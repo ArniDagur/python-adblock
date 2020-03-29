@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "adblock"
+version = "0.1.0"
+description = "Brave's adblocking in Python"
+authors = ["Árni Dagur <arni@dagur.eu>"]
+license = "Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/ArniDagur/python-adblock"
+keywords = []
+
+[tool.poetry.dependencies]
+python = "^3.5"
+
+[tool.poetry.dev-dependencies]
+maturin = "*"
