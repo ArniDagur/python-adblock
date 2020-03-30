@@ -7,8 +7,9 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+adblock = "0.2.6"
 pyo3 = "0.9"
-adblock = "0.2"
+failure = "0.1"
 
 [lib]
 name="adblock"

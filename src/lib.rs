@@ -10,11 +10,17 @@
     unused_qualifications
 )]
 
-use pyo3::class::PyObjectProtocol;
-use pyo3::prelude::*;
-
+use adblock::blocker::BlockerError as RustBlockerError;
 use adblock::blocker::BlockerResult as RustBlockerResult;
 use adblock::engine::Engine as RustEngine;
+use failure::Fail;
+use pyo3::class::PyObjectProtocol;
+use pyo3::exceptions::ValueError as PyValueError;
+use pyo3::prelude::*;
+use pyo3::PyErr;
+
+use std::fs;
+use std::io::{Read, Write};
 
 /// Brave's adblocking library in Python!
 #[pymodule]
@@ -69,6 +75,38 @@ impl PyObjectProtocol for BlockerResult {
             self.filter,
             self.error
         ))
+    }
+}
+
+#[derive(Fail, Debug, PartialEq, Copy, Clone)]
+pub enum BlockerError {
+    #[fail(display = "Serialization error")]
+    SerializationError,
+    #[fail(display = "Deserialization error")]
+    DeserializationError,
+    #[fail(display = "Optimized filter exists")]
+    OptimizedFilterExistence,
+    #[fail(display = "Bad filter add unsupported")]
+    BadFilterAddUnsupported,
+    #[fail(display = "Filter exists")]
+    FilterExists,
+}
+
+impl Into<PyErr> for BlockerError {
+    fn into(self) -> PyErr {
+        PyErr::new::<PyValueError, _>(format!("{:?}", self))
+    }
+}
+
+impl Into<BlockerError> for RustBlockerError {
+    fn into(self) -> BlockerError {
+        match self {
+            Self::SerializationError => BlockerError::SerializationError,
+            Self::DeserializationError => BlockerError::DeserializationError,
+            Self::OptimizedFilterExistence => BlockerError::OptimizedFilterExistence,
+            Self::BadFilterAddUnsupported => BlockerError::BadFilterAddUnsupported,
+            Self::FilterExists => BlockerError::FilterExists,
+        }
     }
 }
 
@@ -146,6 +184,42 @@ impl Engine {
             force_check_exceptions,
         );
         blocker_result.into()
+    }
+
+    pub fn serialize(&mut self) -> PyResult<Vec<u8>> {
+        let result = self.engine.serialize();
+        match result {
+            Ok(x) => Ok(x),
+            Err(error) => {
+                let my_blocker_error: BlockerError = error.into();
+                Err(my_blocker_error.into())
+            }
+        }
+    }
+
+    pub fn serialize_to_file(&mut self, file: &str) -> PyResult<()> {
+        let mut fd = fs::File::open(file)?;
+        let data = self.serialize()?;
+        fd.write_all(&data)?;
+        Ok(())
+    }
+
+    pub fn deserialize(&mut self, serialized: &[u8]) -> PyResult<()> {
+        let result = self.engine.deserialize(serialized);
+        match result {
+            Ok(x) => Ok(x),
+            Err(error) => {
+                let my_blocker_error: BlockerError = error.into();
+                Err(my_blocker_error.into())
+            }
+        }
+    }
+
+    pub fn deserialize_from_file(&mut self, file: &str) -> PyResult<()> {
+        let mut fd = fs::File::open(file)?;
+        let mut data: Vec<u8> = Vec::new();
+        fd.read_to_end(&mut data)?;
+        self.deserialize(&data)
     }
 
     pub fn filter_exists(&self, filter: &str) -> bool {
