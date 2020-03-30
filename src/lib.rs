@@ -225,6 +225,10 @@ impl Engine {
         self.deserialize(&data)
     }
 
+    pub fn add_filter_list(&mut self, filter_list: &str) {
+        self.engine.add_filter_list(filter_list);
+    }
+
     pub fn filter_exists(&self, filter: &str) -> bool {
         self.engine.filter_exists(filter)
     }
