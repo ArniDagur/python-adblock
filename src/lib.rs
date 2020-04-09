@@ -19,8 +19,10 @@ use pyo3::exceptions::ValueError as PyValueError;
 use pyo3::prelude::*;
 use pyo3::PyErr;
 
+use std::collections::HashSet;
 use std::fs;
 use std::io::{Read, Write};
+use std::iter::FromIterator;
 
 /// Brave's adblocking library in Python!
 #[pymodule]
@@ -246,18 +248,26 @@ impl Engine {
         self.engine.tag_exists(tag)
     }
 
-    // pub fn hidden_class_id_selectors(
-    //     &self,
-    //     classes: Vec<String>,
-    //     ids: Vec<String>,
-    //     exceptions: &PySet,
-    // ) -> PyResult<Vec<String>> {
-    //     let mut exception_hashset: HashSet<String> = HashSet::new();
-    //     for exception in exceptions.iter() {
-    //         let exception_pystr = PyString::from(exception);
-    //         exception_hashset.insert(exception.to_string());
-    //     }
-    //     Ok(self.engine
-    //         .hidden_class_id_selectors(&classes, &ids, &exception_hashset))
-    // }
+    /// If any of the provided CSS classes or ids could cause a certain generic
+    /// CSS hide rule (i.e. `{ display: none !important; }`) to be required, this
+    /// method will return a list of CSS selectors corresponding to rules
+    /// referencing those classes or ids, provided that the corresponding rules
+    /// are not excepted.
+    ///
+    /// Exceptions should be passed directly from HostnameSpecificResources.
+    ///
+    /// ## Note
+    /// The `exceptions` field will be changed to a set, once a new version of
+    /// PyO3 is released.
+    pub fn hidden_class_id_selectors(
+        &self,
+        classes: Vec<String>,
+        ids: Vec<String>,
+        exceptions: Vec<String>,
+    ) -> PyResult<Vec<String>> {
+        let exception_hashset: HashSet<String> = HashSet::from_iter(exceptions);
+        Ok(self
+            .engine
+            .hidden_class_id_selectors(&classes, &ids, &exception_hashset))
+    }
 }
