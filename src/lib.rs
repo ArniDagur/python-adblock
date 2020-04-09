@@ -200,12 +200,12 @@ impl Engine {
     }
 
     pub fn serialize_to_file(&mut self, file: &str) -> PyResult<()> {
+        let data = self.serialize()?;
         let mut fd = fs::OpenOptions::new()
             .create(true)
             .truncate(true)
             .write(true)
             .open(file)?;
-        let data = self.serialize()?;
         fd.write_all(&data)?;
         Ok(())
     }
