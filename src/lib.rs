@@ -151,6 +151,19 @@ impl Into<HostnameSpecificResources> for RustHostnameSpecificResources {
     }
 }
 
+#[pyproto]
+impl PyObjectProtocol for HostnameSpecificResources {
+    fn __repr__(&self) -> PyResult<String> {
+        Ok(format!(
+            "HostnameSpecificResources<{} hide selectors, {} style selectors, {} exceptions, injected_javascript={:?}>",
+            self.hide_selectors.len(),
+            self.style_selectors.len(),
+            self.exceptions.len(),
+            self.injected_script,
+        ))
+    }
+}
+
 #[pyclass]
 pub struct Engine {
     engine: RustEngine,
