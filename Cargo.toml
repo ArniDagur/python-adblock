@@ -5,6 +5,9 @@ version = "0.1.2"
 authors = ["Árni Dagur <arni@dagur.eu"]
 edition = "2018"
 
+[profile.release]
+debug = true
+
 [dependencies]
 adblock = "0.2.6"
 pyo3 = "0.9"
