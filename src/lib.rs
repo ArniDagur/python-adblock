@@ -12,6 +12,7 @@
 
 use adblock::blocker::BlockerError as RustBlockerError;
 use adblock::blocker::BlockerResult as RustBlockerResult;
+use adblock::cosmetic_filter_cache::HostnameSpecificResources as RustHostnameSpecificResources;
 use adblock::engine::Engine as RustEngine;
 use failure::Fail;
 use pyo3::class::PyObjectProtocol;
@@ -19,6 +20,7 @@ use pyo3::exceptions::ValueError as PyValueError;
 use pyo3::prelude::*;
 use pyo3::PyErr;
 
+use std::collections::HashMap;
 use std::collections::HashSet;
 use std::fs;
 use std::io::{Read, Write};
@@ -112,6 +114,43 @@ impl Into<BlockerError> for RustBlockerError {
     }
 }
 
+/// Contains cosmetic filter information intended to be injected into a
+/// particular hostname.
+#[pyclass]
+pub struct HostnameSpecificResources {
+    /// A set of any CSS selector on the page that should be hidden, i.e.
+    /// styled as `{ display: none !important; }`.
+    #[pyo3(get)]
+    pub hide_selectors: Vec<String>,
+    /// A map of CSS selectors on the page to respective non-hide style rules,
+    /// i.e. any required styles other than `display: none`.
+    #[pyo3(get)]
+    pub style_selectors: HashMap<String, Vec<String>>,
+    /// A set of any class or id CSS selectors that should not have generic
+    /// rules applied.
+    // In practice, these should be passed to `class_id_stylesheet` and not
+    // used otherwise.
+    #[pyo3(get)]
+    pub exceptions: Vec<String>,
+    /// Javascript code for any scriptlets that should be injected into the
+    /// page.
+    #[pyo3(get)]
+    pub injected_script: String,
+}
+
+impl Into<HostnameSpecificResources> for RustHostnameSpecificResources {
+    fn into(self) -> HostnameSpecificResources {
+        let hide_selectors = Vec::from_iter(self.hide_selectors.into_iter());
+        let exceptions = Vec::from_iter(self.exceptions.into_iter());
+        HostnameSpecificResources {
+            hide_selectors,
+            style_selectors: self.style_selectors,
+            exceptions,
+            injected_script: self.injected_script,
+        }
+    }
+}
+
 #[pyclass]
 pub struct Engine {
     engine: RustEngine,
@@ -166,6 +205,7 @@ impl Engine {
         blocker_result.into()
     }
 
+    #[allow(clippy::too_many_arguments)]
     pub fn check_network_urls_with_hostnames_subset(
         &self,
         url: &str,
@@ -213,7 +253,7 @@ impl Engine {
     pub fn deserialize(&mut self, serialized: &[u8]) -> PyResult<()> {
         let result = self.engine.deserialize(serialized);
         match result {
-            Ok(x) => Ok(x),
+            Ok(_) => Ok(()),
             Err(error) => {
                 let my_blocker_error: BlockerError = error.into();
                 Err(my_blocker_error.into())
@@ -246,6 +286,14 @@ impl Engine {
 
     pub fn tag_exists(&self, tag: &str) -> bool {
         self.engine.tag_exists(tag)
+    }
+
+    /// Returns a set of cosmetic filter resources required for a particular
+    /// hostname. Once this has been called, all CSS ids and classes on a
+    /// page should be passed to hidden_class_id_selectors to obtain any
+    /// stylesheets consisting of generic rules.
+    pub fn hostname_cosmetic_resources(&self, hostname: &str) -> HostnameSpecificResources {
+        self.engine.hostname_cosmetic_resources(hostname).into()
     }
 
     /// If any of the provided CSS classes or ids could cause a certain generic
