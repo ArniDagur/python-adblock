@@ -14,7 +14,6 @@ use adblock::blocker::BlockerError as RustBlockerError;
 use adblock::blocker::BlockerResult as RustBlockerResult;
 use adblock::cosmetic_filter_cache::HostnameSpecificResources as RustHostnameSpecificResources;
 use adblock::engine::Engine as RustEngine;
-use failure::Fail;
 use pyo3::class::PyObjectProtocol;
 use pyo3::exceptions::ValueError as PyValueError;
 use pyo3::prelude::*;
@@ -22,6 +21,8 @@ use pyo3::PyErr;
 
 use std::collections::HashMap;
 use std::collections::HashSet;
+use std::error::Error;
+use std::fmt::{self, Display};
 use std::fs;
 use std::io::{Read, Write};
 use std::iter::FromIterator;
@@ -111,18 +112,35 @@ impl PyObjectProtocol for BlockerResult {
     }
 }
 
-#[derive(Fail, Debug, PartialEq, Copy, Clone)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone)]
 pub enum BlockerError {
-    #[fail(display = "Serialization error")]
     SerializationError,
-    #[fail(display = "Deserialization error")]
     DeserializationError,
-    #[fail(display = "Optimized filter exists")]
     OptimizedFilterExistence,
-    #[fail(display = "Bad filter add unsupported")]
     BadFilterAddUnsupported,
-    #[fail(display = "Filter exists")]
     FilterExists,
+}
+
+impl Error for BlockerError {
+    fn source(&self) -> Option<&(dyn Error + 'static)> {
+        None
+    }
+}
+
+impl Display for BlockerError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(
+            f,
+            "{}",
+            match self {
+                Self::SerializationError => "Serialization error",
+                Self::DeserializationError => "Deserialization error",
+                Self::OptimizedFilterExistence => "Optimized filter exists",
+                Self::BadFilterAddUnsupported => "Bad filter add unsupported",
+                Self::FilterExists => "Filter exists",
+            }
+        )
+    }
 }
 
 impl Into<PyErr> for BlockerError {
