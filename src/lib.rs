@@ -34,20 +34,49 @@ fn adblock(_py: Python<'_>, m: &PyModule) -> PyResult<()> {
     Ok(())
 }
 
+/// The result of an ad-blocking check.
 #[pyclass]
 pub struct BlockerResult {
     #[pyo3(get)]
     pub matched: bool,
+    /// Normally, Brave Browser returns `200 OK` with an empty body when
+    /// `matched` is `True`, except if `explicit_cancel` is also `True`, in
+    /// which case the request is cancelled.
     #[pyo3(get)]
     pub explicit_cancel: bool,
+    /// Important is used to signal that a rule with the `important` option
+    /// matched. An `important` match means that exceptions should not apply
+    /// and no further checking is neccesary--the request should be blocked
+    /// (empty body or cancelled).
+    ///
+    /// Brave Browser keeps seperate instances of Blocker for default lists
+    /// and regional ones, so `important` here is used to correct behaviour
+    /// between them: checking should stop instead of moving to the next
+    /// instance iff an `important` rule matched.
     #[pyo3(get)]
     pub important: bool,
+    /// Iff the blocker matches a rule which has the `redirect` option, as per
+    /// [uBlock Origin's redirect syntax][1], the `redirect` is not `None`.
+    /// The `redirect` field contains the body of the redirect to be injected.
+    ///
+    /// [1]: https://github.com/gorhill/uBlock/wiki/Static-filter-syntax#redirect
     #[pyo3(get)]
     pub redirect: Option<String>,
+    /// Exception is not `None` when the blocker matched on an exception rule.
+    /// Effectively this means that there was a match, but the request should
+    /// not be blocked. It is a non-empty string if the blocker was initialized
+    /// from a list of rules with debugging enabled, otherwise the original
+    /// string representation is discarded to reduce memory use.
     #[pyo3(get)]
     pub exception: Option<String>,
+    /// Filter--similarly to exception--includes the string representation of
+    /// the rule when there is a match and debugging is enabled. Otherwise, on
+    /// a match, it is not `None`.
     #[pyo3(get)]
     pub filter: Option<String>,
+    /// The `error` field is only used to signal that there was an error in
+    /// parsing the provided URLs when using the simpler
+    /// `check_network_urls` method.
     #[pyo3(get)]
     pub error: Option<String>,
 }
@@ -241,6 +270,8 @@ impl Engine {
         blocker_result.into()
     }
 
+    /// Serialize this blocking engine to bytes. They can then be deserialized
+    /// using `deserialize()` to get the same engine again.
     pub fn serialize(&mut self) -> PyResult<Vec<u8>> {
         let result = self.engine.serialize();
         match result {
@@ -252,6 +283,9 @@ impl Engine {
         }
     }
 
+    /// Serialize this blocking engine to a file. The file can then be
+    /// deserialized using `deserialize_from_file()` to get the same engine
+    /// again.
     pub fn serialize_to_file(&mut self, file: &str) -> PyResult<()> {
         let data = self.serialize()?;
         let mut fd = fs::OpenOptions::new()
@@ -263,6 +297,7 @@ impl Engine {
         Ok(())
     }
 
+    /// Deserialize a blocking engine from bytes produced with `serialize()`.
     pub fn deserialize(&mut self, serialized: &[u8]) -> PyResult<()> {
         let result = self.engine.deserialize(serialized);
         match result {
@@ -274,6 +309,8 @@ impl Engine {
         }
     }
 
+    /// Deserialize a blocking engine from file produced with
+    /// `serialize_to_file()`.
     pub fn deserialize_from_file(&mut self, file: &str) -> PyResult<()> {
         let mut fd = fs::File::open(file)?;
         let mut data: Vec<u8> = Vec::new();
@@ -281,10 +318,12 @@ impl Engine {
         self.deserialize(&data)
     }
 
+    /// Add the contents of a block list file to the blocking engine.
     pub fn add_filter_list(&mut self, filter_list: &str) {
         self.engine.add_filter_list(filter_list);
     }
 
+    /// Checks if the given filter exists in the blocking engine.
     pub fn filter_exists(&self, filter: &str) -> bool {
         self.engine.filter_exists(filter)
     }
