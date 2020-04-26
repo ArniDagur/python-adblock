@@ -32,6 +32,8 @@ use std::iter::FromIterator;
 fn adblock(_py: Python<'_>, m: &PyModule) -> PyResult<()> {
     m.add("__version__", env!("CARGO_PKG_VERSION"))?;
     m.add_class::<Engine>()?;
+    m.add_class::<BlockerResult>()?;
+    m.add_class::<HostnameSpecificResources>()?;
     Ok(())
 }
 
