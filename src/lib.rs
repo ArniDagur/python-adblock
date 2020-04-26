@@ -212,6 +212,7 @@ impl PyObjectProtocol for HostnameSpecificResources {
 }
 
 #[pyclass]
+#[text_signature = "($self, network_filters)"]
 pub struct Engine {
     engine: RustEngine,
 }
@@ -235,6 +236,7 @@ impl Engine {
     /// * `script`
     /// * `stylesheet`
     /// * and et cetera...
+    #[text_signature = "($self, url, source_url, request_type)"]
     pub fn check_network_urls(
         &self,
         url: &str,
@@ -247,6 +249,7 @@ impl Engine {
         blocker_result.into()
     }
 
+    #[text_signature = "($self, url, hostname, source_hostname, requsest_type, third_party_request)"]
     pub fn check_network_urls_with_hostnames(
         &self,
         url: &str,
@@ -265,6 +268,8 @@ impl Engine {
         blocker_result.into()
     }
 
+    #[text_signature = "($self, url, hostname, source_hostname, request_type, \
+        third_party_request, previously_matched_rule, force_check_exceptions)"]
     #[allow(clippy::too_many_arguments)]
     pub fn check_network_urls_with_hostnames_subset(
         &self,
@@ -290,6 +295,7 @@ impl Engine {
 
     /// Serialize this blocking engine to bytes. They can then be deserialized
     /// using `deserialize()` to get the same engine again.
+    #[text_signature = "($self)"]
     pub fn serialize(&mut self) -> PyResult<Vec<u8>> {
         let result = self.engine.serialize();
         match result {
@@ -304,6 +310,7 @@ impl Engine {
     /// Serialize this blocking engine to a file. The file can then be
     /// deserialized using `deserialize_from_file()` to get the same engine
     /// again.
+    #[text_signature = "($self, file)"]
     pub fn serialize_to_file(&mut self, file: &str) -> PyResult<()> {
         let data = self.serialize()?;
         let mut fd = fs::OpenOptions::new()
@@ -316,6 +323,7 @@ impl Engine {
     }
 
     /// Deserialize a blocking engine from bytes produced with `serialize()`.
+    #[text_signature = "($self, serialized)"]
     pub fn deserialize(&mut self, serialized: &[u8]) -> PyResult<()> {
         let result = self.engine.deserialize(serialized);
         match result {
@@ -329,6 +337,7 @@ impl Engine {
 
     /// Deserialize a blocking engine from file produced with
     /// `serialize_to_file()`.
+    #[text_signature = "($self, file)"]
     pub fn deserialize_from_file(&mut self, file: &str) -> PyResult<()> {
         let mut fd = fs::File::open(file)?;
         let mut data: Vec<u8> = Vec::new();
@@ -337,23 +346,28 @@ impl Engine {
     }
 
     /// Add the contents of a block list file to the blocking engine.
+    #[text_signature = "($self, filter_list)"]
     pub fn add_filter_list(&mut self, filter_list: &str) {
         self.engine.add_filter_list(filter_list);
     }
 
     /// Checks if the given filter exists in the blocking engine.
+    #[text_signature = "($self, filter)"]
     pub fn filter_exists(&self, filter: &str) -> bool {
         self.engine.filter_exists(filter)
     }
 
+    #[text_signature = "($self, tags)"]
     pub fn tags_enable(&mut self, tags: Vec<&str>) {
         self.engine.tags_enable(&tags);
     }
 
+    #[text_signature = "($self, tags)"]
     pub fn tags_disable(&mut self, tags: Vec<&str>) {
         self.engine.tags_disable(&tags);
     }
 
+    #[text_signature = "($self, tag)"]
     pub fn tag_exists(&self, tag: &str) -> bool {
         self.engine.tag_exists(tag)
     }
@@ -362,6 +376,7 @@ impl Engine {
     /// hostname. Once this has been called, all CSS ids and classes on a
     /// page should be passed to hidden_class_id_selectors to obtain any
     /// stylesheets consisting of generic rules.
+    #[text_signature = "($self, hostname)"]
     pub fn hostname_cosmetic_resources(&self, hostname: &str) -> HostnameSpecificResources {
         self.engine.hostname_cosmetic_resources(hostname).into()
     }
@@ -377,6 +392,7 @@ impl Engine {
     /// ## Note
     /// The `exceptions` field will be changed to a set, once a new version of
     /// PyO3 is released.
+    #[text_signature = "($self, classes, ids, exceptions)"]
     pub fn hidden_class_id_selectors(
         &self,
         classes: Vec<String>,
