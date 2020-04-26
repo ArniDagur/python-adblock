@@ -134,11 +134,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Test PyPi publish
-        env:
-          MATURIN_PASSWORD: ${{ secrets.TEST_PYPI }}
-        run: poetry run maturin publish -r "https://test.pypi.org/legacy/" --interpreter python${{matrix.python_version}} --username __token__
-
       - name: PyPi publish
         if: startsWith(github.ref, 'refs/tags/')
         env:
