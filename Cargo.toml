@@ -11,6 +11,7 @@ debug = true
 [dependencies]
 adblock = "0.2.8"
 pyo3 = "0.9"
+gag = "0.1"
 
 [lib]
 name="adblock"

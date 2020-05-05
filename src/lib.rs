@@ -18,6 +18,7 @@ use pyo3::class::PyObjectProtocol;
 use pyo3::exceptions::ValueError as PyValueError;
 use pyo3::prelude::*;
 use pyo3::PyErr;
+use gag::Gag;
 
 use std::collections::HashMap;
 use std::collections::HashSet;
@@ -350,6 +351,9 @@ impl Engine {
     /// Add the contents of a block list file to the blocking engine.
     #[text_signature = "($self, filter_list)"]
     pub fn add_filter_list(&mut self, filter_list: &str) {
+        // Gag the any messages to stderr. This is necessary until issue
+        // https://github.com/brave/adblock-rust/issues/88 is closed.
+        let _stderr_gag = Gag::stderr();
         self.engine.add_filter_list(filter_list);
     }
 
