@@ -9,7 +9,7 @@ edition = "2018"
 debug = true
 
 [dependencies]
-adblock = "0.2.8"
+adblock = "0.2.9"
 pyo3 = "0.9"
 
 [lib]
