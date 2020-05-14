@@ -213,6 +213,25 @@ impl PyObjectProtocol for HostnameSpecificResources {
     }
 }
 
+/// The main object featured in this library. This object holds the adblocker's
+/// state, and can be queried to see if a given request should be blocked or
+/// not.
+///
+/// # Request types
+/// A few of `Engine`'s methods have a field specifying a "resource type",
+/// valid examples are:
+/// * `beacon`
+/// * `csp_report`
+/// * `document`
+/// * `font`
+/// * `media`
+/// * `object`
+/// * `script`
+/// * `stylesheet`
+/// * and et cetera...
+/// See the [Mozilla Web Documentation][1] for more info.
+///
+/// [1]: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/ResourceType
 #[pyclass]
 #[text_signature = "($self, network_filters)"]
 pub struct Engine {
@@ -221,23 +240,21 @@ pub struct Engine {
 
 #[pymethods]
 impl Engine {
+    /// Create a new adblocking engine
     #[new]
     pub fn from_rules(network_filters: Vec<String>) -> Self {
         let engine = RustEngine::from_rules(&network_filters);
         Self { engine }
     }
 
-    /// ## Request types
-    /// Examples of valid `request_type` parameters include:
-    /// * `beacon`
-    /// * `csp_report`
-    /// * `document`
-    /// * `font`
-    /// * `media`
-    /// * `object`
-    /// * `script`
-    /// * `stylesheet`
-    /// * and et cetera...
+    /// Check if the given `url`—pointing to a resource of type `request_type`—
+    /// is blocked, assuming the request is made from the given `source_url`.
+    /// Returns an object of type `BlockerResult`.
+    ///
+    /// # Arguments
+    /// * `url` - The URL of the request to check
+    /// * `source_url` - The URL from where the request is made
+    /// * `request_type` - The resource type that the request points to
     #[text_signature = "($self, url, source_url, request_type)"]
     pub fn check_network_urls(
         &self,
@@ -251,6 +268,16 @@ impl Engine {
         blocker_result.into()
     }
 
+    /// Check if a request should be blocked based on the given parameters.
+    ///
+    /// # Arguments
+    /// * `url` - The URL of the request to check
+    /// * `hostname` - The given `url`'s hostname
+    /// * `source_hostname` - The hostname of the source URL.
+    /// * `request_type` - The resource type that the request points to
+    /// * `third_party_request` - Is the given request to a third-party? Here,
+    ///   `None` can be given and the engine will figure it out based on the
+    ///   `hostname` and `source_hostname`.
     #[text_signature = "($self, url, hostname, source_hostname, requsest_type, third_party_request)"]
     pub fn check_network_urls_with_hostnames(
         &self,
@@ -270,6 +297,19 @@ impl Engine {
         blocker_result.into()
     }
 
+    /// Check if a request should be blocked based on the given parameters.
+    ///
+    /// # Arguments
+    /// * `url` - The URL of the request to check
+    /// * `hostname` - The given `url`'s hostname
+    /// * `source_hostname` - The hostname of the source URL.
+    /// * `request_type` - The resource type that the request points to
+    /// * `third_party_request` - Is the given request to a third-party? Here,
+    ///   `None` can be given and the engine will figure it out based on the
+    ///   `hostname` and `source_hostname`.
+    /// * `previously_matched_rule` - Return a match as long as there are no
+    ///    exceptions
+    /// * `force_check_exceptions` - Check exceptions even if no other rule matches
     #[text_signature = "($self, url, hostname, source_hostname, request_type, \
         third_party_request, previously_matched_rule, force_check_exceptions)"]
     #[allow(clippy::too_many_arguments)]
@@ -359,16 +399,19 @@ impl Engine {
         self.engine.filter_exists(filter)
     }
 
+    /// Enable the given tags
     #[text_signature = "($self, tags)"]
     pub fn tags_enable(&mut self, tags: Vec<&str>) {
         self.engine.tags_enable(&tags);
     }
 
+    /// Disable the given tags
     #[text_signature = "($self, tags)"]
     pub fn tags_disable(&mut self, tags: Vec<&str>) {
         self.engine.tags_disable(&tags);
     }
 
+    /// Check if the given tag exists
     #[text_signature = "($self, tag)"]
     pub fn tag_exists(&self, tag: &str) -> bool {
         self.engine.tag_exists(tag)
