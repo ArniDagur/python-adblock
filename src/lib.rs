@@ -25,7 +25,6 @@ use std::error::Error;
 use std::fmt::{self, Display};
 use std::fs;
 use std::io::{Read, Write};
-use std::iter::FromIterator;
 
 /// Brave's adblocking library in Python!
 #[pymodule]
@@ -170,7 +169,7 @@ pub struct HostnameSpecificResources {
     /// A set of any CSS selector on the page that should be hidden, i.e.
     /// styled as `{ display: none !important; }`.
     #[pyo3(get)]
-    pub hide_selectors: Vec<String>,
+    pub hide_selectors: HashSet<String>,
     /// A map of CSS selectors on the page to respective non-hide style rules,
     /// i.e. any required styles other than `display: none`.
     #[pyo3(get)]
@@ -180,7 +179,7 @@ pub struct HostnameSpecificResources {
     // In practice, these should be passed to `class_id_stylesheet` and not
     // used otherwise.
     #[pyo3(get)]
-    pub exceptions: Vec<String>,
+    pub exceptions: HashSet<String>,
     /// Javascript code for any scriptlets that should be injected into the
     /// page.
     #[pyo3(get)]
@@ -189,12 +188,10 @@ pub struct HostnameSpecificResources {
 
 impl Into<HostnameSpecificResources> for RustHostnameSpecificResources {
     fn into(self) -> HostnameSpecificResources {
-        let hide_selectors = Vec::from_iter(self.hide_selectors.into_iter());
-        let exceptions = Vec::from_iter(self.exceptions.into_iter());
         HostnameSpecificResources {
-            hide_selectors,
+            hide_selectors: self.hide_selectors,
             style_selectors: self.style_selectors,
-            exceptions,
+            exceptions: self.exceptions,
             injected_script: self.injected_script,
         }
     }
@@ -433,20 +430,15 @@ impl Engine {
     /// are not excepted.
     ///
     /// Exceptions should be passed directly from HostnameSpecificResources.
-    ///
-    /// ## Note
-    /// The `exceptions` field will be changed to a set, once a new version of
-    /// PyO3 is released.
     #[text_signature = "($self, classes, ids, exceptions)"]
     pub fn hidden_class_id_selectors(
         &self,
         classes: Vec<String>,
         ids: Vec<String>,
-        exceptions: Vec<String>,
+        exceptions: HashSet<String>,
     ) -> PyResult<Vec<String>> {
-        let exception_hashset: HashSet<String> = HashSet::from_iter(exceptions);
         Ok(self
             .engine
-            .hidden_class_id_selectors(&classes, &ids, &exception_hashset))
+            .hidden_class_id_selectors(&classes, &ids, &exceptions))
     }
 }
