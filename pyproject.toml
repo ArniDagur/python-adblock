@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "adblock"
-version = "0.1.4"
+version = "0.2.0"
 description = "Brave's adblocking in Python"
 authors = ["Árni Dagur <arni@dagur.eu>"]
 license = "Apache-2.0"
