@@ -1,4 +1,4 @@
-//! Python bindings for Brave's adblocking library, which is written in Rust.
+//! Python wrapper for Brave's adblocking library, which is written in Rust.
 #![deny(
     future_incompatible,
     nonstandard_style,
