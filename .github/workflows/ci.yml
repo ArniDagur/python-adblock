@@ -140,3 +140,29 @@ jobs:
           MATURIN_PASSWORD: ${{ secrets.PYPI }}
         run: poetry run maturin publish --interpreter python${{matrix.python_version}} --username __token__
 
+  docs-publish:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Install latest nightly
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          override: true
+
+      - name: Build documentation
+        uses: actions-rs/cargo@v1
+        with:
+          command: doc
+          args: --all-features
+
+      - name: Deploy documentation
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target/doc
