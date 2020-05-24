@@ -2,6 +2,10 @@ python-adblock
 ==========
 Python wrapper for Brave's adblocking library, which is written in Rust.
 
+### Documentation
+
+Rust documentation for the latest `master` branch can be found at https://arnidagur.github.io/python-adblock/docs/adblock/index.html.
+
 ### License
 
 This project is licensed under either of
