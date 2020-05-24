@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["TOKENS_BUFFER_RESERVED",""],["TOKENS_BUFFER_SIZE",""]],"fn":[["bin_lookup",""],["create_combined_fuzzy_signature",""],["create_fuzzy_signature",""],["fast_hash",""],["is_eof_error",""],["read_file_lines",""],["rules_from_lists",""],["tokenize",""],["tokenize_filter",""],["tokenize_pooled",""]],"type":[["Hash",""]]});

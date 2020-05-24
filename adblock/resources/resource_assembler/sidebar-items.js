@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["assemble_scriptlet_resources",""],["assemble_web_accessible_resources","Builds a `Vec` of `Resource`s from the specified paths on the filesystem:"]]});

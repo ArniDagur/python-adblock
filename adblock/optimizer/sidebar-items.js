@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["optimize","Fusion a set of `filters` by applying optimizations sequentially."]]});

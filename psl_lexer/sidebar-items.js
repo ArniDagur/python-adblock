@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["LIST_URL","The official URL of the list"]],"enum":[["Type",""]],"mod":[["errors","Errors returned by this library"]],"struct":[["List","Stores the public suffix list"],["Suffix",""]],"trait":[["IntoUrl","Converts a type into a Url object"]]});

@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Type","Type of suffix"]],"struct":[["Domain","A registrable domain name"],["Info","Information about the suffix"],["List","Access to the compiled native list"],["Suffix","The suffix of a domain name"]],"trait":[["Psl","A list of all public suffices"]]});
