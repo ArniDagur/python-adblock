@@ -238,6 +238,3 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-# static files generated from Django application using `collectstatic`
-media
-static
