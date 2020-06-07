@@ -72,6 +72,9 @@ jobs:
       - name: Build Python package
         run: poetry run maturin develop --release
 
+      - name: Run Python tests
+        run: poetry run pytest -vv --color=yes
+
   python-publish:
     needs: build
     runs-on: ${{ matrix.os }}

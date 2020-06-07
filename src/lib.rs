@@ -230,7 +230,7 @@ impl PyObjectProtocol for HostnameSpecificResources {
 ///
 /// [1]: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/ResourceType
 #[pyclass]
-#[text_signature = "($self, network_filters)"]
+#[text_signature = "($self, network_filters=None, load_network=True, load_cosmetic=False, debug=False)"]
 pub struct Engine {
     engine: RustEngine,
 }
@@ -239,8 +239,21 @@ pub struct Engine {
 impl Engine {
     /// Create a new adblocking engine
     #[new]
-    pub fn from_rules(network_filters: Vec<String>) -> Self {
-        let engine = RustEngine::from_rules(&network_filters);
+    #[args(network_filters="None", load_network=true, load_cosmetic=false, debug=false)]
+    pub fn new(
+        network_filters: Option<Vec<String>>,
+        load_network: bool,
+        load_cosmetic: bool,
+        debug: bool,
+    ) -> Self {
+        let filters = network_filters.unwrap_or(Vec::new());
+        let engine = RustEngine::from_rules_parametrised(
+            &filters,
+            load_network,
+            load_cosmetic,
+            debug,
+            true,
+        );
         Self { engine }
     }
 
