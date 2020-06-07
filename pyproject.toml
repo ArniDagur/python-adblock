@@ -13,3 +13,4 @@ python = "^3.5"
 
 [tool.poetry.dev-dependencies]
 maturin = "*"
+pytest = "*"
