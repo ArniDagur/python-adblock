@@ -17,6 +17,7 @@ use adblock::engine::Engine as RustEngine;
 use pyo3::class::PyObjectProtocol;
 use pyo3::exceptions::ValueError as PyValueError;
 use pyo3::prelude::*;
+use pyo3::types::PyBytes;
 use pyo3::PyErr;
 
 use std::collections::HashMap;
@@ -348,7 +349,13 @@ impl Engine {
     /// Serialize this blocking engine to bytes. They can then be deserialized
     /// using `deserialize()` to get the same engine again.
     #[text_signature = "($self)"]
-    pub fn serialize(&mut self) -> PyResult<Vec<u8>> {
+    pub fn serialize<'p>(&mut self, py: Python<'p>) -> PyResult<&'p PyBytes> {
+        let bytes = self.serialize_inner()?;
+        let py_bytes = PyBytes::new(py, &bytes);
+        Ok(py_bytes)
+    }
+
+    fn serialize_inner(&mut self) -> PyResult<Vec<u8>> {
         let result = self.engine.serialize();
         match result {
             Ok(x) => Ok(x),
@@ -364,7 +371,7 @@ impl Engine {
     /// again.
     #[text_signature = "($self, file)"]
     pub fn serialize_to_file(&mut self, file: &str) -> PyResult<()> {
-        let data = self.serialize()?;
+        let data = self.serialize_inner()?;
         let mut fd = fs::OpenOptions::new()
             .create(true)
             .truncate(true)
