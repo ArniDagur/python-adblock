@@ -455,6 +455,13 @@
 <span id="455">455</span>
 <span id="456">456</span>
 <span id="457">457</span>
+<span id="458">458</span>
+<span id="459">459</span>
+<span id="460">460</span>
+<span id="461">461</span>
+<span id="462">462</span>
+<span id="463">463</span>
+<span id="464">464</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Python wrapper for Brave&#39;s adblocking library, which is written in Rust.</span>
 <span class="attribute">#![<span class="ident">deny</span>(
@@ -475,6 +482,7 @@
 <span class="kw">use</span> <span class="ident">pyo3</span>::<span class="ident">class</span>::<span class="ident">PyObjectProtocol</span>;
 <span class="kw">use</span> <span class="ident">pyo3</span>::<span class="ident">exceptions</span>::<span class="ident">ValueError</span> <span class="kw">as</span> <span class="ident">PyValueError</span>;
 <span class="kw">use</span> <span class="ident">pyo3</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">pyo3</span>::<span class="ident">types</span>::<span class="ident">PyBytes</span>;
 <span class="kw">use</span> <span class="ident">pyo3</span>::<span class="ident">PyErr</span>;
 
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">HashMap</span>;
@@ -806,7 +814,13 @@
     <span class="doccomment">/// Serialize this blocking engine to bytes. They can then be deserialized</span>
     <span class="doccomment">/// using `deserialize()` to get the same engine again.</span>
     <span class="attribute">#[<span class="ident">text_signature</span> <span class="op">=</span> <span class="string">&quot;($self)&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">serialize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">serialize</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">PyBytes</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">serialize_inner</span>()<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">py_bytes</span> <span class="op">=</span> <span class="ident">PyBytes</span>::<span class="ident">new</span>(<span class="ident">py</span>, <span class="kw-2">&amp;</span><span class="ident">bytes</span>);
+        <span class="prelude-val">Ok</span>(<span class="ident">py_bytes</span>)
+    }
+
+    <span class="kw">fn</span> <span class="ident">serialize_inner</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">engine</span>.<span class="ident">serialize</span>();
         <span class="kw">match</span> <span class="ident">result</span> {
             <span class="prelude-val">Ok</span>(<span class="ident">x</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">x</span>),
@@ -822,7 +836,7 @@
     <span class="doccomment">/// again.</span>
     <span class="attribute">#[<span class="ident">text_signature</span> <span class="op">=</span> <span class="string">&quot;($self, file)&quot;</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">serialize_to_file</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">serialize</span>()<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">serialize_inner</span>()<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fd</span> <span class="op">=</span> <span class="ident">fs</span>::<span class="ident">OpenOptions</span>::<span class="ident">new</span>()
             .<span class="ident">create</span>(<span class="bool-val">true</span>)
             .<span class="ident">truncate</span>(<span class="bool-val">true</span>)
