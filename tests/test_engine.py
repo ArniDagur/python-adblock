@@ -1,5 +1,6 @@
 import adblock
 
+
 def test_engine_arguments():
     # None of these should panic
     adblock.Engine()
