@@ -11,7 +11,7 @@ debug = true
 
 [dependencies]
 adblock = "0.2.9"
-pyo3 = "0.10"
+pyo3 = "0.11"
 
 [lib]
 name="adblock"
