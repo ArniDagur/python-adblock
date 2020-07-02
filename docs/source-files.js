@@ -2,6 +2,7 @@ var N = null;var sourcesIndex = {};
 sourcesIndex["adblock"] = {"name":"","files":["lib.rs"]};
 sourcesIndex["addr"] = {"name":"","files":["dns_impls.rs","domain_impls.rs","email.rs","errors.rs","host.rs","lib.rs","parser.rs"]};
 sourcesIndex["addr2line"] = {"name":"","files":["lazy.rs","lib.rs"]};
+sourcesIndex["adler"] = {"name":"","files":["lib.rs"]};
 sourcesIndex["adler32"] = {"name":"","files":["lib.rs"]};
 sourcesIndex["ahash"] = {"name":"","files":["convert.rs","fallback_hash.rs","lib.rs"]};
 sourcesIndex["aho_corasick"] = {"name":"","dirs":[{"name":"packed","dirs":[{"name":"teddy","files":["compile.rs","mod.rs","runtime.rs"]}],"files":["api.rs","mod.rs","pattern.rs","rabinkarp.rs","vector.rs"]}],"files":["ahocorasick.rs","automaton.rs","buffer.rs","byte_frequencies.rs","classes.rs","dfa.rs","error.rs","lib.rs","nfa.rs","prefilter.rs","state_id.rs"]};
@@ -81,5 +82,5 @@ sourcesIndex["unicode_bidi"] = {"name":"","dirs":[{"name":"char_data","files":["
 sourcesIndex["unicode_normalization"] = {"name":"","files":["__test_api.rs","decompose.rs","lib.rs","lookups.rs","no_std_prelude.rs","normalize.rs","perfect_hash.rs","quick_check.rs","recompose.rs","stream_safe.rs","tables.rs"]};
 sourcesIndex["unicode_xid"] = {"name":"","files":["lib.rs","tables.rs"]};
 sourcesIndex["unindent"] = {"name":"","files":["lib.rs"]};
-sourcesIndex["url"] = {"name":"","files":["encoding.rs","form_urlencoded.rs","host.rs","lib.rs","origin.rs","parser.rs","path_segments.rs","quirks.rs","slicing.rs"]};
+sourcesIndex["url"] = {"name":"","files":["form_urlencoded.rs","host.rs","lib.rs","origin.rs","parser.rs","path_segments.rs","query_encoding.rs","quirks.rs","slicing.rs"]};
 createSourceSidebar();
