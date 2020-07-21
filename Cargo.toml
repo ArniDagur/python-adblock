@@ -10,7 +10,7 @@ license = "MIT OR Apache-2.0"
 debug = true
 
 [dependencies]
-adblock = "0.2.9"
+adblock = "0.3.0"
 pyo3 = "0.10"
 
 [lib]
