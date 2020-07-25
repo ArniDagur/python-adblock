@@ -12,8 +12,10 @@
 
 use adblock::blocker::BlockerError as RustBlockerError;
 use adblock::blocker::BlockerResult as RustBlockerResult;
-use adblock::cosmetic_filter_cache::HostnameSpecificResources as RustHostnameSpecificResources;
+use adblock::cosmetic_filter_cache::UrlSpecificResources as RustUrlSpecificResources;
 use adblock::engine::Engine as RustEngine;
+use adblock::lists::FilterFormat;
+use adblock::lists::FilterSet as RustFilterSet;
 use pyo3::class::PyObjectProtocol;
 use pyo3::exceptions::ValueError as PyValueError;
 use pyo3::prelude::*;
@@ -32,8 +34,9 @@ use std::io::{Read, Write};
 fn adblock(_py: Python<'_>, m: &PyModule) -> PyResult<()> {
     m.add("__version__", env!("CARGO_PKG_VERSION"))?;
     m.add_class::<Engine>()?;
+    m.add_class::<FilterSet>()?;
     m.add_class::<BlockerResult>()?;
-    m.add_class::<HostnameSpecificResources>()?;
+    m.add_class::<UrlSpecificResources>()?;
     Ok(())
 }
 
@@ -163,10 +166,71 @@ impl Into<BlockerError> for RustBlockerError {
     }
 }
 
+fn filter_format_from_string(filter_format: &str) -> PyResult<FilterFormat> {
+    match filter_format {
+        "standard" => Ok(FilterFormat::Standard),
+        "hosts" => Ok(FilterFormat::Hosts),
+        _ => Err(PyErr::new::<PyValueError, _>("Invalid format value")),
+    }
+}
+
+/// Manages a set of rules to be added to an Engine.
+///
+/// To be able to efficiently handle special options like $badfilter, and to
+/// allow optimizations, all rules must be available when the Engine is first
+/// created. FilterSet allows assembling a compound list from multiple
+/// different sources before compiling the rules into an Engine.
+#[pyclass]
+#[text_signature = "($self, debug)"]
+#[derive(Clone)]
+pub struct FilterSet {
+    filter_set: RustFilterSet,
+}
+
+#[pymethods]
+impl FilterSet {
+    /// Creates a new `FilterSet`. The `debug` argument specifies whether or
+    /// not to save information about the original raw filter rules alongside
+    /// the more compact internal representation. If enabled, this information
+    /// will be passed to the corresponding Engine.
+    #[new]
+    #[args(debug = false)]
+    pub fn new(debug: bool) -> Self {
+        Self {
+            filter_set: RustFilterSet::new(debug),
+        }
+    }
+
+    /// Adds the contents of an entire filter list to this FilterSet. Filters
+    /// that cannot be parsed successfully are ignored.
+    ///
+    /// The format is a string containing either "standard" (ABP/uBO-style)
+    /// or "hosts".
+    #[text_signature = "($self, filter_list, format)"]
+    #[args(filter_list, format = "\"standard\"")]
+    pub fn add_filter_list(&mut self, filter_list: &str, format: &str) -> PyResult<()> {
+        let filter_format = filter_format_from_string(format)?;
+        self.filter_set.add_filter_list(filter_list, filter_format);
+        Ok(())
+    }
+
+    /// Adds a collection of filter rules to this FilterSet. Filters that
+    /// cannot be parsed successfully are ignored.
+    ///
+    /// The format is a string containing either "standard" (ABP/uBO-style)
+    /// or "hosts".
+    #[text_signature = "($self, filters, format)"]
+    #[args(filters, format = "\"standard\"")]
+    pub fn add_filters(&mut self, filters: Vec<String>, format: &str) -> PyResult<()> {
+        let filter_format = filter_format_from_string(format)?;
+        self.filter_set.add_filters(&filters, filter_format);
+        Ok(())
+    }
+}
 /// Contains cosmetic filter information intended to be injected into a
 /// particular hostname.
 #[pyclass]
-pub struct HostnameSpecificResources {
+pub struct UrlSpecificResources {
     /// A set of any CSS selector on the page that should be hidden, i.e.
     /// styled as `{ display: none !important; }`.
     #[pyo3(get)]
@@ -187,9 +251,9 @@ pub struct HostnameSpecificResources {
     pub injected_script: String,
 }
 
-impl Into<HostnameSpecificResources> for RustHostnameSpecificResources {
-    fn into(self) -> HostnameSpecificResources {
-        HostnameSpecificResources {
+impl Into<UrlSpecificResources> for RustUrlSpecificResources {
+    fn into(self) -> UrlSpecificResources {
+        UrlSpecificResources {
             hide_selectors: self.hide_selectors,
             style_selectors: self.style_selectors,
             exceptions: self.exceptions,
@@ -199,10 +263,10 @@ impl Into<HostnameSpecificResources> for RustHostnameSpecificResources {
 }
 
 #[pyproto]
-impl PyObjectProtocol for HostnameSpecificResources {
+impl PyObjectProtocol for UrlSpecificResources {
     fn __repr__(&self) -> PyResult<String> {
         Ok(format!(
-            "HostnameSpecificResources<{} hide selectors, {} style selectors, {} exceptions, injected_javascript={:?}>",
+            "UrlSpecificResources<{} hide selectors, {} style selectors, {} exceptions, injected_javascript={:?}>",
             self.hide_selectors.len(),
             self.style_selectors.len(),
             self.exceptions.len(),
@@ -231,7 +295,7 @@ impl PyObjectProtocol for HostnameSpecificResources {
 ///
 /// [1]: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/ResourceType
 #[pyclass]
-#[text_signature = "($self, network_filters=None, load_network=True, load_cosmetic=False, debug=False)"]
+#[text_signature = "($self, filter_set, optimize)"]
 pub struct Engine {
     engine: RustEngine,
 }
@@ -240,21 +304,9 @@ pub struct Engine {
 impl Engine {
     /// Create a new adblocking engine
     #[new]
-    #[args(network_filters="None", load_network=true, load_cosmetic=false, debug=false)]
-    pub fn new(
-        network_filters: Option<Vec<String>>,
-        load_network: bool,
-        load_cosmetic: bool,
-        debug: bool,
-    ) -> Self {
-        let filters = network_filters.unwrap_or(Vec::new());
-        let engine = RustEngine::from_rules_parametrised(
-            &filters,
-            load_network,
-            load_cosmetic,
-            debug,
-            true,
-        );
+    #[args(filter_set, optimize = true)]
+    pub fn new(filter_set: FilterSet, optimize: bool) -> Self {
+        let engine = RustEngine::from_filter_set(filter_set.filter_set, optimize);
         Self { engine }
     }
 
@@ -404,43 +456,57 @@ impl Engine {
         self.deserialize(&data)
     }
 
-    /// Add the contents of a block list file to the blocking engine.
-    #[text_signature = "($self, filter_list)"]
-    pub fn add_filter_list(&mut self, filter_list: &str) {
-        self.engine.add_filter_list(filter_list);
-    }
-
     /// Checks if the given filter exists in the blocking engine.
     #[text_signature = "($self, filter)"]
     pub fn filter_exists(&self, filter: &str) -> bool {
         self.engine.filter_exists(filter)
     }
 
-    /// Enable the given tags
+    /// Sets this engine's tags to be _only_ the ones provided in tags.
+    ///
+    /// Tags can be used to cheaply enable or disable network rules with a
+    /// corresponding $tag option.
     #[text_signature = "($self, tags)"]
-    pub fn tags_enable(&mut self, tags: Vec<&str>) {
-        self.engine.tags_enable(&tags);
+    pub fn use_tags(&mut self, tags: Vec<&str>) {
+        self.engine.use_tags(&tags);
     }
 
-    /// Disable the given tags
+    /// Sets this engine's tags to additionally include the ones provided in
+    /// tags.
+    ///
+    /// Tags can be used to cheaply enable or disable network rules with a
+    /// corresponding $tag option.
     #[text_signature = "($self, tags)"]
-    pub fn tags_disable(&mut self, tags: Vec<&str>) {
-        self.engine.tags_disable(&tags);
+    pub fn enable_tags(&mut self, tags: Vec<&str>) {
+        self.engine.enable_tags(&tags);
     }
 
-    /// Check if the given tag exists
+    /// Sets this engine's tags to no longer include the ones provided in
+    /// tags.
+    ///
+    /// Tags can be used to cheaply enable or disable network rules with a
+    /// corresponding $tag option.
+    #[text_signature = "($self, tags)"]
+    pub fn disable_tags(&mut self, tags: Vec<&str>) {
+        self.engine.disable_tags(&tags);
+    }
+
+    /// Checks if a given tag exists in this engine.
+    ///
+    /// Tags can be used to cheaply enable or disable network rules with a
+    /// corresponding $tag option.
     #[text_signature = "($self, tag)"]
     pub fn tag_exists(&self, tag: &str) -> bool {
         self.engine.tag_exists(tag)
     }
 
     /// Returns a set of cosmetic filter resources required for a particular
-    /// hostname. Once this has been called, all CSS ids and classes on a
+    /// url. Once this has been called, all CSS ids and classes on a
     /// page should be passed to hidden_class_id_selectors to obtain any
     /// stylesheets consisting of generic rules.
-    #[text_signature = "($self, hostname)"]
-    pub fn hostname_cosmetic_resources(&self, hostname: &str) -> HostnameSpecificResources {
-        self.engine.hostname_cosmetic_resources(hostname).into()
+    #[text_signature = "($self, url)"]
+    pub fn url_cosmetic_resources(&self, url: &str) -> UrlSpecificResources {
+        self.engine.url_cosmetic_resources(url).into()
     }
 
     /// If any of the provided CSS classes or ids could cause a certain generic
@@ -449,7 +515,7 @@ impl Engine {
     /// referencing those classes or ids, provided that the corresponding rules
     /// are not excepted.
     ///
-    /// Exceptions should be passed directly from HostnameSpecificResources.
+    /// Exceptions should be passed directly from UrlSpecificResources.
     #[text_signature = "($self, classes, ids, exceptions)"]
     pub fn hidden_class_id_selectors(
         &self,

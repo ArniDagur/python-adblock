@@ -11,7 +11,7 @@ class BlockerResult:
     def __repr__(self) -> str:
         pass
 
-class HostnameSpecificResources:
+class UrlSpecificResources:
     hide_selectors: Set[str]
     style_selectors: Dict[str, List[str]]
     exceptions: Set[str]
@@ -19,14 +19,16 @@ class HostnameSpecificResources:
     def __repr__(self) -> str:
         pass
 
+class FilterSet:
+    def __init__(self, debug: bool = False) -> None:
+        pass
+    def add_filter_list(self, filter_list: str, format: str) -> None:
+        pass
+    def add_filters(self, filters: List[str], format: str) -> None:
+        pass
+
 class Engine:
-    def __init__(
-        self,
-        network_filters: Optional[List[str]] = None,
-        load_network: bool = True,
-        load_cosmetic: bool = False,
-        debug: bool = False,
-    ) -> None:
+    def __init__(self, filter_set: FilterSet, optimize: bool = True) -> None:
         pass
     def check_network_urls(
         self, url: str, source_url: str, request_type: str
@@ -60,17 +62,17 @@ class Engine:
         pass
     def deserialize_from_file(self, file: str) -> None:
         pass
-    def add_filter_list(self, filter_list: str) -> None:
-        pass
     def filter_exists(self, filter: str) -> bool:
         pass
-    def tags_enable(self, tags: List[str]) -> None:
+    def use_tags(self, tags: List[str]) -> None:
         pass
-    def tags_disable(self, tags: List[str]) -> None:
+    def enable_tags(self, tags: List[str]) -> None:
+        pass
+    def disable_tags(self, tags: List[str]) -> None:
         pass
     def tag_exists(self, tag: str) -> bool:
         pass
-    def hostname_cosmetic_resources(self, hostname: str) -> HostnameSpecificResources:
+    def url_cosmetic_resources(self, url: str) -> UrlSpecificResources:
         pass
     def hidden_class_id_selectors(
         self, classes: List[str], ids: List[str], exceptions: Set[str]

@@ -73,7 +73,12 @@ jobs:
         run: poetry run maturin develop --release
 
       - name: Run Python tests
+        if: matrix.python-version != 3.5
         run: poetry run pytest -vv --color=yes
+
+      - name: Run Python tests (skip typestub tests)
+        if: matrix.python-version == 3.5
+        run: poetry run pytest -vv --color=yes --ignore=tests/test_typestubs.py
 
   python-publish:
     needs: build
