@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/pyo3-0.10.1/src/object.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>object.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../pyo3/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/pyo3-0.10.1/src/object.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>object.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../pyo3/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -376,7 +376,7 @@
 
 <span class="kw">impl</span> <span class="ident">PyObject</span> {
     <span class="doccomment">/// For internal conversions</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_not_null</span>(<span class="ident">ptr</span>: <span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">PyObject</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyObject</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_not_null</span>(<span class="ident">ptr</span>: <span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">PyObject</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">PyObject</span> {
         <span class="ident">PyObject</span>(<span class="ident">ptr</span>)
     }
 
@@ -384,9 +384,9 @@
     <span class="doccomment">/// This moves ownership over the pointer into the `PyObject`.</span>
     <span class="doccomment">/// Undefined behavior if the pointer is NULL or invalid.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_owned_ptr</span>(<span class="ident">_py</span>: <span class="ident">Python</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyObject</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_owned_ptr</span>(<span class="ident">_py</span>: <span class="ident">Python</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) <span class="op">-&gt;</span> <span class="ident">PyObject</span> {
         <span class="macro">debug_assert</span><span class="macro">!</span>(
-            <span class="op">!</span><span class="ident">ptr</span>.<span class="ident">is_null</span>() <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">ffi</span>::<span class="ident">Py_REFCNT</span>(<span class="ident">ptr</span>) <span class="op">&gt;</span> <span class="number">0</span>,
+            <span class="op">!</span><span class="ident">ptr</span>.<span class="ident">is_null</span>() <span class="op">&amp;&amp;</span> <span class="ident">ffi</span>::<span class="ident">Py_REFCNT</span>(<span class="ident">ptr</span>) <span class="op">&gt;</span> <span class="number">0</span>,
             <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;REFCNT: {:?} - {:?}&quot;</span>, <span class="ident">ptr</span>, <span class="ident">ffi</span>::<span class="ident">Py_REFCNT</span>(<span class="ident">ptr</span>))
         );
         <span class="ident">PyObject</span>(<span class="ident">NonNull</span>::<span class="ident">new_unchecked</span>(<span class="ident">ptr</span>))
@@ -396,10 +396,10 @@
     <span class="doccomment">/// Panics if the pointer is NULL.</span>
     <span class="doccomment">/// Undefined behavior if the pointer is invalid.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_owned_ptr_or_panic</span>(<span class="ident">_py</span>: <span class="ident">Python</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyObject</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_owned_ptr_or_panic</span>(<span class="ident">_py</span>: <span class="ident">Python</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) <span class="op">-&gt;</span> <span class="ident">PyObject</span> {
         <span class="kw">match</span> <span class="ident">NonNull</span>::<span class="ident">new</span>(<span class="ident">ptr</span>) {
-            <span class="prelude-val">Some</span>(<span class="ident">nonnull_ptr</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">PyObject</span>(<span class="ident">nonnull_ptr</span>),
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="prelude-val">Some</span>(<span class="ident">nonnull_ptr</span>) <span class="op">=&gt;</span> <span class="ident">PyObject</span>(<span class="ident">nonnull_ptr</span>),
+            <span class="prelude-val">None</span> <span class="op">=&gt;</span> {
                 <span class="kw">crate</span>::<span class="ident">err</span>::<span class="ident">panic_after_error</span>();
             }
         }
@@ -408,20 +408,20 @@
     <span class="doccomment">/// Constructs a `PyObject` from the result of a Python FFI call that</span>
     <span class="doccomment">/// returns a new reference (owned pointer).</span>
     <span class="doccomment">/// Returns `Err(PyErr)` if the pointer is NULL.</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_owned_ptr_or_err</span>(<span class="ident">py</span>: <span class="ident">Python</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_owned_ptr_or_err</span>(<span class="ident">py</span>: <span class="ident">Python</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="ident">NonNull</span>::<span class="ident">new</span>(<span class="ident">ptr</span>) {
-            <span class="prelude-val">Some</span>(<span class="ident">nonnull_ptr</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">PyObject</span>(<span class="ident">nonnull_ptr</span>)),
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">PyErr</span>::<span class="ident">fetch</span>(<span class="ident">py</span>)),
+            <span class="prelude-val">Some</span>(<span class="ident">nonnull_ptr</span>) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">PyObject</span>(<span class="ident">nonnull_ptr</span>)),
+            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">PyErr</span>::<span class="ident">fetch</span>(<span class="ident">py</span>)),
         }
     }
 
     <span class="doccomment">/// Constructs a `PyObject` from the result of a Python FFI call that</span>
     <span class="doccomment">/// returns a new reference (owned pointer).</span>
     <span class="doccomment">/// Returns `None` if the pointer is NULL.</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_owned_ptr_or_opt</span>(<span class="ident">_py</span>: <span class="ident">Python</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_owned_ptr_or_opt</span>(<span class="ident">_py</span>: <span class="ident">Python</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="ident">NonNull</span>::<span class="ident">new</span>(<span class="ident">ptr</span>) {
-            <span class="prelude-val">Some</span>(<span class="ident">nonnull_ptr</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">PyObject</span>(<span class="ident">nonnull_ptr</span>)),
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
+            <span class="prelude-val">Some</span>(<span class="ident">nonnull_ptr</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">PyObject</span>(<span class="ident">nonnull_ptr</span>)),
+            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="prelude-val">None</span>,
         }
     }
 
@@ -429,9 +429,9 @@
     <span class="doccomment">/// Calls `Py_INCREF()` on the ptr.</span>
     <span class="doccomment">/// Undefined behavior if the pointer is NULL or invalid.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_borrowed_ptr</span>(<span class="ident">_py</span>: <span class="ident">Python</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyObject</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_borrowed_ptr</span>(<span class="ident">_py</span>: <span class="ident">Python</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) <span class="op">-&gt;</span> <span class="ident">PyObject</span> {
         <span class="macro">debug_assert</span><span class="macro">!</span>(
-            <span class="op">!</span><span class="ident">ptr</span>.<span class="ident">is_null</span>() <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">ffi</span>::<span class="ident">Py_REFCNT</span>(<span class="ident">ptr</span>) <span class="op">&gt;</span> <span class="number">0</span>,
+            <span class="op">!</span><span class="ident">ptr</span>.<span class="ident">is_null</span>() <span class="op">&amp;&amp;</span> <span class="ident">ffi</span>::<span class="ident">Py_REFCNT</span>(<span class="ident">ptr</span>) <span class="op">&gt;</span> <span class="number">0</span>,
             <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;REFCNT: {:?} - {:?}&quot;</span>, <span class="ident">ptr</span>, <span class="ident">ffi</span>::<span class="ident">Py_REFCNT</span>(<span class="ident">ptr</span>))
         );
         <span class="ident">ffi</span>::<span class="ident">Py_INCREF</span>(<span class="ident">ptr</span>);
@@ -444,7 +444,7 @@
     <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_borrowed_ptr_or_err</span>(
         <span class="ident">py</span>: <span class="ident">Python</span>,
         <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span> {
+    ) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="ident">ptr</span>.<span class="ident">is_null</span>() {
             <span class="prelude-val">Err</span>(<span class="ident">PyErr</span>::<span class="ident">fetch</span>(<span class="ident">py</span>))
         } <span class="kw">else</span> {
@@ -458,7 +458,7 @@
     <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_borrowed_ptr_or_opt</span>(
         <span class="ident">py</span>: <span class="ident">Python</span>,
         <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span> {
+    ) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="ident">ptr</span>.<span class="ident">is_null</span>() {
             <span class="prelude-val">None</span>
         } <span class="kw">else</span> {
@@ -467,38 +467,38 @@
     }
 
     <span class="doccomment">/// Gets the reference count of the ffi::PyObject pointer.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_refcnt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">isize</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_refcnt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">isize</span> {
         <span class="kw">unsafe</span> { <span class="ident">ffi</span>::<span class="ident">Py_REFCNT</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">as_ptr</span>()) }
     }
 
     <span class="doccomment">/// Clones self by calling `Py_INCREF()` on the ptr.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">clone_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">clone_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="kw">unsafe</span> { <span class="ident">PyObject</span>::<span class="ident">from_borrowed_ptr</span>(<span class="ident">py</span>, <span class="self">self</span>.<span class="ident">as_ptr</span>()) }
     }
 
     <span class="doccomment">/// Returns whether the object is considered to be None.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This is equivalent to the Python expression `self is None`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_none</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="kw">unsafe</span> { <span class="ident">ffi</span>::<span class="ident">Py_None</span>() <span class="op">=</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">as_ptr</span>() }
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_none</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+        <span class="kw">unsafe</span> { <span class="ident">ffi</span>::<span class="ident">Py_None</span>() <span class="op">==</span> <span class="self">self</span>.<span class="ident">as_ptr</span>() }
     }
 
     <span class="doccomment">/// Returns whether the object is considered to be true.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This is equivalent to the Python expression `bool(self)`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_true</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_true</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">ffi</span>::<span class="ident">PyObject_IsTrue</span>(<span class="self">self</span>.<span class="ident">as_ptr</span>()) };
-        <span class="kw">if</span> <span class="ident">v</span> <span class="op">=</span><span class="op">=</span> <span class="op">-</span><span class="number">1</span> {
+        <span class="kw">if</span> <span class="ident">v</span> <span class="op">==</span> <span class="op">-</span><span class="number">1</span> {
             <span class="prelude-val">Err</span>(<span class="ident">PyErr</span>::<span class="ident">fetch</span>(<span class="ident">py</span>))
         } <span class="kw">else</span> {
-            <span class="prelude-val">Ok</span>(<span class="ident">v</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>)
+            <span class="prelude-val">Ok</span>(<span class="ident">v</span> <span class="op">!=</span> <span class="number">0</span>)
         }
     }
 
     <span class="doccomment">/// Casts the PyObject to a concrete Python object type.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This can cast only to native Python types, not types implemented in Rust.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast_as</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span>, <span class="ident">D</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">D</span>, <span class="ident">PyDowncastError</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast_as</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span>, <span class="ident">D</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">D</span>, <span class="ident">PyDowncastError</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">D</span>: <span class="ident">PyTryFrom</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>,
     {
@@ -508,7 +508,7 @@
     <span class="doccomment">/// Extracts some type from the Python object.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This is a wrapper function around `FromPyObject::extract()`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">extract</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span>, <span class="ident">D</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">extract</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span>, <span class="ident">D</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">D</span>: <span class="ident">FromPyObject</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>,
     {
@@ -518,7 +518,7 @@
     <span class="doccomment">/// Retrieves an attribute value.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This is equivalent to the Python expression `self.attr_name`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">getattr</span><span class="op">&lt;</span><span class="ident">N</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>, <span class="ident">attr_name</span>: <span class="ident">N</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">getattr</span><span class="op">&lt;</span><span class="ident">N</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>, <span class="ident">attr_name</span>: <span class="ident">N</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">N</span>: <span class="ident">ToPyObject</span>,
     {
@@ -533,9 +533,9 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">call</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">py</span>: <span class="ident">Python</span>,
-        <span class="ident">args</span>: <span class="kw">impl</span> <span class="ident">IntoPy</span><span class="op">&lt;</span><span class="ident">Py</span><span class="op">&lt;</span><span class="ident">PyTuple</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">args</span>: <span class="kw">impl</span> <span class="ident">IntoPy</span><span class="op">&lt;</span><span class="ident">Py</span><span class="op">&lt;</span><span class="ident">PyTuple</span><span class="op">&gt;&gt;</span>,
         <span class="ident">kwargs</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">PyDict</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span> {
+    ) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">args</span>.<span class="ident">into_py</span>(<span class="ident">py</span>).<span class="ident">into_ptr</span>();
         <span class="kw">let</span> <span class="ident">kwargs</span> <span class="op">=</span> <span class="ident">kwargs</span>.<span class="ident">into_ptr</span>();
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="kw">unsafe</span> {
@@ -551,14 +551,14 @@
     <span class="doccomment">/// Calls the object with only positional arguments.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This is equivalent to the Python expression `self(*args)`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">call1</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>, <span class="ident">args</span>: <span class="kw">impl</span> <span class="ident">IntoPy</span><span class="op">&lt;</span><span class="ident">Py</span><span class="op">&lt;</span><span class="ident">PyTuple</span><span class="op">&gt;</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">call1</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>, <span class="ident">args</span>: <span class="kw">impl</span> <span class="ident">IntoPy</span><span class="op">&lt;</span><span class="ident">Py</span><span class="op">&lt;</span><span class="ident">PyTuple</span><span class="op">&gt;&gt;</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">call</span>(<span class="ident">py</span>, <span class="ident">args</span>, <span class="prelude-val">None</span>)
     }
 
     <span class="doccomment">/// Calls the object without arguments.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This is equivalent to the Python expression `self()`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">call0</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">call0</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">call</span>(<span class="ident">py</span>, (), <span class="prelude-val">None</span>)
     }
 
@@ -569,9 +569,9 @@
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">py</span>: <span class="ident">Python</span>,
         <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">args</span>: <span class="kw">impl</span> <span class="ident">IntoPy</span><span class="op">&lt;</span><span class="ident">Py</span><span class="op">&lt;</span><span class="ident">PyTuple</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">args</span>: <span class="kw">impl</span> <span class="ident">IntoPy</span><span class="op">&lt;</span><span class="ident">Py</span><span class="op">&lt;</span><span class="ident">PyTuple</span><span class="op">&gt;&gt;</span>,
         <span class="ident">kwargs</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">PyDict</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span> {
+    ) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span> {
         <span class="ident">name</span>.<span class="ident">with_borrowed_ptr</span>(<span class="ident">py</span>, <span class="op">|</span><span class="ident">name</span><span class="op">|</span> <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">args</span>.<span class="ident">into_py</span>(<span class="ident">py</span>).<span class="ident">into_ptr</span>();
             <span class="kw">let</span> <span class="ident">kwargs</span> <span class="op">=</span> <span class="ident">kwargs</span>.<span class="ident">into_ptr</span>();
@@ -594,29 +594,29 @@
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">py</span>: <span class="ident">Python</span>,
         <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">args</span>: <span class="kw">impl</span> <span class="ident">IntoPy</span><span class="op">&lt;</span><span class="ident">Py</span><span class="op">&lt;</span><span class="ident">PyTuple</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span> {
+        <span class="ident">args</span>: <span class="kw">impl</span> <span class="ident">IntoPy</span><span class="op">&lt;</span><span class="ident">Py</span><span class="op">&lt;</span><span class="ident">PyTuple</span><span class="op">&gt;&gt;</span>,
+    ) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">call_method</span>(<span class="ident">py</span>, <span class="ident">name</span>, <span class="ident">args</span>, <span class="prelude-val">None</span>)
     }
 
     <span class="doccomment">/// Calls a method on the object with no arguments.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This is equivalent to the Python expression `self.name()`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">call_method0</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">call_method0</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">call_method</span>(<span class="ident">py</span>, <span class="ident">name</span>, (), <span class="prelude-val">None</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">AsPyRef</span> <span class="kw">for</span> <span class="ident">PyObject</span> {
     <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="ident">PyAny</span>;
-    <span class="kw">fn</span> <span class="ident">as_ref</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="self">self</span>, <span class="ident">_py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">PyAny</span> {
+    <span class="kw">fn</span> <span class="ident">as_ref</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="self">self</span>, <span class="ident">_py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">PyAny</span> {
         <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="self">self</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">PyAny</span>) }
     }
 }
 
 <span class="kw">impl</span> <span class="ident">ToPyObject</span> <span class="kw">for</span> <span class="ident">PyObject</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">to_object</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyObject</span> {
+    <span class="kw">fn</span> <span class="ident">to_object</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>) <span class="op">-&gt;</span> <span class="ident">PyObject</span> {
         <span class="kw">unsafe</span> { <span class="ident">PyObject</span>::<span class="ident">from_borrowed_ptr</span>(<span class="ident">py</span>, <span class="self">self</span>.<span class="ident">as_ptr</span>()) }
     }
 }
@@ -624,7 +624,7 @@
 <span class="kw">impl</span> <span class="ident">AsPyPointer</span> <span class="kw">for</span> <span class="ident">PyObject</span> {
     <span class="doccomment">/// Gets the underlying FFI pointer, returns a borrowed pointer.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">as_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span> {
+    <span class="kw">fn</span> <span class="ident">as_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">as_ptr</span>()
     }
 }
@@ -633,7 +633,7 @@
     <span class="doccomment">/// Gets the underlying FFI pointer, returns a owned pointer.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">fn</span> <span class="ident">into_ptr</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span> {
+    <span class="kw">fn</span> <span class="ident">into_ptr</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span> {
         <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">as_ptr</span>();
         <span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">forget</span>(<span class="self">self</span>); <span class="comment">// Avoid Drop</span>
         <span class="ident">ptr</span>
@@ -643,21 +643,21 @@
 <span class="kw">impl</span> <span class="ident">PartialEq</span> <span class="kw">for</span> <span class="ident">PyObject</span> {
     <span class="doccomment">/// Checks for pointer identity, not equivalent to Python&#39;s `__eq__`.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">o</span>: <span class="kw-2">&amp;</span><span class="ident">PyObject</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="number">0</span> <span class="op">=</span><span class="op">=</span> <span class="ident">o</span>.<span class="number">0</span>
+    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">o</span>: <span class="kw-2">&amp;</span><span class="ident">PyObject</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+        <span class="self">self</span>.<span class="number">0</span> <span class="op">==</span> <span class="ident">o</span>.<span class="number">0</span>
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">FromPyObject</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">PyObject</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="doccomment">/// Extracts `Self` from the source `PyObject`.</span>
-    <span class="kw">fn</span> <span class="ident">extract</span>(<span class="ident">ob</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">PyAny</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">extract</span>(<span class="ident">ob</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">PyAny</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> { <span class="prelude-val">Ok</span>(<span class="ident">PyObject</span>::<span class="ident">from_borrowed_ptr</span>(<span class="ident">ob</span>.<span class="ident">py</span>(), <span class="ident">ob</span>.<span class="ident">as_ptr</span>())) }
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">PyObject</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="kw">unsafe</span> {
             <span class="ident">gil</span>::<span class="ident">register_incref</span>(<span class="self">self</span>.<span class="number">0</span>);
         }

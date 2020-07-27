@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rmp-0.8.9/src/marker.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>marker.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../rmp/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rmp-0.8.9/src/marker.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>marker.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../rmp/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -205,113 +205,113 @@
 
 <span class="kw">impl</span> <span class="ident">Marker</span> {
     <span class="doccomment">/// Construct a msgpack marker from a single byte.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_u8</span>(<span class="ident">n</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Marker</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_u8</span>(<span class="ident">n</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="ident">Marker</span> {
         <span class="kw">match</span> <span class="ident">n</span> {
-            <span class="number">0x00</span> ..<span class="op">=</span> <span class="number">0x7f</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">FixPos</span>(<span class="ident">n</span>),
-            <span class="number">0xe0</span> ..<span class="op">=</span> <span class="number">0xff</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">FixNeg</span>(<span class="ident">n</span> <span class="kw">as</span> <span class="ident">i8</span>),
-            <span class="number">0x80</span> ..<span class="op">=</span> <span class="number">0x8f</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">FixMap</span>(<span class="ident">n</span> <span class="op">&amp;</span> <span class="ident">FIXMAP_SIZE</span>),
-            <span class="number">0x90</span> ..<span class="op">=</span> <span class="number">0x9f</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">FixArray</span>(<span class="ident">n</span> <span class="op">&amp;</span> <span class="ident">FIXARRAY_SIZE</span>),
-            <span class="number">0xa0</span> ..<span class="op">=</span> <span class="number">0xbf</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">FixStr</span>(<span class="ident">n</span> <span class="op">&amp;</span> <span class="ident">FIXSTR_SIZE</span>),
-            <span class="number">0xc0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">Null</span>,
+            <span class="number">0x00</span> ..<span class="op">=</span> <span class="number">0x7f</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">FixPos</span>(<span class="ident">n</span>),
+            <span class="number">0xe0</span> ..<span class="op">=</span> <span class="number">0xff</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">FixNeg</span>(<span class="ident">n</span> <span class="kw">as</span> <span class="ident">i8</span>),
+            <span class="number">0x80</span> ..<span class="op">=</span> <span class="number">0x8f</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">FixMap</span>(<span class="ident">n</span> <span class="op">&amp;</span> <span class="ident">FIXMAP_SIZE</span>),
+            <span class="number">0x90</span> ..<span class="op">=</span> <span class="number">0x9f</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">FixArray</span>(<span class="ident">n</span> <span class="op">&amp;</span> <span class="ident">FIXARRAY_SIZE</span>),
+            <span class="number">0xa0</span> ..<span class="op">=</span> <span class="number">0xbf</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">FixStr</span>(<span class="ident">n</span> <span class="op">&amp;</span> <span class="ident">FIXSTR_SIZE</span>),
+            <span class="number">0xc0</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">Null</span>,
             <span class="comment">// Marked in MessagePack spec as never used.</span>
-            <span class="number">0xc1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">Reserved</span>,
-            <span class="number">0xc2</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">False</span>,
-            <span class="number">0xc3</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">True</span>,
-            <span class="number">0xc4</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">Bin8</span>,
-            <span class="number">0xc5</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">Bin16</span>,
-            <span class="number">0xc6</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">Bin32</span>,
-            <span class="number">0xc7</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">Ext8</span>,
-            <span class="number">0xc8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">Ext16</span>,
-            <span class="number">0xc9</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">Ext32</span>,
-            <span class="number">0xca</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">F32</span>,
-            <span class="number">0xcb</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">F64</span>,
-            <span class="number">0xcc</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">U8</span>,
-            <span class="number">0xcd</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">U16</span>,
-            <span class="number">0xce</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">U32</span>,
-            <span class="number">0xcf</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">U64</span>,
-            <span class="number">0xd0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">I8</span>,
-            <span class="number">0xd1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">I16</span>,
-            <span class="number">0xd2</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">I32</span>,
-            <span class="number">0xd3</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">I64</span>,
-            <span class="number">0xd4</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">FixExt1</span>,
-            <span class="number">0xd5</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">FixExt2</span>,
-            <span class="number">0xd6</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">FixExt4</span>,
-            <span class="number">0xd7</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">FixExt8</span>,
-            <span class="number">0xd8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">FixExt16</span>,
-            <span class="number">0xd9</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">Str8</span>,
-            <span class="number">0xda</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">Str16</span>,
-            <span class="number">0xdb</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">Str32</span>,
-            <span class="number">0xdc</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">Array16</span>,
-            <span class="number">0xdd</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">Array32</span>,
-            <span class="number">0xde</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">Map16</span>,
-            <span class="number">0xdf</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Marker</span>::<span class="ident">Map32</span>,
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+            <span class="number">0xc1</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">Reserved</span>,
+            <span class="number">0xc2</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">False</span>,
+            <span class="number">0xc3</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">True</span>,
+            <span class="number">0xc4</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">Bin8</span>,
+            <span class="number">0xc5</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">Bin16</span>,
+            <span class="number">0xc6</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">Bin32</span>,
+            <span class="number">0xc7</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">Ext8</span>,
+            <span class="number">0xc8</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">Ext16</span>,
+            <span class="number">0xc9</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">Ext32</span>,
+            <span class="number">0xca</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">F32</span>,
+            <span class="number">0xcb</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">F64</span>,
+            <span class="number">0xcc</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">U8</span>,
+            <span class="number">0xcd</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">U16</span>,
+            <span class="number">0xce</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">U32</span>,
+            <span class="number">0xcf</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">U64</span>,
+            <span class="number">0xd0</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">I8</span>,
+            <span class="number">0xd1</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">I16</span>,
+            <span class="number">0xd2</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">I32</span>,
+            <span class="number">0xd3</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">I64</span>,
+            <span class="number">0xd4</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">FixExt1</span>,
+            <span class="number">0xd5</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">FixExt2</span>,
+            <span class="number">0xd6</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">FixExt4</span>,
+            <span class="number">0xd7</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">FixExt8</span>,
+            <span class="number">0xd8</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">FixExt16</span>,
+            <span class="number">0xd9</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">Str8</span>,
+            <span class="number">0xda</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">Str16</span>,
+            <span class="number">0xdb</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">Str32</span>,
+            <span class="number">0xdc</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">Array16</span>,
+            <span class="number">0xdd</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">Array32</span>,
+            <span class="number">0xde</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">Map16</span>,
+            <span class="number">0xdf</span> <span class="op">=&gt;</span> <span class="ident">Marker</span>::<span class="ident">Map32</span>,
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
         }
     }
 
     <span class="doccomment">/// Converts a marker object into a single-byte representation.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_u8</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_u8</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">u8</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">Marker</span>::<span class="ident">FixPos</span>(<span class="ident">val</span>)   <span class="op">=</span><span class="op">&gt;</span> <span class="ident">val</span>,
-            <span class="ident">Marker</span>::<span class="ident">FixNeg</span>(<span class="ident">val</span>)   <span class="op">=</span><span class="op">&gt;</span> <span class="ident">val</span> <span class="kw">as</span> <span class="ident">u8</span>,
+            <span class="ident">Marker</span>::<span class="ident">FixPos</span>(<span class="ident">val</span>)   <span class="op">=&gt;</span> <span class="ident">val</span>,
+            <span class="ident">Marker</span>::<span class="ident">FixNeg</span>(<span class="ident">val</span>)   <span class="op">=&gt;</span> <span class="ident">val</span> <span class="kw">as</span> <span class="ident">u8</span>,
 
-            <span class="ident">Marker</span>::<span class="ident">Null</span>          <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xc0</span>,
+            <span class="ident">Marker</span>::<span class="ident">Null</span>          <span class="op">=&gt;</span> <span class="number">0xc0</span>,
 
-            <span class="ident">Marker</span>::<span class="ident">True</span>          <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xc3</span>,
-            <span class="ident">Marker</span>::<span class="ident">False</span>         <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xc2</span>,
+            <span class="ident">Marker</span>::<span class="ident">True</span>          <span class="op">=&gt;</span> <span class="number">0xc3</span>,
+            <span class="ident">Marker</span>::<span class="ident">False</span>         <span class="op">=&gt;</span> <span class="number">0xc2</span>,
 
-            <span class="ident">Marker</span>::<span class="ident">U8</span>            <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xcc</span>,
-            <span class="ident">Marker</span>::<span class="ident">U16</span>           <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xcd</span>,
-            <span class="ident">Marker</span>::<span class="ident">U32</span>           <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xce</span>,
-            <span class="ident">Marker</span>::<span class="ident">U64</span>           <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xcf</span>,
+            <span class="ident">Marker</span>::<span class="ident">U8</span>            <span class="op">=&gt;</span> <span class="number">0xcc</span>,
+            <span class="ident">Marker</span>::<span class="ident">U16</span>           <span class="op">=&gt;</span> <span class="number">0xcd</span>,
+            <span class="ident">Marker</span>::<span class="ident">U32</span>           <span class="op">=&gt;</span> <span class="number">0xce</span>,
+            <span class="ident">Marker</span>::<span class="ident">U64</span>           <span class="op">=&gt;</span> <span class="number">0xcf</span>,
 
-            <span class="ident">Marker</span>::<span class="ident">I8</span>            <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xd0</span>,
-            <span class="ident">Marker</span>::<span class="ident">I16</span>           <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xd1</span>,
-            <span class="ident">Marker</span>::<span class="ident">I32</span>           <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xd2</span>,
-            <span class="ident">Marker</span>::<span class="ident">I64</span>           <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xd3</span>,
+            <span class="ident">Marker</span>::<span class="ident">I8</span>            <span class="op">=&gt;</span> <span class="number">0xd0</span>,
+            <span class="ident">Marker</span>::<span class="ident">I16</span>           <span class="op">=&gt;</span> <span class="number">0xd1</span>,
+            <span class="ident">Marker</span>::<span class="ident">I32</span>           <span class="op">=&gt;</span> <span class="number">0xd2</span>,
+            <span class="ident">Marker</span>::<span class="ident">I64</span>           <span class="op">=&gt;</span> <span class="number">0xd3</span>,
 
-            <span class="ident">Marker</span>::<span class="ident">F32</span>           <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xca</span>,
-            <span class="ident">Marker</span>::<span class="ident">F64</span>           <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xcb</span>,
+            <span class="ident">Marker</span>::<span class="ident">F32</span>           <span class="op">=&gt;</span> <span class="number">0xca</span>,
+            <span class="ident">Marker</span>::<span class="ident">F64</span>           <span class="op">=&gt;</span> <span class="number">0xcb</span>,
 
-            <span class="ident">Marker</span>::<span class="ident">FixStr</span>(<span class="ident">len</span>)   <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xa0</span> <span class="op">|</span> (<span class="ident">len</span> <span class="op">&amp;</span> <span class="ident">FIXSTR_SIZE</span>),
-            <span class="ident">Marker</span>::<span class="ident">Str8</span>          <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xd9</span>,
-            <span class="ident">Marker</span>::<span class="ident">Str16</span>         <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xda</span>,
-            <span class="ident">Marker</span>::<span class="ident">Str32</span>         <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xdb</span>,
+            <span class="ident">Marker</span>::<span class="ident">FixStr</span>(<span class="ident">len</span>)   <span class="op">=&gt;</span> <span class="number">0xa0</span> <span class="op">|</span> (<span class="ident">len</span> <span class="op">&amp;</span> <span class="ident">FIXSTR_SIZE</span>),
+            <span class="ident">Marker</span>::<span class="ident">Str8</span>          <span class="op">=&gt;</span> <span class="number">0xd9</span>,
+            <span class="ident">Marker</span>::<span class="ident">Str16</span>         <span class="op">=&gt;</span> <span class="number">0xda</span>,
+            <span class="ident">Marker</span>::<span class="ident">Str32</span>         <span class="op">=&gt;</span> <span class="number">0xdb</span>,
 
-            <span class="ident">Marker</span>::<span class="ident">Bin8</span>          <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xc4</span>,
-            <span class="ident">Marker</span>::<span class="ident">Bin16</span>         <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xc5</span>,
-            <span class="ident">Marker</span>::<span class="ident">Bin32</span>         <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xc6</span>,
+            <span class="ident">Marker</span>::<span class="ident">Bin8</span>          <span class="op">=&gt;</span> <span class="number">0xc4</span>,
+            <span class="ident">Marker</span>::<span class="ident">Bin16</span>         <span class="op">=&gt;</span> <span class="number">0xc5</span>,
+            <span class="ident">Marker</span>::<span class="ident">Bin32</span>         <span class="op">=&gt;</span> <span class="number">0xc6</span>,
 
-            <span class="ident">Marker</span>::<span class="ident">FixArray</span>(<span class="ident">len</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="number">0x90</span> <span class="op">|</span> (<span class="ident">len</span> <span class="op">&amp;</span> <span class="ident">FIXARRAY_SIZE</span>),
-            <span class="ident">Marker</span>::<span class="ident">Array16</span>       <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xdc</span>,
-            <span class="ident">Marker</span>::<span class="ident">Array32</span>       <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xdd</span>,
+            <span class="ident">Marker</span>::<span class="ident">FixArray</span>(<span class="ident">len</span>) <span class="op">=&gt;</span> <span class="number">0x90</span> <span class="op">|</span> (<span class="ident">len</span> <span class="op">&amp;</span> <span class="ident">FIXARRAY_SIZE</span>),
+            <span class="ident">Marker</span>::<span class="ident">Array16</span>       <span class="op">=&gt;</span> <span class="number">0xdc</span>,
+            <span class="ident">Marker</span>::<span class="ident">Array32</span>       <span class="op">=&gt;</span> <span class="number">0xdd</span>,
 
-            <span class="ident">Marker</span>::<span class="ident">FixMap</span>(<span class="ident">len</span>)   <span class="op">=</span><span class="op">&gt;</span> <span class="number">0x80</span> <span class="op">|</span> (<span class="ident">len</span> <span class="op">&amp;</span> <span class="ident">FIXMAP_SIZE</span>),
-            <span class="ident">Marker</span>::<span class="ident">Map16</span>         <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xde</span>,
-            <span class="ident">Marker</span>::<span class="ident">Map32</span>         <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xdf</span>,
+            <span class="ident">Marker</span>::<span class="ident">FixMap</span>(<span class="ident">len</span>)   <span class="op">=&gt;</span> <span class="number">0x80</span> <span class="op">|</span> (<span class="ident">len</span> <span class="op">&amp;</span> <span class="ident">FIXMAP_SIZE</span>),
+            <span class="ident">Marker</span>::<span class="ident">Map16</span>         <span class="op">=&gt;</span> <span class="number">0xde</span>,
+            <span class="ident">Marker</span>::<span class="ident">Map32</span>         <span class="op">=&gt;</span> <span class="number">0xdf</span>,
 
-            <span class="ident">Marker</span>::<span class="ident">FixExt1</span>       <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xd4</span>,
-            <span class="ident">Marker</span>::<span class="ident">FixExt2</span>       <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xd5</span>,
-            <span class="ident">Marker</span>::<span class="ident">FixExt4</span>       <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xd6</span>,
-            <span class="ident">Marker</span>::<span class="ident">FixExt8</span>       <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xd7</span>,
-            <span class="ident">Marker</span>::<span class="ident">FixExt16</span>      <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xd8</span>,
-            <span class="ident">Marker</span>::<span class="ident">Ext8</span>          <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xc7</span>,
-            <span class="ident">Marker</span>::<span class="ident">Ext16</span>         <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xc8</span>,
-            <span class="ident">Marker</span>::<span class="ident">Ext32</span>         <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xc9</span>,
+            <span class="ident">Marker</span>::<span class="ident">FixExt1</span>       <span class="op">=&gt;</span> <span class="number">0xd4</span>,
+            <span class="ident">Marker</span>::<span class="ident">FixExt2</span>       <span class="op">=&gt;</span> <span class="number">0xd5</span>,
+            <span class="ident">Marker</span>::<span class="ident">FixExt4</span>       <span class="op">=&gt;</span> <span class="number">0xd6</span>,
+            <span class="ident">Marker</span>::<span class="ident">FixExt8</span>       <span class="op">=&gt;</span> <span class="number">0xd7</span>,
+            <span class="ident">Marker</span>::<span class="ident">FixExt16</span>      <span class="op">=&gt;</span> <span class="number">0xd8</span>,
+            <span class="ident">Marker</span>::<span class="ident">Ext8</span>          <span class="op">=&gt;</span> <span class="number">0xc7</span>,
+            <span class="ident">Marker</span>::<span class="ident">Ext16</span>         <span class="op">=&gt;</span> <span class="number">0xc8</span>,
+            <span class="ident">Marker</span>::<span class="ident">Ext32</span>         <span class="op">=&gt;</span> <span class="number">0xc9</span>,
 
-            <span class="ident">Marker</span>::<span class="ident">Reserved</span>      <span class="op">=</span><span class="op">&gt;</span> <span class="number">0xc1</span>,
+            <span class="ident">Marker</span>::<span class="ident">Reserved</span>      <span class="op">=&gt;</span> <span class="number">0xc1</span>,
         }
     }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Marker</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">val</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Marker</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">val</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="ident">Marker</span> {
         <span class="ident">Marker</span>::<span class="ident">from_u8</span>(<span class="ident">val</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Marker</span> {
-    <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
+    <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">u8</span> {
         <span class="self">self</span>.<span class="ident">to_u8</span>()
     }
 }

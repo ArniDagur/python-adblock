@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.14.9/src/attr.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>attr.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../syn/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/syn-0.14.9/src/attr.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>attr.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../syn/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -628,13 +628,13 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;extra-traits&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">PartialEq</span> <span class="kw">for</span> <span class="ident">Attribute</span> {
-    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">style</span> <span class="op">=</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">style</span>
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="self">self</span>.<span class="ident">pound_token</span> <span class="op">=</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">pound_token</span>
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="self">self</span>.<span class="ident">bracket_token</span> <span class="op">=</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">bracket_token</span>
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="self">self</span>.<span class="ident">path</span> <span class="op">=</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">path</span>
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">tts</span>) <span class="op">=</span><span class="op">=</span> <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">tts</span>)
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="self">self</span>.<span class="ident">is_sugared_doc</span> <span class="op">=</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">is_sugared_doc</span>
+    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+        <span class="self">self</span>.<span class="ident">style</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">style</span>
+            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">pound_token</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">pound_token</span>
+            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">bracket_token</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">bracket_token</span>
+            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">path</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">path</span>
+            <span class="op">&amp;&amp;</span> <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">tts</span>) <span class="op">==</span> <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">tts</span>)
+            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">is_sugared_doc</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">is_sugared_doc</span>
     }
 }
 
@@ -656,8 +656,8 @@
 <span class="kw">impl</span> <span class="ident">Attribute</span> {
     <span class="doccomment">/// Parses the tokens after the path as a [`Meta`](enum.Meta.html) if</span>
     <span class="doccomment">/// possible.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">interpret_meta</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">path</span>.<span class="ident">segments</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">1</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">interpret_meta</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">path</span>.<span class="ident">segments</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">1</span> {
             <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">path</span>.<span class="ident">segments</span>.<span class="ident">first</span>().<span class="ident">unwrap</span>().<span class="ident">value</span>().<span class="ident">ident</span>
         } <span class="kw">else</span> {
             <span class="kw">return</span> <span class="prelude-val">None</span>;
@@ -667,15 +667,15 @@
             <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">Meta</span>::<span class="ident">Word</span>(<span class="ident">name</span>.<span class="ident">clone</span>()));
         }
 
-        <span class="kw">let</span> <span class="ident">tts</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">tts</span>.<span class="ident">clone</span>().<span class="ident">into_iter</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+        <span class="kw">let</span> <span class="ident">tts</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">tts</span>.<span class="ident">clone</span>().<span class="ident">into_iter</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;&gt;</span>();
 
-        <span class="kw">if</span> <span class="ident">tts</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">1</span> {
+        <span class="kw">if</span> <span class="ident">tts</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">1</span> {
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">meta</span>) <span class="op">=</span> <span class="ident">Attribute</span>::<span class="ident">extract_meta_list</span>(<span class="ident">name</span>.<span class="ident">clone</span>(), <span class="kw-2">&amp;</span><span class="ident">tts</span>[<span class="number">0</span>]) {
                 <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">meta</span>);
             }
         }
 
-        <span class="kw">if</span> <span class="ident">tts</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">2</span> {
+        <span class="kw">if</span> <span class="ident">tts</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">2</span> {
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">meta</span>) <span class="op">=</span> <span class="ident">Attribute</span>::<span class="ident">extract_name_value</span>(<span class="ident">name</span>.<span class="ident">clone</span>(), <span class="kw-2">&amp;</span><span class="ident">tts</span>[<span class="number">0</span>], <span class="kw-2">&amp;</span><span class="ident">tts</span>[<span class="number">1</span>]) {
                 <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">meta</span>);
             }
@@ -684,18 +684,18 @@
         <span class="prelude-val">None</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">extract_meta_list</span>(<span class="ident">ident</span>: <span class="ident">Ident</span>, <span class="ident">tt</span>: <span class="kw-2">&amp;</span><span class="ident">TokenTree</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">extract_meta_list</span>(<span class="ident">ident</span>: <span class="ident">Ident</span>, <span class="ident">tt</span>: <span class="kw-2">&amp;</span><span class="ident">TokenTree</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">g</span> <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">tt</span> {
-            <span class="ident">TokenTree</span>::<span class="ident">Group</span>(<span class="kw-2">ref</span> <span class="ident">g</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">g</span>,
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
+            <span class="ident">TokenTree</span>::<span class="ident">Group</span>(<span class="kw-2">ref</span> <span class="ident">g</span>) <span class="op">=&gt;</span> <span class="ident">g</span>,
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
         };
-        <span class="kw">if</span> <span class="ident">g</span>.<span class="ident">delimiter</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">Delimiter</span>::<span class="ident">Parenthesis</span> {
+        <span class="kw">if</span> <span class="ident">g</span>.<span class="ident">delimiter</span>() <span class="op">!=</span> <span class="ident">Delimiter</span>::<span class="ident">Parenthesis</span> {
             <span class="kw">return</span> <span class="prelude-val">None</span>;
         }
-        <span class="kw">let</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="ident">g</span>.<span class="ident">stream</span>().<span class="ident">clone</span>().<span class="ident">into_iter</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+        <span class="kw">let</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="ident">g</span>.<span class="ident">stream</span>().<span class="ident">clone</span>().<span class="ident">into_iter</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;&gt;</span>();
         <span class="kw">let</span> <span class="ident">nested</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">list_of_nested_meta_items_from_tokens</span>(<span class="kw-2">&amp;</span><span class="ident">tokens</span>) {
-            <span class="prelude-val">Some</span>(<span class="ident">n</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">n</span>,
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
+            <span class="prelude-val">Some</span>(<span class="ident">n</span>) <span class="op">=&gt;</span> <span class="ident">n</span>,
+            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
         };
         <span class="prelude-val">Some</span>(<span class="ident">Meta</span>::<span class="ident">List</span>(<span class="ident">MetaList</span> {
             <span class="ident">paren_token</span>: <span class="ident">token</span>::<span class="ident">Paren</span>(<span class="ident">g</span>.<span class="ident">span</span>()),
@@ -704,47 +704,47 @@
         }))
     }
 
-    <span class="kw">fn</span> <span class="ident">extract_name_value</span>(<span class="ident">ident</span>: <span class="ident">Ident</span>, <span class="ident">a</span>: <span class="kw-2">&amp;</span><span class="ident">TokenTree</span>, <span class="ident">b</span>: <span class="kw-2">&amp;</span><span class="ident">TokenTree</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">extract_name_value</span>(<span class="ident">ident</span>: <span class="ident">Ident</span>, <span class="ident">a</span>: <span class="kw-2">&amp;</span><span class="ident">TokenTree</span>, <span class="ident">b</span>: <span class="kw-2">&amp;</span><span class="ident">TokenTree</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Meta</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">a</span> {
-            <span class="ident">TokenTree</span>::<span class="ident">Punct</span>(<span class="kw-2">ref</span> <span class="ident">o</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">o</span>,
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
+            <span class="ident">TokenTree</span>::<span class="ident">Punct</span>(<span class="kw-2">ref</span> <span class="ident">o</span>) <span class="op">=&gt;</span> <span class="ident">o</span>,
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
         };
-        <span class="kw">if</span> <span class="ident">a</span>.<span class="ident">spacing</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">Spacing</span>::<span class="ident">Alone</span> {
+        <span class="kw">if</span> <span class="ident">a</span>.<span class="ident">spacing</span>() <span class="op">!=</span> <span class="ident">Spacing</span>::<span class="ident">Alone</span> {
             <span class="kw">return</span> <span class="prelude-val">None</span>;
         }
-        <span class="kw">if</span> <span class="ident">a</span>.<span class="ident">as_char</span>() <span class="op">!</span><span class="op">=</span> <span class="string">&#39;=&#39;</span> {
+        <span class="kw">if</span> <span class="ident">a</span>.<span class="ident">as_char</span>() <span class="op">!=</span> <span class="string">&#39;=&#39;</span> {
             <span class="kw">return</span> <span class="prelude-val">None</span>;
         }
 
         <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">b</span> {
-            <span class="ident">TokenTree</span>::<span class="ident">Literal</span>(<span class="kw-2">ref</span> <span class="ident">l</span>) <span class="kw">if</span> <span class="op">!</span><span class="ident">l</span>.<span class="ident">to_string</span>().<span class="ident">starts_with</span>(<span class="string">&#39;/&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">TokenTree</span>::<span class="ident">Literal</span>(<span class="kw-2">ref</span> <span class="ident">l</span>) <span class="kw">if</span> <span class="op">!</span><span class="ident">l</span>.<span class="ident">to_string</span>().<span class="ident">starts_with</span>(<span class="string">&#39;/&#39;</span>) <span class="op">=&gt;</span> {
                 <span class="prelude-val">Some</span>(<span class="ident">Meta</span>::<span class="ident">NameValue</span>(<span class="ident">MetaNameValue</span> {
                     <span class="ident">ident</span>: <span class="ident">ident</span>,
                     <span class="ident">eq_token</span>: <span class="macro">Token</span><span class="macro">!</span>[<span class="op">=</span>]([<span class="ident">a</span>.<span class="ident">span</span>()]),
                     <span class="ident">lit</span>: <span class="ident">Lit</span>::<span class="ident">new</span>(<span class="ident">l</span>.<span class="ident">clone</span>()),
                 }))
             }
-            <span class="ident">TokenTree</span>::<span class="ident">Ident</span>(<span class="kw-2">ref</span> <span class="ident">v</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">v</span>.<span class="ident">to_string</span>()[..] {
-                <span class="ident">v</span> @ <span class="string">&quot;true&quot;</span> <span class="op">|</span> <span class="ident">v</span> @ <span class="string">&quot;false&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">Meta</span>::<span class="ident">NameValue</span>(<span class="ident">MetaNameValue</span> {
+            <span class="ident">TokenTree</span>::<span class="ident">Ident</span>(<span class="kw-2">ref</span> <span class="ident">v</span>) <span class="op">=&gt;</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">v</span>.<span class="ident">to_string</span>()[..] {
+                <span class="ident">v</span> @ <span class="string">&quot;true&quot;</span> <span class="op">|</span> <span class="ident">v</span> @ <span class="string">&quot;false&quot;</span> <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">Meta</span>::<span class="ident">NameValue</span>(<span class="ident">MetaNameValue</span> {
                     <span class="ident">ident</span>: <span class="ident">ident</span>,
                     <span class="ident">eq_token</span>: <span class="macro">Token</span><span class="macro">!</span>[<span class="op">=</span>]([<span class="ident">a</span>.<span class="ident">span</span>()]),
                     <span class="ident">lit</span>: <span class="ident">Lit</span>::<span class="ident">Bool</span>(<span class="ident">LitBool</span> {
-                        <span class="ident">value</span>: <span class="ident">v</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;true&quot;</span>,
+                        <span class="ident">value</span>: <span class="ident">v</span> <span class="op">==</span> <span class="string">&quot;true&quot;</span>,
                         <span class="ident">span</span>: <span class="ident">b</span>.<span class="ident">span</span>(),
                     }),
                 })),
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
+                <span class="kw">_</span> <span class="op">=&gt;</span> <span class="prelude-val">None</span>,
             },
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="prelude-val">None</span>,
         }
     }
 }
 
-<span class="kw">fn</span> <span class="ident">nested_meta_item_from_tokens</span>(<span class="ident">tts</span>: <span class="kw-2">&amp;</span>[<span class="ident">TokenTree</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">NestedMeta</span>, <span class="kw-2">&amp;</span>[<span class="ident">TokenTree</span>])<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">nested_meta_item_from_tokens</span>(<span class="ident">tts</span>: <span class="kw-2">&amp;</span>[<span class="ident">TokenTree</span>]) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">NestedMeta</span>, <span class="kw-2">&amp;</span>[<span class="ident">TokenTree</span>])<span class="op">&gt;</span> {
     <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">tts</span>.<span class="ident">is_empty</span>());
 
     <span class="kw">match</span> <span class="ident">tts</span>[<span class="number">0</span>] {
-        <span class="ident">TokenTree</span>::<span class="ident">Literal</span>(<span class="kw-2">ref</span> <span class="ident">lit</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">TokenTree</span>::<span class="ident">Literal</span>(<span class="kw-2">ref</span> <span class="ident">lit</span>) <span class="op">=&gt;</span> {
             <span class="kw">if</span> <span class="ident">lit</span>.<span class="ident">to_string</span>().<span class="ident">starts_with</span>(<span class="string">&#39;/&#39;</span>) {
                 <span class="prelude-val">None</span>
             } <span class="kw">else</span> {
@@ -753,14 +753,14 @@
             }
         }
 
-        <span class="ident">TokenTree</span>::<span class="ident">Ident</span>(<span class="kw-2">ref</span> <span class="ident">ident</span>) <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="kw">if</span> <span class="ident">tts</span>.<span class="ident">len</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="number">3</span> {
+        <span class="ident">TokenTree</span>::<span class="ident">Ident</span>(<span class="kw-2">ref</span> <span class="ident">ident</span>) <span class="op">=&gt;</span> {
+            <span class="kw">if</span> <span class="ident">tts</span>.<span class="ident">len</span>() <span class="op">&gt;=</span> <span class="number">3</span> {
                 <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">meta</span>) <span class="op">=</span> <span class="ident">Attribute</span>::<span class="ident">extract_name_value</span>(<span class="ident">ident</span>.<span class="ident">clone</span>(), <span class="kw-2">&amp;</span><span class="ident">tts</span>[<span class="number">1</span>], <span class="kw-2">&amp;</span><span class="ident">tts</span>[<span class="number">2</span>]) {
                     <span class="kw">return</span> <span class="prelude-val">Some</span>((<span class="ident">NestedMeta</span>::<span class="ident">Meta</span>(<span class="ident">meta</span>), <span class="kw-2">&amp;</span><span class="ident">tts</span>[<span class="number">3</span>..]));
                 }
             }
 
-            <span class="kw">if</span> <span class="ident">tts</span>.<span class="ident">len</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="number">2</span> {
+            <span class="kw">if</span> <span class="ident">tts</span>.<span class="ident">len</span>() <span class="op">&gt;=</span> <span class="number">2</span> {
                 <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">meta</span>) <span class="op">=</span> <span class="ident">Attribute</span>::<span class="ident">extract_meta_list</span>(<span class="ident">ident</span>.<span class="ident">clone</span>(), <span class="kw-2">&amp;</span><span class="ident">tts</span>[<span class="number">1</span>]) {
                     <span class="kw">return</span> <span class="prelude-val">Some</span>((<span class="ident">NestedMeta</span>::<span class="ident">Meta</span>(<span class="ident">meta</span>), <span class="kw-2">&amp;</span><span class="ident">tts</span>[<span class="number">2</span>..]));
                 }
@@ -769,13 +769,13 @@
             <span class="prelude-val">Some</span>((<span class="ident">Meta</span>::<span class="ident">Word</span>(<span class="ident">ident</span>.<span class="ident">clone</span>()).<span class="ident">into</span>(), <span class="kw-2">&amp;</span><span class="ident">tts</span>[<span class="number">1</span>..]))
         }
 
-        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
+        <span class="kw">_</span> <span class="op">=&gt;</span> <span class="prelude-val">None</span>,
     }
 }
 
 <span class="kw">fn</span> <span class="ident">list_of_nested_meta_items_from_tokens</span>(
     <span class="kw-2">mut</span> <span class="ident">tts</span>: <span class="kw-2">&amp;</span>[<span class="ident">TokenTree</span>],
-) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Punctuated</span><span class="op">&lt;</span><span class="ident">NestedMeta</span>, <span class="macro">Token</span><span class="macro">!</span>[,]<span class="op">&gt;</span><span class="op">&gt;</span> {
+) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Punctuated</span><span class="op">&lt;</span><span class="ident">NestedMeta</span>, <span class="macro">Token</span><span class="macro">!</span>[,]<span class="op">&gt;&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">nested_meta_items</span> <span class="op">=</span> <span class="ident">Punctuated</span>::<span class="ident">new</span>();
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">first</span> <span class="op">=</span> <span class="bool-val">true</span>;
 
@@ -784,10 +784,10 @@
             <span class="ident">first</span> <span class="op">=</span> <span class="bool-val">false</span>;
             <span class="prelude-val">None</span>
         } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">TokenTree</span>::<span class="ident">Punct</span>(<span class="kw-2">ref</span> <span class="ident">op</span>) <span class="op">=</span> <span class="ident">tts</span>[<span class="number">0</span>] {
-            <span class="kw">if</span> <span class="ident">op</span>.<span class="ident">spacing</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">Spacing</span>::<span class="ident">Alone</span> {
+            <span class="kw">if</span> <span class="ident">op</span>.<span class="ident">spacing</span>() <span class="op">!=</span> <span class="ident">Spacing</span>::<span class="ident">Alone</span> {
                 <span class="kw">return</span> <span class="prelude-val">None</span>;
             }
-            <span class="kw">if</span> <span class="ident">op</span>.<span class="ident">as_char</span>() <span class="op">!</span><span class="op">=</span> <span class="string">&#39;,&#39;</span> {
+            <span class="kw">if</span> <span class="ident">op</span>.<span class="ident">as_char</span>() <span class="op">!=</span> <span class="string">&#39;,&#39;</span> {
                 <span class="kw">return</span> <span class="prelude-val">None</span>;
             }
             <span class="kw">let</span> <span class="ident">tok</span> <span class="op">=</span> <span class="macro">Token</span><span class="macro">!</span>[,]([<span class="ident">op</span>.<span class="ident">span</span>()]);
@@ -800,8 +800,8 @@
             <span class="kw">return</span> <span class="prelude-val">None</span>;
         };
         <span class="kw">let</span> (<span class="ident">nested</span>, <span class="ident">rest</span>) <span class="op">=</span> <span class="kw">match</span> <span class="ident">nested_meta_item_from_tokens</span>(<span class="ident">tts</span>) {
-            <span class="prelude-val">Some</span>(<span class="ident">pair</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">pair</span>,
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
+            <span class="prelude-val">Some</span>(<span class="ident">pair</span>) <span class="op">=&gt;</span> <span class="ident">pair</span>,
+            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
         };
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">comma</span>) <span class="op">=</span> <span class="ident">prev_comma</span> {
             <span class="ident">nested_meta_items</span>.<span class="ident">push_punct</span>(<span class="ident">comma</span>);
@@ -890,11 +890,11 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// For example this would return the `test` in `#[test]`, the `derive` in</span>
     <span class="doccomment">/// `#[derive(Copy)]`, and the `path` in `#[path = &quot;sys/windows.rs&quot;]`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Ident</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">Meta</span>::<span class="ident">Word</span>(<span class="kw-2">ref</span> <span class="ident">meta</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">meta</span>.<span class="ident">clone</span>(),
-            <span class="ident">Meta</span>::<span class="ident">List</span>(<span class="kw-2">ref</span> <span class="ident">meta</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">meta</span>.<span class="ident">ident</span>.<span class="ident">clone</span>(),
-            <span class="ident">Meta</span>::<span class="ident">NameValue</span>(<span class="kw-2">ref</span> <span class="ident">meta</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">meta</span>.<span class="ident">ident</span>.<span class="ident">clone</span>(),
+            <span class="ident">Meta</span>::<span class="ident">Word</span>(<span class="kw-2">ref</span> <span class="ident">meta</span>) <span class="op">=&gt;</span> <span class="ident">meta</span>.<span class="ident">clone</span>(),
+            <span class="ident">Meta</span>::<span class="ident">List</span>(<span class="kw-2">ref</span> <span class="ident">meta</span>) <span class="op">=&gt;</span> <span class="ident">meta</span>.<span class="ident">ident</span>.<span class="ident">clone</span>(),
+            <span class="ident">Meta</span>::<span class="ident">NameValue</span>(<span class="kw-2">ref</span> <span class="ident">meta</span>) <span class="op">=&gt;</span> <span class="ident">meta</span>.<span class="ident">ident</span>.<span class="ident">clone</span>(),
         }
     }
 }
@@ -917,31 +917,31 @@
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">FilterAttrs</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Ret</span>: <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Attribute</span><span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">outer</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Ret</span>;
-    <span class="kw">fn</span> <span class="ident">inner</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Ret</span>;
+    <span class="kw">fn</span> <span class="ident">outer</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Ret</span>;
+    <span class="kw">fn</span> <span class="ident">inner</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Ret</span>;
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">FilterAttrs</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">T</span>
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Attribute</span><span class="op">&gt;</span>,
 {
-    <span class="kw">type</span> <span class="ident">Ret</span> <span class="op">=</span> <span class="ident">iter</span>::<span class="ident">Filter</span><span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">IntoIter</span>, <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="kw-2">&amp;</span><span class="ident">Attribute</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span><span class="op">&gt;</span>;
+    <span class="kw">type</span> <span class="ident">Ret</span> <span class="op">=</span> <span class="ident">iter</span>::<span class="ident">Filter</span><span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">IntoIter</span>, <span class="kw">fn</span>(<span class="op">&amp;&amp;</span><span class="ident">Attribute</span>) <span class="op">-&gt;</span> <span class="ident">bool</span><span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">outer</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Ret</span> {
-        <span class="kw">fn</span> <span class="ident">is_outer</span>(<span class="ident">attr</span>: <span class="kw-2">&amp;</span><span class="kw-2">&amp;</span><span class="ident">Attribute</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">outer</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Ret</span> {
+        <span class="kw">fn</span> <span class="ident">is_outer</span>(<span class="ident">attr</span>: <span class="op">&amp;&amp;</span><span class="ident">Attribute</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
             <span class="kw">match</span> <span class="ident">attr</span>.<span class="ident">style</span> {
-                <span class="ident">AttrStyle</span>::<span class="ident">Outer</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
+                <span class="ident">AttrStyle</span>::<span class="ident">Outer</span> <span class="op">=&gt;</span> <span class="bool-val">true</span>,
+                <span class="kw">_</span> <span class="op">=&gt;</span> <span class="bool-val">false</span>,
             }
         }
         <span class="self">self</span>.<span class="ident">into_iter</span>().<span class="ident">filter</span>(<span class="ident">is_outer</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">inner</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Ret</span> {
-        <span class="kw">fn</span> <span class="ident">is_inner</span>(<span class="ident">attr</span>: <span class="kw-2">&amp;</span><span class="kw-2">&amp;</span><span class="ident">Attribute</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">inner</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Ret</span> {
+        <span class="kw">fn</span> <span class="ident">is_inner</span>(<span class="ident">attr</span>: <span class="op">&amp;&amp;</span><span class="ident">Attribute</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
             <span class="kw">match</span> <span class="ident">attr</span>.<span class="ident">style</span> {
-                <span class="ident">AttrStyle</span>::<span class="ident">Inner</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
+                <span class="ident">AttrStyle</span>::<span class="ident">Inner</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="bool-val">true</span>,
+                <span class="kw">_</span> <span class="op">=&gt;</span> <span class="bool-val">false</span>,
             }
         }
         <span class="self">self</span>.<span class="ident">into_iter</span>().<span class="ident">filter</span>(<span class="ident">is_inner</span>)
@@ -956,21 +956,21 @@
     <span class="kw">use</span> <span class="ident">proc_macro2</span>::{<span class="ident">Literal</span>, <span class="ident">Punct</span>, <span class="ident">Spacing</span>, <span class="ident">Span</span>, <span class="ident">TokenTree</span>};
     <span class="kw">use</span> <span class="ident">synom</span>::<span class="ident">PResult</span>;
 
-    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="ident">span</span>: <span class="ident">Span</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenTree</span> {
+    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="ident">span</span>: <span class="ident">Span</span>) <span class="op">-&gt;</span> <span class="ident">TokenTree</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">op</span> <span class="op">=</span> <span class="ident">Punct</span>::<span class="ident">new</span>(<span class="string">&#39;=&#39;</span>, <span class="ident">Spacing</span>::<span class="ident">Alone</span>);
         <span class="ident">op</span>.<span class="ident">set_span</span>(<span class="ident">span</span>);
         <span class="ident">op</span>.<span class="ident">into</span>()
     }
 
     <span class="kw">impl</span> <span class="ident">Attribute</span> {
-        <span class="macro">named</span><span class="macro">!</span>(<span class="kw">pub</span> <span class="ident">parse_inner</span> <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>, <span class="macro">alt</span><span class="macro">!</span>(
+        <span class="macro">named</span><span class="macro">!</span>(<span class="kw">pub</span> <span class="ident">parse_inner</span> <span class="op">-&gt;</span> <span class="self">Self</span>, <span class="macro">alt</span><span class="macro">!</span>(
             <span class="macro">do_parse</span><span class="macro">!</span>(
-                <span class="ident">pound</span>: <span class="macro">punct</span><span class="macro">!</span>(#) <span class="op">&gt;</span><span class="op">&gt;</span>
-                <span class="ident">bang</span>: <span class="macro">punct</span><span class="macro">!</span>(<span class="op">!</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+                <span class="ident">pound</span>: <span class="macro">punct</span><span class="macro">!</span>(#) <span class="op">&gt;&gt;</span>
+                <span class="ident">bang</span>: <span class="macro">punct</span><span class="macro">!</span>(<span class="op">!</span>) <span class="op">&gt;&gt;</span>
                 <span class="ident">path_and_tts</span>: <span class="macro">brackets</span><span class="macro">!</span>(<span class="macro">tuple</span><span class="macro">!</span>(
                     <span class="macro">call</span><span class="macro">!</span>(<span class="ident">Path</span>::<span class="ident">parse_mod_style</span>),
                     <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">TokenStream</span>),
-                )) <span class="op">&gt;</span><span class="op">&gt;</span>
+                )) <span class="op">&gt;&gt;</span>
                 ({
                     <span class="kw">let</span> (<span class="ident">bracket</span>, (<span class="ident">path</span>, <span class="ident">tts</span>)) <span class="op">=</span> <span class="ident">path_and_tts</span>;
 
@@ -1004,13 +1004,13 @@
             )
         ));
 
-        <span class="macro">named</span><span class="macro">!</span>(<span class="kw">pub</span> <span class="ident">parse_outer</span> <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>, <span class="macro">alt</span><span class="macro">!</span>(
+        <span class="macro">named</span><span class="macro">!</span>(<span class="kw">pub</span> <span class="ident">parse_outer</span> <span class="op">-&gt;</span> <span class="self">Self</span>, <span class="macro">alt</span><span class="macro">!</span>(
             <span class="macro">do_parse</span><span class="macro">!</span>(
-                <span class="ident">pound</span>: <span class="macro">punct</span><span class="macro">!</span>(#) <span class="op">&gt;</span><span class="op">&gt;</span>
+                <span class="ident">pound</span>: <span class="macro">punct</span><span class="macro">!</span>(#) <span class="op">&gt;&gt;</span>
                 <span class="ident">path_and_tts</span>: <span class="macro">brackets</span><span class="macro">!</span>(<span class="macro">tuple</span><span class="macro">!</span>(
                     <span class="macro">call</span><span class="macro">!</span>(<span class="ident">Path</span>::<span class="ident">parse_mod_style</span>),
                     <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">TokenStream</span>),
-                )) <span class="op">&gt;</span><span class="op">&gt;</span>
+                )) <span class="op">&gt;&gt;</span>
                 ({
                     <span class="kw">let</span> (<span class="ident">bracket</span>, (<span class="ident">path</span>, <span class="ident">tts</span>)) <span class="op">=</span> <span class="ident">path_and_tts</span>;
 
@@ -1050,13 +1050,13 @@
         <span class="ident">Outer</span>,
     }
 
-    <span class="kw">fn</span> <span class="ident">lit_doc_comment</span>(<span class="ident">input</span>: <span class="ident">Cursor</span>, <span class="ident">style</span>: <span class="ident">Comment</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PResult</span><span class="op">&lt;</span><span class="ident">TokenTree</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">lit_doc_comment</span>(<span class="ident">input</span>: <span class="ident">Cursor</span>, <span class="ident">style</span>: <span class="ident">Comment</span>) <span class="op">-&gt;</span> <span class="ident">PResult</span><span class="op">&lt;</span><span class="ident">TokenTree</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="ident">input</span>.<span class="ident">literal</span>() {
-            <span class="prelude-val">Some</span>((<span class="ident">lit</span>, <span class="ident">rest</span>)) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="prelude-val">Some</span>((<span class="ident">lit</span>, <span class="ident">rest</span>)) <span class="op">=&gt;</span> {
                 <span class="kw">let</span> <span class="ident">string</span> <span class="op">=</span> <span class="ident">lit</span>.<span class="ident">to_string</span>();
                 <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">style</span> {
-                    <span class="ident">Comment</span>::<span class="ident">Inner</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">string</span>.<span class="ident">starts_with</span>(<span class="string">&quot;//!&quot;</span>) <span class="op">|</span><span class="op">|</span> <span class="ident">string</span>.<span class="ident">starts_with</span>(<span class="string">&quot;/*!&quot;</span>),
-                    <span class="ident">Comment</span>::<span class="ident">Outer</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">string</span>.<span class="ident">starts_with</span>(<span class="string">&quot;///&quot;</span>) <span class="op">|</span><span class="op">|</span> <span class="ident">string</span>.<span class="ident">starts_with</span>(<span class="string">&quot;/**&quot;</span>),
+                    <span class="ident">Comment</span>::<span class="ident">Inner</span> <span class="op">=&gt;</span> <span class="ident">string</span>.<span class="ident">starts_with</span>(<span class="string">&quot;//!&quot;</span>) <span class="op">||</span> <span class="ident">string</span>.<span class="ident">starts_with</span>(<span class="string">&quot;/*!&quot;</span>),
+                    <span class="ident">Comment</span>::<span class="ident">Outer</span> <span class="op">=&gt;</span> <span class="ident">string</span>.<span class="ident">starts_with</span>(<span class="string">&quot;///&quot;</span>) <span class="op">||</span> <span class="ident">string</span>.<span class="ident">starts_with</span>(<span class="string">&quot;/**&quot;</span>),
                 };
                 <span class="kw">if</span> <span class="ident">ok</span> {
                     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">new</span> <span class="op">=</span> <span class="ident">Literal</span>::<span class="ident">string</span>(<span class="kw-2">&amp;</span><span class="ident">string</span>);
@@ -1066,7 +1066,7 @@
                     <span class="ident">parse_error</span>()
                 }
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">parse_error</span>(),
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="ident">parse_error</span>(),
         }
     }
 }

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/adblock-0.2.9/src/cosmetic_filter_cache.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>cosmetic_filter_cache.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../adblock/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/adblock-0.3.0/src/cosmetic_filter_cache.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>cosmetic_filter_cache.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../adblock/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -666,6 +666,33 @@
 <span id="666">666</span>
 <span id="667">667</span>
 <span id="668">668</span>
+<span id="669">669</span>
+<span id="670">670</span>
+<span id="671">671</span>
+<span id="672">672</span>
+<span id="673">673</span>
+<span id="674">674</span>
+<span id="675">675</span>
+<span id="676">676</span>
+<span id="677">677</span>
+<span id="678">678</span>
+<span id="679">679</span>
+<span id="680">680</span>
+<span id="681">681</span>
+<span id="682">682</span>
+<span id="683">683</span>
+<span id="684">684</span>
+<span id="685">685</span>
+<span id="686">686</span>
+<span id="687">687</span>
+<span id="688">688</span>
+<span id="689">689</span>
+<span id="690">690</span>
+<span id="691">691</span>
+<span id="692">692</span>
+<span id="693">693</span>
+<span id="694">694</span>
+<span id="695">695</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">filters</span>::<span class="ident">cosmetic</span>::<span class="ident">CosmeticFilter</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">filters</span>::<span class="ident">cosmetic</span>::<span class="ident">CosmeticFilterMask</span>;
@@ -681,7 +708,7 @@
     <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">PUBLIC_SUFFIXES</span>: <span class="ident">psl</span>::<span class="ident">List</span> <span class="op">=</span> <span class="ident">psl</span>::<span class="ident">List</span>::<span class="ident">new</span>();
 }
 
-<span class="doccomment">/// Contains cosmetic filter information intended to be injected into a particular hostname.</span>
+<span class="doccomment">/// Contains cosmetic filter information intended to be used on a particular URL.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// `hide_selectors` is a set of any CSS selector on the page that should be hidden, i.e. styled as</span>
 <span class="doccomment">/// `{ display: none !important; }`.</span>
@@ -694,51 +721,57 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// `injected_script` is the Javascript code for any scriptlets that should be injected into the</span>
 <span class="doccomment">/// page.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// `generichide` is set to true if there is a corresponding `$generichide` exception network</span>
+<span class="doccomment">/// filter. If so, the page should not query for additional generic rules using</span>
+<span class="doccomment">/// `hidden_class_id_selectors`.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Deserialize</span>, <span class="ident">Serialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">HostnameSpecificResources</span> {
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">UrlSpecificResources</span> {
     <span class="kw">pub</span> <span class="ident">hide_selectors</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">style_selectors</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">style_selectors</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;&gt;</span>,
     <span class="kw">pub</span> <span class="ident">exceptions</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
     <span class="kw">pub</span> <span class="ident">injected_script</span>: <span class="ident">String</span>,
+    <span class="kw">pub</span> <span class="ident">generichide</span>: <span class="ident">bool</span>,
 }
 
-<span class="kw">impl</span> <span class="ident">HostnameSpecificResources</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">empty</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+<span class="kw">impl</span> <span class="ident">UrlSpecificResources</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">empty</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">hide_selectors</span>: <span class="ident">HashSet</span>::<span class="ident">new</span>(),
             <span class="ident">style_selectors</span>: <span class="ident">HashMap</span>::<span class="ident">new</span>(),
             <span class="ident">exceptions</span>: <span class="ident">HashSet</span>::<span class="ident">new</span>(),
             <span class="ident">injected_script</span>: <span class="ident">String</span>::<span class="ident">new</span>(),
+            <span class="ident">generichide</span>: <span class="bool-val">false</span>,
         }
     }
 }
 
-<span class="kw">fn</span> <span class="ident">hostname_specific_rules</span>(<span class="ident">rules</span>: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span><span class="ident">SpecificFilterType</span>]) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>, <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>) {
+<span class="kw">fn</span> <span class="ident">hostname_specific_rules</span>(<span class="ident">rules</span>: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span><span class="ident">SpecificFilterType</span>]) <span class="op">-&gt;</span> (<span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>, <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>) {
     <span class="kw">if</span> <span class="ident">rules</span>.<span class="ident">is_empty</span>() {
         (<span class="ident">HashSet</span>::<span class="ident">default</span>(), <span class="ident">HashMap</span>::<span class="ident">default</span>(), <span class="macro">vec</span><span class="macro">!</span>[])
     } <span class="kw">else</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">script_rules</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="number">10</span>);
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hide_rules</span> <span class="op">=</span> <span class="ident">HashSet</span>::<span class="ident">with_capacity</span>(<span class="ident">rules</span>.<span class="ident">len</span>());
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">style_rules</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">HashMap</span>::<span class="ident">with_capacity</span>(<span class="ident">rules</span>.<span class="ident">len</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">style_rules</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;&gt;</span> <span class="op">=</span> <span class="ident">HashMap</span>::<span class="ident">with_capacity</span>(<span class="ident">rules</span>.<span class="ident">len</span>());
 
         <span class="ident">rules</span>.<span class="ident">iter</span>()
             .<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">rule</span><span class="op">|</span> {
                 <span class="kw">match</span> <span class="ident">rule</span> {
-                    <span class="ident">SpecificFilterType</span>::<span class="ident">Hide</span>(<span class="ident">sel</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="ident">SpecificFilterType</span>::<span class="ident">Hide</span>(<span class="ident">sel</span>) <span class="op">=&gt;</span> {
                         <span class="ident">hide_rules</span>.<span class="ident">insert</span>(<span class="ident">sel</span>.<span class="ident">to_owned</span>());
                     }
-                    <span class="ident">SpecificFilterType</span>::<span class="ident">Style</span>(<span class="ident">sel</span>, <span class="ident">style</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="ident">SpecificFilterType</span>::<span class="ident">Style</span>(<span class="ident">sel</span>, <span class="ident">style</span>) <span class="op">=&gt;</span> {
                         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">entry</span>) <span class="op">=</span> <span class="ident">style_rules</span>.<span class="ident">get_mut</span>(<span class="ident">sel</span>) {
                             <span class="ident">entry</span>.<span class="ident">push</span>(<span class="ident">style</span>.<span class="ident">to_owned</span>());
                         } <span class="kw">else</span> {
                             <span class="ident">style_rules</span>.<span class="ident">insert</span>(<span class="ident">sel</span>.<span class="ident">to_owned</span>(), <span class="macro">vec</span><span class="macro">!</span>[<span class="ident">style</span>.<span class="ident">to_owned</span>()]);
                         }
                     }
-                    <span class="ident">SpecificFilterType</span>::<span class="ident">ScriptInject</span>(<span class="ident">sel</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="ident">SpecificFilterType</span>::<span class="ident">ScriptInject</span>(<span class="ident">sel</span>) <span class="op">=&gt;</span> {
                         <span class="ident">script_rules</span>.<span class="ident">push</span>(<span class="ident">sel</span>.<span class="ident">to_owned</span>());
                     }
-                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>()
+                    <span class="kw">_</span> <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>()
                 }
             });
 
@@ -747,22 +780,37 @@
 }
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CosmeticFilterCache</span> {
-    <span class="ident">simple_class_rules</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="ident">simple_id_rules</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="ident">complex_class_rules</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">complex_id_rules</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">CosmeticFilterCache</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">simple_class_rules</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">simple_id_rules</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">complex_class_rules</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;&gt;</span>,
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">complex_id_rules</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;&gt;</span>,
 
-    <span class="ident">specific_rules</span>: <span class="ident">HostnameRuleDb</span>,
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">specific_rules</span>: <span class="ident">HostnameRuleDb</span>,
 
-    <span class="ident">misc_generic_selectors</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">misc_generic_selectors</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
 
-    <span class="ident">scriptlets</span>: <span class="ident">ScriptletResourceStorage</span>,
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">scriptlets</span>: <span class="ident">ScriptletResourceStorage</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">CosmeticFilterCache</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">rules</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">CosmeticFilter</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">self_</span> <span class="op">=</span> <span class="ident">CosmeticFilterCache</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="self">Self</span> {
+            <span class="ident">simple_class_rules</span>: <span class="ident">HashSet</span>::<span class="ident">new</span>(),
+            <span class="ident">simple_id_rules</span>: <span class="ident">HashSet</span>::<span class="ident">new</span>(),
+            <span class="ident">complex_class_rules</span>: <span class="ident">HashMap</span>::<span class="ident">new</span>(),
+            <span class="ident">complex_id_rules</span>: <span class="ident">HashMap</span>::<span class="ident">new</span>(),
+
+            <span class="ident">specific_rules</span>: <span class="ident">HostnameRuleDb</span>::<span class="ident">new</span>(),
+
+            <span class="ident">misc_generic_selectors</span>: <span class="ident">HashSet</span>::<span class="ident">new</span>(),
+
+            <span class="ident">scriptlets</span>: <span class="ident">Default</span>::<span class="ident">default</span>(),
+        }
+    }
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_rules</span>(<span class="ident">rules</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">CosmeticFilter</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">self_</span> <span class="op">=</span> <span class="self">Self</span> {
             <span class="ident">simple_class_rules</span>: <span class="ident">HashSet</span>::<span class="ident">with_capacity</span>(<span class="ident">rules</span>.<span class="ident">len</span>() <span class="op">/</span> <span class="number">2</span>),
             <span class="ident">simple_id_rules</span>: <span class="ident">HashSet</span>::<span class="ident">with_capacity</span>(<span class="ident">rules</span>.<span class="ident">len</span>() <span class="op">/</span> <span class="number">2</span>),
             <span class="ident">complex_class_rules</span>: <span class="ident">HashMap</span>::<span class="ident">with_capacity</span>(<span class="ident">rules</span>.<span class="ident">len</span>() <span class="op">/</span> <span class="number">2</span>),
@@ -826,7 +874,7 @@
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hidden_class_id_selectors</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">classes</span>: <span class="kw-2">&amp;</span>[<span class="ident">String</span>], <span class="ident">ids</span>: <span class="kw-2">&amp;</span>[<span class="ident">String</span>], <span class="ident">exceptions</span>: <span class="kw-2">&amp;</span><span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hidden_class_id_selectors</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">classes</span>: <span class="kw-2">&amp;</span>[<span class="ident">String</span>], <span class="ident">ids</span>: <span class="kw-2">&amp;</span>[<span class="ident">String</span>], <span class="ident">exceptions</span>: <span class="kw-2">&amp;</span><span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">simple_classes</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">simple_ids</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">complex_selectors</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
@@ -856,20 +904,20 @@
             }
         });
 
-        <span class="kw">if</span> <span class="ident">simple_classes</span>.<span class="ident">is_empty</span>() <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">simple_ids</span>.<span class="ident">is_empty</span>() <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">complex_selectors</span>.<span class="ident">is_empty</span>() {
+        <span class="kw">if</span> <span class="ident">simple_classes</span>.<span class="ident">is_empty</span>() <span class="op">&amp;&amp;</span> <span class="ident">simple_ids</span>.<span class="ident">is_empty</span>() <span class="op">&amp;&amp;</span> <span class="ident">complex_selectors</span>.<span class="ident">is_empty</span>() {
             <span class="kw">return</span> <span class="macro">vec</span><span class="macro">!</span>[];
         }
 
         <span class="ident">simple_classes</span>.<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">class</span><span class="op">|</span> <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;.{}&quot;</span>, <span class="ident">class</span>))
             .<span class="ident">chain</span>(<span class="ident">simple_ids</span>.<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">id</span><span class="op">|</span> <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;#{}&quot;</span>, <span class="ident">id</span>)))
             .<span class="ident">chain</span>(<span class="ident">complex_selectors</span>.<span class="ident">into_iter</span>().<span class="ident">cloned</span>())
-            .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>()
+            .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;&gt;</span>()
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hostname_cosmetic_resources</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">hostname</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">HostnameSpecificResources</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hostname_cosmetic_resources</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">hostname</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">generichide</span>: <span class="ident">bool</span>) <span class="op">-&gt;</span> <span class="ident">UrlSpecificResources</span> {
         <span class="kw">let</span> <span class="ident">domain</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">PUBLIC_SUFFIXES</span>.<span class="ident">domain</span>(<span class="ident">hostname</span>) {
-            <span class="prelude-val">Some</span>(<span class="ident">domain</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">domain</span>,
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="ident">HostnameSpecificResources</span>::<span class="ident">empty</span>(),
+            <span class="prelude-val">Some</span>(<span class="ident">domain</span>) <span class="op">=&gt;</span> <span class="ident">domain</span>,
+            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="ident">UrlSpecificResources</span>::<span class="ident">empty</span>(),
         };
         <span class="kw">let</span> <span class="ident">domain_str</span> <span class="op">=</span> <span class="ident">domain</span>.<span class="ident">to_str</span>();
 
@@ -890,26 +938,32 @@
 
         <span class="kw">let</span> <span class="ident">rules_that_apply</span> <span class="op">=</span> <span class="ident">rules_that_apply</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="ident">r</span>.<span class="ident">to_owned</span>()).<span class="ident">filter</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> {
             <span class="ident">exceptions</span>.<span class="ident">allow_specific_rule</span>(<span class="ident">r</span>)
-        }).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+        }).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;&gt;</span>();
 
         <span class="kw">let</span> (<span class="ident">hostname_hide_selectors</span>, <span class="ident">style_selectors</span>, <span class="ident">script_injections</span>) <span class="op">=</span> <span class="ident">hostname_specific_rules</span>(<span class="kw-2">&amp;</span><span class="ident">rules_that_apply</span>[..]);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hide_selectors</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">misc_generic_selectors</span>.<span class="ident">difference</span>(<span class="kw-2">&amp;</span><span class="ident">exceptions</span>.<span class="ident">hide_exceptions</span>).<span class="ident">cloned</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">HashSet</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-        <span class="ident">hostname_hide_selectors</span>.<span class="ident">into_iter</span>().<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">sel</span><span class="op">|</span> { <span class="ident">hide_selectors</span>.<span class="ident">insert</span>(<span class="ident">sel</span>); });
+        <span class="kw">let</span> <span class="ident">hide_selectors</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">generichide</span> {
+            <span class="ident">hostname_hide_selectors</span>
+        } <span class="kw">else</span> {
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hide_selectors</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">misc_generic_selectors</span>.<span class="ident">difference</span>(<span class="kw-2">&amp;</span><span class="ident">exceptions</span>.<span class="ident">hide_exceptions</span>).<span class="ident">cloned</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">HashSet</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;&gt;</span>();
+            <span class="ident">hostname_hide_selectors</span>.<span class="ident">into_iter</span>().<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">sel</span><span class="op">|</span> { <span class="ident">hide_selectors</span>.<span class="ident">insert</span>(<span class="ident">sel</span>); });
+            <span class="ident">hide_selectors</span>
+        };
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">injected_script</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">new</span>();
         <span class="ident">script_injections</span>.<span class="ident">iter</span>().<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> {
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">filled_template</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">scriptlets</span>.<span class="ident">get_scriptlet</span>(<span class="kw-2">&amp;</span><span class="ident">s</span>) {
-                <span class="ident">injected_script</span> <span class="op">+</span><span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">filled_template</span>;
-                <span class="ident">injected_script</span> <span class="op">+</span><span class="op">=</span> <span class="string">&quot;\n&quot;</span>;
+                <span class="ident">injected_script</span> <span class="op">+=</span> <span class="kw-2">&amp;</span><span class="ident">filled_template</span>;
+                <span class="ident">injected_script</span> <span class="op">+=</span> <span class="string">&quot;\n&quot;</span>;
             }
         });
 
-        <span class="ident">HostnameSpecificResources</span> {
+        <span class="ident">UrlSpecificResources</span> {
             <span class="ident">hide_selectors</span>,
             <span class="ident">style_selectors</span>,
             <span class="ident">exceptions</span>: <span class="ident">exceptions</span>.<span class="ident">hide_exceptions</span>,
             <span class="ident">injected_script</span>,
+            <span class="ident">generichide</span>,
         }
     }
 
@@ -937,40 +991,40 @@
         <span class="kw">use</span> <span class="ident">SpecificFilterType</span> <span class="kw">as</span> <span class="ident">Rule</span>;
 
         <span class="kw">match</span> <span class="ident">rule</span> {
-            <span class="ident">Rule</span>::<span class="ident">Hide</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident">Rule</span>::<span class="ident">Style</span>(<span class="kw">_</span>, <span class="kw">_</span>) <span class="op">|</span> <span class="ident">Rule</span>::<span class="ident">ScriptInject</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> (),
-            <span class="ident">Rule</span>::<span class="ident">Unhide</span>(<span class="ident">sel</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">Rule</span>::<span class="ident">Hide</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident">Rule</span>::<span class="ident">Style</span>(<span class="kw">_</span>, <span class="kw">_</span>) <span class="op">|</span> <span class="ident">Rule</span>::<span class="ident">ScriptInject</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> (),
+            <span class="ident">Rule</span>::<span class="ident">Unhide</span>(<span class="ident">sel</span>) <span class="op">=&gt;</span> {
                 <span class="self">self</span>.<span class="ident">hide_exceptions</span>.<span class="ident">insert</span>(<span class="ident">sel</span>.<span class="ident">clone</span>());
             }
-            <span class="ident">Rule</span>::<span class="ident">UnhideStyle</span>(<span class="ident">sel</span>, <span class="ident">style</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">Rule</span>::<span class="ident">UnhideStyle</span>(<span class="ident">sel</span>, <span class="ident">style</span>) <span class="op">=&gt;</span> {
                 <span class="self">self</span>.<span class="ident">style_exceptions</span>.<span class="ident">insert</span>((<span class="ident">sel</span>.<span class="ident">clone</span>(), <span class="ident">style</span>.<span class="ident">clone</span>()));
             }
-            <span class="ident">Rule</span>::<span class="ident">UnhideScriptInject</span>(<span class="ident">script</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">Rule</span>::<span class="ident">UnhideScriptInject</span>(<span class="ident">script</span>) <span class="op">=&gt;</span> {
                 <span class="self">self</span>.<span class="ident">script_inject_exceptions</span>.<span class="ident">insert</span>(<span class="ident">script</span>.<span class="ident">clone</span>());
             }
         }
     }
 
     <span class="doccomment">/// A generic selector is allowed if it is not excepted by this set of exceptions.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">allow_generic_selector</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">selector</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">allow_generic_selector</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">selector</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="op">!</span><span class="self">self</span>.<span class="ident">hide_exceptions</span>.<span class="ident">contains</span>(<span class="ident">selector</span>)
     }
 
     <span class="doccomment">/// Specific rules are allowed if they can be used to hide, restyle, or inject a script in the</span>
     <span class="doccomment">/// context of this set of exceptions - i.e. if the rule itself is not an exception rule and</span>
     <span class="doccomment">/// doesn&#39;t have a corresponding exception rule added previously.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">allow_specific_rule</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rule</span>: <span class="kw-2">&amp;</span><span class="ident">SpecificFilterType</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">allow_specific_rule</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rule</span>: <span class="kw-2">&amp;</span><span class="ident">SpecificFilterType</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="ident">rule</span> {
-            <span class="ident">SpecificFilterType</span>::<span class="ident">Hide</span>(<span class="ident">sel</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">hide_exceptions</span>.<span class="ident">contains</span>(<span class="ident">sel</span>),
-            <span class="ident">SpecificFilterType</span>::<span class="ident">Style</span>(<span class="ident">sel</span>, <span class="ident">style</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">style_exceptions</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span>(<span class="ident">sel</span>.<span class="ident">to_string</span>(), <span class="ident">style</span>.<span class="ident">to_string</span>())),
-            <span class="ident">SpecificFilterType</span>::<span class="ident">ScriptInject</span>(<span class="ident">sel</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">script_inject_exceptions</span>.<span class="ident">contains</span>(<span class="ident">sel</span>),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
+            <span class="ident">SpecificFilterType</span>::<span class="ident">Hide</span>(<span class="ident">sel</span>) <span class="op">=&gt;</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">hide_exceptions</span>.<span class="ident">contains</span>(<span class="ident">sel</span>),
+            <span class="ident">SpecificFilterType</span>::<span class="ident">Style</span>(<span class="ident">sel</span>, <span class="ident">style</span>) <span class="op">=&gt;</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">style_exceptions</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span>(<span class="ident">sel</span>.<span class="ident">to_string</span>(), <span class="ident">style</span>.<span class="ident">to_string</span>())),
+            <span class="ident">SpecificFilterType</span>::<span class="ident">ScriptInject</span>(<span class="ident">sel</span>) <span class="op">=&gt;</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">script_inject_exceptions</span>.<span class="ident">contains</span>(<span class="ident">sel</span>),
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="bool-val">false</span>,
         }
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>, <span class="ident">Default</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">HostnameRuleDb</span> {
-    <span class="ident">db</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Hash</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">SpecificFilterType</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">db</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Hash</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">SpecificFilterType</span><span class="op">&gt;&gt;</span>,
 }
 
 <span class="doccomment">/// Each hostname-specific filter can be pointed to by several different hostnames, and each</span>
@@ -980,7 +1034,7 @@
 <span class="doccomment">/// keys to get the indices of relevant buckets, which are in turn used to retrieve all the filters</span>
 <span class="doccomment">/// that apply.</span>
 <span class="kw">impl</span> <span class="ident">HostnameRuleDb</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="ident">HostnameRuleDb</span> {
             <span class="ident">db</span>: <span class="ident">HashMap</span>::<span class="ident">new</span>(),
         }
@@ -1022,7 +1076,7 @@
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">retrieve</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">hostname</span>: <span class="kw-2">&amp;</span><span class="ident">Hash</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span>[<span class="ident">SpecificFilterType</span>]<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">retrieve</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">hostname</span>: <span class="kw-2">&amp;</span><span class="ident">Hash</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span>[<span class="ident">SpecificFilterType</span>]<span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">bucket</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">db</span>.<span class="ident">get</span>(<span class="ident">hostname</span>) {
             <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="ident">bucket</span>)
         } <span class="kw">else</span> {
@@ -1049,7 +1103,7 @@
 <span class="doccomment">/// This implementation assumes the given rule has hostname or entity constraints, and that the</span>
 <span class="doccomment">/// appropriate &#39;hidden&#39; generic rule has already been applied externally if necessary.</span>
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">CosmeticFilter</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SpecificFilterType</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">rule</span>: <span class="kw-2">&amp;</span><span class="ident">CosmeticFilter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">rule</span>: <span class="kw-2">&amp;</span><span class="ident">CosmeticFilter</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">unhide</span> <span class="op">=</span> <span class="ident">rule</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">CosmeticFilterMask</span>::<span class="ident">UNHIDE</span>);
 
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">style</span>) <span class="op">=</span> <span class="ident">rule</span>.<span class="ident">style</span> {
@@ -1075,20 +1129,20 @@
 }
 
 <span class="kw">impl</span> <span class="ident">SpecificFilterType</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">negated</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">negated</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">SpecificFilterType</span>::<span class="ident">Hide</span>(<span class="ident">sel</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">SpecificFilterType</span>::<span class="ident">Unhide</span>(<span class="ident">sel</span>),
-            <span class="ident">SpecificFilterType</span>::<span class="ident">Unhide</span>(<span class="ident">sel</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">SpecificFilterType</span>::<span class="ident">Hide</span>(<span class="ident">sel</span>),
-            <span class="ident">SpecificFilterType</span>::<span class="ident">Style</span>(<span class="ident">sel</span>, <span class="ident">style</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">SpecificFilterType</span>::<span class="ident">UnhideStyle</span>(<span class="ident">sel</span>, <span class="ident">style</span>),
-            <span class="ident">SpecificFilterType</span>::<span class="ident">UnhideStyle</span>(<span class="ident">sel</span>, <span class="ident">style</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">SpecificFilterType</span>::<span class="ident">Style</span>(<span class="ident">sel</span>, <span class="ident">style</span>),
-            <span class="ident">SpecificFilterType</span>::<span class="ident">ScriptInject</span>(<span class="ident">script</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">SpecificFilterType</span>::<span class="ident">UnhideScriptInject</span>(<span class="ident">script</span>),
-            <span class="ident">SpecificFilterType</span>::<span class="ident">UnhideScriptInject</span>(<span class="ident">script</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">SpecificFilterType</span>::<span class="ident">ScriptInject</span>(<span class="ident">script</span>),
+            <span class="ident">SpecificFilterType</span>::<span class="ident">Hide</span>(<span class="ident">sel</span>) <span class="op">=&gt;</span> <span class="ident">SpecificFilterType</span>::<span class="ident">Unhide</span>(<span class="ident">sel</span>),
+            <span class="ident">SpecificFilterType</span>::<span class="ident">Unhide</span>(<span class="ident">sel</span>) <span class="op">=&gt;</span> <span class="ident">SpecificFilterType</span>::<span class="ident">Hide</span>(<span class="ident">sel</span>),
+            <span class="ident">SpecificFilterType</span>::<span class="ident">Style</span>(<span class="ident">sel</span>, <span class="ident">style</span>) <span class="op">=&gt;</span> <span class="ident">SpecificFilterType</span>::<span class="ident">UnhideStyle</span>(<span class="ident">sel</span>, <span class="ident">style</span>),
+            <span class="ident">SpecificFilterType</span>::<span class="ident">UnhideStyle</span>(<span class="ident">sel</span>, <span class="ident">style</span>) <span class="op">=&gt;</span> <span class="ident">SpecificFilterType</span>::<span class="ident">Style</span>(<span class="ident">sel</span>, <span class="ident">style</span>),
+            <span class="ident">SpecificFilterType</span>::<span class="ident">ScriptInject</span>(<span class="ident">script</span>) <span class="op">=&gt;</span> <span class="ident">SpecificFilterType</span>::<span class="ident">UnhideScriptInject</span>(<span class="ident">script</span>),
+            <span class="ident">SpecificFilterType</span>::<span class="ident">UnhideScriptInject</span>(<span class="ident">script</span>) <span class="op">=&gt;</span> <span class="ident">SpecificFilterType</span>::<span class="ident">ScriptInject</span>(<span class="ident">script</span>),
 
         }
     }
 }
 
-<span class="kw">fn</span> <span class="ident">hostname_domain_hashes</span>(<span class="ident">hostname</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">domain</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span>) {
+<span class="kw">fn</span> <span class="ident">hostname_domain_hashes</span>(<span class="ident">hostname</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">domain</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> (<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span>) {
     <span class="kw">let</span> <span class="ident">request_entities</span> <span class="op">=</span> <span class="kw">crate</span>::<span class="ident">filters</span>::<span class="ident">cosmetic</span>::<span class="ident">get_entity_hashes_from_labels</span>(<span class="ident">hostname</span>, <span class="ident">domain</span>);
     <span class="kw">let</span> <span class="ident">request_hostnames</span> <span class="op">=</span> <span class="kw">crate</span>::<span class="ident">filters</span>::<span class="ident">cosmetic</span>::<span class="ident">get_hostname_hashes_from_labels</span>(<span class="ident">hostname</span>, <span class="ident">domain</span>);
 
@@ -1099,13 +1153,13 @@
 <span class="kw">mod</span> <span class="ident">cosmetic_cache_tests</span> {
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
 
-    <span class="kw">fn</span> <span class="ident">cache_from_rules</span>(<span class="ident">rules</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">CosmeticFilterCache</span> {
+    <span class="kw">fn</span> <span class="ident">cache_from_rules</span>(<span class="ident">rules</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">CosmeticFilterCache</span> {
         <span class="kw">let</span> <span class="ident">parsed_rules</span> <span class="op">=</span> <span class="ident">rules</span>
             .<span class="ident">iter</span>()
             .<span class="ident">map</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="ident">CosmeticFilter</span>::<span class="ident">parse</span>(<span class="ident">r</span>, <span class="bool-val">false</span>).<span class="ident">unwrap</span>())
-            .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+            .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;&gt;</span>();
 
-        <span class="ident">CosmeticFilterCache</span>::<span class="ident">new</span>(<span class="ident">parsed_rules</span>)
+        <span class="ident">CosmeticFilterCache</span>::<span class="ident">from_rules</span>(<span class="ident">parsed_rules</span>)
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -1115,15 +1169,15 @@
             <span class="string">&quot;sub.example.com#@#.item2&quot;</span>,
         ]);
 
-        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;test.com&quot;</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">HostnameSpecificResources</span>::<span class="ident">empty</span>();
+        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;test.com&quot;</span>, <span class="bool-val">false</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">UrlSpecificResources</span>::<span class="ident">empty</span>();
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">out</span>, <span class="ident">expected</span>);
 
-        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;example.com&quot;</span>);
+        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;example.com&quot;</span>, <span class="bool-val">false</span>);
         <span class="ident">expected</span>.<span class="ident">exceptions</span>.<span class="ident">insert</span>(<span class="string">&quot;.item&quot;</span>.<span class="ident">into</span>());
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">out</span>, <span class="ident">expected</span>);
 
-        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;sub.example.com&quot;</span>);
+        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;sub.example.com&quot;</span>, <span class="bool-val">false</span>);
         <span class="ident">expected</span>.<span class="ident">exceptions</span>.<span class="ident">insert</span>(<span class="string">&quot;.item2&quot;</span>.<span class="ident">into</span>());
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">out</span>, <span class="ident">expected</span>);
     }
@@ -1134,16 +1188,16 @@
             <span class="string">&quot;example.com,~sub.example.com##.item&quot;</span>,
         ]);
 
-        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;test.com&quot;</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">HostnameSpecificResources</span>::<span class="ident">empty</span>();
+        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;test.com&quot;</span>, <span class="bool-val">false</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">UrlSpecificResources</span>::<span class="ident">empty</span>();
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">out</span>, <span class="ident">expected</span>);
 
-        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;example.com&quot;</span>);
+        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;example.com&quot;</span>, <span class="bool-val">false</span>);
         <span class="ident">expected</span>.<span class="ident">hide_selectors</span>.<span class="ident">insert</span>(<span class="string">&quot;.item&quot;</span>.<span class="ident">to_owned</span>());
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">out</span>, <span class="ident">expected</span>);
 
-        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;sub.example.com&quot;</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">HostnameSpecificResources</span>::<span class="ident">empty</span>();
+        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;sub.example.com&quot;</span>, <span class="bool-val">false</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">UrlSpecificResources</span>::<span class="ident">empty</span>();
         <span class="ident">expected</span>.<span class="ident">exceptions</span>.<span class="ident">insert</span>(<span class="string">&quot;.item&quot;</span>.<span class="ident">into</span>());
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">out</span>, <span class="ident">expected</span>);
     }
@@ -1157,23 +1211,23 @@
             <span class="string">&quot;a2.sub.example.com##.element:style(background: #000)&quot;</span>,
         ]);
 
-        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;sub.example.com&quot;</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">HostnameSpecificResources</span>::<span class="ident">empty</span>();
+        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;sub.example.com&quot;</span>, <span class="bool-val">false</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">UrlSpecificResources</span>::<span class="ident">empty</span>();
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">out</span>, <span class="ident">expected</span>);
 
-        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;sub.test.example.com&quot;</span>);
+        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;sub.test.example.com&quot;</span>, <span class="bool-val">false</span>);
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">out</span>, <span class="ident">expected</span>);
 
-        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;a1.sub.example.com&quot;</span>);
+        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;a1.sub.example.com&quot;</span>, <span class="bool-val">false</span>);
         <span class="ident">expected</span>.<span class="ident">hide_selectors</span>.<span class="ident">insert</span>(<span class="string">&quot;.element&quot;</span>.<span class="ident">to_owned</span>());
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">out</span>, <span class="ident">expected</span>);
 
-        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;test.example.com&quot;</span>);
+        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;test.example.com&quot;</span>, <span class="bool-val">false</span>);
         <span class="ident">expected</span>.<span class="ident">hide_selectors</span>.<span class="ident">clear</span>();
         <span class="ident">expected</span>.<span class="ident">style_selectors</span>.<span class="ident">insert</span>(<span class="string">&quot;.element&quot;</span>.<span class="ident">to_owned</span>(), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;background: #fff&quot;</span>.<span class="ident">to_owned</span>()]);
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">out</span>, <span class="ident">expected</span>);
 
-        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;a2.sub.example.com&quot;</span>);
+        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;a2.sub.example.com&quot;</span>, <span class="bool-val">false</span>);
         <span class="ident">expected</span>.<span class="ident">style_selectors</span>.<span class="ident">clear</span>();
         <span class="ident">expected</span>.<span class="ident">style_selectors</span>.<span class="ident">insert</span>(<span class="string">&quot;.element&quot;</span>.<span class="ident">to_owned</span>(), <span class="macro">vec</span><span class="macro">!</span>[<span class="string">&quot;background: #000&quot;</span>.<span class="ident">to_owned</span>()]);
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">out</span>, <span class="ident">expected</span>);
@@ -1216,26 +1270,26 @@
             },
         ]);
 
-        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;sub.example.com&quot;</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">HostnameSpecificResources</span>::<span class="ident">empty</span>();
+        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;sub.example.com&quot;</span>, <span class="bool-val">false</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">expected</span> <span class="op">=</span> <span class="ident">UrlSpecificResources</span>::<span class="ident">empty</span>();
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">out</span>, <span class="ident">expected</span>);
 
-        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;sub.test.example.com&quot;</span>);
+        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;sub.test.example.com&quot;</span>, <span class="bool-val">false</span>);
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">out</span>, <span class="ident">expected</span>);
 
-        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;test.example.com&quot;</span>);
+        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;test.example.com&quot;</span>, <span class="bool-val">false</span>);
         <span class="ident">expected</span>.<span class="ident">injected_script</span> <span class="op">=</span> <span class="string">&quot;set-constant.js, atob, trueFunc\n&quot;</span>.<span class="ident">to_owned</span>();
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">out</span>, <span class="ident">expected</span>);
 
-        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;cosmetic.net&quot;</span>);
+        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;cosmetic.net&quot;</span>, <span class="bool-val">false</span>);
         <span class="ident">expected</span>.<span class="ident">injected_script</span> <span class="op">=</span> <span class="string">&quot;nowebrtc.js\n&quot;</span>.<span class="ident">to_owned</span>();
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">out</span>, <span class="ident">expected</span>);
 
-        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;g.cosmetic.net&quot;</span>);
+        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;g.cosmetic.net&quot;</span>, <span class="bool-val">false</span>);
         <span class="ident">expected</span>.<span class="ident">injected_script</span> <span class="op">=</span> <span class="string">&quot;nowebrtc.js\nwindow.open-defuser.js\n&quot;</span>.<span class="ident">to_owned</span>();
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">out</span>, <span class="ident">expected</span>);
 
-        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;c.g.cosmetic.net&quot;</span>);
+        <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;c.g.cosmetic.net&quot;</span>, <span class="bool-val">false</span>);
         <span class="ident">expected</span>.<span class="ident">injected_script</span> <span class="op">=</span> <span class="string">&quot;window.open-defuser.js\n&quot;</span>.<span class="ident">to_owned</span>();
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">out</span>, <span class="ident">expected</span>);
     }
@@ -1249,7 +1303,7 @@
             <span class="string">&quot;##.children .including #simple-id&quot;</span>,
             <span class="string">&quot;##a.a-class&quot;</span>,
         ];
-        <span class="kw">let</span> <span class="ident">cfcache</span> <span class="op">=</span> <span class="ident">CosmeticFilterCache</span>::<span class="ident">new</span>(<span class="ident">rules</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="ident">CosmeticFilter</span>::<span class="ident">parse</span>(<span class="ident">r</span>, <span class="bool-val">false</span>).<span class="ident">unwrap</span>()).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>());
+        <span class="kw">let</span> <span class="ident">cfcache</span> <span class="op">=</span> <span class="ident">CosmeticFilterCache</span>::<span class="ident">from_rules</span>(<span class="ident">rules</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="ident">CosmeticFilter</span>::<span class="ident">parse</span>(<span class="ident">r</span>, <span class="bool-val">false</span>).<span class="ident">unwrap</span>()).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;&gt;</span>());
 
         <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hidden_class_id_selectors</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;with&quot;</span>.<span class="ident">into</span>()], <span class="kw-2">&amp;</span>[], <span class="kw-2">&amp;</span><span class="ident">HashSet</span>::<span class="ident">default</span>());
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">out</span>, <span class="ident">Vec</span>::<span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>::<span class="ident">new</span>());
@@ -1287,8 +1341,8 @@
             <span class="string">&quot;example.*#@#.a-class&quot;</span>,
             <span class="string">&quot;~test.com###test-element&quot;</span>,
         ];
-        <span class="kw">let</span> <span class="ident">cfcache</span> <span class="op">=</span> <span class="ident">CosmeticFilterCache</span>::<span class="ident">new</span>(<span class="ident">rules</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="ident">CosmeticFilter</span>::<span class="ident">parse</span>(<span class="ident">r</span>, <span class="bool-val">false</span>).<span class="ident">unwrap</span>()).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>());
-        <span class="kw">let</span> <span class="ident">exceptions</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;example.co.uk&quot;</span>).<span class="ident">exceptions</span>;
+        <span class="kw">let</span> <span class="ident">cfcache</span> <span class="op">=</span> <span class="ident">CosmeticFilterCache</span>::<span class="ident">from_rules</span>(<span class="ident">rules</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="ident">CosmeticFilter</span>::<span class="ident">parse</span>(<span class="ident">r</span>, <span class="bool-val">false</span>).<span class="ident">unwrap</span>()).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;&gt;</span>());
+        <span class="kw">let</span> <span class="ident">exceptions</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;example.co.uk&quot;</span>, <span class="bool-val">false</span>).<span class="ident">exceptions</span>;
 
         <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hidden_class_id_selectors</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;a-class&quot;</span>.<span class="ident">into</span>()], <span class="kw-2">&amp;</span>[], <span class="kw-2">&amp;</span><span class="ident">exceptions</span>);
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">out</span>, [<span class="string">&quot;.a-class .with .children&quot;</span>]);
@@ -1299,7 +1353,7 @@
         <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hidden_class_id_selectors</span>(<span class="kw-2">&amp;</span>[], <span class="kw-2">&amp;</span>[<span class="string">&quot;test-element&quot;</span>.<span class="ident">into</span>()], <span class="kw-2">&amp;</span><span class="ident">exceptions</span>);
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">out</span>, [<span class="string">&quot;#test-element&quot;</span>]);
 
-        <span class="kw">let</span> <span class="ident">exceptions</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;a1.test.com&quot;</span>).<span class="ident">exceptions</span>;
+        <span class="kw">let</span> <span class="ident">exceptions</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;a1.test.com&quot;</span>, <span class="bool-val">false</span>).<span class="ident">exceptions</span>;
 
         <span class="kw">let</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hidden_class_id_selectors</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;a-class&quot;</span>.<span class="ident">into</span>()], <span class="kw-2">&amp;</span>[], <span class="kw-2">&amp;</span><span class="ident">exceptions</span>);
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">out</span>, [<span class="string">&quot;.a-class&quot;</span>, <span class="string">&quot;.a-class .with .children&quot;</span>]);
@@ -1320,16 +1374,16 @@
             <span class="string">&quot;example.com#@#div &gt; p&quot;</span>,
             <span class="string">&quot;~example.com##a[href=\&quot;notbad.com\&quot;]&quot;</span>,
         ];
-        <span class="kw">let</span> <span class="ident">cfcache</span> <span class="op">=</span> <span class="ident">CosmeticFilterCache</span>::<span class="ident">new</span>(<span class="ident">rules</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="ident">CosmeticFilter</span>::<span class="ident">parse</span>(<span class="ident">r</span>, <span class="bool-val">false</span>).<span class="ident">unwrap</span>()).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>());
+        <span class="kw">let</span> <span class="ident">cfcache</span> <span class="op">=</span> <span class="ident">CosmeticFilterCache</span>::<span class="ident">from_rules</span>(<span class="ident">rules</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="ident">CosmeticFilter</span>::<span class="ident">parse</span>(<span class="ident">r</span>, <span class="bool-val">false</span>).<span class="ident">unwrap</span>()).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;&gt;</span>());
 
-        <span class="kw">let</span> <span class="ident">hide_selectors</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;test.com&quot;</span>).<span class="ident">hide_selectors</span>;
+        <span class="kw">let</span> <span class="ident">hide_selectors</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;test.com&quot;</span>, <span class="bool-val">false</span>).<span class="ident">hide_selectors</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">expected_hides</span> <span class="op">=</span> <span class="ident">HashSet</span>::<span class="ident">new</span>();
         <span class="ident">expected_hides</span>.<span class="ident">insert</span>(<span class="string">&quot;a[href=\&quot;bad.com\&quot;]&quot;</span>.<span class="ident">to_owned</span>());
         <span class="ident">expected_hides</span>.<span class="ident">insert</span>(<span class="string">&quot;div &gt; p&quot;</span>.<span class="ident">to_owned</span>());
         <span class="ident">expected_hides</span>.<span class="ident">insert</span>(<span class="string">&quot;a[href=\&quot;notbad.com\&quot;]&quot;</span>.<span class="ident">to_owned</span>());
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">hide_selectors</span>, <span class="ident">expected_hides</span>);
 
-        <span class="kw">let</span> <span class="ident">hide_selectors</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;example.com&quot;</span>).<span class="ident">hide_selectors</span>;
+        <span class="kw">let</span> <span class="ident">hide_selectors</span> <span class="op">=</span> <span class="ident">cfcache</span>.<span class="ident">hostname_cosmetic_resources</span>(<span class="string">&quot;example.com&quot;</span>, <span class="bool-val">false</span>).<span class="ident">hide_selectors</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">expected_hides</span> <span class="op">=</span> <span class="ident">HashSet</span>::<span class="ident">new</span>();
         <span class="ident">expected_hides</span>.<span class="ident">insert</span>(<span class="string">&quot;a[href=\&quot;bad.com\&quot;]&quot;</span>.<span class="ident">to_owned</span>());
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">hide_selectors</span>, <span class="ident">expected_hides</span>);

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/twoway-0.2.1/src/pcmp.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>pcmp.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../twoway/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/twoway-0.2.1/src/pcmp.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>pcmp.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../twoway/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -606,7 +606,7 @@
 
 <span class="kw">use</span> <span class="ident">TwoWaySearcher</span>;
 
-<span class="kw">fn</span> <span class="ident">zip</span><span class="op">&lt;</span><span class="ident">I</span>, <span class="ident">J</span><span class="op">&gt;</span>(<span class="ident">i</span>: <span class="ident">I</span>, <span class="ident">j</span>: <span class="ident">J</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Zip</span><span class="op">&lt;</span><span class="ident">I</span>::<span class="ident">IntoIter</span>, <span class="ident">J</span>::<span class="ident">IntoIter</span><span class="op">&gt;</span>
+<span class="kw">fn</span> <span class="ident">zip</span><span class="op">&lt;</span><span class="ident">I</span>, <span class="ident">J</span><span class="op">&gt;</span>(<span class="ident">i</span>: <span class="ident">I</span>, <span class="ident">j</span>: <span class="ident">J</span>) <span class="op">-&gt;</span> <span class="ident">Zip</span><span class="op">&lt;</span><span class="ident">I</span>::<span class="ident">IntoIter</span>, <span class="ident">J</span>::<span class="ident">IntoIter</span><span class="op">&gt;</span>
     <span class="kw">where</span> <span class="ident">I</span>: <span class="ident">IntoIterator</span>,
           <span class="ident">J</span>: <span class="ident">IntoIterator</span>
 {
@@ -631,7 +631,7 @@
 <span class="doccomment">/// bytes are readable.</span>
 <span class="attribute">#[<span class="ident">target_feature</span>(<span class="ident">enable</span> <span class="op">=</span> <span class="string">&quot;sse4.2&quot;</span>)]</span>
 <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">pcmpestri_16_mask</span>(<span class="ident">text</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>, <span class="ident">offset</span>: <span class="ident">usize</span>, <span class="ident">text_len</span>: <span class="ident">usize</span>,
-                       <span class="ident">needle</span>: <span class="ident">__m128i</span>, <span class="ident">needle_len</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
+                       <span class="ident">needle</span>: <span class="ident">__m128i</span>, <span class="ident">needle_len</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">u32</span> {
     <span class="comment">//debug_assert!(text_len + offset &lt;= text.len()); // saturates at 16</span>
     <span class="comment">//debug_assert!(needle_len &lt;= 16); // saturates at 16</span>
     <span class="kw">let</span> <span class="ident">text</span> <span class="op">=</span> <span class="ident">mask_load</span>(<span class="ident">text</span>.<span class="ident">offset</span>(<span class="ident">offset</span> <span class="kw">as</span> <span class="kw">_</span>) <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span>, <span class="ident">text_len</span>);
@@ -649,7 +649,7 @@
 <span class="doccomment">/// No mask: `text` must be at least 16 bytes from the end of a memory region.</span>
 <span class="attribute">#[<span class="ident">target_feature</span>(<span class="ident">enable</span> <span class="op">=</span> <span class="string">&quot;sse4.2&quot;</span>)]</span>
 <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">pcmpestri_16_nomask</span>(<span class="ident">text</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>, <span class="ident">offset</span>: <span class="ident">usize</span>, <span class="ident">text_len</span>: <span class="ident">usize</span>,
-                       <span class="ident">needle</span>: <span class="ident">__m128i</span>, <span class="ident">needle_len</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
+                       <span class="ident">needle</span>: <span class="ident">__m128i</span>, <span class="ident">needle_len</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">u32</span> {
     <span class="comment">//debug_assert!(text_len + offset &lt;= text.len()); // saturates at 16</span>
     <span class="comment">//debug_assert!(needle_len &lt;= 16); // saturates at 16</span>
     <span class="kw">let</span> <span class="ident">text</span> <span class="op">=</span> <span class="ident">_mm_loadu_si128</span>(<span class="ident">text</span>.<span class="ident">offset</span>(<span class="ident">offset</span> <span class="kw">as</span> <span class="kw">_</span>) <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span>);
@@ -665,7 +665,7 @@
 <span class="doccomment">/// Return value: bitmask in the 16 lsb of the return value.</span>
 <span class="attribute">#[<span class="ident">target_feature</span>(<span class="ident">enable</span> <span class="op">=</span> <span class="string">&quot;sse4.2&quot;</span>)]</span>
 <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">pcmpestrm_eq_each</span>(<span class="ident">text</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>, <span class="ident">offset</span>: <span class="ident">usize</span>, <span class="ident">text_len</span>: <span class="ident">usize</span>,
-                            <span class="ident">needle</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>, <span class="ident">noffset</span>: <span class="ident">usize</span>, <span class="ident">needle_len</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+                            <span class="ident">needle</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>, <span class="ident">noffset</span>: <span class="ident">usize</span>, <span class="ident">needle_len</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">u64</span> {
     <span class="comment">// NOTE: text *must* be readable for 16 bytes</span>
     <span class="comment">// NOTE: needle *must* be readable for 16 bytes</span>
     <span class="comment">//debug_assert!(text_len + offset &lt;= text.len()); // saturates at 16</span>
@@ -675,7 +675,7 @@
     <span class="kw">let</span> <span class="ident">mask</span> <span class="op">=</span> <span class="ident">_mm_cmpestrm</span>(<span class="ident">needle</span>, <span class="ident">needle_len</span> <span class="kw">as</span> <span class="kw">_</span>, <span class="ident">text</span>, <span class="ident">text_len</span> <span class="kw">as</span> <span class="kw">_</span>, <span class="ident">_SIDD_CMP_EQUAL_EACH</span>);
 
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86&quot;</span>)]</span> {
-        <span class="ident">_mm_extract_epi32</span>(<span class="ident">mask</span>, <span class="number">0</span>) <span class="kw">as</span> <span class="ident">u64</span> <span class="op">|</span> (<span class="ident">_mm_extract_epi32</span>(<span class="ident">mask</span>, <span class="number">1</span>) <span class="kw">as</span> (<span class="ident">u64</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">32</span>)
+        <span class="ident">_mm_extract_epi32</span>(<span class="ident">mask</span>, <span class="number">0</span>) <span class="kw">as</span> <span class="ident">u64</span> <span class="op">|</span> (<span class="ident">_mm_extract_epi32</span>(<span class="ident">mask</span>, <span class="number">1</span>) <span class="kw">as</span> (<span class="ident">u64</span>) <span class="op">&lt;&lt;</span> <span class="number">32</span>)
     }
 
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>)]</span> {
@@ -687,10 +687,10 @@
 <span class="doccomment">/// Search for first possible match of `pat` -- might be just a byte</span>
 <span class="doccomment">/// Return `(pos, length)` length of match</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">fn</span> <span class="ident">first_start_of_match</span>(<span class="ident">text</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">pat</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">usize</span>)<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">first_start_of_match</span>(<span class="ident">text</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">pat</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">usize</span>)<span class="op">&gt;</span> {
     <span class="comment">// not safe for text that is non aligned and ends at page boundary</span>
     <span class="kw">let</span> <span class="ident">patl</span> <span class="op">=</span> <span class="ident">pat</span>.<span class="ident">len</span>();
-    <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">patl</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">16</span>);
+    <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">patl</span> <span class="op">&lt;=</span> <span class="number">16</span>);
     <span class="kw">unsafe</span> { <span class="ident">first_start_of_match_mask</span>(<span class="ident">text</span>, <span class="ident">pat</span>.<span class="ident">len</span>(), <span class="ident">pat128</span>(<span class="ident">pat</span>)) }
 }
 
@@ -699,17 +699,17 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// the end of text an be close (within 16 bytes) of a page boundary</span>
 <span class="attribute">#[<span class="ident">target_feature</span>(<span class="ident">enable</span> <span class="op">=</span> <span class="string">&quot;sse4.2&quot;</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">first_start_of_match_mask</span>(<span class="ident">text</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">pat_len</span>: <span class="ident">usize</span>, <span class="ident">p</span>: <span class="ident">__m128i</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">usize</span>)<span class="op">&gt;</span> {
+<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">first_start_of_match_mask</span>(<span class="ident">text</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">pat_len</span>: <span class="ident">usize</span>, <span class="ident">p</span>: <span class="ident">__m128i</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">usize</span>)<span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">tp</span> <span class="op">=</span> <span class="ident">text</span>.<span class="ident">as_ptr</span>();
-    <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">pat_len</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">16</span>);
+    <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">pat_len</span> <span class="op">&lt;=</span> <span class="number">16</span>);
 
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">offset</span> <span class="op">=</span> <span class="number">0</span>;
 
-    <span class="kw">while</span> <span class="ident">text</span>.<span class="ident">len</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="ident">offset</span> <span class="op">+</span> <span class="ident">pat_len</span> {
+    <span class="kw">while</span> <span class="ident">text</span>.<span class="ident">len</span>() <span class="op">&gt;=</span> <span class="ident">offset</span> <span class="op">+</span> <span class="ident">pat_len</span> {
         <span class="kw">let</span> <span class="ident">tlen</span> <span class="op">=</span> <span class="ident">text</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">offset</span>;
         <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="ident">pcmpestri_16_mask</span>(<span class="ident">tp</span>, <span class="ident">offset</span>, <span class="ident">tlen</span>, <span class="ident">p</span>, <span class="ident">pat_len</span>) <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">if</span> <span class="ident">ret</span> <span class="op">=</span><span class="op">=</span> <span class="number">16</span> {
-            <span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="number">16</span>;
+        <span class="kw">if</span> <span class="ident">ret</span> <span class="op">==</span> <span class="number">16</span> {
+            <span class="ident">offset</span> <span class="op">+=</span> <span class="number">16</span>;
         } <span class="kw">else</span> {
             <span class="kw">let</span> <span class="ident">match_len</span> <span class="op">=</span> <span class="ident">cmp</span>::<span class="ident">min</span>(<span class="ident">pat_len</span>, <span class="number">16</span> <span class="op">-</span> <span class="ident">ret</span>);
             <span class="kw">return</span> <span class="prelude-val">Some</span>((<span class="ident">offset</span> <span class="op">+</span> <span class="ident">ret</span>, <span class="ident">match_len</span>));
@@ -725,18 +725,18 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// unsafe because the end of text must not be close (within 16 bytes) of a page boundary</span>
 <span class="attribute">#[<span class="ident">target_feature</span>(<span class="ident">enable</span> <span class="op">=</span> <span class="string">&quot;sse4.2&quot;</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">first_start_of_match_nomask</span>(<span class="ident">text</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">pat_len</span>: <span class="ident">usize</span>, <span class="ident">p</span>: <span class="ident">__m128i</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">usize</span>)<span class="op">&gt;</span> {
+<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">first_start_of_match_nomask</span>(<span class="ident">text</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">pat_len</span>: <span class="ident">usize</span>, <span class="ident">p</span>: <span class="ident">__m128i</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">usize</span>)<span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">tp</span> <span class="op">=</span> <span class="ident">text</span>.<span class="ident">as_ptr</span>();
-    <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">pat_len</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">16</span>);
-    <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">pat_len</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">text</span>.<span class="ident">len</span>());
+    <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">pat_len</span> <span class="op">&lt;=</span> <span class="number">16</span>);
+    <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">pat_len</span> <span class="op">&lt;=</span> <span class="ident">text</span>.<span class="ident">len</span>());
 
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">offset</span> <span class="op">=</span> <span class="number">0</span>;
 
-    <span class="kw">while</span> <span class="ident">text</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">pat_len</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">offset</span> {
+    <span class="kw">while</span> <span class="ident">text</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">pat_len</span> <span class="op">&gt;=</span> <span class="ident">offset</span> {
         <span class="kw">let</span> <span class="ident">tlen</span> <span class="op">=</span> <span class="ident">text</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">offset</span>;
         <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="ident">pcmpestri_16_nomask</span>(<span class="ident">tp</span>, <span class="ident">offset</span>, <span class="ident">tlen</span>, <span class="ident">p</span>, <span class="ident">pat_len</span>) <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">if</span> <span class="ident">ret</span> <span class="op">=</span><span class="op">=</span> <span class="number">16</span> {
-            <span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="number">16</span>;
+        <span class="kw">if</span> <span class="ident">ret</span> <span class="op">==</span> <span class="number">16</span> {
+            <span class="ident">offset</span> <span class="op">+=</span> <span class="number">16</span>;
         } <span class="kw">else</span> {
             <span class="kw">let</span> <span class="ident">match_len</span> <span class="op">=</span> <span class="ident">cmp</span>::<span class="ident">min</span>(<span class="ident">pat_len</span>, <span class="number">16</span> <span class="op">-</span> <span class="ident">ret</span>);
             <span class="kw">return</span> <span class="prelude-val">Some</span>((<span class="ident">offset</span> <span class="op">+</span> <span class="ident">ret</span>, <span class="ident">match_len</span>));
@@ -765,25 +765,25 @@
             <span class="kw">let</span> <span class="ident">first_start</span> <span class="op">=</span> <span class="ident">first_start_of_match</span>(<span class="ident">longer</span>.<span class="ident">as_bytes</span>(), <span class="ident">window</span>);
             <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">first_start</span>.<span class="ident">is_some</span>());
             <span class="kw">let</span> (<span class="ident">pos</span>, <span class="ident">len</span>) <span class="op">=</span> <span class="ident">first_start</span>.<span class="ident">unwrap</span>();
-            <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">len</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">wsz</span>);
-            <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">len</span> <span class="op">=</span><span class="op">=</span> <span class="ident">wsz</span> <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="prelude-val">Some</span>(<span class="ident">pos</span>) <span class="op">=</span><span class="op">=</span> <span class="ident">str_find</span>
-                    <span class="op">|</span><span class="op">|</span> <span class="ident">pos</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">str_find</span>.<span class="ident">unwrap</span>());
+            <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">len</span> <span class="op">&lt;=</span> <span class="ident">wsz</span>);
+            <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">len</span> <span class="op">==</span> <span class="ident">wsz</span> <span class="op">&amp;&amp;</span> <span class="prelude-val">Some</span>(<span class="ident">pos</span>) <span class="op">==</span> <span class="ident">str_find</span>
+                    <span class="op">||</span> <span class="ident">pos</span> <span class="op">&lt;=</span> <span class="ident">str_find</span>.<span class="ident">unwrap</span>());
         }
     }
 }
 
-<span class="kw">fn</span> <span class="ident">find_2byte_pat</span>(<span class="ident">text</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">pat</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">usize</span>)<span class="op">&gt;</span> {
-    <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">text</span>.<span class="ident">len</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="ident">pat</span>.<span class="ident">len</span>());
-    <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">pat</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">2</span>);
+<span class="kw">fn</span> <span class="ident">find_2byte_pat</span>(<span class="ident">text</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">pat</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">usize</span>)<span class="op">&gt;</span> {
+    <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">text</span>.<span class="ident">len</span>() <span class="op">&gt;=</span> <span class="ident">pat</span>.<span class="ident">len</span>());
+    <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">pat</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">2</span>);
     <span class="comment">// Search for the second byte of the pattern, not the first, better for</span>
     <span class="comment">// scripts where we have two-byte encoded codepoints (the first byte will</span>
     <span class="comment">// repeat much more often than the second).</span>
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">off</span> <span class="op">=</span> <span class="number">1</span>;
     <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">i</span>) <span class="op">=</span> <span class="ident">memchr</span>::<span class="ident">memchr</span>(<span class="ident">pat</span>[<span class="number">1</span>], <span class="kw-2">&amp;</span><span class="ident">text</span>[<span class="ident">off</span>..]) {
         <span class="kw">match</span> <span class="ident">text</span>.<span class="ident">get</span>(<span class="ident">off</span> <span class="op">+</span> <span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>) {
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">break</span>,
-            <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="ident">c</span>) <span class="kw">if</span> <span class="ident">c</span> <span class="op">=</span><span class="op">=</span> <span class="ident">pat</span>[<span class="number">0</span>] <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Some</span>((<span class="ident">off</span> <span class="op">+</span> <span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>, <span class="ident">off</span> <span class="op">+</span> <span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>)),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">off</span> <span class="op">+</span><span class="op">=</span> <span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>,
+            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">break</span>,
+            <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="ident">c</span>) <span class="kw">if</span> <span class="ident">c</span> <span class="op">==</span> <span class="ident">pat</span>[<span class="number">0</span>] <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Some</span>((<span class="ident">off</span> <span class="op">+</span> <span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>, <span class="ident">off</span> <span class="op">+</span> <span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>)),
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="ident">off</span> <span class="op">+=</span> <span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>,
         }
 
     }
@@ -792,8 +792,8 @@
 
 <span class="doccomment">/// Simd text search optimized for short patterns (&lt;= 8 bytes)</span>
 <span class="attribute">#[<span class="ident">target_feature</span>(<span class="ident">enable</span> <span class="op">=</span> <span class="string">&quot;sse4.2&quot;</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">find_short_pat</span>(<span class="ident">text</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">pat</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-    <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">pat</span>.<span class="ident">len</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="number">8</span>);
+<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">find_short_pat</span>(<span class="ident">text</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">pat</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
+    <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">pat</span>.<span class="ident">len</span>() <span class="op">&lt;=</span> <span class="number">8</span>);
     <span class="comment">/*
     if pat.len() == 2 {
         return find_2byte_pat(text, pat);
@@ -811,19 +811,19 @@
         }
         <span class="comment">// find the next occurence</span>
         <span class="kw">match</span> <span class="ident">first_start_of_match_nomask</span>(<span class="kw-2">&amp;</span><span class="ident">safetext</span>[<span class="ident">pos</span>..], <span class="ident">pat</span>.<span class="ident">len</span>(), <span class="ident">r</span>) {
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="prelude-val">None</span> <span class="op">=&gt;</span> {
                 <span class="ident">pos</span> <span class="op">=</span> <span class="ident">cmp</span>::<span class="ident">max</span>(<span class="ident">pos</span>, <span class="ident">safetext</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">pat</span>.<span class="ident">len</span>());
                 <span class="kw">break</span> <span class="comment">// no matches</span>
             }
-            <span class="prelude-val">Some</span>((<span class="ident">mpos</span>, <span class="ident">mlen</span>)) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="ident">pos</span> <span class="op">+</span><span class="op">=</span> <span class="ident">mpos</span>;
+            <span class="prelude-val">Some</span>((<span class="ident">mpos</span>, <span class="ident">mlen</span>)) <span class="op">=&gt;</span> {
+                <span class="ident">pos</span> <span class="op">+=</span> <span class="ident">mpos</span>;
                 <span class="kw">if</span> <span class="ident">mlen</span> <span class="op">&lt;</span> <span class="ident">pat</span>.<span class="ident">len</span>() {
                     <span class="kw">if</span> <span class="ident">pos</span> <span class="op">&gt;</span> <span class="ident">text</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">pat</span>.<span class="ident">len</span>() {
                         <span class="kw">return</span> <span class="prelude-val">None</span>;
                     }
                     <span class="kw">for</span> (<span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span>) <span class="kw">in</span> <span class="ident">zip</span>(<span class="kw-2">&amp;</span><span class="ident">text</span>[<span class="ident">pos</span> <span class="op">+</span> <span class="ident">mlen</span>..], <span class="kw-2">&amp;</span><span class="ident">pat</span>[<span class="ident">mlen</span>..]) {
-                        <span class="kw">if</span> <span class="ident">a</span> <span class="op">!</span><span class="op">=</span> <span class="ident">b</span> {
-                            <span class="ident">pos</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                        <span class="kw">if</span> <span class="ident">a</span> <span class="op">!=</span> <span class="ident">b</span> {
+                            <span class="ident">pos</span> <span class="op">+=</span> <span class="number">1</span>;
                             <span class="kw">continue</span> <span class="lifetime">&#39;search</span>;
                         }
                     }
@@ -840,16 +840,16 @@
         }
         <span class="comment">// find the next occurence</span>
         <span class="kw">match</span> <span class="ident">first_start_of_match_mask</span>(<span class="kw-2">&amp;</span><span class="ident">text</span>[<span class="ident">pos</span>..], <span class="ident">pat</span>.<span class="ident">len</span>(), <span class="ident">r</span>) {
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>, <span class="comment">// no matches</span>
-            <span class="prelude-val">Some</span>((<span class="ident">mpos</span>, <span class="ident">mlen</span>)) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="ident">pos</span> <span class="op">+</span><span class="op">=</span> <span class="ident">mpos</span>;
+            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>, <span class="comment">// no matches</span>
+            <span class="prelude-val">Some</span>((<span class="ident">mpos</span>, <span class="ident">mlen</span>)) <span class="op">=&gt;</span> {
+                <span class="ident">pos</span> <span class="op">+=</span> <span class="ident">mpos</span>;
                 <span class="kw">if</span> <span class="ident">mlen</span> <span class="op">&lt;</span> <span class="ident">pat</span>.<span class="ident">len</span>() {
                     <span class="kw">if</span> <span class="ident">pos</span> <span class="op">&gt;</span> <span class="ident">text</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">pat</span>.<span class="ident">len</span>() {
                         <span class="kw">return</span> <span class="prelude-val">None</span>;
                     }
                     <span class="kw">for</span> (<span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span>) <span class="kw">in</span> <span class="ident">zip</span>(<span class="kw-2">&amp;</span><span class="ident">text</span>[<span class="ident">pos</span> <span class="op">+</span> <span class="ident">mlen</span>..], <span class="kw-2">&amp;</span><span class="ident">pat</span>[<span class="ident">mlen</span>..]) {
-                        <span class="kw">if</span> <span class="ident">a</span> <span class="op">!</span><span class="op">=</span> <span class="ident">b</span> {
-                            <span class="ident">pos</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                        <span class="kw">if</span> <span class="ident">a</span> <span class="op">!=</span> <span class="ident">b</span> {
+                            <span class="ident">pos</span> <span class="op">+=</span> <span class="number">1</span>;
                             <span class="kw">continue</span> <span class="lifetime">&#39;tail</span>;
                         }
                     }
@@ -862,7 +862,7 @@
 }
 
 <span class="doccomment">/// `is_supported` checks whether necessary SSE 4.2 feature is supported on current CPU.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_supported</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_supported</span>() <span class="op">-&gt;</span> <span class="ident">bool</span> {
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;use_std&quot;</span>)]</span>
     <span class="kw">return</span> <span class="macro">is_x86_feature_detected</span><span class="macro">!</span>(<span class="string">&quot;sse4.2&quot;</span>);
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;use_std&quot;</span>))]</span>
@@ -872,14 +872,14 @@
 <span class="doccomment">/// `find` finds the first ocurrence of `pattern` in the `text`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This is the SSE42 accelerated version.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">find</span>(<span class="ident">text</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">pattern</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">find</span>(<span class="ident">text</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">pattern</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
     <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">is_supported</span>());
 
     <span class="kw">if</span> <span class="ident">pattern</span>.<span class="ident">is_empty</span>() {
         <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="number">0</span>);
     } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">text</span>.<span class="ident">len</span>() <span class="op">&lt;</span> <span class="ident">pattern</span>.<span class="ident">len</span>() {
         <span class="kw">return</span> <span class="prelude-val">None</span>;
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">pattern</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">1</span> {
+    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">pattern</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">1</span> {
         <span class="kw">return</span> <span class="ident">memchr</span>::<span class="ident">memchr</span>(<span class="ident">pattern</span>[<span class="number">0</span>], <span class="ident">text</span>);
     } <span class="kw">else</span> {
         <span class="kw">unsafe</span> { <span class="ident">find_inner</span>(<span class="ident">text</span>, <span class="ident">pattern</span>) }
@@ -887,8 +887,8 @@
 }
 
 <span class="attribute">#[<span class="ident">target_feature</span>(<span class="ident">enable</span> <span class="op">=</span> <span class="string">&quot;sse4.2&quot;</span>)]</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">find_inner</span>(<span class="ident">text</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">pat</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="ident">pat</span>.<span class="ident">len</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="number">6</span> {
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">find_inner</span>(<span class="ident">text</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">pat</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
+    <span class="kw">if</span> <span class="ident">pat</span>.<span class="ident">len</span>() <span class="op">&lt;=</span> <span class="number">6</span> {
         <span class="kw">return</span> <span class="ident">find_short_pat</span>(<span class="ident">text</span>, <span class="ident">pat</span>);
     }
 
@@ -899,7 +899,7 @@
     <span class="kw">let</span> (<span class="ident">crit_pos</span>, <span class="kw-2">mut</span> <span class="ident">period</span>) <span class="op">=</span> <span class="ident">TwoWaySearcher</span>::<span class="ident">crit_params</span>(<span class="ident">pat</span>);
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">memory</span>;
 
-    <span class="kw">if</span> <span class="kw-2">&amp;</span><span class="ident">pat</span>[..<span class="ident">crit_pos</span>] <span class="op">=</span><span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">pat</span>[<span class="ident">period</span>.. <span class="ident">period</span> <span class="op">+</span> <span class="ident">crit_pos</span>] {
+    <span class="kw">if</span> <span class="kw-2">&amp;</span><span class="ident">pat</span>[..<span class="ident">crit_pos</span>] <span class="op">==</span> <span class="kw-2">&amp;</span><span class="ident">pat</span>[<span class="ident">period</span>.. <span class="ident">period</span> <span class="op">+</span> <span class="ident">crit_pos</span>] {
         <span class="ident">memory</span> <span class="op">=</span> <span class="number">0</span>; <span class="comment">// use memory</span>
     } <span class="kw">else</span> {
         <span class="ident">memory</span> <span class="op">=</span> <span class="op">!</span><span class="number">0</span>; <span class="comment">// !0 means memory is unused</span>
@@ -910,7 +910,7 @@
     <span class="comment">//println!(&quot;pat: {:?}, crit={}, period={}&quot;, pat, crit_pos, period);</span>
     <span class="kw">let</span> (<span class="ident">left</span>, <span class="ident">right</span>) <span class="op">=</span> <span class="ident">pat</span>.<span class="ident">split_at</span>(<span class="ident">crit_pos</span>);
     <span class="kw">let</span> (<span class="ident">right16</span>, <span class="ident">_right17</span>) <span class="op">=</span> <span class="ident">right</span>.<span class="ident">split_at</span>(<span class="ident">cmp</span>::<span class="ident">min</span>(<span class="number">16</span>, <span class="ident">right</span>.<span class="ident">len</span>()));
-    <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">right</span>.<span class="ident">len</span>() <span class="op">!</span><span class="op">=</span> <span class="number">0</span>);
+    <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">right</span>.<span class="ident">len</span>() <span class="op">!=</span> <span class="number">0</span>);
 
     <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">pat128</span>(<span class="ident">right</span>);
 
@@ -918,7 +918,7 @@
     <span class="kw">let</span> <span class="ident">safetext</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">text</span>[..<span class="ident">cmp</span>::<span class="ident">max</span>(<span class="ident">text</span>.<span class="ident">len</span>(), <span class="number">16</span>) <span class="op">-</span> <span class="number">16</span>];
 
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pos</span> <span class="op">=</span> <span class="number">0</span>;
-    <span class="kw">if</span> <span class="ident">memory</span> <span class="op">=</span><span class="op">=</span> <span class="op">!</span><span class="number">0</span> {
+    <span class="kw">if</span> <span class="ident">memory</span> <span class="op">==</span> <span class="op">!</span><span class="number">0</span> {
         <span class="comment">// Long period case -- no memory, period is an approximation</span>
         <span class="lifetime">&#39;search</span>: <span class="kw">loop</span> {
             <span class="kw">if</span> <span class="ident">pos</span> <span class="op">+</span> <span class="ident">pat</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="ident">safetext</span>.<span class="ident">len</span>() {
@@ -927,20 +927,20 @@
             <span class="comment">// find the next occurence of the right half</span>
             <span class="kw">let</span> <span class="ident">start</span> <span class="op">=</span> <span class="ident">crit_pos</span>;
             <span class="kw">match</span> <span class="ident">first_start_of_match_nomask</span>(<span class="kw-2">&amp;</span><span class="ident">safetext</span>[<span class="ident">pos</span> <span class="op">+</span> <span class="ident">start</span>..], <span class="ident">right16</span>.<span class="ident">len</span>(), <span class="ident">r</span>) {
-                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="prelude-val">None</span> <span class="op">=&gt;</span> {
                     <span class="ident">pos</span> <span class="op">=</span> <span class="ident">cmp</span>::<span class="ident">max</span>(<span class="ident">pos</span>, <span class="ident">safetext</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">pat</span>.<span class="ident">len</span>());
                     <span class="kw">break</span> <span class="comment">// no matches</span>
                 }
-                <span class="prelude-val">Some</span>((<span class="ident">mpos</span>, <span class="ident">mlen</span>)) <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="ident">pos</span> <span class="op">+</span><span class="op">=</span> <span class="ident">mpos</span>;
+                <span class="prelude-val">Some</span>((<span class="ident">mpos</span>, <span class="ident">mlen</span>)) <span class="op">=&gt;</span> {
+                    <span class="ident">pos</span> <span class="op">+=</span> <span class="ident">mpos</span>;
                     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pfxlen</span> <span class="op">=</span> <span class="ident">mlen</span>;
                     <span class="kw">if</span> <span class="ident">pfxlen</span> <span class="op">&lt;</span> <span class="ident">right</span>.<span class="ident">len</span>() {
-                        <span class="ident">pfxlen</span> <span class="op">+</span><span class="op">=</span> <span class="ident">shared_prefix_inner</span>(<span class="kw-2">&amp;</span><span class="ident">text</span>[<span class="ident">pos</span> <span class="op">+</span> <span class="ident">start</span> <span class="op">+</span> <span class="ident">mlen</span>..], <span class="kw-2">&amp;</span><span class="ident">right</span>[<span class="ident">mlen</span>..]);
+                        <span class="ident">pfxlen</span> <span class="op">+=</span> <span class="ident">shared_prefix_inner</span>(<span class="kw-2">&amp;</span><span class="ident">text</span>[<span class="ident">pos</span> <span class="op">+</span> <span class="ident">start</span> <span class="op">+</span> <span class="ident">mlen</span>..], <span class="kw-2">&amp;</span><span class="ident">right</span>[<span class="ident">mlen</span>..]);
                     }
-                    <span class="kw">if</span> <span class="ident">pfxlen</span> <span class="op">!</span><span class="op">=</span> <span class="ident">right</span>.<span class="ident">len</span>() {
+                    <span class="kw">if</span> <span class="ident">pfxlen</span> <span class="op">!=</span> <span class="ident">right</span>.<span class="ident">len</span>() {
                         <span class="comment">// partial match</span>
                         <span class="comment">// skip by the number of bytes matched</span>
-                        <span class="ident">pos</span> <span class="op">+</span><span class="op">=</span> <span class="ident">pfxlen</span> <span class="op">+</span> <span class="number">1</span>;
+                        <span class="ident">pos</span> <span class="op">+=</span> <span class="ident">pfxlen</span> <span class="op">+</span> <span class="number">1</span>;
                         <span class="kw">continue</span> <span class="lifetime">&#39;search</span>;
                     } <span class="kw">else</span> {
                         <span class="comment">// matches right part</span>
@@ -950,8 +950,8 @@
 
             <span class="comment">// See if the left part of the needle matches</span>
             <span class="comment">// XXX: Original algorithm compares from right to left here</span>
-            <span class="kw">if</span> <span class="ident">left</span> <span class="op">!</span><span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">text</span>[<span class="ident">pos</span>..<span class="ident">pos</span> <span class="op">+</span> <span class="ident">left</span>.<span class="ident">len</span>()] {
-                <span class="ident">pos</span> <span class="op">+</span><span class="op">=</span> <span class="ident">period</span>;
+            <span class="kw">if</span> <span class="ident">left</span> <span class="op">!=</span> <span class="kw-2">&amp;</span><span class="ident">text</span>[<span class="ident">pos</span>..<span class="ident">pos</span> <span class="op">+</span> <span class="ident">left</span>.<span class="ident">len</span>()] {
+                <span class="ident">pos</span> <span class="op">+=</span> <span class="ident">period</span>;
                 <span class="kw">continue</span> <span class="lifetime">&#39;search</span>;
             }
 
@@ -965,15 +965,15 @@
             }
             <span class="comment">// find the next occurence of the right half</span>
             <span class="comment">//println!(&quot;memory trace pos={}, memory={}&quot;, pos, memory);</span>
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pfxlen</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">memory</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pfxlen</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">memory</span> <span class="op">==</span> <span class="number">0</span> {
                 <span class="kw">let</span> <span class="ident">start</span> <span class="op">=</span> <span class="ident">crit_pos</span>;
                 <span class="kw">match</span> <span class="ident">first_start_of_match_nomask</span>(<span class="kw-2">&amp;</span><span class="ident">safetext</span>[<span class="ident">pos</span> <span class="op">+</span> <span class="ident">start</span>..], <span class="ident">right16</span>.<span class="ident">len</span>(), <span class="ident">r</span>) {
-                    <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="prelude-val">None</span> <span class="op">=&gt;</span> {
                         <span class="ident">pos</span> <span class="op">=</span> <span class="ident">cmp</span>::<span class="ident">max</span>(<span class="ident">pos</span>, <span class="ident">safetext</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">pat</span>.<span class="ident">len</span>());
                         <span class="kw">break</span> <span class="comment">// no matches</span>
                     }
-                    <span class="prelude-val">Some</span>((<span class="ident">mpos</span>, <span class="ident">mlen</span>)) <span class="op">=</span><span class="op">&gt;</span> {
-                        <span class="ident">pos</span> <span class="op">+</span><span class="op">=</span> <span class="ident">mpos</span>;
+                    <span class="prelude-val">Some</span>((<span class="ident">mpos</span>, <span class="ident">mlen</span>)) <span class="op">=&gt;</span> {
+                        <span class="ident">pos</span> <span class="op">+=</span> <span class="ident">mpos</span>;
                         <span class="ident">mlen</span>
                     }
                 }
@@ -981,12 +981,12 @@
                 <span class="ident">memory</span> <span class="op">-</span> <span class="ident">crit_pos</span>
             };
             <span class="kw">if</span> <span class="ident">pfxlen</span> <span class="op">&lt;</span> <span class="ident">right</span>.<span class="ident">len</span>() {
-                <span class="ident">pfxlen</span> <span class="op">+</span><span class="op">=</span> <span class="ident">shared_prefix_inner</span>(<span class="kw-2">&amp;</span><span class="ident">text</span>[<span class="ident">pos</span> <span class="op">+</span> <span class="ident">crit_pos</span> <span class="op">+</span> <span class="ident">pfxlen</span>..], <span class="kw-2">&amp;</span><span class="ident">right</span>[<span class="ident">pfxlen</span>..]);
+                <span class="ident">pfxlen</span> <span class="op">+=</span> <span class="ident">shared_prefix_inner</span>(<span class="kw-2">&amp;</span><span class="ident">text</span>[<span class="ident">pos</span> <span class="op">+</span> <span class="ident">crit_pos</span> <span class="op">+</span> <span class="ident">pfxlen</span>..], <span class="kw-2">&amp;</span><span class="ident">right</span>[<span class="ident">pfxlen</span>..]);
             }
-            <span class="kw">if</span> <span class="ident">pfxlen</span> <span class="op">!</span><span class="op">=</span> <span class="ident">right</span>.<span class="ident">len</span>() {
+            <span class="kw">if</span> <span class="ident">pfxlen</span> <span class="op">!=</span> <span class="ident">right</span>.<span class="ident">len</span>() {
                 <span class="comment">// partial match</span>
                 <span class="comment">// skip by the number of bytes matched</span>
-                <span class="ident">pos</span> <span class="op">+</span><span class="op">=</span> <span class="ident">pfxlen</span> <span class="op">+</span> <span class="number">1</span>;
+                <span class="ident">pos</span> <span class="op">+=</span> <span class="ident">pfxlen</span> <span class="op">+</span> <span class="number">1</span>;
                 <span class="ident">memory</span> <span class="op">=</span> <span class="number">0</span>;
                 <span class="kw">continue</span> <span class="lifetime">&#39;search_memory</span>;
             } <span class="kw">else</span> {
@@ -995,8 +995,8 @@
 
             <span class="comment">// See if the left part of the needle matches</span>
             <span class="comment">// XXX: Original algorithm compares from right to left here</span>
-            <span class="kw">if</span> <span class="ident">memory</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">left</span>.<span class="ident">len</span>() <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="kw-2">&amp;</span><span class="ident">left</span>[<span class="ident">memory</span>..] <span class="op">!</span><span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">text</span>[<span class="ident">pos</span> <span class="op">+</span> <span class="ident">memory</span>..<span class="ident">pos</span> <span class="op">+</span> <span class="ident">left</span>.<span class="ident">len</span>()] {
-                <span class="ident">pos</span> <span class="op">+</span><span class="op">=</span> <span class="ident">period</span>;
+            <span class="kw">if</span> <span class="ident">memory</span> <span class="op">&lt;=</span> <span class="ident">left</span>.<span class="ident">len</span>() <span class="op">&amp;&amp;</span> <span class="kw-2">&amp;</span><span class="ident">left</span>[<span class="ident">memory</span>..] <span class="op">!=</span> <span class="kw-2">&amp;</span><span class="ident">text</span>[<span class="ident">pos</span> <span class="op">+</span> <span class="ident">memory</span>..<span class="ident">pos</span> <span class="op">+</span> <span class="ident">left</span>.<span class="ident">len</span>()] {
+                <span class="ident">pos</span> <span class="op">+=</span> <span class="ident">period</span>;
                 <span class="ident">memory</span> <span class="op">=</span> <span class="ident">pat</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">period</span>;
                 <span class="kw">continue</span> <span class="lifetime">&#39;search_memory</span>;
             }
@@ -1013,17 +1013,17 @@
         <span class="comment">// find the next occurence of the right half</span>
         <span class="kw">let</span> <span class="ident">start</span> <span class="op">=</span> <span class="ident">crit_pos</span>;
         <span class="kw">match</span> <span class="ident">first_start_of_match_mask</span>(<span class="kw-2">&amp;</span><span class="ident">text</span>[<span class="ident">pos</span> <span class="op">+</span> <span class="ident">start</span>..], <span class="ident">right16</span>.<span class="ident">len</span>(), <span class="ident">r</span>) {
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
-            <span class="prelude-val">Some</span>((<span class="ident">mpos</span>, <span class="ident">mlen</span>)) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="ident">pos</span> <span class="op">+</span><span class="op">=</span> <span class="ident">mpos</span>;
+            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
+            <span class="prelude-val">Some</span>((<span class="ident">mpos</span>, <span class="ident">mlen</span>)) <span class="op">=&gt;</span> {
+                <span class="ident">pos</span> <span class="op">+=</span> <span class="ident">mpos</span>;
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pfxlen</span> <span class="op">=</span> <span class="ident">mlen</span>;
                 <span class="kw">if</span> <span class="ident">pfxlen</span> <span class="op">&lt;</span> <span class="ident">right</span>.<span class="ident">len</span>() {
-                    <span class="ident">pfxlen</span> <span class="op">+</span><span class="op">=</span> <span class="ident">shared_prefix_inner</span>(<span class="kw-2">&amp;</span><span class="ident">text</span>[<span class="ident">pos</span> <span class="op">+</span> <span class="ident">start</span> <span class="op">+</span> <span class="ident">mlen</span>..], <span class="kw-2">&amp;</span><span class="ident">right</span>[<span class="ident">mlen</span>..]);
+                    <span class="ident">pfxlen</span> <span class="op">+=</span> <span class="ident">shared_prefix_inner</span>(<span class="kw-2">&amp;</span><span class="ident">text</span>[<span class="ident">pos</span> <span class="op">+</span> <span class="ident">start</span> <span class="op">+</span> <span class="ident">mlen</span>..], <span class="kw-2">&amp;</span><span class="ident">right</span>[<span class="ident">mlen</span>..]);
                 }
-                <span class="kw">if</span> <span class="ident">pfxlen</span> <span class="op">!</span><span class="op">=</span> <span class="ident">right</span>.<span class="ident">len</span>() {
+                <span class="kw">if</span> <span class="ident">pfxlen</span> <span class="op">!=</span> <span class="ident">right</span>.<span class="ident">len</span>() {
                     <span class="comment">// partial match</span>
                     <span class="comment">// skip by the number of bytes matched</span>
-                    <span class="ident">pos</span> <span class="op">+</span><span class="op">=</span> <span class="ident">pfxlen</span> <span class="op">+</span> <span class="number">1</span>;
+                    <span class="ident">pos</span> <span class="op">+=</span> <span class="ident">pfxlen</span> <span class="op">+</span> <span class="number">1</span>;
                     <span class="kw">continue</span> <span class="lifetime">&#39;tail</span>;
 
                 } <span class="kw">else</span> {
@@ -1034,8 +1034,8 @@
 
         <span class="comment">// See if the left part of the needle matches</span>
         <span class="comment">// XXX: Original algorithm compares from right to left here</span>
-        <span class="kw">if</span> <span class="ident">left</span> <span class="op">!</span><span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">text</span>[<span class="ident">pos</span>..<span class="ident">pos</span> <span class="op">+</span> <span class="ident">left</span>.<span class="ident">len</span>()] {
-            <span class="ident">pos</span> <span class="op">+</span><span class="op">=</span> <span class="ident">period</span>;
+        <span class="kw">if</span> <span class="ident">left</span> <span class="op">!=</span> <span class="kw-2">&amp;</span><span class="ident">text</span>[<span class="ident">pos</span>..<span class="ident">pos</span> <span class="op">+</span> <span class="ident">left</span>.<span class="ident">len</span>()] {
+            <span class="ident">pos</span> <span class="op">+=</span> <span class="ident">period</span>;
             <span class="kw">continue</span> <span class="lifetime">&#39;tail</span>;
         }
 
@@ -1080,7 +1080,7 @@
 
 <span class="doccomment">/// Load the first 16 bytes of `pat` into a SIMD vector.</span>
 <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-<span class="kw">fn</span> <span class="ident">pat128</span>(<span class="ident">pat</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">__m128i</span> {
+<span class="kw">fn</span> <span class="ident">pat128</span>(<span class="ident">pat</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="ident">__m128i</span> {
     <span class="kw">unsafe</span> {
         <span class="ident">mask_load</span>(<span class="ident">pat</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span>, <span class="ident">pat</span>.<span class="ident">len</span>())
     }
@@ -1088,7 +1088,7 @@
 
 <span class="doccomment">/// Load the first len bytes (maximum 16) from ptr into a vector, safely</span>
 <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">mask_load</span>(<span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>, <span class="kw-2">mut</span> <span class="ident">len</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">__m128i</span> {
+<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">mask_load</span>(<span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>, <span class="kw-2">mut</span> <span class="ident">len</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">__m128i</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data</span>: <span class="ident">__m128i</span> <span class="op">=</span> <span class="ident">_mm_setzero_si128</span>();
     <span class="ident">len</span> <span class="op">=</span> <span class="ident">cmp</span>::<span class="ident">min</span>(<span class="ident">len</span>, <span class="ident">mem</span>::<span class="ident">size_of_val</span>(<span class="kw-2">&amp;</span><span class="ident">data</span>));
 
@@ -1099,14 +1099,14 @@
 <span class="doccomment">/// Find longest shared prefix, return its length</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Alignment safe: works for any text, pat.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shared_prefix</span>(<span class="ident">text</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">pat</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shared_prefix</span>(<span class="ident">text</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">pat</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="ident">usize</span> {
     <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">is_supported</span>());
 
     <span class="kw">unsafe</span> { <span class="ident">shared_prefix_inner</span>(<span class="ident">text</span>, <span class="ident">pat</span>) }
 }
 
 <span class="attribute">#[<span class="ident">target_feature</span>(<span class="ident">enable</span> <span class="op">=</span> <span class="string">&quot;sse4.2&quot;</span>)]</span>
-<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">shared_prefix_inner</span>(<span class="ident">text</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">pat</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">shared_prefix_inner</span>(<span class="ident">text</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">pat</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="ident">usize</span> {
     <span class="kw">let</span> <span class="ident">tp</span> <span class="op">=</span> <span class="ident">text</span>.<span class="ident">as_ptr</span>();
     <span class="kw">let</span> <span class="ident">tlen</span> <span class="op">=</span> <span class="ident">text</span>.<span class="ident">len</span>();
     <span class="kw">let</span> <span class="ident">pp</span> <span class="op">=</span> <span class="ident">pat</span>.<span class="ident">as_ptr</span>();
@@ -1122,24 +1122,24 @@
         <span class="kw">let</span> <span class="ident">initial_tail</span> <span class="op">=</span> <span class="ident">initial_part</span> <span class="op">-</span> <span class="ident">offset</span>;
         <span class="kw">let</span> <span class="ident">mask</span> <span class="op">=</span> <span class="ident">pcmpestrm_eq_each</span>(<span class="ident">tp</span>, <span class="ident">offset</span>, <span class="ident">initial_tail</span>, <span class="ident">pp</span>, <span class="ident">offset</span>, <span class="ident">initial_tail</span>);
         <span class="comment">// find zero in the first 16 bits</span>
-        <span class="kw">if</span> <span class="ident">mask</span> <span class="op">!</span><span class="op">=</span> <span class="number">0xffff</span> {
+        <span class="kw">if</span> <span class="ident">mask</span> <span class="op">!=</span> <span class="number">0xffff</span> {
             <span class="kw">let</span> <span class="ident">first_bit_set</span> <span class="op">=</span> (<span class="ident">mask</span> <span class="op">^</span> <span class="number">0xffff</span>).<span class="ident">trailing_zeros</span>() <span class="kw">as</span> <span class="ident">usize</span>;
-            <span class="ident">prefix_len</span> <span class="op">+</span><span class="op">=</span> <span class="ident">first_bit_set</span>;
+            <span class="ident">prefix_len</span> <span class="op">+=</span> <span class="ident">first_bit_set</span>;
             <span class="kw">return</span> <span class="ident">prefix_len</span>;
         } <span class="kw">else</span> {
-            <span class="ident">prefix_len</span> <span class="op">+</span><span class="op">=</span> <span class="ident">cmp</span>::<span class="ident">min</span>(<span class="ident">initial_tail</span>, <span class="number">16</span>);
+            <span class="ident">prefix_len</span> <span class="op">+=</span> <span class="ident">cmp</span>::<span class="ident">min</span>(<span class="ident">initial_tail</span>, <span class="number">16</span>);
         }
-        <span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="number">16</span>;
+        <span class="ident">offset</span> <span class="op">+=</span> <span class="number">16</span>;
     }
     <span class="comment">// so one block left, the last (up to) 16 bytes</span>
     <span class="comment">// unchecked slicing .. we don&#39;t want panics in this function</span>
     <span class="kw">let</span> <span class="ident">text_suffix</span> <span class="op">=</span> <span class="ident">get_unchecked</span>(<span class="ident">text</span>, <span class="ident">prefix_len</span>..<span class="ident">len</span>);
     <span class="kw">let</span> <span class="ident">pat_suffix</span> <span class="op">=</span> <span class="ident">get_unchecked</span>(<span class="ident">pat</span>, <span class="ident">prefix_len</span>..<span class="ident">len</span>);
     <span class="kw">for</span> (<span class="kw-2">&amp;</span><span class="ident">a</span>, <span class="kw-2">&amp;</span><span class="ident">b</span>) <span class="kw">in</span> <span class="ident">zip</span>(<span class="ident">text_suffix</span>, <span class="ident">pat_suffix</span>) {
-        <span class="kw">if</span> <span class="ident">a</span> <span class="op">!</span><span class="op">=</span> <span class="ident">b</span> {
+        <span class="kw">if</span> <span class="ident">a</span> <span class="op">!=</span> <span class="ident">b</span> {
             <span class="kw">break</span>;
         }
-        <span class="ident">prefix_len</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+        <span class="ident">prefix_len</span> <span class="op">+=</span> <span class="number">1</span>;
     }
 
     <span class="ident">prefix_len</span>

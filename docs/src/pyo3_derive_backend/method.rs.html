@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/pyo3-derive-backend-0.10.1/src/method.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>method.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../pyo3_derive_backend/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/pyo3-derive-backend-0.10.1/src/method.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>method.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../pyo3_derive_backend/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -577,21 +577,21 @@
     <span class="comment">// r# can be removed by syn::ext::IdentExt::unraw()</span>
     <span class="kw">pub</span> <span class="ident">python_name</span>: <span class="ident">syn</span>::<span class="ident">Ident</span>,
     <span class="kw">pub</span> <span class="ident">attrs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Argument</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">args</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">FnArg</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">args</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">FnArg</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;&gt;</span>,
     <span class="kw">pub</span> <span class="ident">output</span>: <span class="ident">syn</span>::<span class="ident">Type</span>,
     <span class="kw">pub</span> <span class="ident">doc</span>: <span class="ident">syn</span>::<span class="ident">LitStr</span>,
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_return_info</span>(<span class="ident">output</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">ReturnType</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="ident">Type</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_return_info</span>(<span class="ident">output</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">ReturnType</span>) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="ident">Type</span> {
     <span class="kw">match</span> <span class="ident">output</span> {
-        <span class="ident">syn</span>::<span class="ident">ReturnType</span>::<span class="ident">Default</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="ident">Type</span>::<span class="ident">Infer</span>(<span class="ident">syn</span>::<span class="macro">parse_quote</span><span class="macro">!</span> {<span class="kw">_</span>}),
-        <span class="ident">syn</span>::<span class="ident">ReturnType</span>::<span class="ident">Type</span>(<span class="kw">_</span>, <span class="kw-2">ref</span> <span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="ident">ty</span>.<span class="ident">clone</span>(),
+        <span class="ident">syn</span>::<span class="ident">ReturnType</span>::<span class="ident">Default</span> <span class="op">=&gt;</span> <span class="ident">syn</span>::<span class="ident">Type</span>::<span class="ident">Infer</span>(<span class="ident">syn</span>::<span class="macro">parse_quote</span><span class="macro">!</span> {<span class="kw">_</span>}),
+        <span class="ident">syn</span>::<span class="ident">ReturnType</span>::<span class="ident">Type</span>(<span class="kw">_</span>, <span class="kw-2">ref</span> <span class="ident">ty</span>) <span class="op">=&gt;</span> <span class="kw-2">*</span><span class="ident">ty</span>.<span class="ident">clone</span>(),
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">FnSpec</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Generate the code for borrowing self</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">borrow_self</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">borrow_self</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">TokenStream</span> {
         <span class="kw">let</span> <span class="ident">is_mut</span> <span class="op">=</span> <span class="self">self</span>
             .<span class="ident">self_</span>
             .<span class="ident">expect</span>(<span class="string">&quot;impl_borrow_self is called for non-self fn&quot;</span>);
@@ -603,7 +603,7 @@
         <span class="ident">sig</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">syn</span>::<span class="ident">Signature</span>,
         <span class="ident">meth_attrs</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">syn</span>::<span class="ident">Attribute</span><span class="op">&gt;</span>,
         <span class="ident">allow_custom_name</span>: <span class="ident">bool</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">FnSpec</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    ) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">FnSpec</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;&gt;</span> {
         <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">sig</span>.<span class="ident">ident</span>;
         <span class="kw">let</span> <span class="ident">MethodAttributes</span> {
             <span class="ident">ty</span>: <span class="kw-2">mut</span> <span class="ident">fn_type</span>,
@@ -615,14 +615,14 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">arguments</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
         <span class="kw">for</span> <span class="ident">input</span> <span class="kw">in</span> <span class="ident">sig</span>.<span class="ident">inputs</span>.<span class="ident">iter</span>() {
             <span class="kw">match</span> <span class="ident">input</span> {
-                <span class="ident">syn</span>::<span class="ident">FnArg</span>::<span class="ident">Receiver</span>(<span class="ident">recv</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">syn</span>::<span class="ident">FnArg</span>::<span class="ident">Receiver</span>(<span class="ident">recv</span>) <span class="op">=&gt;</span> {
                     <span class="ident">self_</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">recv</span>.<span class="ident">mutability</span>.<span class="ident">is_some</span>());
                 }
                 <span class="ident">syn</span>::<span class="ident">FnArg</span>::<span class="ident">Typed</span>(<span class="ident">syn</span>::<span class="ident">PatType</span> {
                     <span class="kw-2">ref</span> <span class="ident">pat</span>, <span class="kw-2">ref</span> <span class="ident">ty</span>, ..
-                }) <span class="op">=</span><span class="op">&gt;</span> {
+                }) <span class="op">=&gt;</span> {
                     <span class="comment">// skip first argument (cls)</span>
-                    <span class="kw">if</span> <span class="ident">fn_type</span> <span class="op">=</span><span class="op">=</span> <span class="ident">FnType</span>::<span class="ident">FnClass</span> <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">self_</span>.<span class="ident">is_none</span>() {
+                    <span class="kw">if</span> <span class="ident">fn_type</span> <span class="op">==</span> <span class="ident">FnType</span>::<span class="ident">FnClass</span> <span class="op">&amp;&amp;</span> <span class="ident">self_</span>.<span class="ident">is_none</span>() {
                         <span class="ident">self_</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="bool-val">false</span>);
                         <span class="kw">continue</span>;
                     }
@@ -633,8 +633,8 @@
                             <span class="kw-2">ref</span> <span class="ident">by_ref</span>,
                             <span class="kw-2">ref</span> <span class="ident">mutability</span>,
                             ..
-                        }) <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">ident</span>, <span class="ident">by_ref</span>, <span class="ident">mutability</span>),
-                        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                        }) <span class="op">=&gt;</span> (<span class="ident">ident</span>, <span class="ident">by_ref</span>, <span class="ident">mutability</span>),
+                        <span class="kw">_</span> <span class="op">=&gt;</span> {
                             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(<span class="ident">pat</span>, <span class="string">&quot;unsupported argument&quot;</span>));
                         }
                     };
@@ -657,7 +657,7 @@
 
         <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="ident">get_return_info</span>(<span class="kw-2">&amp;</span><span class="ident">sig</span>.<span class="ident">output</span>);
 
-        <span class="kw">if</span> <span class="ident">fn_type</span> <span class="op">=</span><span class="op">=</span> <span class="ident">FnType</span>::<span class="ident">Fn</span> <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">self_</span>.<span class="ident">is_none</span>() {
+        <span class="kw">if</span> <span class="ident">fn_type</span> <span class="op">==</span> <span class="ident">FnType</span>::<span class="ident">Fn</span> <span class="op">&amp;&amp;</span> <span class="ident">self_</span>.<span class="ident">is_none</span>() {
             <span class="kw">if</span> <span class="ident">arguments</span>.<span class="ident">is_empty</span>() {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
                     <span class="ident">name</span>,
@@ -665,14 +665,14 @@
                 ));
             }
             <span class="ident">fn_type</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">arguments</span>.<span class="ident">remove</span>(<span class="number">0</span>).<span class="ident">ty</span> {
-                <span class="ident">syn</span>::<span class="ident">Type</span>::<span class="ident">Reference</span>(<span class="ident">r</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">FnType</span>::<span class="ident">PySelfRef</span>(<span class="ident">replace_self_in_ref</span>(<span class="ident">r</span>)<span class="question-mark">?</span>),
-                <span class="ident">syn</span>::<span class="ident">Type</span>::<span class="ident">Path</span>(<span class="ident">p</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">FnType</span>::<span class="ident">PySelfPath</span>(<span class="ident">replace_self_in_path</span>(<span class="ident">p</span>)),
-                <span class="ident">x</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(<span class="ident">x</span>, <span class="string">&quot;Invalid type as custom self&quot;</span>)),
+                <span class="ident">syn</span>::<span class="ident">Type</span>::<span class="ident">Reference</span>(<span class="ident">r</span>) <span class="op">=&gt;</span> <span class="ident">FnType</span>::<span class="ident">PySelfRef</span>(<span class="ident">replace_self_in_ref</span>(<span class="ident">r</span>)<span class="question-mark">?</span>),
+                <span class="ident">syn</span>::<span class="ident">Type</span>::<span class="ident">Path</span>(<span class="ident">p</span>) <span class="op">=&gt;</span> <span class="ident">FnType</span>::<span class="ident">PySelfPath</span>(<span class="ident">replace_self_in_path</span>(<span class="ident">p</span>)),
+                <span class="ident">x</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(<span class="ident">x</span>, <span class="string">&quot;Invalid type as custom self&quot;</span>)),
             };
         }
 
         <span class="kw">if</span> <span class="kw">let</span> <span class="ident">FnType</span>::<span class="ident">ClassAttribute</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">fn_type</span> {
-            <span class="kw">if</span> <span class="ident">self_</span>.<span class="ident">is_some</span>() <span class="op">|</span><span class="op">|</span> <span class="op">!</span><span class="ident">arguments</span>.<span class="ident">is_empty</span>() {
+            <span class="kw">if</span> <span class="ident">self_</span>.<span class="ident">is_some</span>() <span class="op">||</span> <span class="op">!</span><span class="ident">arguments</span>.<span class="ident">is_empty</span>() {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
                     <span class="ident">name</span>,
                     <span class="string">&quot;Class attribute methods cannot take arguments&quot;</span>,
@@ -684,9 +684,9 @@
         <span class="kw">if</span> <span class="kw">let</span> <span class="ident">FnType</span>::<span class="ident">Getter</span> <span class="op">|</span> <span class="ident">FnType</span>::<span class="ident">Setter</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">fn_type</span> {
             <span class="kw">if</span> <span class="ident">python_name</span>.<span class="ident">is_none</span>() {
                 <span class="kw">let</span> <span class="ident">prefix</span> <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">fn_type</span> {
-                    <span class="ident">FnType</span>::<span class="ident">Getter</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;get_&quot;</span>,
-                    <span class="ident">FnType</span>::<span class="ident">Setter</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;set_&quot;</span>,
-                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+                    <span class="ident">FnType</span>::<span class="ident">Getter</span> <span class="op">=&gt;</span> <span class="string">&quot;get_&quot;</span>,
+                    <span class="ident">FnType</span>::<span class="ident">Setter</span> <span class="op">=&gt;</span> <span class="string">&quot;set_&quot;</span>,
+                    <span class="kw">_</span> <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
                 };
 
                 <span class="kw">let</span> <span class="ident">ident</span> <span class="op">=</span> <span class="ident">sig</span>.<span class="ident">ident</span>.<span class="ident">unraw</span>().<span class="ident">to_string</span>();
@@ -696,7 +696,7 @@
             }
         }
 
-        <span class="kw">let</span> <span class="ident">python_name</span> <span class="op">=</span> <span class="ident">python_name</span>.<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">name</span>.<span class="ident">unraw</span>());
+        <span class="kw">let</span> <span class="ident">python_name</span> <span class="op">=</span> <span class="ident">python_name</span>.<span class="ident">unwrap_or_else</span>(<span class="op">||</span> <span class="ident">name</span>.<span class="ident">unraw</span>());
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">parse_erroneous_text_signature</span> <span class="op">=</span> <span class="op">|</span><span class="ident">error_msg</span>: <span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">|</span> {
             <span class="comment">// try to parse anyway to give better error messages</span>
@@ -714,12 +714,12 @@
             <span class="op">|</span> <span class="ident">FnType</span>::<span class="ident">PySelfRef</span>(<span class="kw">_</span>)
             <span class="op">|</span> <span class="ident">FnType</span>::<span class="ident">PySelfPath</span>(<span class="kw">_</span>)
             <span class="op">|</span> <span class="ident">FnType</span>::<span class="ident">FnClass</span>
-            <span class="op">|</span> <span class="ident">FnType</span>::<span class="ident">FnStatic</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">utils</span>::<span class="ident">parse_text_signature_attrs</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="ident">meth_attrs</span>, <span class="ident">name</span>)<span class="question-mark">?</span>,
-            <span class="ident">FnType</span>::<span class="ident">FnNew</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">parse_erroneous_text_signature</span>(
+            <span class="op">|</span> <span class="ident">FnType</span>::<span class="ident">FnStatic</span> <span class="op">=&gt;</span> <span class="ident">utils</span>::<span class="ident">parse_text_signature_attrs</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="ident">meth_attrs</span>, <span class="ident">name</span>)<span class="question-mark">?</span>,
+            <span class="ident">FnType</span>::<span class="ident">FnNew</span> <span class="op">=&gt;</span> <span class="ident">parse_erroneous_text_signature</span>(
                 <span class="string">&quot;text_signature not allowed on __new__; if you want to add a signature on \
                  __new__, put it on the struct definition instead&quot;</span>,
             )<span class="question-mark">?</span>,
-            <span class="ident">FnType</span>::<span class="ident">FnCall</span> <span class="op">|</span> <span class="ident">FnType</span>::<span class="ident">Getter</span> <span class="op">|</span> <span class="ident">FnType</span>::<span class="ident">Setter</span> <span class="op">|</span> <span class="ident">FnType</span>::<span class="ident">ClassAttribute</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">FnType</span>::<span class="ident">FnCall</span> <span class="op">|</span> <span class="ident">FnType</span>::<span class="ident">Getter</span> <span class="op">|</span> <span class="ident">FnType</span>::<span class="ident">Setter</span> <span class="op">|</span> <span class="ident">FnType</span>::<span class="ident">ClassAttribute</span> <span class="op">=&gt;</span> {
                 <span class="ident">parse_erroneous_text_signature</span>(<span class="string">&quot;text_signature not allowed with this attribute&quot;</span>)<span class="question-mark">?</span>
             }
         };
@@ -738,7 +738,7 @@
         })
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_args</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Ident</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_args</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Ident</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="kw">for</span> <span class="ident">s</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">attrs</span>.<span class="ident">iter</span>() {
             <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Argument</span>::<span class="ident">VarArgs</span>(<span class="kw-2">ref</span> <span class="ident">path</span>) <span class="op">=</span> <span class="ident">s</span> {
                 <span class="kw">return</span> <span class="ident">path</span>.<span class="ident">is_ident</span>(<span class="ident">name</span>);
@@ -747,7 +747,7 @@
         <span class="bool-val">false</span>
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_kwargs</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Ident</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_kwargs</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Ident</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="kw">for</span> <span class="ident">s</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">attrs</span>.<span class="ident">iter</span>() {
             <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Argument</span>::<span class="ident">KeywordArgs</span>(<span class="kw-2">ref</span> <span class="ident">path</span>) <span class="op">=</span> <span class="ident">s</span> {
                 <span class="kw">return</span> <span class="ident">path</span>.<span class="ident">is_ident</span>(<span class="ident">name</span>);
@@ -756,10 +756,10 @@
         <span class="bool-val">false</span>
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">default_value</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Ident</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TokenStream</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">default_value</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Ident</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TokenStream</span><span class="op">&gt;</span> {
         <span class="kw">for</span> <span class="ident">s</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">attrs</span>.<span class="ident">iter</span>() {
             <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">s</span> {
-                <span class="ident">Argument</span>::<span class="ident">Arg</span>(<span class="kw-2">ref</span> <span class="ident">path</span>, <span class="kw-2">ref</span> <span class="ident">opt</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">Argument</span>::<span class="ident">Arg</span>(<span class="kw-2">ref</span> <span class="ident">path</span>, <span class="kw-2">ref</span> <span class="ident">opt</span>) <span class="op">=&gt;</span> {
                     <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">is_ident</span>(<span class="ident">name</span>) {
                         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">val</span>) <span class="op">=</span> <span class="ident">opt</span> {
                             <span class="kw">let</span> <span class="ident">i</span>: <span class="ident">syn</span>::<span class="ident">Expr</span> <span class="op">=</span> <span class="ident">syn</span>::<span class="ident">parse_str</span>(<span class="kw-2">&amp;</span><span class="ident">val</span>).<span class="ident">unwrap</span>();
@@ -767,19 +767,19 @@
                         }
                     }
                 }
-                <span class="ident">Argument</span>::<span class="ident">Kwarg</span>(<span class="kw-2">ref</span> <span class="ident">path</span>, <span class="kw-2">ref</span> <span class="ident">opt</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">Argument</span>::<span class="ident">Kwarg</span>(<span class="kw-2">ref</span> <span class="ident">path</span>, <span class="kw-2">ref</span> <span class="ident">opt</span>) <span class="op">=&gt;</span> {
                     <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">is_ident</span>(<span class="ident">name</span>) {
                         <span class="kw">let</span> <span class="ident">i</span>: <span class="ident">syn</span>::<span class="ident">Expr</span> <span class="op">=</span> <span class="ident">syn</span>::<span class="ident">parse_str</span>(<span class="kw-2">&amp;</span><span class="ident">opt</span>).<span class="ident">unwrap</span>();
                         <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="macro">quote</span><span class="macro">!</span>(#<span class="ident">i</span>));
                     }
                 }
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> (),
+                <span class="kw">_</span> <span class="op">=&gt;</span> (),
             }
         }
         <span class="prelude-val">None</span>
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_kw_only</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Ident</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_kw_only</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Ident</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="kw">for</span> <span class="ident">s</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">attrs</span>.<span class="ident">iter</span>() {
             <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Argument</span>::<span class="ident">Kwarg</span>(<span class="kw-2">ref</span> <span class="ident">path</span>, <span class="kw">_</span>) <span class="op">=</span> <span class="ident">s</span> {
                 <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">is_ident</span>(<span class="ident">name</span>) {
@@ -791,15 +791,15 @@
     }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_ref</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Ident</span>, <span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Type</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_ref</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Ident</span>, <span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Type</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
     <span class="kw">match</span> <span class="ident">ty</span> {
-        <span class="ident">syn</span>::<span class="ident">Type</span>::<span class="ident">Reference</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="bool-val">true</span>,
-        <span class="ident">syn</span>::<span class="ident">Type</span>::<span class="ident">Path</span>(<span class="ident">syn</span>::<span class="ident">TypePath</span> { <span class="kw-2">ref</span> <span class="ident">path</span>, .. }) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">syn</span>::<span class="ident">Type</span>::<span class="ident">Reference</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="bool-val">true</span>,
+        <span class="ident">syn</span>::<span class="ident">Type</span>::<span class="ident">Path</span>(<span class="ident">syn</span>::<span class="ident">TypePath</span> { <span class="kw-2">ref</span> <span class="ident">path</span>, .. }) <span class="op">=&gt;</span> {
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">segment</span>) <span class="op">=</span> <span class="ident">path</span>.<span class="ident">segments</span>.<span class="ident">last</span>() {
-                <span class="kw">if</span> <span class="string">&quot;Option&quot;</span> <span class="op">=</span><span class="op">=</span> <span class="ident">segment</span>.<span class="ident">ident</span>.<span class="ident">to_string</span>().<span class="ident">as_str</span>() {
+                <span class="kw">if</span> <span class="string">&quot;Option&quot;</span> <span class="op">==</span> <span class="ident">segment</span>.<span class="ident">ident</span>.<span class="ident">to_string</span>().<span class="ident">as_str</span>() {
                     <span class="kw">match</span> <span class="ident">segment</span>.<span class="ident">arguments</span> {
-                        <span class="ident">syn</span>::<span class="ident">PathArguments</span>::<span class="ident">AngleBracketed</span>(<span class="kw-2">ref</span> <span class="ident">params</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                            <span class="kw">if</span> <span class="ident">params</span>.<span class="ident">args</span>.<span class="ident">len</span>() <span class="op">!</span><span class="op">=</span> <span class="number">1</span> {
+                        <span class="ident">syn</span>::<span class="ident">PathArguments</span>::<span class="ident">AngleBracketed</span>(<span class="kw-2">ref</span> <span class="ident">params</span>) <span class="op">=&gt;</span> {
+                            <span class="kw">if</span> <span class="ident">params</span>.<span class="ident">args</span>.<span class="ident">len</span>() <span class="op">!=</span> <span class="number">1</span> {
                                 <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;argument type is not supported by python method: {:?} ({:?}) {:?}&quot;</span>,
                                        <span class="ident">name</span>,
                                        <span class="ident">ty</span>,
@@ -810,7 +810,7 @@
                                 <span class="kw">return</span> <span class="bool-val">true</span>;
                             }
                         }
-                        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                        <span class="kw">_</span> <span class="op">=&gt;</span> {
                             <span class="macro">panic</span><span class="macro">!</span>(
                                 <span class="string">&quot;argument type is not supported by python method: {:?} ({:?}) {:?}&quot;</span>,
                                 <span class="ident">name</span>, <span class="ident">ty</span>, <span class="ident">path</span>
@@ -820,23 +820,23 @@
                 }
             }
         }
-        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> (),
+        <span class="kw">_</span> <span class="op">=&gt;</span> (),
     }
     <span class="bool-val">false</span>
 }
 
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">check_ty_optional</span>(<span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Type</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Type</span><span class="op">&gt;</span> {
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">check_ty_optional</span>(<span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Type</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Type</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">ty</span> {
-        <span class="ident">syn</span>::<span class="ident">Type</span>::<span class="ident">Path</span>(<span class="ident">syn</span>::<span class="ident">TypePath</span> { <span class="kw-2">ref</span> <span class="ident">path</span>, .. }) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">path</span>,
-        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
+        <span class="ident">syn</span>::<span class="ident">Type</span>::<span class="ident">Path</span>(<span class="ident">syn</span>::<span class="ident">TypePath</span> { <span class="kw-2">ref</span> <span class="ident">path</span>, .. }) <span class="op">=&gt;</span> <span class="ident">path</span>,
+        <span class="kw">_</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
     };
-    <span class="kw">let</span> <span class="ident">seg</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">segments</span>.<span class="ident">last</span>().<span class="ident">filter</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">ident</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;Option&quot;</span>)<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="ident">seg</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">segments</span>.<span class="ident">last</span>().<span class="ident">filter</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">ident</span> <span class="op">==</span> <span class="string">&quot;Option&quot;</span>)<span class="question-mark">?</span>;
     <span class="kw">match</span> <span class="ident">seg</span>.<span class="ident">arguments</span> {
-        <span class="ident">syn</span>::<span class="ident">PathArguments</span>::<span class="ident">AngleBracketed</span>(<span class="kw-2">ref</span> <span class="ident">params</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="ident">params</span>.<span class="ident">args</span>.<span class="ident">first</span>() {
-            <span class="prelude-val">Some</span>(<span class="ident">syn</span>::<span class="ident">GenericArgument</span>::<span class="ident">Type</span>(<span class="kw-2">ref</span> <span class="ident">ty</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">ty</span>),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
+        <span class="ident">syn</span>::<span class="ident">PathArguments</span>::<span class="ident">AngleBracketed</span>(<span class="kw-2">ref</span> <span class="ident">params</span>) <span class="op">=&gt;</span> <span class="kw">match</span> <span class="ident">params</span>.<span class="ident">args</span>.<span class="ident">first</span>() {
+            <span class="prelude-val">Some</span>(<span class="ident">syn</span>::<span class="ident">GenericArgument</span>::<span class="ident">Type</span>(<span class="kw-2">ref</span> <span class="ident">ty</span>)) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">ty</span>),
+            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="prelude-val">None</span>,
         },
-        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
+        <span class="kw">_</span> <span class="op">=&gt;</span> <span class="prelude-val">None</span>,
     }
 }
 
@@ -850,7 +850,7 @@
 <span class="kw">fn</span> <span class="ident">parse_method_attributes</span>(
     <span class="ident">attrs</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">syn</span>::<span class="ident">Attribute</span><span class="op">&gt;</span>,
     <span class="ident">allow_custom_name</span>: <span class="ident">bool</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">MethodAttributes</span><span class="op">&gt;</span> {
+) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">MethodAttributes</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">new_attrs</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">FnType</span><span class="op">&gt;</span> <span class="op">=</span> <span class="prelude-val">None</span>;
@@ -858,15 +858,15 @@
 
     <span class="kw">for</span> <span class="ident">attr</span> <span class="kw">in</span> <span class="ident">attrs</span>.<span class="ident">iter</span>() {
         <span class="kw">match</span> <span class="ident">attr</span>.<span class="ident">parse_meta</span>()<span class="question-mark">?</span> {
-            <span class="ident">syn</span>::<span class="ident">Meta</span>::<span class="ident">Path</span>(<span class="kw-2">ref</span> <span class="ident">name</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">if</span> <span class="ident">name</span>.<span class="ident">is_ident</span>(<span class="string">&quot;new&quot;</span>) <span class="op">|</span><span class="op">|</span> <span class="ident">name</span>.<span class="ident">is_ident</span>(<span class="string">&quot;__new__&quot;</span>) {
+            <span class="ident">syn</span>::<span class="ident">Meta</span>::<span class="ident">Path</span>(<span class="kw-2">ref</span> <span class="ident">name</span>) <span class="op">=&gt;</span> {
+                <span class="kw">if</span> <span class="ident">name</span>.<span class="ident">is_ident</span>(<span class="string">&quot;new&quot;</span>) <span class="op">||</span> <span class="ident">name</span>.<span class="ident">is_ident</span>(<span class="string">&quot;__new__&quot;</span>) {
                     <span class="ident">res</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">FnType</span>::<span class="ident">FnNew</span>)
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">name</span>.<span class="ident">is_ident</span>(<span class="string">&quot;init&quot;</span>) <span class="op">|</span><span class="op">|</span> <span class="ident">name</span>.<span class="ident">is_ident</span>(<span class="string">&quot;__init__&quot;</span>) {
+                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">name</span>.<span class="ident">is_ident</span>(<span class="string">&quot;init&quot;</span>) <span class="op">||</span> <span class="ident">name</span>.<span class="ident">is_ident</span>(<span class="string">&quot;__init__&quot;</span>) {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
                         <span class="ident">name</span>,
                         <span class="string">&quot;#[init] is disabled since PyO3 0.9.0&quot;</span>,
                     ));
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">name</span>.<span class="ident">is_ident</span>(<span class="string">&quot;call&quot;</span>) <span class="op">|</span><span class="op">|</span> <span class="ident">name</span>.<span class="ident">is_ident</span>(<span class="string">&quot;__call__&quot;</span>) {
+                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">name</span>.<span class="ident">is_ident</span>(<span class="string">&quot;call&quot;</span>) <span class="op">||</span> <span class="ident">name</span>.<span class="ident">is_ident</span>(<span class="string">&quot;__call__&quot;</span>) {
                     <span class="ident">res</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">FnType</span>::<span class="ident">FnCall</span>)
                 } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">name</span>.<span class="ident">is_ident</span>(<span class="string">&quot;classmethod&quot;</span>) {
                     <span class="ident">res</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">FnType</span>::<span class="ident">FnClass</span>)
@@ -874,14 +874,14 @@
                     <span class="ident">res</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">FnType</span>::<span class="ident">FnStatic</span>)
                 } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">name</span>.<span class="ident">is_ident</span>(<span class="string">&quot;classattr&quot;</span>) {
                     <span class="ident">res</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">FnType</span>::<span class="ident">ClassAttribute</span>)
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">name</span>.<span class="ident">is_ident</span>(<span class="string">&quot;setter&quot;</span>) <span class="op">|</span><span class="op">|</span> <span class="ident">name</span>.<span class="ident">is_ident</span>(<span class="string">&quot;getter&quot;</span>) {
+                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">name</span>.<span class="ident">is_ident</span>(<span class="string">&quot;setter&quot;</span>) <span class="op">||</span> <span class="ident">name</span>.<span class="ident">is_ident</span>(<span class="string">&quot;getter&quot;</span>) {
                     <span class="kw">if</span> <span class="kw">let</span> <span class="ident">syn</span>::<span class="ident">AttrStyle</span>::<span class="ident">Inner</span>(<span class="kw">_</span>) <span class="op">=</span> <span class="ident">attr</span>.<span class="ident">style</span> {
                         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
                             <span class="ident">attr</span>,
                             <span class="string">&quot;Inner style attribute is not supported for setter and getter&quot;</span>,
                         ));
                     }
-                    <span class="kw">if</span> <span class="ident">res</span> <span class="op">!</span><span class="op">=</span> <span class="prelude-val">None</span> {
+                    <span class="kw">if</span> <span class="ident">res</span> <span class="op">!=</span> <span class="prelude-val">None</span> {
                         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
                             <span class="ident">attr</span>,
                             <span class="string">&quot;setter/getter attribute can not be used mutiple times&quot;</span>,
@@ -900,7 +900,7 @@
                 <span class="kw-2">ref</span> <span class="ident">path</span>,
                 <span class="kw-2">ref</span> <span class="ident">nested</span>,
                 ..
-            }) <span class="op">=</span><span class="op">&gt;</span> {
+            }) <span class="op">=&gt;</span> {
                 <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">is_ident</span>(<span class="string">&quot;new&quot;</span>) {
                     <span class="ident">res</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">FnType</span>::<span class="ident">FnNew</span>)
                 } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">is_ident</span>(<span class="string">&quot;init&quot;</span>) {
@@ -910,20 +910,20 @@
                     ));
                 } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">is_ident</span>(<span class="string">&quot;call&quot;</span>) {
                     <span class="ident">res</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">FnType</span>::<span class="ident">FnCall</span>)
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">is_ident</span>(<span class="string">&quot;setter&quot;</span>) <span class="op">|</span><span class="op">|</span> <span class="ident">path</span>.<span class="ident">is_ident</span>(<span class="string">&quot;getter&quot;</span>) {
+                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">is_ident</span>(<span class="string">&quot;setter&quot;</span>) <span class="op">||</span> <span class="ident">path</span>.<span class="ident">is_ident</span>(<span class="string">&quot;getter&quot;</span>) {
                     <span class="kw">if</span> <span class="kw">let</span> <span class="ident">syn</span>::<span class="ident">AttrStyle</span>::<span class="ident">Inner</span>(<span class="kw">_</span>) <span class="op">=</span> <span class="ident">attr</span>.<span class="ident">style</span> {
                         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
                             <span class="ident">attr</span>,
                             <span class="string">&quot;Inner style attribute is not supported for setter and getter&quot;</span>,
                         ));
                     }
-                    <span class="kw">if</span> <span class="ident">res</span> <span class="op">!</span><span class="op">=</span> <span class="prelude-val">None</span> {
+                    <span class="kw">if</span> <span class="ident">res</span> <span class="op">!=</span> <span class="prelude-val">None</span> {
                         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
                             <span class="ident">attr</span>,
                             <span class="string">&quot;setter/getter attribute can not be used mutiple times&quot;</span>,
                         ));
                     }
-                    <span class="kw">if</span> <span class="ident">nested</span>.<span class="ident">len</span>() <span class="op">!</span><span class="op">=</span> <span class="number">1</span> {
+                    <span class="kw">if</span> <span class="ident">nested</span>.<span class="ident">len</span>() <span class="op">!=</span> <span class="number">1</span> {
                         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
                             <span class="ident">attr</span>,
                             <span class="string">&quot;setter/getter requires one value&quot;</span>,
@@ -937,19 +937,19 @@
                     };
 
                     <span class="ident">property_name</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">nested</span>.<span class="ident">first</span>().<span class="ident">unwrap</span>() {
-                        <span class="ident">syn</span>::<span class="ident">NestedMeta</span>::<span class="ident">Meta</span>(<span class="ident">syn</span>::<span class="ident">Meta</span>::<span class="ident">Path</span>(<span class="kw-2">ref</span> <span class="ident">w</span>)) <span class="kw">if</span> <span class="ident">w</span>.<span class="ident">segments</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> {
+                        <span class="ident">syn</span>::<span class="ident">NestedMeta</span>::<span class="ident">Meta</span>(<span class="ident">syn</span>::<span class="ident">Meta</span>::<span class="ident">Path</span>(<span class="kw-2">ref</span> <span class="ident">w</span>)) <span class="kw">if</span> <span class="ident">w</span>.<span class="ident">segments</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">1</span> <span class="op">=&gt;</span> {
                             <span class="prelude-val">Some</span>(<span class="ident">w</span>.<span class="ident">segments</span>[<span class="number">0</span>].<span class="ident">ident</span>.<span class="ident">clone</span>())
                         }
-                        <span class="ident">syn</span>::<span class="ident">NestedMeta</span>::<span class="ident">Lit</span>(<span class="kw-2">ref</span> <span class="ident">lit</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">lit</span> {
-                            <span class="ident">syn</span>::<span class="ident">Lit</span>::<span class="ident">Str</span>(<span class="kw-2">ref</span> <span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">s</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>),
-                            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                        <span class="ident">syn</span>::<span class="ident">NestedMeta</span>::<span class="ident">Lit</span>(<span class="kw-2">ref</span> <span class="ident">lit</span>) <span class="op">=&gt;</span> <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">lit</span> {
+                            <span class="ident">syn</span>::<span class="ident">Lit</span>::<span class="ident">Str</span>(<span class="kw-2">ref</span> <span class="ident">s</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">s</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>),
+                            <span class="kw">_</span> <span class="op">=&gt;</span> {
                                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
                                     <span class="ident">lit</span>,
                                     <span class="string">&quot;setter/getter attribute requires str value&quot;</span>,
                                 ))
                             }
                         },
-                        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                        <span class="kw">_</span> <span class="op">=&gt;</span> {
                             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
                                 <span class="ident">nested</span>.<span class="ident">first</span>().<span class="ident">unwrap</span>(),
                                 <span class="string">&quot;expected ident or string literal for property name&quot;</span>,
@@ -963,7 +963,7 @@
                     <span class="ident">new_attrs</span>.<span class="ident">push</span>(<span class="ident">attr</span>.<span class="ident">clone</span>())
                 }
             }
-            <span class="ident">syn</span>::<span class="ident">Meta</span>::<span class="ident">NameValue</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">new_attrs</span>.<span class="ident">push</span>(<span class="ident">attr</span>.<span class="ident">clone</span>()),
+            <span class="ident">syn</span>::<span class="ident">Meta</span>::<span class="ident">NameValue</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="ident">new_attrs</span>.<span class="ident">push</span>(<span class="ident">attr</span>.<span class="ident">clone</span>()),
         }
     }
 
@@ -988,44 +988,44 @@
     <span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">FnType</span>,
     <span class="ident">attrs</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">syn</span>::<span class="ident">Attribute</span><span class="op">&gt;</span>,
     <span class="ident">property_name</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">syn</span>::<span class="ident">Ident</span><span class="op">&gt;</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">syn</span>::<span class="ident">Ident</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">syn</span>::<span class="ident">Ident</span><span class="op">&gt;&gt;</span> {
     <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">parse_name_attribute</span>(<span class="ident">attrs</span>)<span class="question-mark">?</span>;
 
     <span class="comment">// Reject some invalid combinations</span>
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">name</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">name</span> {
         <span class="kw">match</span> <span class="ident">ty</span> {
-            <span class="ident">FnType</span>::<span class="ident">FnNew</span> <span class="op">|</span> <span class="ident">FnType</span>::<span class="ident">FnCall</span> <span class="op">|</span> <span class="ident">FnType</span>::<span class="ident">Getter</span> <span class="op">|</span> <span class="ident">FnType</span>::<span class="ident">Setter</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">FnType</span>::<span class="ident">FnNew</span> <span class="op">|</span> <span class="ident">FnType</span>::<span class="ident">FnCall</span> <span class="op">|</span> <span class="ident">FnType</span>::<span class="ident">Getter</span> <span class="op">|</span> <span class="ident">FnType</span>::<span class="ident">Setter</span> <span class="op">=&gt;</span> {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
                     <span class="ident">name</span>,
                     <span class="string">&quot;name not allowed with this attribute&quot;</span>,
                 ))
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {}
+            <span class="kw">_</span> <span class="op">=&gt;</span> {}
         }
     }
 
     <span class="comment">// Thanks to check above we can be sure that this generates the right python name</span>
     <span class="prelude-val">Ok</span>(<span class="kw">match</span> <span class="ident">ty</span> {
-        <span class="ident">FnType</span>::<span class="ident">FnNew</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">syn</span>::<span class="ident">Ident</span>::<span class="ident">new</span>(<span class="string">&quot;__new__&quot;</span>, <span class="ident">proc_macro2</span>::<span class="ident">Span</span>::<span class="ident">call_site</span>())),
-        <span class="ident">FnType</span>::<span class="ident">FnCall</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">syn</span>::<span class="ident">Ident</span>::<span class="ident">new</span>(<span class="string">&quot;__call__&quot;</span>, <span class="ident">proc_macro2</span>::<span class="ident">Span</span>::<span class="ident">call_site</span>())),
-        <span class="ident">FnType</span>::<span class="ident">Getter</span> <span class="op">|</span> <span class="ident">FnType</span>::<span class="ident">Setter</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">property_name</span>,
-        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">name</span>,
+        <span class="ident">FnType</span>::<span class="ident">FnNew</span> <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">syn</span>::<span class="ident">Ident</span>::<span class="ident">new</span>(<span class="string">&quot;__new__&quot;</span>, <span class="ident">proc_macro2</span>::<span class="ident">Span</span>::<span class="ident">call_site</span>())),
+        <span class="ident">FnType</span>::<span class="ident">FnCall</span> <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">syn</span>::<span class="ident">Ident</span>::<span class="ident">new</span>(<span class="string">&quot;__call__&quot;</span>, <span class="ident">proc_macro2</span>::<span class="ident">Span</span>::<span class="ident">call_site</span>())),
+        <span class="ident">FnType</span>::<span class="ident">Getter</span> <span class="op">|</span> <span class="ident">FnType</span>::<span class="ident">Setter</span> <span class="op">=&gt;</span> <span class="ident">property_name</span>,
+        <span class="kw">_</span> <span class="op">=&gt;</span> <span class="ident">name</span>,
     })
 }
 
 <span class="comment">// Replace &amp;A&lt;Self&gt; with &amp;A&lt;_&gt;</span>
-<span class="kw">fn</span> <span class="ident">replace_self_in_ref</span>(<span class="ident">refn</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">TypeReference</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">syn</span>::<span class="ident">TypeReference</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">replace_self_in_ref</span>(<span class="ident">refn</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">TypeReference</span>) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">syn</span>::<span class="ident">TypeReference</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">refn</span>.<span class="ident">to_owned</span>();
     <span class="kw">let</span> <span class="ident">tp</span> <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="ident">res</span>.<span class="ident">elem</span> {
-        <span class="ident">syn</span>::<span class="ident">Type</span>::<span class="ident">Path</span>(<span class="ident">p</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">p</span>,
-        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(<span class="ident">refn</span>, <span class="string">&quot;unsupported argument&quot;</span>)),
+        <span class="ident">syn</span>::<span class="ident">Type</span>::<span class="ident">Path</span>(<span class="ident">p</span>) <span class="op">=&gt;</span> <span class="ident">p</span>,
+        <span class="kw">_</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(<span class="ident">refn</span>, <span class="string">&quot;unsupported argument&quot;</span>)),
     };
     <span class="ident">replace_self_impl</span>(<span class="ident">tp</span>);
     <span class="ident">res</span>.<span class="ident">lifetime</span> <span class="op">=</span> <span class="prelude-val">None</span>;
     <span class="prelude-val">Ok</span>(<span class="ident">res</span>)
 }
 
-<span class="kw">fn</span> <span class="ident">replace_self_in_path</span>(<span class="ident">tp</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">TypePath</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="ident">TypePath</span> {
+<span class="kw">fn</span> <span class="ident">replace_self_in_path</span>(<span class="ident">tp</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">TypePath</span>) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="ident">TypePath</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">tp</span>.<span class="ident">to_owned</span>();
     <span class="ident">replace_self_impl</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">res</span>);
     <span class="ident">res</span>
@@ -1041,7 +1041,7 @@
                     <span class="ident">add_arg</span> <span class="op">=</span> <span class="bool-val">false</span>;
                 }
                 <span class="kw">if</span> <span class="kw">let</span> <span class="ident">syn</span>::<span class="ident">GenericArgument</span>::<span class="ident">Type</span>(<span class="ident">syn</span>::<span class="ident">Type</span>::<span class="ident">Path</span>(<span class="ident">p</span>)) <span class="op">=</span> <span class="ident">arg</span> {
-                    <span class="kw">if</span> <span class="ident">p</span>.<span class="ident">path</span>.<span class="ident">segments</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">1</span> <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">p</span>.<span class="ident">path</span>.<span class="ident">segments</span>[<span class="number">0</span>].<span class="ident">ident</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;Self&quot;</span> {
+                    <span class="kw">if</span> <span class="ident">p</span>.<span class="ident">path</span>.<span class="ident">segments</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">1</span> <span class="op">&amp;&amp;</span> <span class="ident">p</span>.<span class="ident">path</span>.<span class="ident">segments</span>[<span class="number">0</span>].<span class="ident">ident</span> <span class="op">==</span> <span class="string">&quot;Self&quot;</span> {
                         <span class="ident">args</span>.<span class="ident">push</span>(<span class="ident">infer</span>(<span class="ident">p</span>.<span class="ident">span</span>()));
                         <span class="ident">add_arg</span> <span class="op">=</span> <span class="bool-val">false</span>;
                     }
@@ -1053,7 +1053,7 @@
             <span class="ident">g</span>.<span class="ident">args</span> <span class="op">=</span> <span class="ident">args</span>;
         }
     }
-    <span class="kw">fn</span> <span class="ident">infer</span>(<span class="ident">span</span>: <span class="ident">proc_macro2</span>::<span class="ident">Span</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="ident">GenericArgument</span> {
+    <span class="kw">fn</span> <span class="ident">infer</span>(<span class="ident">span</span>: <span class="ident">proc_macro2</span>::<span class="ident">Span</span>) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="ident">GenericArgument</span> {
         <span class="ident">syn</span>::<span class="ident">GenericArgument</span>::<span class="ident">Type</span>(<span class="ident">syn</span>::<span class="ident">Type</span>::<span class="ident">Infer</span>(<span class="ident">syn</span>::<span class="ident">TypeInfer</span> {
             <span class="ident">underscore_token</span>: <span class="ident">syn</span>::<span class="ident">token</span>::<span class="ident">Underscore</span> { <span class="ident">spans</span>: [<span class="ident">span</span>] },
         }))

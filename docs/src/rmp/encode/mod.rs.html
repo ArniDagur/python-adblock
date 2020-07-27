@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rmp-0.8.9/src/encode/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../rmp/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/rmp-0.8.9/src/encode/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../rmp/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -328,21 +328,21 @@
 <span class="kw">struct</span> <span class="ident">MarkerWriteError</span>(<span class="ident">Error</span>);
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Error</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">MarkerWriteError</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">err</span>: <span class="ident">Error</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MarkerWriteError</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">err</span>: <span class="ident">Error</span>) <span class="op">-&gt;</span> <span class="ident">MarkerWriteError</span> {
         <span class="ident">MarkerWriteError</span>(<span class="ident">err</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">MarkerWriteError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Error</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">err</span>: <span class="ident">MarkerWriteError</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Error</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">err</span>: <span class="ident">MarkerWriteError</span>) <span class="op">-&gt;</span> <span class="ident">Error</span> {
         <span class="kw">match</span> <span class="ident">err</span> {
-            <span class="ident">MarkerWriteError</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">err</span>
+            <span class="ident">MarkerWriteError</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="ident">err</span>
         }
     }
 }
 
 <span class="doccomment">/// Attempts to write the given marker into the writer.</span>
-<span class="kw">fn</span> <span class="ident">write_marker</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">marker</span>: <span class="ident">Marker</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">MarkerWriteError</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">write_marker</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">marker</span>: <span class="ident">Marker</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">MarkerWriteError</span><span class="op">&gt;</span> {
     <span class="ident">wr</span>.<span class="ident">write_u8</span>(<span class="ident">marker</span>.<span class="ident">to_u8</span>()).<span class="ident">map_err</span>(<span class="ident">MarkerWriteError</span>)
 }
 
@@ -350,13 +350,13 @@
 <span class="kw">struct</span> <span class="ident">DataWriteError</span>(<span class="ident">Error</span>);
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Error</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">DataWriteError</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">err</span>: <span class="ident">Error</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">DataWriteError</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">err</span>: <span class="ident">Error</span>) <span class="op">-&gt;</span> <span class="ident">DataWriteError</span> {
         <span class="ident">DataWriteError</span>(<span class="ident">err</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">DataWriteError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Error</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">err</span>: <span class="ident">DataWriteError</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Error</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">err</span>: <span class="ident">DataWriteError</span>) <span class="op">-&gt;</span> <span class="ident">Error</span> {
         <span class="ident">err</span>.<span class="number">0</span>
     }
 }
@@ -378,7 +378,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// assert_eq!(vec![0xc0], buf);</span>
 <span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_nil</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_nil</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="ident">write_marker</span>(<span class="ident">wr</span>, <span class="ident">Marker</span>::<span class="ident">Null</span>).<span class="ident">map_err</span>(<span class="ident">From</span>::<span class="ident">from</span>)
 }
 
@@ -391,7 +391,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// Each call to this function may generate an I/O error indicating that the operation could not be</span>
 <span class="doccomment">/// completed.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_bool</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_bool</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">bool</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">marker</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">val</span> {
         <span class="ident">Marker</span>::<span class="ident">True</span>
     } <span class="kw">else</span> {
@@ -401,43 +401,43 @@
     <span class="ident">write_marker</span>(<span class="ident">wr</span>, <span class="ident">marker</span>).<span class="ident">map_err</span>(<span class="ident">From</span>::<span class="ident">from</span>)
 }
 
-<span class="kw">fn</span> <span class="ident">write_data_u8</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">DataWriteError</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">write_data_u8</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">DataWriteError</span><span class="op">&gt;</span> {
     <span class="ident">wr</span>.<span class="ident">write_u8</span>(<span class="ident">val</span>).<span class="ident">map_err</span>(<span class="ident">DataWriteError</span>)
 }
 
-<span class="kw">fn</span> <span class="ident">write_data_u16</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">u16</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">DataWriteError</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">write_data_u16</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">u16</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">DataWriteError</span><span class="op">&gt;</span> {
     <span class="ident">wr</span>.<span class="ident">write_u16</span>::<span class="op">&lt;</span><span class="ident">byteorder</span>::<span class="ident">BigEndian</span><span class="op">&gt;</span>(<span class="ident">val</span>).<span class="ident">map_err</span>(<span class="ident">DataWriteError</span>)
 }
 
-<span class="kw">fn</span> <span class="ident">write_data_u32</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">DataWriteError</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">write_data_u32</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">DataWriteError</span><span class="op">&gt;</span> {
     <span class="ident">wr</span>.<span class="ident">write_u32</span>::<span class="op">&lt;</span><span class="ident">byteorder</span>::<span class="ident">BigEndian</span><span class="op">&gt;</span>(<span class="ident">val</span>).<span class="ident">map_err</span>(<span class="ident">DataWriteError</span>)
 }
 
-<span class="kw">fn</span> <span class="ident">write_data_u64</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">u64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">DataWriteError</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">write_data_u64</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">u64</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">DataWriteError</span><span class="op">&gt;</span> {
     <span class="ident">wr</span>.<span class="ident">write_u64</span>::<span class="op">&lt;</span><span class="ident">byteorder</span>::<span class="ident">BigEndian</span><span class="op">&gt;</span>(<span class="ident">val</span>).<span class="ident">map_err</span>(<span class="ident">DataWriteError</span>)
 }
 
-<span class="kw">fn</span> <span class="ident">write_data_i8</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">i8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">DataWriteError</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">write_data_i8</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">i8</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">DataWriteError</span><span class="op">&gt;</span> {
     <span class="ident">wr</span>.<span class="ident">write_i8</span>(<span class="ident">val</span>).<span class="ident">map_err</span>(<span class="ident">DataWriteError</span>)
 }
 
-<span class="kw">fn</span> <span class="ident">write_data_i16</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">i16</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">DataWriteError</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">write_data_i16</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">i16</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">DataWriteError</span><span class="op">&gt;</span> {
     <span class="ident">wr</span>.<span class="ident">write_i16</span>::<span class="op">&lt;</span><span class="ident">byteorder</span>::<span class="ident">BigEndian</span><span class="op">&gt;</span>(<span class="ident">val</span>).<span class="ident">map_err</span>(<span class="ident">DataWriteError</span>)
 }
 
-<span class="kw">fn</span> <span class="ident">write_data_i32</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">DataWriteError</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">write_data_i32</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">i32</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">DataWriteError</span><span class="op">&gt;</span> {
     <span class="ident">wr</span>.<span class="ident">write_i32</span>::<span class="op">&lt;</span><span class="ident">byteorder</span>::<span class="ident">BigEndian</span><span class="op">&gt;</span>(<span class="ident">val</span>).<span class="ident">map_err</span>(<span class="ident">DataWriteError</span>)
 }
 
-<span class="kw">fn</span> <span class="ident">write_data_i64</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">i64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">DataWriteError</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">write_data_i64</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">i64</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">DataWriteError</span><span class="op">&gt;</span> {
     <span class="ident">wr</span>.<span class="ident">write_i64</span>::<span class="op">&lt;</span><span class="ident">byteorder</span>::<span class="ident">BigEndian</span><span class="op">&gt;</span>(<span class="ident">val</span>).<span class="ident">map_err</span>(<span class="ident">DataWriteError</span>)
 }
 
-<span class="kw">fn</span> <span class="ident">write_data_f32</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">f32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">DataWriteError</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">write_data_f32</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">f32</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">DataWriteError</span><span class="op">&gt;</span> {
     <span class="ident">wr</span>.<span class="ident">write_f32</span>::<span class="op">&lt;</span><span class="ident">byteorder</span>::<span class="ident">BigEndian</span><span class="op">&gt;</span>(<span class="ident">val</span>).<span class="ident">map_err</span>(<span class="ident">DataWriteError</span>)
 }
 
-<span class="kw">fn</span> <span class="ident">write_data_f64</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">DataWriteError</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">write_data_f64</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">f64</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">DataWriteError</span><span class="op">&gt;</span> {
     <span class="ident">wr</span>.<span class="ident">write_f64</span>::<span class="op">&lt;</span><span class="ident">byteorder</span>::<span class="ident">BigEndian</span><span class="op">&gt;</span>(<span class="ident">val</span>).<span class="ident">map_err</span>(<span class="ident">DataWriteError</span>)
 }
 
@@ -451,41 +451,41 @@
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">MarkerWriteError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ValueWriteError</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">err</span>: <span class="ident">MarkerWriteError</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ValueWriteError</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">err</span>: <span class="ident">MarkerWriteError</span>) <span class="op">-&gt;</span> <span class="ident">ValueWriteError</span> {
         <span class="kw">match</span> <span class="ident">err</span> {
-            <span class="ident">MarkerWriteError</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ValueWriteError</span>::<span class="ident">InvalidMarkerWrite</span>(<span class="ident">err</span>),
+            <span class="ident">MarkerWriteError</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="ident">ValueWriteError</span>::<span class="ident">InvalidMarkerWrite</span>(<span class="ident">err</span>),
         }
     }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">DataWriteError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ValueWriteError</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">err</span>: <span class="ident">DataWriteError</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ValueWriteError</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">err</span>: <span class="ident">DataWriteError</span>) <span class="op">-&gt;</span> <span class="ident">ValueWriteError</span> {
         <span class="kw">match</span> <span class="ident">err</span> {
-            <span class="ident">DataWriteError</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ValueWriteError</span>::<span class="ident">InvalidDataWrite</span>(<span class="ident">err</span>),
+            <span class="ident">DataWriteError</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="ident">ValueWriteError</span>::<span class="ident">InvalidDataWrite</span>(<span class="ident">err</span>),
         }
     }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">ValueWriteError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Error</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">err</span>: <span class="ident">ValueWriteError</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Error</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">err</span>: <span class="ident">ValueWriteError</span>) <span class="op">-&gt;</span> <span class="ident">Error</span> {
         <span class="kw">match</span> <span class="ident">err</span> {
             <span class="ident">ValueWriteError</span>::<span class="ident">InvalidMarkerWrite</span>(<span class="ident">err</span>) <span class="op">|</span>
-            <span class="ident">ValueWriteError</span>::<span class="ident">InvalidDataWrite</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">err</span>,
+            <span class="ident">ValueWriteError</span>::<span class="ident">InvalidDataWrite</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="ident">err</span>,
         }
     }
 }
 
 <span class="kw">impl</span> <span class="ident">error</span>::<span class="ident">Error</span> <span class="kw">for</span> <span class="ident">ValueWriteError</span> {
-    <span class="kw">fn</span> <span class="ident">source</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span>(<span class="kw">dyn</span> <span class="ident">error</span>::<span class="ident">Error</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>)<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">source</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span>(<span class="kw">dyn</span> <span class="ident">error</span>::<span class="ident">Error</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>)<span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">ValueWriteError</span>::<span class="ident">InvalidMarkerWrite</span>(<span class="kw-2">ref</span> <span class="ident">err</span>) <span class="op">|</span>
-            <span class="ident">ValueWriteError</span>::<span class="ident">InvalidDataWrite</span>(<span class="kw-2">ref</span> <span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">err</span>),
+            <span class="ident">ValueWriteError</span>::<span class="ident">InvalidDataWrite</span>(<span class="kw-2">ref</span> <span class="ident">err</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">err</span>),
         }
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Display</span> <span class="kw">for</span> <span class="ident">ValueWriteError</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">fmt</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">fmt</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;error while writing multi-byte MessagePack value&quot;</span>)
     }
 }
@@ -497,7 +497,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This function will return `ValueWriteError` on any I/O error occurred while writing either the</span>
 <span class="doccomment">/// marker or the data.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_array_len</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">len</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Marker</span>, <span class="ident">ValueWriteError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_array_len</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">len</span>: <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Marker</span>, <span class="ident">ValueWriteError</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">marker</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">len</span> <span class="op">&lt;</span> <span class="number">16</span> {
         <span class="ident">write_marker</span>(<span class="ident">wr</span>, <span class="ident">Marker</span>::<span class="ident">FixArray</span>(<span class="ident">len</span> <span class="kw">as</span> <span class="ident">u8</span>))<span class="question-mark">?</span>;
         <span class="ident">Marker</span>::<span class="ident">FixArray</span>(<span class="ident">len</span> <span class="kw">as</span> <span class="ident">u8</span>)
@@ -521,7 +521,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This function will return `ValueWriteError` on any I/O error occurred while writing either the</span>
 <span class="doccomment">/// marker or the data.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_map_len</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">len</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Marker</span>, <span class="ident">ValueWriteError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_map_len</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">len</span>: <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Marker</span>, <span class="ident">ValueWriteError</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">marker</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">len</span> <span class="op">&lt;</span> <span class="number">16</span> {
         <span class="ident">write_marker</span>(<span class="ident">wr</span>, <span class="ident">Marker</span>::<span class="ident">FixMap</span>(<span class="ident">len</span> <span class="kw">as</span> <span class="ident">u8</span>))<span class="question-mark">?</span>;
         <span class="ident">Marker</span>::<span class="ident">FixMap</span>(<span class="ident">len</span> <span class="kw">as</span> <span class="ident">u8</span>)
@@ -550,39 +550,39 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// Panics if `ty` is negative, because it is reserved for future MessagePack extension including</span>
 <span class="doccomment">/// 2-byte type information.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_ext_meta</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">len</span>: <span class="ident">u32</span>, <span class="ident">ty</span>: <span class="ident">i8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Marker</span>, <span class="ident">ValueWriteError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_ext_meta</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">len</span>: <span class="ident">u32</span>, <span class="ident">ty</span>: <span class="ident">i8</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Marker</span>, <span class="ident">ValueWriteError</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">marker</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">len</span> {
-        <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="number">1</span> <span class="op">=&gt;</span> {
             <span class="ident">write_marker</span>(<span class="ident">wr</span>, <span class="ident">Marker</span>::<span class="ident">FixExt1</span>)<span class="question-mark">?</span>;
             <span class="ident">Marker</span>::<span class="ident">FixExt1</span>
         }
-        <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="number">2</span> <span class="op">=&gt;</span> {
             <span class="ident">write_marker</span>(<span class="ident">wr</span>, <span class="ident">Marker</span>::<span class="ident">FixExt2</span>)<span class="question-mark">?</span>;
             <span class="ident">Marker</span>::<span class="ident">FixExt2</span>
         }
-        <span class="number">4</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="number">4</span> <span class="op">=&gt;</span> {
             <span class="ident">write_marker</span>(<span class="ident">wr</span>, <span class="ident">Marker</span>::<span class="ident">FixExt4</span>)<span class="question-mark">?</span>;
             <span class="ident">Marker</span>::<span class="ident">FixExt4</span>
         }
-        <span class="number">8</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="number">8</span> <span class="op">=&gt;</span> {
             <span class="ident">write_marker</span>(<span class="ident">wr</span>, <span class="ident">Marker</span>::<span class="ident">FixExt8</span>)<span class="question-mark">?</span>;
             <span class="ident">Marker</span>::<span class="ident">FixExt8</span>
         }
-        <span class="number">16</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="number">16</span> <span class="op">=&gt;</span> {
             <span class="ident">write_marker</span>(<span class="ident">wr</span>, <span class="ident">Marker</span>::<span class="ident">FixExt16</span>)<span class="question-mark">?</span>;
             <span class="ident">Marker</span>::<span class="ident">FixExt16</span>
         }
-        <span class="ident">len</span> <span class="kw">if</span> <span class="ident">len</span> <span class="op">&lt;</span> <span class="number">256</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">len</span> <span class="kw">if</span> <span class="ident">len</span> <span class="op">&lt;</span> <span class="number">256</span> <span class="op">=&gt;</span> {
             <span class="ident">write_marker</span>(<span class="ident">wr</span>, <span class="ident">Marker</span>::<span class="ident">Ext8</span>)<span class="question-mark">?</span>;
             <span class="ident">write_data_u8</span>(<span class="ident">wr</span>, <span class="ident">len</span> <span class="kw">as</span> <span class="ident">u8</span>)<span class="question-mark">?</span>;
             <span class="ident">Marker</span>::<span class="ident">Ext8</span>
         }
-        <span class="ident">len</span> <span class="kw">if</span> <span class="ident">len</span> <span class="op">&lt;</span> <span class="number">65536</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">len</span> <span class="kw">if</span> <span class="ident">len</span> <span class="op">&lt;</span> <span class="number">65536</span> <span class="op">=&gt;</span> {
             <span class="ident">write_marker</span>(<span class="ident">wr</span>, <span class="ident">Marker</span>::<span class="ident">Ext16</span>)<span class="question-mark">?</span>;
             <span class="ident">write_data_u16</span>(<span class="ident">wr</span>, <span class="ident">len</span> <span class="kw">as</span> <span class="ident">u16</span>)<span class="question-mark">?</span>;
             <span class="ident">Marker</span>::<span class="ident">Ext16</span>
         }
-        <span class="ident">len</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">len</span> <span class="op">=&gt;</span> {
             <span class="ident">write_marker</span>(<span class="ident">wr</span>, <span class="ident">Marker</span>::<span class="ident">Ext32</span>)<span class="question-mark">?</span>;
             <span class="ident">write_data_u32</span>(<span class="ident">wr</span>, <span class="ident">len</span>)<span class="question-mark">?</span>;
             <span class="ident">Marker</span>::<span class="ident">Ext32</span>

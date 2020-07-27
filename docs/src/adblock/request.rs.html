@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/adblock-0.2.9/src/request.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>request.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../adblock/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/adblock-0.3.0/src/request.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>request.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../adblock/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -584,39 +584,39 @@
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">idna</span>::<span class="ident">Errors</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">RequestError</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">_err</span>: <span class="ident">idna</span>::<span class="ident">Errors</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">RequestError</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">_err</span>: <span class="ident">idna</span>::<span class="ident">Errors</span>) <span class="op">-&gt;</span> <span class="ident">RequestError</span> {
         <span class="ident">RequestError</span>::<span class="ident">UnicodeDecodingError</span>
     }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">url</span>::<span class="ident">ParseError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">RequestError</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">_err</span>: <span class="ident">url</span>::<span class="ident">ParseError</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">RequestError</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">_err</span>: <span class="ident">url</span>::<span class="ident">ParseError</span>) <span class="op">-&gt;</span> <span class="ident">RequestError</span> {
         <span class="ident">RequestError</span>::<span class="ident">HostnameParseError</span>
     }
 }
 
-<span class="kw">fn</span> <span class="ident">cpt_match_type</span>(<span class="ident">cpt</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">RequestType</span> {
+<span class="kw">fn</span> <span class="ident">cpt_match_type</span>(<span class="ident">cpt</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">RequestType</span> {
     <span class="kw">match</span> <span class="ident">cpt</span> {
-        <span class="string">&quot;beacon&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Ping</span>,
-        <span class="string">&quot;csp_report&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Csp</span>,
-        <span class="string">&quot;document&quot;</span> <span class="op">|</span> <span class="string">&quot;main_frame&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Document</span>,
-        <span class="string">&quot;font&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Font</span>,
-        <span class="string">&quot;image&quot;</span> <span class="op">|</span> <span class="string">&quot;imageset&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Image</span>,
-        <span class="string">&quot;media&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Media</span>,
-        <span class="string">&quot;object&quot;</span> <span class="op">|</span> <span class="string">&quot;object_subrequest&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Object</span>,
-        <span class="string">&quot;ping&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Ping</span>,
-        <span class="string">&quot;script&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Script</span>,
-        <span class="string">&quot;stylesheet&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Stylesheet</span>,
-        <span class="string">&quot;sub_frame&quot;</span> <span class="op">|</span> <span class="string">&quot;subdocument&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Subdocument</span>,
-        <span class="string">&quot;websocket&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Websocket</span>,
-        <span class="string">&quot;xhr&quot;</span> <span class="op">|</span> <span class="string">&quot;xmlhttprequest&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Xmlhttprequest</span>,
-        <span class="string">&quot;other&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Other</span>,
-        <span class="string">&quot;speculative&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Other</span>,
-        <span class="string">&quot;web_manifest&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Other</span>,
-        <span class="string">&quot;xbl&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Other</span>,
-        <span class="string">&quot;xml_dtd&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Other</span>,
-        <span class="string">&quot;xslt&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Other</span>,
-        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Other</span>
+        <span class="string">&quot;beacon&quot;</span> <span class="op">=&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Ping</span>,
+        <span class="string">&quot;csp_report&quot;</span> <span class="op">=&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Csp</span>,
+        <span class="string">&quot;document&quot;</span> <span class="op">|</span> <span class="string">&quot;main_frame&quot;</span> <span class="op">=&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Document</span>,
+        <span class="string">&quot;font&quot;</span> <span class="op">=&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Font</span>,
+        <span class="string">&quot;image&quot;</span> <span class="op">|</span> <span class="string">&quot;imageset&quot;</span> <span class="op">=&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Image</span>,
+        <span class="string">&quot;media&quot;</span> <span class="op">=&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Media</span>,
+        <span class="string">&quot;object&quot;</span> <span class="op">|</span> <span class="string">&quot;object_subrequest&quot;</span> <span class="op">=&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Object</span>,
+        <span class="string">&quot;ping&quot;</span> <span class="op">=&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Ping</span>,
+        <span class="string">&quot;script&quot;</span> <span class="op">=&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Script</span>,
+        <span class="string">&quot;stylesheet&quot;</span> <span class="op">=&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Stylesheet</span>,
+        <span class="string">&quot;sub_frame&quot;</span> <span class="op">|</span> <span class="string">&quot;subdocument&quot;</span> <span class="op">=&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Subdocument</span>,
+        <span class="string">&quot;websocket&quot;</span> <span class="op">=&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Websocket</span>,
+        <span class="string">&quot;xhr&quot;</span> <span class="op">|</span> <span class="string">&quot;xmlhttprequest&quot;</span> <span class="op">=&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Xmlhttprequest</span>,
+        <span class="string">&quot;other&quot;</span> <span class="op">=&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Other</span>,
+        <span class="string">&quot;speculative&quot;</span> <span class="op">=&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Other</span>,
+        <span class="string">&quot;web_manifest&quot;</span> <span class="op">=&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Other</span>,
+        <span class="string">&quot;xbl&quot;</span> <span class="op">=&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Other</span>,
+        <span class="string">&quot;xml_dtd&quot;</span> <span class="op">=&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Other</span>,
+        <span class="string">&quot;xslt&quot;</span> <span class="op">=&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Other</span>,
+        <span class="kw">_</span> <span class="op">=&gt;</span> <span class="ident">RequestType</span>::<span class="ident">Other</span>
     }
 }
 
@@ -631,11 +631,11 @@
     <span class="kw">pub</span> <span class="ident">is_third_party</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span>,
     <span class="kw">pub</span> <span class="ident">url</span>: <span class="ident">String</span>,
     <span class="kw">pub</span> <span class="ident">hostname</span>: <span class="ident">String</span>,
-    <span class="kw">pub</span> <span class="ident">source_hostname_hashes</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">utils</span>::<span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">source_hostname_hashes</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">utils</span>::<span class="ident">Hash</span><span class="op">&gt;&gt;</span>,
 
     <span class="comment">// mutable fields, set later</span>
     <span class="kw">pub</span> <span class="ident">bug</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>,
-    <span class="ident">fuzzy_signature</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">RwLock</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">utils</span>::<span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="comment">// evaluated lazily</span>
+    <span class="ident">fuzzy_signature</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">RwLock</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">utils</span>::<span class="ident">Hash</span><span class="op">&gt;&gt;</span><span class="op">&gt;&gt;</span>, <span class="comment">// evaluated lazily</span>
     <span class="ident">hostname_end</span>: <span class="ident">usize</span>
 }
 
@@ -647,11 +647,11 @@
         <span class="ident">token_buffer</span>.<span class="ident">push</span>(<span class="number">0</span>);
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">url_after_hostname</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">url_after_hostname</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">url</span>[<span class="self">self</span>.<span class="ident">hostname_end</span>..]
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_fuzzy_signature</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">utils</span>::<span class="ident">Hash</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_fuzzy_signature</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">utils</span>::<span class="ident">Hash</span><span class="op">&gt;</span> {
         {
             <span class="kw">let</span> <span class="ident">signature_cache</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">fuzzy_signature</span>.<span class="ident">read</span>().<span class="ident">unwrap</span>();
             <span class="kw">if</span> <span class="ident">signature_cache</span>.<span class="ident">is_some</span>() {
@@ -674,14 +674,14 @@
         <span class="ident">domain</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">source_hostname</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">source_domain</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Request</span> {
+    ) <span class="op">-&gt;</span> <span class="ident">Request</span> {
         <span class="kw">let</span> <span class="ident">third_party</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">source_domain</span>.<span class="ident">is_empty</span>() {
             <span class="prelude-val">None</span>
         } <span class="kw">else</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">source_domain</span> <span class="op">!</span><span class="op">=</span> <span class="ident">domain</span>)
+            <span class="prelude-val">Some</span>(<span class="ident">source_domain</span> <span class="op">!=</span> <span class="ident">domain</span>)
         };
 
-        <span class="kw">let</span> <span class="ident">hostname_end</span> <span class="op">=</span> <span class="ident">twoway</span>::<span class="ident">find_str</span>(<span class="ident">url</span>, <span class="ident">hostname</span>).<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">url</span>.<span class="ident">len</span>()) <span class="op">+</span> <span class="ident">hostname</span>.<span class="ident">len</span>();
+        <span class="kw">let</span> <span class="ident">hostname_end</span> <span class="op">=</span> <span class="ident">twoway</span>::<span class="ident">find_str</span>(<span class="ident">url</span>, <span class="ident">hostname</span>).<span class="ident">unwrap_or_else</span>(<span class="op">||</span> <span class="ident">url</span>.<span class="ident">len</span>()) <span class="op">+</span> <span class="ident">hostname</span>.<span class="ident">len</span>();
 
         <span class="self">Self</span>::<span class="ident">from_detailed_parameters</span>(
             <span class="ident">raw_type</span>,
@@ -705,7 +705,7 @@
         <span class="ident">source_domain</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">third_party</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span>,
         <span class="ident">hostname_end</span>: <span class="ident">usize</span>
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Request</span> {
+    ) <span class="op">-&gt;</span> <span class="ident">Request</span> {
         <span class="kw">let</span> <span class="ident">first_party</span> <span class="op">=</span> <span class="ident">third_party</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="op">!</span><span class="ident">p</span>);
 
         <span class="kw">let</span> <span class="ident">is_http</span>: <span class="ident">bool</span>;
@@ -720,11 +720,11 @@
             <span class="ident">is_supported</span> <span class="op">=</span> <span class="bool-val">true</span>;
             <span class="ident">request_type</span> <span class="op">=</span> <span class="ident">cpt_match_type</span>(<span class="ident">raw_type</span>);
         } <span class="kw">else</span> {
-            <span class="ident">is_http</span> <span class="op">=</span> <span class="ident">schema</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;http&quot;</span>;
-            <span class="ident">is_https</span> <span class="op">=</span> <span class="op">!</span><span class="ident">is_http</span> <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">schema</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;https&quot;</span>;
+            <span class="ident">is_http</span> <span class="op">=</span> <span class="ident">schema</span> <span class="op">==</span> <span class="string">&quot;http&quot;</span>;
+            <span class="ident">is_https</span> <span class="op">=</span> <span class="op">!</span><span class="ident">is_http</span> <span class="op">&amp;&amp;</span> <span class="ident">schema</span> <span class="op">==</span> <span class="string">&quot;https&quot;</span>;
 
-            <span class="kw">let</span> <span class="ident">is_websocket</span> <span class="op">=</span> <span class="op">!</span><span class="ident">is_http</span> <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="op">!</span><span class="ident">is_https</span> <span class="kw-2">&amp;</span><span class="op">&amp;</span> (<span class="ident">schema</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;ws&quot;</span> <span class="op">|</span><span class="op">|</span> <span class="ident">schema</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;wss&quot;</span>);
-            <span class="ident">is_supported</span> <span class="op">=</span> <span class="ident">is_http</span> <span class="op">|</span><span class="op">|</span> <span class="ident">is_https</span> <span class="op">|</span><span class="op">|</span> <span class="ident">is_websocket</span>;
+            <span class="kw">let</span> <span class="ident">is_websocket</span> <span class="op">=</span> <span class="op">!</span><span class="ident">is_http</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">is_https</span> <span class="op">&amp;&amp;</span> (<span class="ident">schema</span> <span class="op">==</span> <span class="string">&quot;ws&quot;</span> <span class="op">||</span> <span class="ident">schema</span> <span class="op">==</span> <span class="string">&quot;wss&quot;</span>);
+            <span class="ident">is_supported</span> <span class="op">=</span> <span class="ident">is_http</span> <span class="op">||</span> <span class="ident">is_https</span> <span class="op">||</span> <span class="ident">is_websocket</span>;
             <span class="kw">if</span> <span class="ident">is_websocket</span> {
                 <span class="ident">request_type</span> <span class="op">=</span> <span class="ident">RequestType</span>::<span class="ident">Websocket</span>;
             } <span class="kw">else</span> {
@@ -738,7 +738,7 @@
             <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">c</span>) <span class="kw">in</span>
                 <span class="ident">source_hostname</span>[..<span class="ident">source_hostname</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">source_domain</span>.<span class="ident">len</span>()].<span class="ident">char_indices</span>()
             {
-                <span class="kw">if</span> <span class="ident">c</span> <span class="op">=</span><span class="op">=</span> <span class="string">&#39;.&#39;</span> {
+                <span class="kw">if</span> <span class="ident">c</span> <span class="op">==</span> <span class="string">&#39;.&#39;</span> {
                     <span class="ident">hashes</span>.<span class="ident">push</span>(<span class="ident">utils</span>::<span class="ident">fast_hash</span>(<span class="kw-2">&amp;</span><span class="ident">source_hostname</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>..]));
                 }
             }
@@ -767,7 +767,7 @@
         <span class="ident">url</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">source_url</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">request_type</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Request</span>, <span class="ident">RequestError</span><span class="op">&gt;</span> {
+    ) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Request</span>, <span class="ident">RequestError</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">parsed_url</span>) <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">parse_url</span>(<span class="kw-2">&amp;</span><span class="ident">url</span>) {
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">parsed_source</span>) <span class="op">=</span> <span class="ident">Request</span>::<span class="ident">parse_url</span>(<span class="kw-2">&amp;</span><span class="ident">source_url</span>) {
                 <span class="kw">let</span> <span class="ident">source_domain</span> <span class="op">=</span> <span class="ident">parsed_source</span>.<span class="ident">domain</span>();
@@ -775,7 +775,7 @@
                 <span class="kw">let</span> <span class="ident">third_party</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">source_domain</span>.<span class="ident">is_empty</span>() {
                     <span class="prelude-val">None</span>
                 } <span class="kw">else</span> {
-                    <span class="prelude-val">Some</span>(<span class="ident">source_domain</span> <span class="op">!</span><span class="op">=</span> <span class="ident">parsed_url</span>.<span class="ident">domain</span>())
+                    <span class="prelude-val">Some</span>(<span class="ident">source_domain</span> <span class="op">!=</span> <span class="ident">parsed_url</span>.<span class="ident">domain</span>())
                 };
 
                 <span class="prelude-val">Ok</span>(<span class="ident">Request</span>::<span class="ident">from_detailed_parameters</span>(
@@ -811,7 +811,7 @@
         <span class="ident">source_hostname</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">request_type</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">third_party_request</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span>
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Request</span> {
+    ) <span class="op">-&gt;</span> <span class="ident">Request</span> {
         <span class="kw">let</span> <span class="ident">url_norm</span> <span class="op">=</span> <span class="ident">url</span>.<span class="ident">to_ascii_lowercase</span>();
 
         <span class="kw">let</span> (<span class="ident">source_domain_start</span>, <span class="ident">source_domain_end</span>) <span class="op">=</span> <span class="ident">get_host_domain</span>(<span class="kw-2">&amp;</span><span class="ident">source_hostname</span>);
@@ -826,7 +826,7 @@
             <span class="kw">if</span> <span class="ident">source_domain</span>.<span class="ident">is_empty</span>() {
                 <span class="prelude-val">None</span>
             } <span class="kw">else</span> {
-                <span class="prelude-val">Some</span>(<span class="ident">source_domain</span> <span class="op">!</span><span class="op">=</span> <span class="ident">domain</span>)
+                <span class="prelude-val">Some</span>(<span class="ident">source_domain</span> <span class="op">!=</span> <span class="ident">domain</span>)
             }
         } <span class="kw">else</span> {
             <span class="ident">third_party_request</span>
@@ -844,7 +844,7 @@
         )
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_url</span>(<span class="ident">url</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Request</span>, <span class="ident">RequestError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_url</span>(<span class="ident">url</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Request</span>, <span class="ident">RequestError</span><span class="op">&gt;</span> {
         <span class="comment">// Used in testing - assume empty source_url and default request type</span>
         <span class="self">Self</span>::<span class="ident">from_urls</span>(<span class="ident">url</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>)
     }
@@ -956,7 +956,7 @@
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">assumed_https</span>.<span class="ident">is_supported</span>, <span class="bool-val">true</span>);
     }
 
-    <span class="kw">fn</span> <span class="ident">tokenize</span>(<span class="ident">tokens</span>: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span><span class="ident">str</span>], <span class="ident">extra_tokens</span>: <span class="kw-2">&amp;</span>[<span class="ident">utils</span>::<span class="ident">Hash</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">utils</span>::<span class="ident">Hash</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">tokenize</span>(<span class="ident">tokens</span>: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span><span class="ident">str</span>], <span class="ident">extra_tokens</span>: <span class="kw-2">&amp;</span>[<span class="ident">utils</span>::<span class="ident">Hash</span>]) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">utils</span>::<span class="ident">Hash</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tokens</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="ident">utils</span>::<span class="ident">fast_hash</span>(<span class="kw-2">&amp;</span><span class="ident">t</span>)).<span class="ident">collect</span>();
         <span class="ident">tokens</span>.<span class="ident">extend</span>(<span class="ident">extra_tokens</span>);
         <span class="ident">tokens</span>

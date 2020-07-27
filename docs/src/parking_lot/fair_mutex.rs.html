@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/parking_lot-0.10.2/src/fair_mutex.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>fair_mutex.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../parking_lot/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/parking_lot-0.10.2/src/fair_mutex.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>fair_mutex.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../parking_lot/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -362,7 +362,7 @@
 <span class="doccomment">/// Creates a new fair mutex in an unlocked state ready for use.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This allows creating a fair mutex in a constant context on stable Rust.</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">const_fair_mutex</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">val</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">FairMutex</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">const_fair_mutex</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">val</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">FairMutex</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="ident">FairMutex</span>::<span class="ident">const_new</span>(<span class="op">&lt;</span><span class="ident">RawFairMutex</span> <span class="kw">as</span> <span class="ident">lock_api</span>::<span class="ident">RawMutex</span><span class="op">&gt;</span>::<span class="ident">INIT</span>, <span class="ident">val</span>)
 }
 
@@ -412,7 +412,7 @@
 
         <span class="kw">fn</span> <span class="ident">inc</span>(<span class="ident">m</span>: <span class="kw-2">&amp;</span><span class="ident">FairMutex</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>) {
             <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">J</span> {
-                <span class="kw-2">*</span><span class="ident">m</span>.<span class="ident">lock</span>() <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                <span class="kw-2">*</span><span class="ident">m</span>.<span class="ident">lock</span>() <span class="op">+=</span> <span class="number">1</span>;
             }
         }
 
@@ -420,13 +420,13 @@
         <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">K</span> {
             <span class="kw">let</span> <span class="ident">tx2</span> <span class="op">=</span> <span class="ident">tx</span>.<span class="ident">clone</span>();
             <span class="kw">let</span> <span class="ident">m2</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">clone</span>();
-            <span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
+            <span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">||</span> {
                 <span class="ident">inc</span>(<span class="kw-2">&amp;</span><span class="ident">m2</span>);
                 <span class="ident">tx2</span>.<span class="ident">send</span>(()).<span class="ident">unwrap</span>();
             });
             <span class="kw">let</span> <span class="ident">tx2</span> <span class="op">=</span> <span class="ident">tx</span>.<span class="ident">clone</span>();
             <span class="kw">let</span> <span class="ident">m2</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">clone</span>();
-            <span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
+            <span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">||</span> {
                 <span class="ident">inc</span>(<span class="kw-2">&amp;</span><span class="ident">m2</span>);
                 <span class="ident">tx2</span>.<span class="ident">send</span>(()).<span class="ident">unwrap</span>();
             });
@@ -483,7 +483,7 @@
         <span class="kw">let</span> <span class="ident">arc</span> <span class="op">=</span> <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">FairMutex</span>::<span class="ident">new</span>(<span class="number">1</span>));
         <span class="kw">let</span> <span class="ident">arc2</span> <span class="op">=</span> <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">FairMutex</span>::<span class="ident">new</span>(<span class="ident">arc</span>));
         <span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">channel</span>();
-        <span class="kw">let</span> <span class="ident">_t</span> <span class="op">=</span> <span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
+        <span class="kw">let</span> <span class="ident">_t</span> <span class="op">=</span> <span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">||</span> {
             <span class="kw">let</span> <span class="ident">lock</span> <span class="op">=</span> <span class="ident">arc2</span>.<span class="ident">lock</span>();
             <span class="kw">let</span> <span class="ident">lock2</span> <span class="op">=</span> <span class="ident">lock</span>.<span class="ident">lock</span>();
             <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="kw-2">*</span><span class="ident">lock2</span>, <span class="number">1</span>);
@@ -496,13 +496,13 @@
     <span class="kw">fn</span> <span class="ident">test_mutex_arc_access_in_unwind</span>() {
         <span class="kw">let</span> <span class="ident">arc</span> <span class="op">=</span> <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">FairMutex</span>::<span class="ident">new</span>(<span class="number">1</span>));
         <span class="kw">let</span> <span class="ident">arc2</span> <span class="op">=</span> <span class="ident">arc</span>.<span class="ident">clone</span>();
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
+        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">||</span> {
             <span class="kw">struct</span> <span class="ident">Unwinder</span> {
-                <span class="ident">i</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">FairMutex</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+                <span class="ident">i</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">FairMutex</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;&gt;</span>,
             }
             <span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">Unwinder</span> {
                 <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
-                    <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">i</span>.<span class="ident">lock</span>() <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                    <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">i</span>.<span class="ident">lock</span>() <span class="op">+=</span> <span class="number">1</span>;
                 }
             }
             <span class="kw">let</span> <span class="ident">_u</span> <span class="op">=</span> <span class="ident">Unwinder</span> { <span class="ident">i</span>: <span class="ident">arc2</span> };
@@ -549,7 +549,7 @@
         <span class="kw">let</span> <span class="ident">mutex</span> <span class="op">=</span> <span class="ident">FairMutex</span>::<span class="ident">new</span>(<span class="ident">contents</span>.<span class="ident">clone</span>());
 
         <span class="kw">let</span> <span class="ident">serialized</span> <span class="op">=</span> <span class="ident">serialize</span>(<span class="kw-2">&amp;</span><span class="ident">mutex</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">deserialized</span>: <span class="ident">FairMutex</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">deserialize</span>(<span class="kw-2">&amp;</span><span class="ident">serialized</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">deserialized</span>: <span class="ident">FairMutex</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;&gt;</span> <span class="op">=</span> <span class="ident">deserialize</span>(<span class="kw-2">&amp;</span><span class="ident">serialized</span>).<span class="ident">unwrap</span>();
 
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="kw-2">*</span>(<span class="ident">mutex</span>.<span class="ident">lock</span>()), <span class="kw-2">*</span>(<span class="ident">deserialized</span>.<span class="ident">lock</span>()));
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">contents</span>, <span class="kw-2">*</span>(<span class="ident">deserialized</span>.<span class="ident">lock</span>()));

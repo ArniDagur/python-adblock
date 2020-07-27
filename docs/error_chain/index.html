@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `error_chain` crate."><meta name="keywords" content="rust, rustlang, rust-lang, error_chain"><title>error_chain - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../dark.css"><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script src="../storage.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="shortcut icon" href="../favicon.ico"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../error_chain/index.html'><div class='logo-container'><img src='../rust-logo.png' alt='logo'></div></a><p class='location'>Crate error_chain</p><div class="sidebar-elems"><a id='all-types' href='all.html'><p>See all error_chain's items</p></a><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li><li><a href="#structs">Structs</a></li><li><a href="#traits">Traits</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'error_chain', ty: 'mod', relpath: '../'};</script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../src/error_chain/lib.rs.html#1-824' title='goto source code'>[src]</a></span><span class='in-band'>Crate <a class="mod" href=''>error_chain</a></span></h1><div class='docblock'><p>A library for consistent and reliable error handling</p>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `error_chain` crate."><meta name="keywords" content="rust, rustlang, rust-lang, error_chain"><title>error_chain - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../ayu.css" disabled ><script src="../storage.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="shortcut icon" href="../favicon.ico"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../error_chain/index.html'><div class='logo-container'><img src='../rust-logo.png' alt='logo'></div></a><p class='location'>Crate error_chain</p><div class='block version'><p>Version 0.12.2</p></div><div class="sidebar-elems"><a id='all-types' href='all.html'><p>See all error_chain's items</p></a><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li><li><a href="#structs">Structs</a></li><li><a href="#traits">Traits</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'error_chain', ty: 'mod', relpath: '../'};</script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../src/error_chain/lib.rs.html#1-824' title='goto source code'>[src]</a></span><span class='in-band'>Crate <a class="mod" href=''>error_chain</a></span></h1><div class='docblock'><p>A library for consistent and reliable error handling</p>
 <p>error-chain makes it easy to take full advantage of Rust's
 powerful error handling features without the overhead of
 maintaining boilerplate error types and conversions. It implements
@@ -162,7 +162,7 @@ and the <a href="example_generated/enum.ErrorKind.html"><code>ErrorKind</code></
 <p>Introducing new error chains, with a string message:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
-<span class="kw">fn</span> <span class="ident">foo</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">foo</span>() <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="prelude-val">Err</span>(<span class="string">&quot;foo error!&quot;</span>.<span class="ident">into</span>())
 }</pre></div>
 <p>Introducing new error chains, with an <a href="example_generated/enum.ErrorKind.html"><code>ErrorKind</code></a>:</p>
@@ -172,7 +172,7 @@ and the <a href="example_generated/enum.ErrorKind.html"><code>ErrorKind</code></
     <span class="ident">errors</span> { <span class="ident">FooError</span> }
 }
 
-<span class="kw">fn</span> <span class="ident">foo</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">foo</span>() <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="prelude-val">Err</span>(<span class="ident">ErrorKind</span>::<span class="ident">FooError</span>.<span class="ident">into</span>())
 }</pre></div>
 <p>Note that the return type is the typedef <a href="example_generated/type.Result.html"><code>Result</code></a>, which is
@@ -185,11 +185,11 @@ isn't needed; <code>Err(ErrorKind)</code> will automatically be converted to <co
 So the below is equivalent to the previous:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
-<span class="kw">fn</span> <span class="ident">foo</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">foo</span>() <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(<span class="ident">ErrorKind</span>::<span class="ident">FooError</span>)<span class="question-mark">?</span>)
 }
 
-<span class="kw">fn</span> <span class="ident">bar</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">bar</span>() <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(<span class="string">&quot;bogus!&quot;</span>)<span class="question-mark">?</span>)
 }</pre></div>
 <h2 id="the-bail-macro" class="section-header"><a href="#the-bail-macro">The <code>bail!</code> macro</a></h2>
@@ -199,7 +199,7 @@ with conversions done automatically.</p>
 <p>With <a href="macro.bail.html"><code>bail!</code></a> the previous examples look like:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
-<span class="kw">fn</span> <span class="ident">foo</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">foo</span>() <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="kw">if</span> <span class="bool-val">true</span> {
         <span class="macro">bail</span><span class="macro">!</span>(<span class="ident">ErrorKind</span>::<span class="ident">FooError</span>);
     } <span class="kw">else</span> {
@@ -207,7 +207,7 @@ with conversions done automatically.</p>
     }
 }
 
-<span class="kw">fn</span> <span class="ident">bar</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">bar</span>() <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="kw">if</span> <span class="bool-val">true</span> {
         <span class="macro">bail</span><span class="macro">!</span>(<span class="string">&quot;bogus!&quot;</span>);
     } <span class="kw">else</span> {
@@ -220,7 +220,7 @@ This can be done on a Result or on an existing Error.</p>
 <p>To extend the error chain:</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered">
-<span class="kw">let</span> <span class="ident">res</span>: <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> <span class="op">=</span> <span class="ident">do_something</span>().<span class="ident">chain_err</span>(<span class="op">|</span><span class="op">|</span> <span class="string">&quot;something went wrong&quot;</span>);</pre></div>
+<span class="kw">let</span> <span class="ident">res</span>: <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> <span class="op">=</span> <span class="ident">do_something</span>().<span class="ident">chain_err</span>(<span class="op">||</span> <span class="string">&quot;something went wrong&quot;</span>);</pre></div>
 <p><a href="example_generated/trait.ResultExt.html#tymethod.chain_err"><code>chain_err</code></a> can be called on any <a href="example_generated/type.Result.html"><code>Result</code></a> type where the contained
 error type implements <a href="https://doc.rust-lang.org/std/error/trait.Error.html"><code>std::error::Error</code></a><code>+</code><a href="https://doc.rust-lang.org/std/marker/trait.Send.html"><code>Send</code></a><code> + 'static</code>, as long as
 the <a href="example_generated/type.Result.html"><code>Result</code></a> type's corresponding <a href="example_generated/trait.ResultExt.html"><code>ResultExt</code></a> trait is in scope.  If
@@ -247,7 +247,7 @@ partially handling errors using the <a href="https://doc.rust-lang.org/std/resul
     }
 }
 
-<span class="kw">fn</span> <span class="ident">do_other_thing</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">other</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> { <span class="macro">unimplemented</span><span class="macro">!</span>() }
+<span class="kw">fn</span> <span class="ident">do_other_thing</span>() <span class="op">-&gt;</span> <span class="ident">other</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> { <span class="macro">unimplemented</span><span class="macro">!</span>() }
 
 <span class="kw">let</span> <span class="ident">res</span>: <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> <span class="op">=</span> <span class="ident">do_other_thing</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">e</span>.<span class="ident">into</span>());</pre></div>
 <p>The <a href="example_generated/struct.Error.html"><code>Error</code></a> and <a href="example_generated/enum.ErrorKind.html"><code>ErrorKind</code></a> types implements <a href="https://doc.rust-lang.org/std/convert/trait.From.html"><code>From</code></a> for the corresponding
@@ -269,9 +269,9 @@ making dispatching on error kinds relatively compact:</p>
 }
 
 <span class="kw">match</span> <span class="ident">Error</span>::<span class="ident">from</span>(<span class="string">&quot;error!&quot;</span>) {
-    <span class="ident">Error</span>(<span class="ident">ErrorKind</span>::<span class="ident">InvalidToolchainName</span>(<span class="kw">_</span>), <span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> { }
-    <span class="ident">Error</span>(<span class="ident">ErrorKind</span>::<span class="ident">Msg</span>(<span class="kw">_</span>), <span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> { }
-    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> { }
+    <span class="ident">Error</span>(<span class="ident">ErrorKind</span>::<span class="ident">InvalidToolchainName</span>(<span class="kw">_</span>), <span class="kw">_</span>) <span class="op">=&gt;</span> { }
+    <span class="ident">Error</span>(<span class="ident">ErrorKind</span>::<span class="ident">Msg</span>(<span class="kw">_</span>), <span class="kw">_</span>) <span class="op">=&gt;</span> { }
+    <span class="kw">_</span> <span class="op">=&gt;</span> { }
 }</pre></div>
 <p>Chained errors are also matched with (relatively) compact syntax</p>
 
@@ -296,8 +296,8 @@ making dispatching on error kinds relatively compact:</p>
 
 
 <span class="kw">match</span> <span class="ident">app</span>::<span class="ident">Error</span>::<span class="ident">from</span>(<span class="string">&quot;error!&quot;</span>) {
-    <span class="ident">app</span>::<span class="ident">Error</span>(<span class="ident">app</span>::<span class="ident">ErrorKind</span>::<span class="ident">Utils</span>(<span class="ident">utils</span>::<span class="ident">ErrorKind</span>::<span class="ident">BadStuff</span>), <span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> { }
-    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> { }
+    <span class="ident">app</span>::<span class="ident">Error</span>(<span class="ident">app</span>::<span class="ident">ErrorKind</span>::<span class="ident">Utils</span>(<span class="ident">utils</span>::<span class="ident">ErrorKind</span>::<span class="ident">BadStuff</span>), <span class="kw">_</span>) <span class="op">=&gt;</span> { }
+    <span class="kw">_</span> <span class="op">=&gt;</span> { }
 }</pre></div>
 <h2 id="inspecting-errors" class="section-header"><a href="#inspecting-errors">Inspecting errors</a></h2>
 <p>An error-chain error contains information about the error itself, a backtrace, and the chain
@@ -317,7 +317,7 @@ of causing errors. For reporting purposes, this information can be accessed as f
 
 <span class="comment">// Generate an example error to inspect:</span>
 <span class="kw">let</span> <span class="ident">e</span> <span class="op">=</span> <span class="string">&quot;xyzzy&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>()
-    .<span class="ident">chain_err</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">ErrorKind</span>::<span class="ident">InvalidToolchainName</span>(<span class="string">&quot;xyzzy&quot;</span>.<span class="ident">to_string</span>()))
+    .<span class="ident">chain_err</span>(<span class="op">||</span> <span class="ident">ErrorKind</span>::<span class="ident">InvalidToolchainName</span>(<span class="string">&quot;xyzzy&quot;</span>.<span class="ident">to_string</span>()))
     .<span class="ident">unwrap_err</span>();
 
 <span class="comment">// Get the brief description of the error:</span>
@@ -374,7 +374,7 @@ within your own project.</p>
         <span class="kw">for</span> <span class="ident">frame</span> <span class="kw">in</span> <span class="ident">frames</span>.<span class="ident">iter</span>() {
             <span class="kw">for</span> <span class="ident">symbol</span> <span class="kw">in</span> <span class="ident">frame</span>.<span class="ident">symbols</span>().<span class="ident">iter</span>() {
                 <span class="kw">if</span> <span class="kw">let</span> (<span class="prelude-val">Some</span>(<span class="ident">file</span>), <span class="prelude-val">Some</span>(<span class="ident">lineno</span>)) <span class="op">=</span> (<span class="ident">symbol</span>.<span class="ident">filename</span>(), <span class="ident">symbol</span>.<span class="ident">lineno</span>()) {
-                    <span class="kw">if</span> <span class="ident">file</span>.<span class="ident">display</span>().<span class="ident">to_string</span>()[<span class="number">0</span>..<span class="number">3</span>] <span class="op">=</span><span class="op">=</span> <span class="string">&quot;src&quot;</span>.<span class="ident">to_string</span>(){
+                    <span class="kw">if</span> <span class="ident">file</span>.<span class="ident">display</span>().<span class="ident">to_string</span>()[<span class="number">0</span>..<span class="number">3</span>] <span class="op">==</span> <span class="string">&quot;src&quot;</span>.<span class="ident">to_string</span>(){
                         <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}:{}&quot;</span>, <span class="ident">file</span>.<span class="ident">display</span>().<span class="ident">to_string</span>(), <span class="ident">lineno</span>);
                     }
                 }
@@ -383,7 +383,7 @@ within your own project.</p>
     }
 };
 
-<span class="kw">fn</span> <span class="ident">open_file</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">open_file</span>() <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
    <span class="ident">std</span>::<span class="ident">fs</span>::<span class="ident">File</span>::<span class="ident">open</span>(<span class="string">&quot;does_not_exist&quot;</span>)<span class="question-mark">?</span>;
    <span class="prelude-val">Ok</span>(())
 }</pre></div>

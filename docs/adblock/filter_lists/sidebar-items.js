@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["default",""],["regions",""]]});
+initSidebarItems({"mod":[["default",""],["regions",""]],"struct":[["RemoteFilterSource","Describes an online source of adblock rules."]]});

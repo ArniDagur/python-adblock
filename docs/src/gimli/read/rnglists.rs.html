@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/gimli-0.21.0/src/read/rnglists.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>rnglists.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../gimli/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">   1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/gimli-0.22.0/src/read/rnglists.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>rnglists.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../gimli/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
 <span id="4">   4</span>
@@ -1365,7 +1365,7 @@
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">section</span>: <span class="ident">R</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;input</span>, <span class="ident">Endian</span><span class="op">&gt;</span> <span class="ident">DebugRanges</span><span class="op">&lt;</span><span class="ident">EndianSlice</span><span class="op">&lt;</span><span class="lifetime">&#39;input</span>, <span class="ident">Endian</span><span class="op">&gt;</span><span class="op">&gt;</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;input</span>, <span class="ident">Endian</span><span class="op">&gt;</span> <span class="ident">DebugRanges</span><span class="op">&lt;</span><span class="ident">EndianSlice</span><span class="op">&lt;</span><span class="lifetime">&#39;input</span>, <span class="ident">Endian</span><span class="op">&gt;&gt;</span>
 <span class="kw">where</span>
     <span class="ident">Endian</span>: <span class="ident">Endianity</span>,
 {
@@ -1383,23 +1383,23 @@
     <span class="doccomment">/// # let read_debug_ranges_section_somehow = || &amp;buf;</span>
     <span class="doccomment">/// let debug_ranges = DebugRanges::new(read_debug_ranges_section_somehow(), LittleEndian);</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">section</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;input</span> [<span class="ident">u8</span>], <span class="ident">endian</span>: <span class="ident">Endian</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">section</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;input</span> [<span class="ident">u8</span>], <span class="ident">endian</span>: <span class="ident">Endian</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span>::<span class="ident">from</span>(<span class="ident">EndianSlice</span>::<span class="ident">new</span>(<span class="ident">section</span>, <span class="ident">endian</span>))
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">Section</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">DebugRanges</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">id</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">SectionId</span> {
+    <span class="kw">fn</span> <span class="ident">id</span>() <span class="op">-&gt;</span> <span class="ident">SectionId</span> {
         <span class="ident">SectionId</span>::<span class="ident">DebugRanges</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">reader</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">R</span> {
+    <span class="kw">fn</span> <span class="ident">reader</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">R</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">section</span>
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">DebugRanges</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">section</span>: <span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">section</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="ident">DebugRanges</span> { <span class="ident">section</span> }
     }
 }
@@ -1411,7 +1411,7 @@
     <span class="ident">section</span>: <span class="ident">R</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;input</span>, <span class="ident">Endian</span><span class="op">&gt;</span> <span class="ident">DebugRngLists</span><span class="op">&lt;</span><span class="ident">EndianSlice</span><span class="op">&lt;</span><span class="lifetime">&#39;input</span>, <span class="ident">Endian</span><span class="op">&gt;</span><span class="op">&gt;</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;input</span>, <span class="ident">Endian</span><span class="op">&gt;</span> <span class="ident">DebugRngLists</span><span class="op">&lt;</span><span class="ident">EndianSlice</span><span class="op">&lt;</span><span class="lifetime">&#39;input</span>, <span class="ident">Endian</span><span class="op">&gt;&gt;</span>
 <span class="kw">where</span>
     <span class="ident">Endian</span>: <span class="ident">Endianity</span>,
 {
@@ -1430,23 +1430,23 @@
     <span class="doccomment">/// let debug_rnglists =</span>
     <span class="doccomment">///     DebugRngLists::new(read_debug_rnglists_section_somehow(), LittleEndian);</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">section</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;input</span> [<span class="ident">u8</span>], <span class="ident">endian</span>: <span class="ident">Endian</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">section</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;input</span> [<span class="ident">u8</span>], <span class="ident">endian</span>: <span class="ident">Endian</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span>::<span class="ident">from</span>(<span class="ident">EndianSlice</span>::<span class="ident">new</span>(<span class="ident">section</span>, <span class="ident">endian</span>))
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">Section</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">DebugRngLists</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">id</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">SectionId</span> {
+    <span class="kw">fn</span> <span class="ident">id</span>() <span class="op">-&gt;</span> <span class="ident">SectionId</span> {
         <span class="ident">SectionId</span>::<span class="ident">DebugRngLists</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">reader</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">R</span> {
+    <span class="kw">fn</span> <span class="ident">reader</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">R</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">section</span>
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">DebugRngLists</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">section</span>: <span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">section</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="ident">DebugRngLists</span> { <span class="ident">section</span> }
     }
 }
@@ -1458,7 +1458,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">RngListsHeader</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="ident">RngListsHeader</span> {
             <span class="ident">encoding</span>: <span class="ident">Encoding</span> {
                 <span class="ident">format</span>: <span class="ident">Format</span>::<span class="ident">Dwarf32</span>,
@@ -1474,7 +1474,7 @@
     <span class="doccomment">/// Return the serialized size of the table header.</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">size</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
+    <span class="kw">fn</span> <span class="ident">size</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">u8</span> {
         <span class="comment">// initial_length + version + address_size + segment_selector_size + offset_entry_count</span>
         <span class="self">self</span>.<span class="ident">encoding</span>.<span class="ident">format</span>.<span class="ident">initial_length_size</span>() <span class="op">+</span> <span class="number">2</span> <span class="op">+</span> <span class="number">1</span> <span class="op">+</span> <span class="number">1</span> <span class="op">+</span> <span class="number">4</span>
     }
@@ -1482,18 +1482,18 @@
 
 <span class="comment">// TODO: add an iterator over headers in the .debug_rnglists section</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
-<span class="kw">fn</span> <span class="ident">parse_header</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Reader</span><span class="op">&gt;</span>(<span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">RngListsHeader</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">parse_header</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Reader</span><span class="op">&gt;</span>(<span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">RngListsHeader</span><span class="op">&gt;</span> {
     <span class="kw">let</span> (<span class="ident">length</span>, <span class="ident">format</span>) <span class="op">=</span> <span class="ident">input</span>.<span class="ident">read_initial_length</span>()<span class="question-mark">?</span>;
     <span class="ident">input</span>.<span class="ident">truncate</span>(<span class="ident">length</span>)<span class="question-mark">?</span>;
 
     <span class="kw">let</span> <span class="ident">version</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">read_u16</span>()<span class="question-mark">?</span>;
-    <span class="kw">if</span> <span class="ident">version</span> <span class="op">!</span><span class="op">=</span> <span class="number">5</span> {
+    <span class="kw">if</span> <span class="ident">version</span> <span class="op">!=</span> <span class="number">5</span> {
         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">UnknownVersion</span>(<span class="ident">u64</span>::<span class="ident">from</span>(<span class="ident">version</span>)));
     }
 
     <span class="kw">let</span> <span class="ident">address_size</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">read_u8</span>()<span class="question-mark">?</span>;
     <span class="kw">let</span> <span class="ident">segment_selector_size</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">read_u8</span>()<span class="question-mark">?</span>;
-    <span class="kw">if</span> <span class="ident">segment_selector_size</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
+    <span class="kw">if</span> <span class="ident">segment_selector_size</span> <span class="op">!=</span> <span class="number">0</span> {
         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">UnsupportedSegmentSize</span>);
     }
     <span class="kw">let</span> <span class="ident">offset_entry_count</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">read_u32</span>()<span class="question-mark">?</span>;
@@ -1519,7 +1519,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">RangeLists</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Construct a new `RangeLists` instance from the data in the `.debug_ranges` and</span>
     <span class="doccomment">/// `.debug_rnglists` sections.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">debug_ranges</span>: <span class="ident">DebugRanges</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>, <span class="ident">debug_rnglists</span>: <span class="ident">DebugRngLists</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">RangeLists</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">debug_ranges</span>: <span class="ident">DebugRanges</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>, <span class="ident">debug_rnglists</span>: <span class="ident">DebugRngLists</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">RangeLists</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
         <span class="ident">RangeLists</span> {
             <span class="ident">debug_ranges</span>,
             <span class="ident">debug_rnglists</span>,
@@ -1543,9 +1543,9 @@
     <span class="doccomment">///     gimli::EndianSlice::new(&amp;section, gimli::LittleEndian)</span>
     <span class="doccomment">/// });</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">borrow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">F</span>, <span class="ident">R</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">borrow</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">RangeLists</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">borrow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">F</span>, <span class="ident">R</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">borrow</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="ident">RangeLists</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
     <span class="kw">where</span>
-        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">R</span>,
+        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">R</span>,
     {
         <span class="ident">RangeLists</span> {
             <span class="ident">debug_ranges</span>: <span class="ident">borrow</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">debug_ranges</span>.<span class="ident">section</span>).<span class="ident">into</span>(),
@@ -1572,7 +1572,7 @@
         <span class="ident">base_address</span>: <span class="ident">u64</span>,
         <span class="ident">debug_addr</span>: <span class="kw-2">&amp;</span><span class="ident">DebugAddr</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>,
         <span class="ident">debug_addr_base</span>: <span class="ident">DebugAddrBase</span><span class="op">&lt;</span><span class="ident">R</span>::<span class="ident">Offset</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">RngListIter</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    ) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">RngListIter</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;&gt;</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">RngListIter</span>::<span class="ident">new</span>(
             <span class="self">self</span>.<span class="ident">raw_ranges</span>(<span class="ident">offset</span>, <span class="ident">unit_encoding</span>)<span class="question-mark">?</span>,
             <span class="ident">base_address</span>,
@@ -1595,8 +1595,8 @@
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">offset</span>: <span class="ident">RangeListsOffset</span><span class="op">&lt;</span><span class="ident">R</span>::<span class="ident">Offset</span><span class="op">&gt;</span>,
         <span class="ident">unit_encoding</span>: <span class="ident">Encoding</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">RawRngListIter</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">input</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">unit_encoding</span>.<span class="ident">version</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">4</span> {
+    ) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">RawRngListIter</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;&gt;</span> {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">input</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">unit_encoding</span>.<span class="ident">version</span> <span class="op">&lt;=</span> <span class="number">4</span> {
             <span class="self">self</span>.<span class="ident">debug_ranges</span>.<span class="ident">section</span>.<span class="ident">clone</span>()
         } <span class="kw">else</span> {
             <span class="self">self</span>.<span class="ident">debug_rnglists</span>.<span class="ident">section</span>.<span class="ident">clone</span>()
@@ -1619,7 +1619,7 @@
         <span class="ident">unit_encoding</span>: <span class="ident">Encoding</span>,
         <span class="ident">base</span>: <span class="ident">DebugRngListsBase</span><span class="op">&lt;</span><span class="ident">R</span>::<span class="ident">Offset</span><span class="op">&gt;</span>,
         <span class="ident">index</span>: <span class="ident">DebugRngListsIndex</span><span class="op">&lt;</span><span class="ident">R</span>::<span class="ident">Offset</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">RangeListsOffset</span><span class="op">&lt;</span><span class="ident">R</span>::<span class="ident">Offset</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    ) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">RangeListsOffset</span><span class="op">&lt;</span><span class="ident">R</span>::<span class="ident">Offset</span><span class="op">&gt;&gt;</span> {
         <span class="kw">let</span> <span class="ident">format</span> <span class="op">=</span> <span class="ident">unit_encoding</span>.<span class="ident">format</span>;
         <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">debug_rnglists</span>.<span class="ident">section</span>.<span class="ident">clone</span>();
         <span class="ident">input</span>.<span class="ident">skip</span>(<span class="ident">base</span>.<span class="number">0</span>)<span class="question-mark">?</span>;
@@ -1632,10 +1632,10 @@
     }
 
     <span class="doccomment">/// Call `Reader::lookup_offset_id` for each section, and return the first match.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lookup_offset_id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">id</span>: <span class="ident">ReaderOffsetId</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">SectionId</span>, <span class="ident">R</span>::<span class="ident">Offset</span>)<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lookup_offset_id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">id</span>: <span class="ident">ReaderOffsetId</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">SectionId</span>, <span class="ident">R</span>::<span class="ident">Offset</span>)<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">debug_ranges</span>
             .<span class="ident">lookup_offset_id</span>(<span class="ident">id</span>)
-            .<span class="ident">or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">debug_rnglists</span>.<span class="ident">lookup_offset_id</span>(<span class="ident">id</span>))
+            .<span class="ident">or_else</span>(<span class="op">||</span> <span class="self">self</span>.<span class="ident">debug_rnglists</span>.<span class="ident">lookup_offset_id</span>(<span class="ident">id</span>))
     }
 }
 
@@ -1708,7 +1708,7 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">ReaderOffset</span><span class="op">&gt;</span> <span class="ident">RawRngListEntry</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Parse a range entry from `.debug_rnglists`</span>
-    <span class="kw">fn</span> <span class="ident">parse</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Reader</span><span class="op">&lt;</span><span class="ident">Offset</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>, <span class="ident">encoding</span>: <span class="ident">Encoding</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">parse</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Reader</span><span class="op">&lt;</span><span class="ident">Offset</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;&gt;</span>(<span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>, <span class="ident">encoding</span>: <span class="ident">Encoding</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;&gt;</span> {
         <span class="kw">if</span> <span class="ident">encoding</span>.<span class="ident">version</span> <span class="op">&lt;</span> <span class="number">5</span> {
             <span class="kw">let</span> <span class="ident">range</span> <span class="op">=</span> <span class="ident">RawRange</span>::<span class="ident">parse</span>(<span class="ident">input</span>, <span class="ident">encoding</span>.<span class="ident">address_size</span>)<span class="question-mark">?</span>;
             <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="kw">if</span> <span class="ident">range</span>.<span class="ident">is_end</span>() {
@@ -1723,34 +1723,34 @@
             });
         }
         <span class="prelude-val">Ok</span>(<span class="kw">match</span> <span class="ident">constants</span>::<span class="ident">DwRle</span>(<span class="ident">input</span>.<span class="ident">read_u8</span>()<span class="question-mark">?</span>) {
-            <span class="ident">constants</span>::<span class="ident">DW_RLE_end_of_list</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
-            <span class="ident">constants</span>::<span class="ident">DW_RLE_base_addressx</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">RawRngListEntry</span>::<span class="ident">BaseAddressx</span> {
+            <span class="ident">constants</span>::<span class="ident">DW_RLE_end_of_list</span> <span class="op">=&gt;</span> <span class="prelude-val">None</span>,
+            <span class="ident">constants</span>::<span class="ident">DW_RLE_base_addressx</span> <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">RawRngListEntry</span>::<span class="ident">BaseAddressx</span> {
                 <span class="ident">addr</span>: <span class="ident">DebugAddrIndex</span>(<span class="ident">input</span>.<span class="ident">read_uleb128</span>().<span class="ident">and_then</span>(<span class="ident">R</span>::<span class="ident">Offset</span>::<span class="ident">from_u64</span>)<span class="question-mark">?</span>),
             }),
-            <span class="ident">constants</span>::<span class="ident">DW_RLE_startx_endx</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">RawRngListEntry</span>::<span class="ident">StartxEndx</span> {
+            <span class="ident">constants</span>::<span class="ident">DW_RLE_startx_endx</span> <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">RawRngListEntry</span>::<span class="ident">StartxEndx</span> {
                 <span class="ident">begin</span>: <span class="ident">DebugAddrIndex</span>(<span class="ident">input</span>.<span class="ident">read_uleb128</span>().<span class="ident">and_then</span>(<span class="ident">R</span>::<span class="ident">Offset</span>::<span class="ident">from_u64</span>)<span class="question-mark">?</span>),
                 <span class="ident">end</span>: <span class="ident">DebugAddrIndex</span>(<span class="ident">input</span>.<span class="ident">read_uleb128</span>().<span class="ident">and_then</span>(<span class="ident">R</span>::<span class="ident">Offset</span>::<span class="ident">from_u64</span>)<span class="question-mark">?</span>),
             }),
-            <span class="ident">constants</span>::<span class="ident">DW_RLE_startx_length</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">RawRngListEntry</span>::<span class="ident">StartxLength</span> {
+            <span class="ident">constants</span>::<span class="ident">DW_RLE_startx_length</span> <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">RawRngListEntry</span>::<span class="ident">StartxLength</span> {
                 <span class="ident">begin</span>: <span class="ident">DebugAddrIndex</span>(<span class="ident">input</span>.<span class="ident">read_uleb128</span>().<span class="ident">and_then</span>(<span class="ident">R</span>::<span class="ident">Offset</span>::<span class="ident">from_u64</span>)<span class="question-mark">?</span>),
                 <span class="ident">length</span>: <span class="ident">input</span>.<span class="ident">read_uleb128</span>()<span class="question-mark">?</span>,
             }),
-            <span class="ident">constants</span>::<span class="ident">DW_RLE_offset_pair</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">RawRngListEntry</span>::<span class="ident">OffsetPair</span> {
+            <span class="ident">constants</span>::<span class="ident">DW_RLE_offset_pair</span> <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">RawRngListEntry</span>::<span class="ident">OffsetPair</span> {
                 <span class="ident">begin</span>: <span class="ident">input</span>.<span class="ident">read_uleb128</span>()<span class="question-mark">?</span>,
                 <span class="ident">end</span>: <span class="ident">input</span>.<span class="ident">read_uleb128</span>()<span class="question-mark">?</span>,
             }),
-            <span class="ident">constants</span>::<span class="ident">DW_RLE_base_address</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">RawRngListEntry</span>::<span class="ident">BaseAddress</span> {
+            <span class="ident">constants</span>::<span class="ident">DW_RLE_base_address</span> <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">RawRngListEntry</span>::<span class="ident">BaseAddress</span> {
                 <span class="ident">addr</span>: <span class="ident">input</span>.<span class="ident">read_address</span>(<span class="ident">encoding</span>.<span class="ident">address_size</span>)<span class="question-mark">?</span>,
             }),
-            <span class="ident">constants</span>::<span class="ident">DW_RLE_start_end</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">RawRngListEntry</span>::<span class="ident">StartEnd</span> {
+            <span class="ident">constants</span>::<span class="ident">DW_RLE_start_end</span> <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">RawRngListEntry</span>::<span class="ident">StartEnd</span> {
                 <span class="ident">begin</span>: <span class="ident">input</span>.<span class="ident">read_address</span>(<span class="ident">encoding</span>.<span class="ident">address_size</span>)<span class="question-mark">?</span>,
                 <span class="ident">end</span>: <span class="ident">input</span>.<span class="ident">read_address</span>(<span class="ident">encoding</span>.<span class="ident">address_size</span>)<span class="question-mark">?</span>,
             }),
-            <span class="ident">constants</span>::<span class="ident">DW_RLE_start_length</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">RawRngListEntry</span>::<span class="ident">StartLength</span> {
+            <span class="ident">constants</span>::<span class="ident">DW_RLE_start_length</span> <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">RawRngListEntry</span>::<span class="ident">StartLength</span> {
                 <span class="ident">begin</span>: <span class="ident">input</span>.<span class="ident">read_address</span>(<span class="ident">encoding</span>.<span class="ident">address_size</span>)<span class="question-mark">?</span>,
                 <span class="ident">length</span>: <span class="ident">input</span>.<span class="ident">read_uleb128</span>()<span class="question-mark">?</span>,
             }),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="kw">_</span> <span class="op">=&gt;</span> {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">InvalidAddressRange</span>);
             }
         })
@@ -1759,24 +1759,24 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Reader</span><span class="op">&gt;</span> <span class="ident">RawRngListIter</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Construct a `RawRngListIter`.</span>
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">input</span>: <span class="ident">R</span>, <span class="ident">encoding</span>: <span class="ident">Encoding</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">RawRngListIter</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">input</span>: <span class="ident">R</span>, <span class="ident">encoding</span>: <span class="ident">Encoding</span>) <span class="op">-&gt;</span> <span class="ident">RawRngListIter</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
         <span class="ident">RawRngListIter</span> { <span class="ident">input</span>, <span class="ident">encoding</span> }
     }
 
     <span class="doccomment">/// Advance the iterator to the next range.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">RawRngListEntry</span><span class="op">&lt;</span><span class="ident">R</span>::<span class="ident">Offset</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">RawRngListEntry</span><span class="op">&lt;</span><span class="ident">R</span>::<span class="ident">Offset</span><span class="op">&gt;&gt;</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">input</span>.<span class="ident">is_empty</span>() {
             <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>);
         }
 
         <span class="kw">match</span> <span class="ident">RawRngListEntry</span>::<span class="ident">parse</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">input</span>, <span class="self">self</span>.<span class="ident">encoding</span>) {
-            <span class="prelude-val">Ok</span>(<span class="ident">range</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="prelude-val">Ok</span>(<span class="ident">range</span>) <span class="op">=&gt;</span> {
                 <span class="kw">if</span> <span class="ident">range</span>.<span class="ident">is_none</span>() {
                     <span class="self">self</span>.<span class="ident">input</span>.<span class="ident">empty</span>();
                 }
                 <span class="prelude-val">Ok</span>(<span class="ident">range</span>)
             }
-            <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> {
                 <span class="self">self</span>.<span class="ident">input</span>.<span class="ident">empty</span>();
                 <span class="prelude-val">Err</span>(<span class="ident">e</span>)
             }
@@ -1789,7 +1789,7 @@
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">RawRngListEntry</span><span class="op">&lt;</span><span class="ident">R</span>::<span class="ident">Offset</span><span class="op">&gt;</span>;
     <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">Error</span>;
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">core</span>::<span class="ident">result</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Item</span><span class="op">&gt;</span>, <span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> ::<span class="ident">core</span>::<span class="ident">result</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Item</span><span class="op">&gt;</span>, <span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="ident">RawRngListIter</span>::<span class="ident">next</span>(<span class="self">self</span>)
     }
 }
@@ -1814,7 +1814,7 @@
         <span class="ident">base_address</span>: <span class="ident">u64</span>,
         <span class="ident">debug_addr</span>: <span class="ident">DebugAddr</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>,
         <span class="ident">debug_addr_base</span>: <span class="ident">DebugAddrBase</span><span class="op">&lt;</span><span class="ident">R</span>::<span class="ident">Offset</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">RngListIter</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
+    ) <span class="op">-&gt;</span> <span class="ident">RngListIter</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
         <span class="ident">RngListIter</span> {
             <span class="ident">raw</span>,
             <span class="ident">base_address</span>,
@@ -1824,46 +1824,46 @@
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">get_address</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">DebugAddrIndex</span><span class="op">&lt;</span><span class="ident">R</span>::<span class="ident">Offset</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">get_address</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">DebugAddrIndex</span><span class="op">&lt;</span><span class="ident">R</span>::<span class="ident">Offset</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">debug_addr</span>
             .<span class="ident">get_address</span>(<span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">encoding</span>.<span class="ident">address_size</span>, <span class="self">self</span>.<span class="ident">debug_addr_base</span>, <span class="ident">index</span>)
     }
 
     <span class="doccomment">/// Advance the iterator to the next range.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Range</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Range</span><span class="op">&gt;&gt;</span> {
         <span class="kw">loop</span> {
             <span class="kw">let</span> <span class="ident">raw_range</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">next</span>()<span class="question-mark">?</span> {
-                <span class="prelude-val">Some</span>(<span class="ident">range</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">range</span>,
-                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>),
+                <span class="prelude-val">Some</span>(<span class="ident">range</span>) <span class="op">=&gt;</span> <span class="ident">range</span>,
+                <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>),
             };
 
             <span class="kw">let</span> <span class="ident">range</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">raw_range</span> {
-                <span class="ident">RawRngListEntry</span>::<span class="ident">BaseAddress</span> { <span class="ident">addr</span> } <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">RawRngListEntry</span>::<span class="ident">BaseAddress</span> { <span class="ident">addr</span> } <span class="op">=&gt;</span> {
                     <span class="self">self</span>.<span class="ident">base_address</span> <span class="op">=</span> <span class="ident">addr</span>;
                     <span class="kw">continue</span>;
                 }
-                <span class="ident">RawRngListEntry</span>::<span class="ident">BaseAddressx</span> { <span class="ident">addr</span> } <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">RawRngListEntry</span>::<span class="ident">BaseAddressx</span> { <span class="ident">addr</span> } <span class="op">=&gt;</span> {
                     <span class="self">self</span>.<span class="ident">base_address</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">get_address</span>(<span class="ident">addr</span>)<span class="question-mark">?</span>;
                     <span class="kw">continue</span>;
                 }
-                <span class="ident">RawRngListEntry</span>::<span class="ident">StartxEndx</span> { <span class="ident">begin</span>, <span class="ident">end</span> } <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">RawRngListEntry</span>::<span class="ident">StartxEndx</span> { <span class="ident">begin</span>, <span class="ident">end</span> } <span class="op">=&gt;</span> {
                     <span class="kw">let</span> <span class="ident">begin</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">get_address</span>(<span class="ident">begin</span>)<span class="question-mark">?</span>;
                     <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">get_address</span>(<span class="ident">end</span>)<span class="question-mark">?</span>;
                     <span class="ident">Range</span> { <span class="ident">begin</span>, <span class="ident">end</span> }
                 }
-                <span class="ident">RawRngListEntry</span>::<span class="ident">StartxLength</span> { <span class="ident">begin</span>, <span class="ident">length</span> } <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">RawRngListEntry</span>::<span class="ident">StartxLength</span> { <span class="ident">begin</span>, <span class="ident">length</span> } <span class="op">=&gt;</span> {
                     <span class="kw">let</span> <span class="ident">begin</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">get_address</span>(<span class="ident">begin</span>)<span class="question-mark">?</span>;
                     <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="ident">begin</span> <span class="op">+</span> <span class="ident">length</span>;
                     <span class="ident">Range</span> { <span class="ident">begin</span>, <span class="ident">end</span> }
                 }
                 <span class="ident">RawRngListEntry</span>::<span class="ident">AddressOrOffsetPair</span> { <span class="ident">begin</span>, <span class="ident">end</span> }
-                <span class="op">|</span> <span class="ident">RawRngListEntry</span>::<span class="ident">OffsetPair</span> { <span class="ident">begin</span>, <span class="ident">end</span> } <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="op">|</span> <span class="ident">RawRngListEntry</span>::<span class="ident">OffsetPair</span> { <span class="ident">begin</span>, <span class="ident">end</span> } <span class="op">=&gt;</span> {
                     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">range</span> <span class="op">=</span> <span class="ident">Range</span> { <span class="ident">begin</span>, <span class="ident">end</span> };
                     <span class="ident">range</span>.<span class="ident">add_base_address</span>(<span class="self">self</span>.<span class="ident">base_address</span>, <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">encoding</span>.<span class="ident">address_size</span>);
                     <span class="ident">range</span>
                 }
-                <span class="ident">RawRngListEntry</span>::<span class="ident">StartEnd</span> { <span class="ident">begin</span>, <span class="ident">end</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Range</span> { <span class="ident">begin</span>, <span class="ident">end</span> },
-                <span class="ident">RawRngListEntry</span>::<span class="ident">StartLength</span> { <span class="ident">begin</span>, <span class="ident">length</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Range</span> {
+                <span class="ident">RawRngListEntry</span>::<span class="ident">StartEnd</span> { <span class="ident">begin</span>, <span class="ident">end</span> } <span class="op">=&gt;</span> <span class="ident">Range</span> { <span class="ident">begin</span>, <span class="ident">end</span> },
+                <span class="ident">RawRngListEntry</span>::<span class="ident">StartLength</span> { <span class="ident">begin</span>, <span class="ident">length</span> } <span class="op">=&gt;</span> <span class="ident">Range</span> {
                     <span class="ident">begin</span>,
                     <span class="ident">end</span>: <span class="ident">begin</span> <span class="op">+</span> <span class="ident">length</span>,
                 },
@@ -1884,7 +1884,7 @@
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">Range</span>;
     <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">Error</span>;
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> ::<span class="ident">core</span>::<span class="ident">result</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Item</span><span class="op">&gt;</span>, <span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> ::<span class="ident">core</span>::<span class="ident">result</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Item</span><span class="op">&gt;</span>, <span class="self">Self</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="ident">RngListIter</span>::<span class="ident">next</span>(<span class="self">self</span>)
     }
 }
@@ -1904,8 +1904,8 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// This will only occur for raw ranges.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_end</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">begin</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="self">self</span>.<span class="ident">end</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_end</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+        <span class="self">self</span>.<span class="ident">begin</span> <span class="op">==</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">end</span> <span class="op">==</span> <span class="number">0</span>
     }
 
     <span class="doccomment">/// Check if this is a base address selection entry.</span>
@@ -1913,14 +1913,14 @@
     <span class="doccomment">/// A base address selection entry changes the base address that subsequent</span>
     <span class="doccomment">/// range entries are relative to.  This will only occur for raw ranges.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_base_address</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">address_size</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">begin</span> <span class="op">=</span><span class="op">=</span> <span class="op">!</span><span class="number">0</span> <span class="op">&gt;</span><span class="op">&gt;</span> (<span class="number">64</span> <span class="op">-</span> <span class="ident">address_size</span> <span class="op">*</span> <span class="number">8</span>)
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_base_address</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">address_size</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+        <span class="self">self</span>.<span class="ident">begin</span> <span class="op">==</span> <span class="op">!</span><span class="number">0</span> <span class="op">&gt;&gt;</span> (<span class="number">64</span> <span class="op">-</span> <span class="ident">address_size</span> <span class="op">*</span> <span class="number">8</span>)
     }
 
     <span class="doccomment">/// Parse an address range entry from `.debug_ranges` or `.debug_loc`.</span>
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Reader</span><span class="op">&gt;</span>(<span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>, <span class="ident">address_size</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">RawRange</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Reader</span><span class="op">&gt;</span>(<span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>, <span class="ident">address_size</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">RawRange</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">begin</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">read_address</span>(<span class="ident">address_size</span>)<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">read_address</span>(<span class="ident">address_size</span>)<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">range</span> <span class="op">=</span> <span class="ident">RawRange</span> { <span class="ident">begin</span>, <span class="ident">end</span> };
@@ -1942,7 +1942,7 @@
     <span class="doccomment">/// Add a base address to this range.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">add_base_address</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">base_address</span>: <span class="ident">u64</span>, <span class="ident">address_size</span>: <span class="ident">u8</span>) {
-        <span class="kw">let</span> <span class="ident">mask</span> <span class="op">=</span> <span class="op">!</span><span class="number">0</span> <span class="op">&gt;</span><span class="op">&gt;</span> (<span class="number">64</span> <span class="op">-</span> <span class="ident">address_size</span> <span class="op">*</span> <span class="number">8</span>);
+        <span class="kw">let</span> <span class="ident">mask</span> <span class="op">=</span> <span class="op">!</span><span class="number">0</span> <span class="op">&gt;&gt;</span> (<span class="number">64</span> <span class="op">-</span> <span class="ident">address_size</span> <span class="op">*</span> <span class="number">8</span>);
         <span class="self">self</span>.<span class="ident">begin</span> <span class="op">=</span> <span class="ident">base_address</span>.<span class="ident">wrapping_add</span>(<span class="self">self</span>.<span class="ident">begin</span>) <span class="op">&amp;</span> <span class="ident">mask</span>;
         <span class="self">self</span>.<span class="ident">end</span> <span class="op">=</span> <span class="ident">base_address</span>.<span class="ident">wrapping_add</span>(<span class="self">self</span>.<span class="ident">end</span>) <span class="op">&amp;</span> <span class="ident">mask</span>;
     }
@@ -2649,8 +2649,8 @@
             <span class="ident">debug_addr</span>,
             <span class="ident">debug_addr_base</span>,
         ) {
-            <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">UnexpectedEof</span>(<span class="kw">_</span>)) <span class="op">=</span><span class="op">&gt;</span> {}
-            <span class="ident">otherwise</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Unexpected result: {:?}&quot;</span>, <span class="ident">otherwise</span>),
+            <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">UnexpectedEof</span>(<span class="kw">_</span>)) <span class="op">=&gt;</span> {}
+            <span class="ident">otherwise</span> <span class="op">=&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Unexpected result: {:?}&quot;</span>, <span class="ident">otherwise</span>),
         }
     }
 

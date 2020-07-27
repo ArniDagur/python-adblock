@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/pyo3-0.10.1/src/python.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>python.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../pyo3/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/pyo3-0.10.1/src/python.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>python.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../pyo3/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -626,7 +626,7 @@
     <span class="doccomment">/// The lifetime `&#39;p` must be shorter than the period you *assume* that you have GIL.</span>
     <span class="doccomment">/// I.e., `Python&lt;&#39;static&gt;` is always *really* unsafe.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">assume_gil_acquired</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">assume_gil_acquired</span>() <span class="op">-&gt;</span> <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span> {
         <span class="ident">Python</span>(<span class="ident">PhantomData</span>)
     }
 
@@ -635,7 +635,7 @@
     <span class="doccomment">/// If the Python runtime is not already initialized, this function will initialize it.</span>
     <span class="doccomment">/// See [prepare_freethreaded_python()](fn.prepare_freethreaded_python.html) for details.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">acquire_gil</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">GILGuard</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">acquire_gil</span>() <span class="op">-&gt;</span> <span class="ident">GILGuard</span> {
         <span class="ident">GILGuard</span>::<span class="ident">acquire</span>()
     }
 
@@ -694,9 +694,9 @@
     <span class="doccomment">///     });</span>
     <span class="doccomment">/// }</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">allow_threads</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">allow_threads</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="ident">T</span>
     <span class="kw">where</span>
-        <span class="ident">F</span>: <span class="ident">Send</span> <span class="op">+</span> <span class="ident">FnOnce</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
+        <span class="ident">F</span>: <span class="ident">Send</span> <span class="op">+</span> <span class="ident">FnOnce</span>() <span class="op">-&gt;</span> <span class="ident">T</span>,
     {
         <span class="comment">// The `Send` bound on the closure prevents the user from</span>
         <span class="comment">// transferring the `Python` token into the closure.</span>
@@ -736,7 +736,7 @@
         <span class="ident">code</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">globals</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">PyDict</span><span class="op">&gt;</span>,
         <span class="ident">locals</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">PyDict</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">PyAny</span><span class="op">&gt;</span> {
+    ) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">PyAny</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">run_code</span>(<span class="ident">code</span>, <span class="ident">ffi</span>::<span class="ident">Py_eval_input</span>, <span class="ident">globals</span>, <span class="ident">locals</span>)
     }
 
@@ -769,7 +769,7 @@
         <span class="ident">code</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">globals</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">PyDict</span><span class="op">&gt;</span>,
         <span class="ident">locals</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">PyDict</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    ) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">run_code</span>(<span class="ident">code</span>, <span class="ident">ffi</span>::<span class="ident">Py_file_input</span>, <span class="ident">globals</span>, <span class="ident">locals</span>);
         <span class="ident">res</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">obj</span><span class="op">|</span> {
             <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">obj</span>.<span class="ident">is_none</span>());
@@ -789,7 +789,7 @@
         <span class="ident">start</span>: <span class="ident">c_int</span>,
         <span class="ident">globals</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">PyDict</span><span class="op">&gt;</span>,
         <span class="ident">locals</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">PyDict</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">PyAny</span><span class="op">&gt;</span> {
+    ) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">PyAny</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">code</span> <span class="op">=</span> <span class="ident">CString</span>::<span class="ident">new</span>(<span class="ident">code</span>)<span class="question-mark">?</span>;
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">mptr</span> <span class="op">=</span> <span class="ident">ffi</span>::<span class="ident">PyImport_AddModule</span>(<span class="string">&quot;__main__\0&quot;</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span>);
@@ -799,7 +799,7 @@
 
             <span class="kw">let</span> <span class="ident">globals</span> <span class="op">=</span> <span class="ident">globals</span>
                 .<span class="ident">map</span>(<span class="ident">AsPyPointer</span>::<span class="ident">as_ptr</span>)
-                .<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">ffi</span>::<span class="ident">PyModule_GetDict</span>(<span class="ident">mptr</span>));
+                .<span class="ident">unwrap_or_else</span>(<span class="op">||</span> <span class="ident">ffi</span>::<span class="ident">PyModule_GetDict</span>(<span class="ident">mptr</span>));
             <span class="kw">let</span> <span class="ident">locals</span> <span class="op">=</span> <span class="ident">locals</span>.<span class="ident">map</span>(<span class="ident">AsPyPointer</span>::<span class="ident">as_ptr</span>).<span class="ident">unwrap_or</span>(<span class="ident">globals</span>);
 
             <span class="kw">let</span> <span class="ident">res_ptr</span> <span class="op">=</span> <span class="ident">ffi</span>::<span class="ident">PyRun_StringFlags</span>(
@@ -815,7 +815,7 @@
     }
 
     <span class="doccomment">/// Gets the Python type object for type `T`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_type</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">PyType</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_type</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">PyType</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">PyTypeObject</span>,
     {
@@ -823,21 +823,21 @@
     }
 
     <span class="doccomment">/// Imports the Python module with the specified name.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">import</span>(<span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">PyModule</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">import</span>(<span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">PyModule</span><span class="op">&gt;</span> {
         <span class="ident">PyModule</span>::<span class="ident">import</span>(<span class="self">self</span>, <span class="ident">name</span>)
     }
 
     <span class="doccomment">/// Checks whether `obj` is an instance of type `T`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This is equivalent to the Python `isinstance` function.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_instance</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PyTypeObject</span>, <span class="ident">V</span>: <span class="ident">AsPyPointer</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">obj</span>: <span class="kw-2">&amp;</span><span class="ident">V</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_instance</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PyTypeObject</span>, <span class="ident">V</span>: <span class="ident">AsPyPointer</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">obj</span>: <span class="kw-2">&amp;</span><span class="ident">V</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
         <span class="ident">T</span>::<span class="ident">type_object</span>().<span class="ident">as_ref</span>(<span class="self">self</span>).<span class="ident">is_instance</span>(<span class="ident">obj</span>)
     }
 
     <span class="doccomment">/// Checks whether type `T` is subclass of type `U`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This is equivalent to the Python `issubclass` function.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_subclass</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_subclass</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">PyTypeObject</span>,
         <span class="ident">U</span>: <span class="ident">PyTypeObject</span>,
@@ -848,14 +848,14 @@
     <span class="doccomment">/// Gets the Python builtin value `None`.</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span> <span class="comment">// the Python keyword starts with uppercase</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="prelude-val">None</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyObject</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="prelude-val">None</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">PyObject</span> {
         <span class="kw">unsafe</span> { <span class="ident">PyObject</span>::<span class="ident">from_borrowed_ptr</span>(<span class="self">self</span>, <span class="ident">ffi</span>::<span class="ident">Py_None</span>()) }
     }
 
     <span class="doccomment">/// Gets the Python builtin value `NotImplemented`.</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span> <span class="comment">// the Python keyword starts with uppercase</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">NotImplemented</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyObject</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">NotImplemented</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">PyObject</span> {
         <span class="kw">unsafe</span> { <span class="ident">PyObject</span>::<span class="ident">from_borrowed_ptr</span>(<span class="self">self</span>, <span class="ident">ffi</span>::<span class="ident">Py_NotImplemented</span>()) }
     }
 
@@ -911,14 +911,14 @@
     <span class="doccomment">///   after the `GILPool` is dropped, unless they are converted to `Py&lt;T&gt;` *before* the pool</span>
     <span class="doccomment">///   is dropped.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new_pool</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">GILPool</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new_pool</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">GILPool</span> {
         <span class="ident">GILPool</span>::<span class="ident">new</span>()
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span> <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Registers the object in the release pool, and tries to downcast to specific type.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">checked_cast_as</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">obj</span>: <span class="ident">PyObject</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">T</span>, <span class="ident">PyDowncastError</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">checked_cast_as</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">obj</span>: <span class="ident">PyObject</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">T</span>, <span class="ident">PyDowncastError</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">PyTryFrom</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>,
     {
@@ -928,7 +928,7 @@
 
     <span class="doccomment">/// Registers the object in the release pool, and does an unchecked downcast</span>
     <span class="doccomment">/// to the specific type.</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">cast_as</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">obj</span>: <span class="ident">PyObject</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">T</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">cast_as</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">obj</span>: <span class="ident">PyObject</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">T</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">PyNativeType</span> <span class="op">+</span> <span class="ident">PyTypeInfo</span>,
     {
@@ -939,7 +939,7 @@
     <span class="doccomment">/// Registers the object pointer in the release pool,</span>
     <span class="doccomment">/// and does an unchecked downcast to the specific type.</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">wrong_self_convention</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_owned_ptr</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">T</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_owned_ptr</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">T</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">FromPyPointer</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>,
     {
@@ -951,7 +951,7 @@
     <span class="doccomment">/// Returns `Err(PyErr)` if the pointer is NULL.</span>
     <span class="doccomment">/// Does an unchecked downcast to the specific type.</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">wrong_self_convention</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_owned_ptr_or_err</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">T</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_owned_ptr_or_err</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">T</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">FromPyPointer</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>,
     {
@@ -963,7 +963,7 @@
     <span class="doccomment">/// Returns `None` if the pointer is NULL.</span>
     <span class="doccomment">/// Does an unchecked downcast to the specific type.</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">wrong_self_convention</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_owned_ptr_or_opt</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">T</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_owned_ptr_or_opt</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">T</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">FromPyPointer</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>,
     {
@@ -975,7 +975,7 @@
     <span class="doccomment">/// Panics if the pointer is NULL.</span>
     <span class="doccomment">/// Does an unchecked downcast to the specific type.</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">wrong_self_convention</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_borrowed_ptr</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">T</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_borrowed_ptr</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">T</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">FromPyPointer</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>,
     {
@@ -987,7 +987,7 @@
     <span class="doccomment">/// Returns `Err(PyErr)` if the pointer is NULL.</span>
     <span class="doccomment">/// Does an unchecked downcast to the specific type.</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">wrong_self_convention</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_borrowed_ptr_or_err</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">T</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_borrowed_ptr_or_err</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">T</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">FromPyPointer</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>,
     {
@@ -999,7 +999,7 @@
     <span class="doccomment">/// Returns `None` if the pointer is NULL.</span>
     <span class="doccomment">/// Does an unchecked downcast to the specific type.</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">wrong_self_convention</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_borrowed_ptr_or_opt</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">T</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_borrowed_ptr_or_opt</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">T</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">FromPyPointer</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>,
     {
@@ -1009,7 +1009,7 @@
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
     <span class="doccomment">/// Passes value ownership to `Python` object and get reference back.</span>
     <span class="doccomment">/// Value get cleaned up on the GIL release.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">register_any</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="lifetime">&#39;static</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">ob</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">T</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">register_any</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="lifetime">&#39;static</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">ob</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">T</span> {
         <span class="kw">unsafe</span> { <span class="ident">gil</span>::<span class="ident">register_any</span>(<span class="ident">ob</span>) }
     }
 
@@ -1113,9 +1113,9 @@
         <span class="kw">let</span> <span class="ident">gil</span> <span class="op">=</span> <span class="ident">Python</span>::<span class="ident">acquire_gil</span>();
         <span class="kw">let</span> <span class="ident">py</span> <span class="op">=</span> <span class="ident">gil</span>.<span class="ident">python</span>();
 
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">std</span>::<span class="ident">panic</span>::<span class="ident">catch_unwind</span>(<span class="op">|</span><span class="op">|</span> <span class="kw">unsafe</span> {
+        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">std</span>::<span class="ident">panic</span>::<span class="ident">catch_unwind</span>(<span class="op">||</span> <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="ident">py</span> <span class="op">=</span> <span class="ident">Python</span>::<span class="ident">assume_gil_acquired</span>();
-            <span class="ident">py</span>.<span class="ident">allow_threads</span>(<span class="op">|</span><span class="op">|</span> {
+            <span class="ident">py</span>.<span class="ident">allow_threads</span>(<span class="op">||</span> {
                 <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;There was a panic!&quot;</span>);
             });
         });
@@ -1126,7 +1126,7 @@
         <span class="comment">// If allow_threads is implemented correctly, this thread still owns the GIL here</span>
         <span class="comment">// so the following Python calls should not cause crashes.</span>
         <span class="kw">let</span> <span class="ident">list</span> <span class="op">=</span> <span class="ident">PyList</span>::<span class="ident">new</span>(<span class="ident">py</span>, <span class="kw-2">&amp;</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">list</span>.<span class="ident">extract</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(), <span class="macro">vec</span><span class="macro">!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
+        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">list</span>.<span class="ident">extract</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;&gt;</span>().<span class="ident">unwrap</span>(), <span class="macro">vec</span><span class="macro">!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
     }
 }
 </pre></div>

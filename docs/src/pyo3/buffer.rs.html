@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/pyo3-0.10.1/src/buffer.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>buffer.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css"><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../pyo3/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/pyo3-0.10.1/src/buffer.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>buffer.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../pyo3/index.html'><div class='logo-container'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -774,7 +774,7 @@
 <span class="doccomment">/// Allows access to the underlying buffer used by a python object such as `bytes`, `bytearray` or `array.array`.</span>
 <span class="comment">// use Pin&lt;Box&gt; because Python expects that the Py_buffer struct has a stable memory address</span>
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PyBuffer</span>(<span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">Py_buffer</span><span class="op">&gt;</span><span class="op">&gt;</span>);
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PyBuffer</span>(<span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">Py_buffer</span><span class="op">&gt;&gt;</span>);
 
 <span class="comment">// PyBuffer is thread-safe: the shape of the buffer is immutable while a Py_buffer exists.</span>
 <span class="comment">// Accessing the buffer contents is protected using the GIL.</span>
@@ -791,15 +791,15 @@
 }
 
 <span class="kw">impl</span> <span class="ident">ElementType</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_format</span>(<span class="ident">format</span>: <span class="kw-2">&amp;</span><span class="ident">CStr</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ElementType</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_format</span>(<span class="ident">format</span>: <span class="kw-2">&amp;</span><span class="ident">CStr</span>) <span class="op">-&gt;</span> <span class="ident">ElementType</span> {
         <span class="kw">let</span> <span class="ident">slice</span> <span class="op">=</span> <span class="ident">format</span>.<span class="ident">to_bytes</span>();
-        <span class="kw">if</span> <span class="ident">slice</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">1</span> {
+        <span class="kw">if</span> <span class="ident">slice</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">1</span> {
             <span class="ident">native_element_type_from_type_char</span>(<span class="ident">slice</span>[<span class="number">0</span>])
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">slice</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">2</span> {
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">slice</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">2</span> {
             <span class="kw">match</span> <span class="ident">slice</span>[<span class="number">0</span>] {
-                <span class="string">b&#39;@&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">native_element_type_from_type_char</span>(<span class="ident">slice</span>[<span class="number">1</span>]),
-                <span class="string">b&#39;=&#39;</span> <span class="op">|</span> <span class="string">b&#39;&lt;&#39;</span> <span class="op">|</span> <span class="string">b&#39;&gt;&#39;</span> <span class="op">|</span> <span class="string">b&#39;!&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">standard_element_type_from_type_char</span>(<span class="ident">slice</span>[<span class="number">1</span>]),
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType</span>::<span class="ident">Unknown</span>,
+                <span class="string">b&#39;@&#39;</span> <span class="op">=&gt;</span> <span class="ident">native_element_type_from_type_char</span>(<span class="ident">slice</span>[<span class="number">1</span>]),
+                <span class="string">b&#39;=&#39;</span> <span class="op">|</span> <span class="string">b&#39;&lt;&#39;</span> <span class="op">|</span> <span class="string">b&#39;&gt;&#39;</span> <span class="op">|</span> <span class="string">b&#39;!&#39;</span> <span class="op">=&gt;</span> <span class="ident">standard_element_type_from_type_char</span>(<span class="ident">slice</span>[<span class="number">1</span>]),
+                <span class="kw">_</span> <span class="op">=&gt;</span> <span class="ident">ElementType</span>::<span class="ident">Unknown</span>,
             }
         } <span class="kw">else</span> {
             <span class="ident">ElementType</span>::<span class="ident">Unknown</span>
@@ -807,88 +807,88 @@
     }
 }
 
-<span class="kw">fn</span> <span class="ident">native_element_type_from_type_char</span>(<span class="ident">type_char</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ElementType</span> {
+<span class="kw">fn</span> <span class="ident">native_element_type_from_type_char</span>(<span class="ident">type_char</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="ident">ElementType</span> {
     <span class="kw">use</span> <span class="self">self</span>::<span class="ident">ElementType</span>::<span class="kw-2">*</span>;
     <span class="kw">match</span> <span class="ident">type_char</span> {
-        <span class="string">b&#39;c&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">UnsignedInteger</span> {
+        <span class="string">b&#39;c&#39;</span> <span class="op">=&gt;</span> <span class="ident">UnsignedInteger</span> {
             <span class="ident">bytes</span>: <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">raw</span>::<span class="ident">c_char</span><span class="op">&gt;</span>(),
         },
-        <span class="string">b&#39;b&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">SignedInteger</span> {
+        <span class="string">b&#39;b&#39;</span> <span class="op">=&gt;</span> <span class="ident">SignedInteger</span> {
             <span class="ident">bytes</span>: <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">raw</span>::<span class="ident">c_schar</span><span class="op">&gt;</span>(),
         },
-        <span class="string">b&#39;B&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">UnsignedInteger</span> {
+        <span class="string">b&#39;B&#39;</span> <span class="op">=&gt;</span> <span class="ident">UnsignedInteger</span> {
             <span class="ident">bytes</span>: <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">raw</span>::<span class="ident">c_uchar</span><span class="op">&gt;</span>(),
         },
-        <span class="string">b&#39;?&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Bool</span>,
-        <span class="string">b&#39;h&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">SignedInteger</span> {
+        <span class="string">b&#39;?&#39;</span> <span class="op">=&gt;</span> <span class="ident">Bool</span>,
+        <span class="string">b&#39;h&#39;</span> <span class="op">=&gt;</span> <span class="ident">SignedInteger</span> {
             <span class="ident">bytes</span>: <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">raw</span>::<span class="ident">c_short</span><span class="op">&gt;</span>(),
         },
-        <span class="string">b&#39;H&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">UnsignedInteger</span> {
+        <span class="string">b&#39;H&#39;</span> <span class="op">=&gt;</span> <span class="ident">UnsignedInteger</span> {
             <span class="ident">bytes</span>: <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">raw</span>::<span class="ident">c_ushort</span><span class="op">&gt;</span>(),
         },
-        <span class="string">b&#39;i&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">SignedInteger</span> {
+        <span class="string">b&#39;i&#39;</span> <span class="op">=&gt;</span> <span class="ident">SignedInteger</span> {
             <span class="ident">bytes</span>: <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">raw</span>::<span class="ident">c_int</span><span class="op">&gt;</span>(),
         },
-        <span class="string">b&#39;I&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">UnsignedInteger</span> {
+        <span class="string">b&#39;I&#39;</span> <span class="op">=&gt;</span> <span class="ident">UnsignedInteger</span> {
             <span class="ident">bytes</span>: <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">raw</span>::<span class="ident">c_uint</span><span class="op">&gt;</span>(),
         },
-        <span class="string">b&#39;l&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">SignedInteger</span> {
+        <span class="string">b&#39;l&#39;</span> <span class="op">=&gt;</span> <span class="ident">SignedInteger</span> {
             <span class="ident">bytes</span>: <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">raw</span>::<span class="ident">c_long</span><span class="op">&gt;</span>(),
         },
-        <span class="string">b&#39;L&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">UnsignedInteger</span> {
+        <span class="string">b&#39;L&#39;</span> <span class="op">=&gt;</span> <span class="ident">UnsignedInteger</span> {
             <span class="ident">bytes</span>: <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">raw</span>::<span class="ident">c_ulong</span><span class="op">&gt;</span>(),
         },
-        <span class="string">b&#39;q&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">SignedInteger</span> {
+        <span class="string">b&#39;q&#39;</span> <span class="op">=&gt;</span> <span class="ident">SignedInteger</span> {
             <span class="ident">bytes</span>: <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">raw</span>::<span class="ident">c_longlong</span><span class="op">&gt;</span>(),
         },
-        <span class="string">b&#39;Q&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">UnsignedInteger</span> {
+        <span class="string">b&#39;Q&#39;</span> <span class="op">=&gt;</span> <span class="ident">UnsignedInteger</span> {
             <span class="ident">bytes</span>: <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">raw</span>::<span class="ident">c_ulonglong</span><span class="op">&gt;</span>(),
         },
-        <span class="string">b&#39;n&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">SignedInteger</span> {
+        <span class="string">b&#39;n&#39;</span> <span class="op">=&gt;</span> <span class="ident">SignedInteger</span> {
             <span class="ident">bytes</span>: <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">libc</span>::<span class="ident">ssize_t</span><span class="op">&gt;</span>(),
         },
-        <span class="string">b&#39;N&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">UnsignedInteger</span> {
+        <span class="string">b&#39;N&#39;</span> <span class="op">=&gt;</span> <span class="ident">UnsignedInteger</span> {
             <span class="ident">bytes</span>: <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">libc</span>::<span class="ident">size_t</span><span class="op">&gt;</span>(),
         },
-        <span class="string">b&#39;e&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Float</span> { <span class="ident">bytes</span>: <span class="number">2</span> },
-        <span class="string">b&#39;f&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Float</span> { <span class="ident">bytes</span>: <span class="number">4</span> },
-        <span class="string">b&#39;d&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Float</span> { <span class="ident">bytes</span>: <span class="number">8</span> },
-        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Unknown</span>,
+        <span class="string">b&#39;e&#39;</span> <span class="op">=&gt;</span> <span class="ident">Float</span> { <span class="ident">bytes</span>: <span class="number">2</span> },
+        <span class="string">b&#39;f&#39;</span> <span class="op">=&gt;</span> <span class="ident">Float</span> { <span class="ident">bytes</span>: <span class="number">4</span> },
+        <span class="string">b&#39;d&#39;</span> <span class="op">=&gt;</span> <span class="ident">Float</span> { <span class="ident">bytes</span>: <span class="number">8</span> },
+        <span class="kw">_</span> <span class="op">=&gt;</span> <span class="ident">Unknown</span>,
     }
 }
 
-<span class="kw">fn</span> <span class="ident">standard_element_type_from_type_char</span>(<span class="ident">type_char</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ElementType</span> {
+<span class="kw">fn</span> <span class="ident">standard_element_type_from_type_char</span>(<span class="ident">type_char</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="ident">ElementType</span> {
     <span class="kw">use</span> <span class="self">self</span>::<span class="ident">ElementType</span>::<span class="kw-2">*</span>;
     <span class="kw">match</span> <span class="ident">type_char</span> {
-        <span class="string">b&#39;c&#39;</span> <span class="op">|</span> <span class="string">b&#39;B&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">UnsignedInteger</span> { <span class="ident">bytes</span>: <span class="number">1</span> },
-        <span class="string">b&#39;b&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">SignedInteger</span> { <span class="ident">bytes</span>: <span class="number">1</span> },
-        <span class="string">b&#39;?&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Bool</span>,
-        <span class="string">b&#39;h&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">SignedInteger</span> { <span class="ident">bytes</span>: <span class="number">2</span> },
-        <span class="string">b&#39;H&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">UnsignedInteger</span> { <span class="ident">bytes</span>: <span class="number">2</span> },
-        <span class="string">b&#39;i&#39;</span> <span class="op">|</span> <span class="string">b&#39;l&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">SignedInteger</span> { <span class="ident">bytes</span>: <span class="number">4</span> },
-        <span class="string">b&#39;I&#39;</span> <span class="op">|</span> <span class="string">b&#39;L&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">UnsignedInteger</span> { <span class="ident">bytes</span>: <span class="number">4</span> },
-        <span class="string">b&#39;q&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">SignedInteger</span> { <span class="ident">bytes</span>: <span class="number">8</span> },
-        <span class="string">b&#39;Q&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">UnsignedInteger</span> { <span class="ident">bytes</span>: <span class="number">8</span> },
-        <span class="string">b&#39;e&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Float</span> { <span class="ident">bytes</span>: <span class="number">2</span> },
-        <span class="string">b&#39;f&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Float</span> { <span class="ident">bytes</span>: <span class="number">4</span> },
-        <span class="string">b&#39;d&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Float</span> { <span class="ident">bytes</span>: <span class="number">8</span> },
-        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Unknown</span>,
+        <span class="string">b&#39;c&#39;</span> <span class="op">|</span> <span class="string">b&#39;B&#39;</span> <span class="op">=&gt;</span> <span class="ident">UnsignedInteger</span> { <span class="ident">bytes</span>: <span class="number">1</span> },
+        <span class="string">b&#39;b&#39;</span> <span class="op">=&gt;</span> <span class="ident">SignedInteger</span> { <span class="ident">bytes</span>: <span class="number">1</span> },
+        <span class="string">b&#39;?&#39;</span> <span class="op">=&gt;</span> <span class="ident">Bool</span>,
+        <span class="string">b&#39;h&#39;</span> <span class="op">=&gt;</span> <span class="ident">SignedInteger</span> { <span class="ident">bytes</span>: <span class="number">2</span> },
+        <span class="string">b&#39;H&#39;</span> <span class="op">=&gt;</span> <span class="ident">UnsignedInteger</span> { <span class="ident">bytes</span>: <span class="number">2</span> },
+        <span class="string">b&#39;i&#39;</span> <span class="op">|</span> <span class="string">b&#39;l&#39;</span> <span class="op">=&gt;</span> <span class="ident">SignedInteger</span> { <span class="ident">bytes</span>: <span class="number">4</span> },
+        <span class="string">b&#39;I&#39;</span> <span class="op">|</span> <span class="string">b&#39;L&#39;</span> <span class="op">=&gt;</span> <span class="ident">UnsignedInteger</span> { <span class="ident">bytes</span>: <span class="number">4</span> },
+        <span class="string">b&#39;q&#39;</span> <span class="op">=&gt;</span> <span class="ident">SignedInteger</span> { <span class="ident">bytes</span>: <span class="number">8</span> },
+        <span class="string">b&#39;Q&#39;</span> <span class="op">=&gt;</span> <span class="ident">UnsignedInteger</span> { <span class="ident">bytes</span>: <span class="number">8</span> },
+        <span class="string">b&#39;e&#39;</span> <span class="op">=&gt;</span> <span class="ident">Float</span> { <span class="ident">bytes</span>: <span class="number">2</span> },
+        <span class="string">b&#39;f&#39;</span> <span class="op">=&gt;</span> <span class="ident">Float</span> { <span class="ident">bytes</span>: <span class="number">4</span> },
+        <span class="string">b&#39;d&#39;</span> <span class="op">=&gt;</span> <span class="ident">Float</span> { <span class="ident">bytes</span>: <span class="number">8</span> },
+        <span class="kw">_</span> <span class="op">=&gt;</span> <span class="ident">Unknown</span>,
     }
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_endian</span> <span class="op">=</span> <span class="string">&quot;little&quot;</span>)]</span>
-<span class="kw">fn</span> <span class="ident">is_matching_endian</span>(<span class="ident">c</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+<span class="kw">fn</span> <span class="ident">is_matching_endian</span>(<span class="ident">c</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
     <span class="kw">match</span> <span class="ident">c</span> {
-        <span class="string">b&#39;@&#39;</span> <span class="op">|</span> <span class="string">b&#39;=&#39;</span> <span class="op">|</span> <span class="string">b&#39;&lt;&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
+        <span class="string">b&#39;@&#39;</span> <span class="op">|</span> <span class="string">b&#39;=&#39;</span> <span class="op">|</span> <span class="string">b&#39;&lt;&#39;</span> <span class="op">=&gt;</span> <span class="bool-val">true</span>,
+        <span class="kw">_</span> <span class="op">=&gt;</span> <span class="bool-val">false</span>,
     }
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_endian</span> <span class="op">=</span> <span class="string">&quot;big&quot;</span>)]</span>
-<span class="kw">fn</span> <span class="ident">is_matching_endian</span>(<span class="ident">c</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+<span class="kw">fn</span> <span class="ident">is_matching_endian</span>(<span class="ident">c</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
     <span class="kw">match</span> <span class="ident">c</span> {
-        <span class="string">b&#39;@&#39;</span> <span class="op">|</span> <span class="string">b&#39;=&#39;</span> <span class="op">|</span> <span class="string">b&#39;&gt;&#39;</span> <span class="op">|</span> <span class="string">b&#39;!&#39;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
+        <span class="string">b&#39;@&#39;</span> <span class="op">|</span> <span class="string">b&#39;=&#39;</span> <span class="op">|</span> <span class="string">b&#39;&gt;&#39;</span> <span class="op">|</span> <span class="string">b&#39;!&#39;</span> <span class="op">=&gt;</span> <span class="bool-val">true</span>,
+        <span class="kw">_</span> <span class="op">=&gt;</span> <span class="bool-val">false</span>,
     }
 }
 
@@ -896,7 +896,7 @@
 <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">trait</span> <span class="ident">Element</span> {
     <span class="doccomment">/// Gets whether the element specified in the format string is potentially compatible.</span>
     <span class="doccomment">/// Alignment and size are checked separately from this function.</span>
-    <span class="kw">fn</span> <span class="ident">is_compatible_format</span>(<span class="ident">format</span>: <span class="kw-2">&amp;</span><span class="ident">CStr</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>;
+    <span class="kw">fn</span> <span class="ident">is_compatible_format</span>(<span class="ident">format</span>: <span class="kw-2">&amp;</span><span class="ident">CStr</span>) <span class="op">-&gt;</span> <span class="ident">bool</span>;
 }
 
 <span class="kw">fn</span> <span class="ident">validate</span>(<span class="ident">b</span>: <span class="kw-2">&amp;</span><span class="ident">ffi</span>::<span class="ident">Py_buffer</span>) {
@@ -907,7 +907,7 @@
 
 <span class="kw">impl</span> <span class="ident">PyBuffer</span> {
     <span class="doccomment">/// Get the underlying buffer from the specified python object.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span>(<span class="ident">py</span>: <span class="ident">Python</span>, <span class="ident">obj</span>: <span class="kw-2">&amp;</span><span class="ident">PyAny</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyBuffer</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span>(<span class="ident">py</span>: <span class="ident">Python</span>, <span class="ident">obj</span>: <span class="kw-2">&amp;</span><span class="ident">PyAny</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyBuffer</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">Box</span>::<span class="ident">pin</span>(<span class="ident">mem</span>::<span class="ident">zeroed</span>::<span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">Py_buffer</span><span class="op">&gt;</span>());
             <span class="ident">err</span>::<span class="ident">error_on_minusone</span>(
@@ -924,14 +924,14 @@
     <span class="doccomment">/// Warning: the buffer memory might be mutated by other Python functions,</span>
     <span class="doccomment">/// and thus may only be accessed while the GIL is held.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">buf_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">raw</span>::<span class="ident">c_void</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">buf_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">raw</span>::<span class="ident">c_void</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">buf</span>
     }
 
     <span class="doccomment">/// Gets a pointer to the specified item.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If `indices.len() &lt; self.dimensions()`, returns the start address of the sub-array at the specified dimension.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">indices</span>: <span class="kw-2">&amp;</span>[<span class="ident">usize</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">raw</span>::<span class="ident">c_void</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">indices</span>: <span class="kw-2">&amp;</span>[<span class="ident">usize</span>]) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">raw</span>::<span class="ident">c_void</span> {
         <span class="kw">let</span> <span class="ident">shape</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">shape</span>()[..<span class="ident">indices</span>.<span class="ident">len</span>()];
         <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">indices</span>.<span class="ident">len</span>() {
             <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">indices</span>[<span class="ident">i</span>] <span class="op">&lt;</span> <span class="ident">shape</span>[<span class="ident">i</span>]);
@@ -946,20 +946,20 @@
 
     <span class="doccomment">/// Gets whether the underlying buffer is read-only.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">readonly</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">readonly</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">readonly</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">readonly</span> <span class="op">!=</span> <span class="number">0</span>
     }
 
     <span class="doccomment">/// Gets the size of a single element, in bytes.</span>
     <span class="doccomment">/// Important exception: when requesting an unformatted buffer, item_size still has the value</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">item_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">item_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">usize</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">itemsize</span> <span class="kw">as</span> <span class="ident">usize</span>
     }
 
     <span class="doccomment">/// Gets the total number of items.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">item_count</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">item_count</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">usize</span> {
         (<span class="self">self</span>.<span class="number">0</span>.<span class="ident">len</span> <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">/</span> (<span class="self">self</span>.<span class="number">0</span>.<span class="ident">itemsize</span> <span class="kw">as</span> <span class="ident">usize</span>)
     }
 
@@ -967,7 +967,7 @@
     <span class="doccomment">/// For contiguous arrays, this is the length of the underlying memory block.</span>
     <span class="doccomment">/// For non-contiguous arrays, it is the length that the logical structure would have if it were copied to a contiguous representation.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">usize</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">len</span> <span class="kw">as</span> <span class="ident">usize</span>
     }
 
@@ -975,7 +975,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// May be 0 to indicate a single scalar value.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dimensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dimensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">usize</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">ndim</span> <span class="kw">as</span> <span class="ident">usize</span>
     }
 
@@ -987,7 +987,7 @@
     <span class="doccomment">/// Despite Python using an array of signed integers, the values are guaranteed to be non-negative.</span>
     <span class="doccomment">/// However, dimensions of length 0 are possible and might need special attention.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shape</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">usize</span>] {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shape</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">usize</span>] {
         <span class="kw">unsafe</span> { <span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">shape</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">usize</span>, <span class="self">self</span>.<span class="number">0</span>.<span class="ident">ndim</span> <span class="kw">as</span> <span class="ident">usize</span>) }
     }
 
@@ -996,7 +996,7 @@
     <span class="doccomment">/// Stride values can be any integer. For regular arrays, strides are usually positive,</span>
     <span class="doccomment">/// but a consumer MUST be able to handle the case `strides[n] &lt;= 0`.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">strides</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">isize</span>] {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">strides</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">isize</span>] {
         <span class="kw">unsafe</span> { <span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">strides</span>, <span class="self">self</span>.<span class="number">0</span>.<span class="ident">ndim</span> <span class="kw">as</span> <span class="ident">usize</span>) }
     }
 
@@ -1006,7 +1006,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// If all suboffsets are negative (i.e. no de-referencing is needed), then this field must be NULL (the default value).</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">suboffsets</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span>[<span class="ident">isize</span>]<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">suboffsets</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span>[<span class="ident">isize</span>]<span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
             <span class="kw">if</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">suboffsets</span>.<span class="ident">is_null</span>() {
                 <span class="prelude-val">None</span>
@@ -1021,7 +1021,7 @@
 
     <span class="doccomment">/// A NUL terminated string in struct module style syntax describing the contents of a single item.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">format</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">CStr</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">format</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">CStr</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">format</span>.<span class="ident">is_null</span>() {
             <span class="ident">CStr</span>::<span class="ident">from_bytes_with_nul</span>(<span class="string">b&quot;B\0&quot;</span>).<span class="ident">unwrap</span>()
         } <span class="kw">else</span> {
@@ -1031,17 +1031,17 @@
 
     <span class="doccomment">/// Gets whether the buffer is contiguous in C-style order (last index varies fastest when visiting items in order of memory address).</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_c_contiguous</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_c_contiguous</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="kw">unsafe</span> {
-            <span class="ident">ffi</span>::<span class="ident">PyBuffer_IsContiguous</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">ffi</span>::<span class="ident">Py_buffer</span>, <span class="string">b&#39;C&#39;</span> <span class="kw">as</span> <span class="ident">libc</span>::<span class="ident">c_char</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
+            <span class="ident">ffi</span>::<span class="ident">PyBuffer_IsContiguous</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">ffi</span>::<span class="ident">Py_buffer</span>, <span class="string">b&#39;C&#39;</span> <span class="kw">as</span> <span class="ident">libc</span>::<span class="ident">c_char</span>) <span class="op">!=</span> <span class="number">0</span>
         }
     }
 
     <span class="doccomment">/// Gets whether the buffer is contiguous in Fortran-style order (first index varies fastest when visiting items in order of memory address).</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_fortran_contiguous</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_fortran_contiguous</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="kw">unsafe</span> {
-            <span class="ident">ffi</span>::<span class="ident">PyBuffer_IsContiguous</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">ffi</span>::<span class="ident">Py_buffer</span>, <span class="string">b&#39;F&#39;</span> <span class="kw">as</span> <span class="ident">libc</span>::<span class="ident">c_char</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
+            <span class="ident">ffi</span>::<span class="ident">PyBuffer_IsContiguous</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">ffi</span>::<span class="ident">Py_buffer</span>, <span class="string">b&#39;F&#39;</span> <span class="kw">as</span> <span class="ident">libc</span>::<span class="ident">c_char</span>) <span class="op">!=</span> <span class="number">0</span>
         }
     }
 
@@ -1054,11 +1054,11 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// The returned slice uses type `Cell&lt;T&gt;` because it&#39;s theoretically possible for any call into the Python runtime</span>
     <span class="doccomment">/// to modify the values in the slice.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_slice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">Element</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">_py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">ReadOnlyCell</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>]<span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">=</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">item_size</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> (<span class="self">self</span>.<span class="number">0</span>.<span class="ident">buf</span> <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">%</span> <span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">=</span><span class="op">=</span> <span class="number">0</span>
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="self">self</span>.<span class="ident">is_c_contiguous</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">T</span>::<span class="ident">is_compatible_format</span>(<span class="self">self</span>.<span class="ident">format</span>())
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_slice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">Element</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">_py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">ReadOnlyCell</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>]<span class="op">&gt;</span> {
+        <span class="kw">if</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">==</span> <span class="self">self</span>.<span class="ident">item_size</span>()
+            <span class="op">&amp;&amp;</span> (<span class="self">self</span>.<span class="number">0</span>.<span class="ident">buf</span> <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">%</span> <span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">==</span> <span class="number">0</span>
+            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">is_c_contiguous</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">T</span>::<span class="ident">is_compatible_format</span>(<span class="self">self</span>.<span class="ident">format</span>())
         {
             <span class="kw">unsafe</span> {
                 <span class="prelude-val">Some</span>(<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(
@@ -1081,12 +1081,12 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// The returned slice uses type `Cell&lt;T&gt;` because it&#39;s theoretically possible for any call into the Python runtime</span>
     <span class="doccomment">/// to modify the values in the slice.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_slice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">Element</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">_py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">cell</span>::<span class="ident">Cell</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>]<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_slice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">Element</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">_py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">cell</span>::<span class="ident">Cell</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>]<span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">readonly</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">=</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">item_size</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> (<span class="self">self</span>.<span class="number">0</span>.<span class="ident">buf</span> <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">%</span> <span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">=</span><span class="op">=</span> <span class="number">0</span>
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="self">self</span>.<span class="ident">is_c_contiguous</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">T</span>::<span class="ident">is_compatible_format</span>(<span class="self">self</span>.<span class="ident">format</span>())
+            <span class="op">&amp;&amp;</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">==</span> <span class="self">self</span>.<span class="ident">item_size</span>()
+            <span class="op">&amp;&amp;</span> (<span class="self">self</span>.<span class="number">0</span>.<span class="ident">buf</span> <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">%</span> <span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">==</span> <span class="number">0</span>
+            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">is_c_contiguous</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">T</span>::<span class="ident">is_compatible_format</span>(<span class="self">self</span>.<span class="ident">format</span>())
         {
             <span class="kw">unsafe</span> {
                 <span class="prelude-val">Some</span>(<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(
@@ -1111,11 +1111,11 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_fortran_slice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">Element</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>,
         <span class="ident">_py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">ReadOnlyCell</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>]<span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">=</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">item_size</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> (<span class="self">self</span>.<span class="number">0</span>.<span class="ident">buf</span> <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">%</span> <span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">=</span><span class="op">=</span> <span class="number">0</span>
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="self">self</span>.<span class="ident">is_fortran_contiguous</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">T</span>::<span class="ident">is_compatible_format</span>(<span class="self">self</span>.<span class="ident">format</span>())
+    ) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">ReadOnlyCell</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>]<span class="op">&gt;</span> {
+        <span class="kw">if</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">==</span> <span class="self">self</span>.<span class="ident">item_size</span>()
+            <span class="op">&amp;&amp;</span> (<span class="self">self</span>.<span class="number">0</span>.<span class="ident">buf</span> <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">%</span> <span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">==</span> <span class="number">0</span>
+            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">is_fortran_contiguous</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">T</span>::<span class="ident">is_compatible_format</span>(<span class="self">self</span>.<span class="ident">format</span>())
         {
             <span class="kw">unsafe</span> {
                 <span class="prelude-val">Some</span>(<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(
@@ -1141,12 +1141,12 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_fortran_mut_slice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">Element</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>,
         <span class="ident">_py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">cell</span>::<span class="ident">Cell</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>]<span class="op">&gt;</span> {
+    ) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">cell</span>::<span class="ident">Cell</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>]<span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">readonly</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">=</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">item_size</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> (<span class="self">self</span>.<span class="number">0</span>.<span class="ident">buf</span> <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">%</span> <span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">=</span><span class="op">=</span> <span class="number">0</span>
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="self">self</span>.<span class="ident">is_fortran_contiguous</span>()
-            <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">T</span>::<span class="ident">is_compatible_format</span>(<span class="self">self</span>.<span class="ident">format</span>())
+            <span class="op">&amp;&amp;</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">==</span> <span class="self">self</span>.<span class="ident">item_size</span>()
+            <span class="op">&amp;&amp;</span> (<span class="self">self</span>.<span class="number">0</span>.<span class="ident">buf</span> <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">%</span> <span class="ident">mem</span>::<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">==</span> <span class="number">0</span>
+            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">is_fortran_contiguous</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">T</span>::<span class="ident">is_compatible_format</span>(<span class="self">self</span>.<span class="ident">format</span>())
         {
             <span class="kw">unsafe</span> {
                 <span class="prelude-val">Some</span>(<span class="ident">slice</span>::<span class="ident">from_raw_parts</span>(
@@ -1168,7 +1168,7 @@
     <span class="doccomment">/// To check whether the buffer format is compatible before calling this method,</span>
     <span class="doccomment">/// you can use `&lt;T as buffer::Element&gt;::is_compatible_format(buf.format())`.</span>
     <span class="doccomment">/// Alternatively, `match buffer::ElementType::from_format(buf.format())`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">copy_to_slice</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Element</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>, <span class="ident">target</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">T</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">copy_to_slice</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Element</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>, <span class="ident">target</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">T</span>]) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">copy_to_slice_impl</span>(<span class="ident">py</span>, <span class="ident">target</span>, <span class="string">b&#39;C&#39;</span>)
     }
 
@@ -1185,7 +1185,7 @@
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">py</span>: <span class="ident">Python</span>,
         <span class="ident">target</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">T</span>],
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    ) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">copy_to_slice_impl</span>(<span class="ident">py</span>, <span class="ident">target</span>, <span class="string">b&#39;F&#39;</span>)
     }
 
@@ -1194,13 +1194,13 @@
         <span class="ident">py</span>: <span class="ident">Python</span>,
         <span class="ident">target</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">T</span>],
         <span class="ident">fort</span>: <span class="ident">u8</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="ident">mem</span>::<span class="ident">size_of_val</span>(<span class="ident">target</span>) <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">len_bytes</span>() {
+    ) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+        <span class="kw">if</span> <span class="ident">mem</span>::<span class="ident">size_of_val</span>(<span class="ident">target</span>) <span class="op">!=</span> <span class="self">self</span>.<span class="ident">len_bytes</span>() {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">exceptions</span>::<span class="ident">BufferError</span>::<span class="ident">py_err</span>(
                 <span class="string">&quot;Slice length does not match buffer length.&quot;</span>,
             ));
         }
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">T</span>::<span class="ident">is_compatible_format</span>(<span class="self">self</span>.<span class="ident">format</span>()) <span class="op">|</span><span class="op">|</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">item_size</span>() {
+        <span class="kw">if</span> <span class="op">!</span><span class="ident">T</span>::<span class="ident">is_compatible_format</span>(<span class="self">self</span>.<span class="ident">format</span>()) <span class="op">||</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">!=</span> <span class="self">self</span>.<span class="ident">item_size</span>() {
             <span class="kw">return</span> <span class="ident">incompatible_format_error</span>();
         }
         <span class="kw">unsafe</span> {
@@ -1220,7 +1220,7 @@
     <span class="doccomment">/// If the buffer is multi-dimensional, the elements are written in C-style order.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Fails if the buffer format is not compatible with type `T`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_vec</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Element</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_vec</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Element</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span> {
         <span class="self">self</span>.<span class="ident">to_vec_impl</span>(<span class="ident">py</span>, <span class="string">b&#39;C&#39;</span>)
     }
 
@@ -1228,12 +1228,12 @@
     <span class="doccomment">/// If the buffer is multi-dimensional, the elements are written in Fortran-style order.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Fails if the buffer format is not compatible with type `T`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_fortran_vec</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Element</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_fortran_vec</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Element</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span> {
         <span class="self">self</span>.<span class="ident">to_vec_impl</span>(<span class="ident">py</span>, <span class="string">b&#39;F&#39;</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">to_vec_impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Element</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>, <span class="ident">fort</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">T</span>::<span class="ident">is_compatible_format</span>(<span class="self">self</span>.<span class="ident">format</span>()) <span class="op">|</span><span class="op">|</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">item_size</span>() {
+    <span class="kw">fn</span> <span class="ident">to_vec_impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Element</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>, <span class="ident">fort</span>: <span class="ident">u8</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span> {
+        <span class="kw">if</span> <span class="op">!</span><span class="ident">T</span>::<span class="ident">is_compatible_format</span>(<span class="self">self</span>.<span class="ident">format</span>()) <span class="op">||</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">!=</span> <span class="self">self</span>.<span class="ident">item_size</span>() {
             <span class="ident">incompatible_format_error</span>()<span class="question-mark">?</span>;
             <span class="macro">unreachable</span><span class="macro">!</span>();
         }
@@ -1267,7 +1267,7 @@
     <span class="doccomment">/// To check whether the buffer format is compatible before calling this method,</span>
     <span class="doccomment">/// use `&lt;T as buffer::Element&gt;::is_compatible_format(buf.format())`.</span>
     <span class="doccomment">/// Alternatively, `match buffer::ElementType::from_format(buf.format())`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">copy_from_slice</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Element</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>, <span class="ident">source</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">copy_from_slice</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Element</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>, <span class="ident">source</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>]) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">copy_from_slice_impl</span>(<span class="ident">py</span>, <span class="ident">source</span>, <span class="string">b&#39;C&#39;</span>)
     }
 
@@ -1285,7 +1285,7 @@
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">py</span>: <span class="ident">Python</span>,
         <span class="ident">source</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>],
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    ) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">copy_from_slice_impl</span>(<span class="ident">py</span>, <span class="ident">source</span>, <span class="string">b&#39;F&#39;</span>)
     }
 
@@ -1294,16 +1294,16 @@
         <span class="ident">py</span>: <span class="ident">Python</span>,
         <span class="ident">source</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>],
         <span class="ident">fort</span>: <span class="ident">u8</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    ) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">readonly</span>() {
             <span class="kw">return</span> <span class="ident">buffer_readonly_error</span>();
         }
-        <span class="kw">if</span> <span class="ident">mem</span>::<span class="ident">size_of_val</span>(<span class="ident">source</span>) <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">len_bytes</span>() {
+        <span class="kw">if</span> <span class="ident">mem</span>::<span class="ident">size_of_val</span>(<span class="ident">source</span>) <span class="op">!=</span> <span class="self">self</span>.<span class="ident">len_bytes</span>() {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">exceptions</span>::<span class="ident">BufferError</span>::<span class="ident">py_err</span>(
                 <span class="string">&quot;Slice length does not match buffer length.&quot;</span>,
             ));
         }
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">T</span>::<span class="ident">is_compatible_format</span>(<span class="self">self</span>.<span class="ident">format</span>()) <span class="op">|</span><span class="op">|</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">item_size</span>() {
+        <span class="kw">if</span> <span class="op">!</span><span class="ident">T</span>::<span class="ident">is_compatible_format</span>(<span class="self">self</span>.<span class="ident">format</span>()) <span class="op">||</span> <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">!=</span> <span class="self">self</span>.<span class="ident">item_size</span>() {
             <span class="kw">return</span> <span class="ident">incompatible_format_error</span>();
         }
         <span class="kw">unsafe</span> {
@@ -1330,19 +1330,19 @@
 
             <span class="comment">// Finally, drop the contained Pin&lt;Box&lt;_&gt;&gt; in place, to free the</span>
             <span class="comment">// Box memory.</span>
-            <span class="kw">let</span> <span class="ident">inner</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">Py_buffer</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">mdself</span>.<span class="number">0</span>;
+            <span class="kw">let</span> <span class="ident">inner</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">Py_buffer</span><span class="op">&gt;&gt;</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">mdself</span>.<span class="number">0</span>;
             <span class="ident">ptr</span>::<span class="ident">drop_in_place</span>(<span class="ident">inner</span>);
         }
     }
 }
 
-<span class="kw">fn</span> <span class="ident">incompatible_format_error</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">incompatible_format_error</span>() <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="prelude-val">Err</span>(<span class="ident">exceptions</span>::<span class="ident">BufferError</span>::<span class="ident">py_err</span>(
         <span class="string">&quot;Slice type is incompatible with buffer format.&quot;</span>,
     ))
 }
 
-<span class="kw">fn</span> <span class="ident">buffer_readonly_error</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">buffer_readonly_error</span>() <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="prelude-val">Err</span>(<span class="ident">exceptions</span>::<span class="ident">BufferError</span>::<span class="ident">py_err</span>(
         <span class="string">&quot;Cannot write to read-only buffer.&quot;</span>,
     ))
@@ -1365,25 +1365,25 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span><span class="op">&gt;</span> <span class="ident">ReadOnlyCell</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">T</span> {
         <span class="kw">unsafe</span> { <span class="kw-2">*</span><span class="self">self</span>.<span class="number">0</span>.<span class="ident">get</span>() }
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span> {
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">get</span>()
     }
 }
 
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">impl_element</span>(
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>:<span class="ident">ty</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">f</span>:<span class="ident">ident</span>) <span class="op">=</span><span class="op">&gt;</span> {
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>:<span class="ident">ty</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">f</span>:<span class="ident">ident</span>) <span class="op">=&gt;</span> {
         <span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">Element</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span> {
-            <span class="kw">fn</span> <span class="ident">is_compatible_format</span>(<span class="ident">format</span>: <span class="kw-2">&amp;</span><span class="ident">CStr</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+            <span class="kw">fn</span> <span class="ident">is_compatible_format</span>(<span class="ident">format</span>: <span class="kw-2">&amp;</span><span class="ident">CStr</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
                 <span class="kw">let</span> <span class="ident">slice</span> <span class="op">=</span> <span class="ident">format</span>.<span class="ident">to_bytes</span>();
-                <span class="kw">if</span> <span class="ident">slice</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">1</span> <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="op">!</span><span class="ident">is_matching_endian</span>(<span class="ident">slice</span>[<span class="number">0</span>]) {
+                <span class="kw">if</span> <span class="ident">slice</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">1</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">is_matching_endian</span>(<span class="ident">slice</span>[<span class="number">0</span>]) {
                     <span class="kw">return</span> <span class="bool-val">false</span>;
                 }
-                <span class="ident">ElementType</span>::<span class="ident">from_format</span>(<span class="ident">format</span>) <span class="op">=</span><span class="op">=</span> <span class="ident">ElementType</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">f</span> { <span class="ident">bytes</span>: <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span><span class="op">&gt;</span>() }
+                <span class="ident">ElementType</span>::<span class="ident">from_format</span>(<span class="ident">format</span>) <span class="op">==</span> <span class="ident">ElementType</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">f</span> { <span class="ident">bytes</span>: <span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span><span class="op">&gt;</span>() }
             }
         }
     }

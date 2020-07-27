@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/pyo3-0.10.1/src/ffi/pythonrun.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>pythonrun.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../pyo3/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/pyo3-0.10.1/src/ffi/pythonrun.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>pythonrun.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../pyo3/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -259,15 +259,15 @@
     <span class="comment">// TODO: these moved to pylifecycle.h</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_SetProgramName</span>(<span class="ident">arg1</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wchar_t</span>);
     <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">PyPy</span>, <span class="ident">link_name</span> <span class="op">=</span> <span class="string">&quot;PyPy_GetProgramName&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_GetProgramName</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wchar_t</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_GetProgramName</span>() <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wchar_t</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_SetPythonHome</span>(<span class="ident">arg1</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wchar_t</span>);
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_GetPythonHome</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wchar_t</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_GetPythonHome</span>() <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wchar_t</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_Initialize</span>();
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_InitializeEx</span>(<span class="ident">arg1</span>: <span class="ident">c_int</span>);
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_Finalize</span>();
     <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">PyPy</span>, <span class="ident">link_name</span> <span class="op">=</span> <span class="string">&quot;PyPy_IsInitialized&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_IsInitialized</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span>;
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_NewInterpreter</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyThreadState</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_IsInitialized</span>() <span class="op">-&gt;</span> <span class="ident">c_int</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_NewInterpreter</span>() <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyThreadState</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_EndInterpreter</span>(<span class="ident">arg1</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyThreadState</span>);
 }
 
@@ -284,53 +284,53 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">Py_LIMITED_API</span>))]</span>
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">windows</span>, <span class="ident">link</span>(<span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;pythonXY&quot;</span>))]</span>
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">PyRun_SimpleStringFlags</span>(<span class="ident">arg1</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>, <span class="ident">arg2</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyCompilerFlags</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">PyRun_SimpleStringFlags</span>(<span class="ident">arg1</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>, <span class="ident">arg2</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyCompilerFlags</span>) <span class="op">-&gt;</span> <span class="ident">c_int</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">PyRun_AnyFileFlags</span>(
         <span class="ident">arg1</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">FILE</span>,
         <span class="ident">arg2</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>,
         <span class="ident">arg3</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyCompilerFlags</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span>;
+    ) <span class="op">-&gt;</span> <span class="ident">c_int</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">PyRun_AnyFileExFlags</span>(
         <span class="ident">fp</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">FILE</span>,
         <span class="ident">filename</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>,
         <span class="ident">closeit</span>: <span class="ident">c_int</span>,
         <span class="ident">flags</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyCompilerFlags</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span>;
+    ) <span class="op">-&gt;</span> <span class="ident">c_int</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">PyRun_SimpleFileExFlags</span>(
         <span class="ident">fp</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">FILE</span>,
         <span class="ident">filename</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>,
         <span class="ident">closeit</span>: <span class="ident">c_int</span>,
         <span class="ident">flags</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyCompilerFlags</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span>;
+    ) <span class="op">-&gt;</span> <span class="ident">c_int</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">PyRun_InteractiveOneFlags</span>(
         <span class="ident">fp</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">FILE</span>,
         <span class="ident">filename</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>,
         <span class="ident">flags</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyCompilerFlags</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span>;
+    ) <span class="op">-&gt;</span> <span class="ident">c_int</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">PyRun_InteractiveOneObject</span>(
         <span class="ident">fp</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">FILE</span>,
         <span class="ident">filename</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span>,
         <span class="ident">flags</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyCompilerFlags</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span>;
+    ) <span class="op">-&gt;</span> <span class="ident">c_int</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">PyRun_InteractiveLoopFlags</span>(
         <span class="ident">fp</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">FILE</span>,
         <span class="ident">filename</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>,
         <span class="ident">flags</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyCompilerFlags</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span>;
+    ) <span class="op">-&gt;</span> <span class="ident">c_int</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">PyParser_ASTFromString</span>(
         <span class="ident">s</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>,
         <span class="ident">filename</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>,
         <span class="ident">start</span>: <span class="ident">c_int</span>,
         <span class="ident">flags</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyCompilerFlags</span>,
         <span class="ident">arena</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyArena</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">_mod</span>;
+    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">_mod</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">PyParser_ASTFromStringObject</span>(
         <span class="ident">s</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>,
         <span class="ident">filename</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span>,
         <span class="ident">start</span>: <span class="ident">c_int</span>,
         <span class="ident">flags</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyCompilerFlags</span>,
         <span class="ident">arena</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyArena</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">_mod</span>;
+    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">_mod</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">PyParser_ASTFromFile</span>(
         <span class="ident">fp</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">FILE</span>,
         <span class="ident">filename</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>,
@@ -341,7 +341,7 @@
         <span class="ident">flags</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyCompilerFlags</span>,
         <span class="ident">errcode</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_int</span>,
         <span class="ident">arena</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyArena</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">_mod</span>;
+    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">_mod</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">PyParser_ASTFromFileObject</span>(
         <span class="ident">fp</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">FILE</span>,
         <span class="ident">filename</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span>,
@@ -352,20 +352,20 @@
         <span class="ident">flags</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyCompilerFlags</span>,
         <span class="ident">errcode</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_int</span>,
         <span class="ident">arena</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyArena</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">_mod</span>;
+    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">_mod</span>;
 }
 
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">symtable</span> {}
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">_node</span> {}
 
 <span class="attribute">#[<span class="ident">inline</span>]</span>
-<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">PyParser_SimpleParseString</span>(<span class="ident">s</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>, <span class="ident">b</span>: <span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">_node</span> {
+<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">PyParser_SimpleParseString</span>(<span class="ident">s</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>, <span class="ident">b</span>: <span class="ident">c_int</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">_node</span> {
     <span class="ident">PyParser_SimpleParseStringFlags</span>(<span class="ident">s</span>, <span class="ident">b</span>, <span class="number">0</span>)
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">Py_LIMITED_API</span>))]</span>
 <span class="attribute">#[<span class="ident">inline</span>]</span>
-<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">PyParser_SimpleParseFile</span>(<span class="ident">fp</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">FILE</span>, <span class="ident">s</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>, <span class="ident">b</span>: <span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">_node</span> {
+<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">PyParser_SimpleParseFile</span>(<span class="ident">fp</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">FILE</span>, <span class="ident">s</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>, <span class="ident">b</span>: <span class="ident">c_int</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">_node</span> {
     <span class="ident">PyParser_SimpleParseFileFlags</span>(<span class="ident">fp</span>, <span class="ident">s</span>, <span class="ident">b</span>, <span class="number">0</span>)
 }
 
@@ -375,20 +375,20 @@
         <span class="ident">arg1</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>,
         <span class="ident">arg2</span>: <span class="ident">c_int</span>,
         <span class="ident">arg3</span>: <span class="ident">c_int</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">_node</span>;
+    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">_node</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">PyParser_SimpleParseStringFlagsFilename</span>(
         <span class="ident">arg1</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>,
         <span class="ident">arg2</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>,
         <span class="ident">arg3</span>: <span class="ident">c_int</span>,
         <span class="ident">arg4</span>: <span class="ident">c_int</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">_node</span>;
+    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">_node</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">Py_LIMITED_API</span>))]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">PyParser_SimpleParseFileFlags</span>(
         <span class="ident">arg1</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">FILE</span>,
         <span class="ident">arg2</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>,
         <span class="ident">arg3</span>: <span class="ident">c_int</span>,
         <span class="ident">arg4</span>: <span class="ident">c_int</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">_node</span>;
+    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">_node</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">Py_LIMITED_API</span>))]</span>
     <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">PyPy</span>, <span class="ident">link_name</span> <span class="op">=</span> <span class="string">&quot;PyPyRun_StringFlags&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">PyRun_StringFlags</span>(
@@ -397,7 +397,7 @@
         <span class="ident">arg3</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span>,
         <span class="ident">arg4</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span>,
         <span class="ident">arg5</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyCompilerFlags</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span>;
+    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">Py_LIMITED_API</span>))]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">PyRun_FileExFlags</span>(
         <span class="ident">fp</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">FILE</span>,
@@ -407,10 +407,10 @@
         <span class="ident">locals</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span>,
         <span class="ident">closeit</span>: <span class="ident">c_int</span>,
         <span class="ident">flags</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyCompilerFlags</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span>;
+    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">Py_LIMITED_API</span>)]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">PyPy</span>))]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_CompileString</span>(<span class="ident">string</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>, <span class="ident">p</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>, <span class="ident">s</span>: <span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_CompileString</span>(<span class="ident">string</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>, <span class="ident">p</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>, <span class="ident">s</span>: <span class="ident">c_int</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">PyPy</span>)]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">Py_LIMITED_API</span>))]</span>
     <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">PyPy</span>, <span class="ident">link_name</span> <span class="op">=</span> <span class="string">&quot;PyPy_CompileStringFlags&quot;</span>)]</span>
@@ -419,18 +419,18 @@
         <span class="ident">p</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>,
         <span class="ident">s</span>: <span class="ident">c_int</span>,
         <span class="ident">f</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyCompilerFlags</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span>;
+    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span>;
 }
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">Py_LIMITED_API</span>))]</span>
 <span class="attribute">#[<span class="ident">inline</span>]</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">PyPy</span>))]</span>
-<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">Py_CompileString</span>(<span class="ident">string</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>, <span class="ident">p</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>, <span class="ident">s</span>: <span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span> {
+<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">Py_CompileString</span>(<span class="ident">string</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>, <span class="ident">p</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>, <span class="ident">s</span>: <span class="ident">c_int</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span> {
     <span class="ident">Py_CompileStringExFlags</span>(<span class="ident">string</span>, <span class="ident">p</span>, <span class="ident">s</span>, <span class="ident">ptr</span>::<span class="ident">null_mut</span>(), <span class="op">-</span><span class="number">1</span>)
 }
 
 <span class="attribute">#[<span class="ident">inline</span>]</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">PyPy</span>)]</span>
-<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">Py_CompileString</span>(<span class="ident">string</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>, <span class="ident">p</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>, <span class="ident">s</span>: <span class="ident">c_int</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span> {
+<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">Py_CompileString</span>(<span class="ident">string</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>, <span class="ident">p</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>, <span class="ident">s</span>: <span class="ident">c_int</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span> {
     <span class="ident">Py_CompileStringFlags</span>(<span class="ident">string</span>, <span class="ident">p</span>, <span class="ident">s</span>, <span class="ident">ptr</span>::<span class="ident">null_mut</span>())
 }
 
@@ -444,7 +444,7 @@
         <span class="ident">start</span>: <span class="ident">c_int</span>,
         <span class="ident">flags</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyCompilerFlags</span>,
         <span class="ident">optimize</span>: <span class="ident">c_int</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span>;
+    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">Py_LIMITED_API</span>))]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_CompileStringObject</span>(
         <span class="ident">str</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>,
@@ -452,18 +452,18 @@
         <span class="ident">start</span>: <span class="ident">c_int</span>,
         <span class="ident">flags</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyCompilerFlags</span>,
         <span class="ident">optimize</span>: <span class="ident">c_int</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span>;
+    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_SymtableString</span>(
         <span class="ident">str</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>,
         <span class="ident">filename</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>,
         <span class="ident">start</span>: <span class="ident">c_int</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">symtable</span>;
+    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">symtable</span>;
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">Py_LIMITED_API</span>))]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_SymtableStringObject</span>(
         <span class="ident">str</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>,
         <span class="ident">filename</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyObject</span>,
         <span class="ident">start</span>: <span class="ident">c_int</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">symtable</span>;
+    ) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">symtable</span>;
 
     <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">PyPy</span>, <span class="ident">link_name</span> <span class="op">=</span> <span class="string">&quot;PyPyErr_Print&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">PyErr_Print</span>();
@@ -474,20 +474,20 @@
 
     <span class="comment">// TODO: these moved to pylifecycle.h</span>
     <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">PyPy</span>, <span class="ident">link_name</span> <span class="op">=</span> <span class="string">&quot;PyPy_AtExit&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_AtExit</span>(<span class="ident">func</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>()<span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_AtExit</span>(<span class="ident">func</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>()<span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">c_int</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_Exit</span>(<span class="ident">arg1</span>: <span class="ident">c_int</span>);
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_Main</span>(<span class="ident">argc</span>: <span class="ident">c_int</span>, <span class="ident">argv</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wchar_t</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">c_int</span>;
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_GetProgramFullPath</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wchar_t</span>;
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_GetPrefix</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wchar_t</span>;
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_GetExecPrefix</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wchar_t</span>;
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_GetPath</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wchar_t</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_Main</span>(<span class="ident">argc</span>: <span class="ident">c_int</span>, <span class="ident">argv</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wchar_t</span>) <span class="op">-&gt;</span> <span class="ident">c_int</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_GetProgramFullPath</span>() <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wchar_t</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_GetPrefix</span>() <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wchar_t</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_GetExecPrefix</span>() <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wchar_t</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_GetPath</span>() <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">wchar_t</span>;
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_SetPath</span>(<span class="ident">arg1</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">wchar_t</span>);
     <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">PyPy</span>, <span class="ident">link_name</span> <span class="op">=</span> <span class="string">&quot;PyPy_GetVersion&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_GetVersion</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>;
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_GetPlatform</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>;
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_GetCopyright</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>;
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_GetCompiler</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>;
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_GetBuildInfo</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_GetVersion</span>() <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_GetPlatform</span>() <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_GetCopyright</span>() <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_GetCompiler</span>() <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">Py_GetBuildInfo</span>() <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">c_char</span>;
 }
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "pyo3";</script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>
