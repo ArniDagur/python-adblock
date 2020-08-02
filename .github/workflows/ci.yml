@@ -148,6 +148,57 @@ jobs:
           MATURIN_PASSWORD: ${{ secrets.PYPI }}
         run: poetry run maturin publish --interpreter python${{matrix.python_version}} --username __token__
 
+  python-publish-cross:
+    needs: python-publish
+    container: rustembedded/cross:${{matrix.target}}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.6, 3.7, 3.8]
+        target: [aarch64-unknown-linux-gnu, i686-unknown-linux-gnu, x86_64-unknown-netbsd]
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install latest nightly
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          override: true
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+          poetry install
+      - name: Build Python package
+        run: poetry run maturin build --release --no-sdist --strip --interpreter python${{matrix.python_version}} --target ${{matrix.target}}
+
+      - name: List wheels
+        run: find ./target/wheels/
+
+      - name: Install wheels
+        run: pip install target/wheels/adblock*.whl
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: target/wheels/adblock*.whl
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: PyPi publish
+        if: github.event_name == 'release' && github.event.action == 'created'
+        env:
+          MATURIN_PASSWORD: ${{ secrets.PYPI }}
+        run: poetry run maturin publish --interpreter python${{matrix.python_version}} --username __token__
+
+
   docs-publish:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
