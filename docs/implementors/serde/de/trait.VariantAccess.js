@@ -1,3 +1,3 @@
 (function() {var implementors = {};
-implementors["rmp_serde"] = [{"text":"impl&lt;'de, 'a, R:&nbsp;<a class=\"trait\" href=\"rmp_serde/decode/trait.Read.html\" title=\"trait rmp_serde::decode::Read\">Read</a>&lt;'de&gt;&gt; <a class=\"trait\" href=\"serde/de/trait.VariantAccess.html\" title=\"trait serde::de::VariantAccess\">VariantAccess</a>&lt;'de&gt; for <a class=\"struct\" href=\"rmp_serde/decode/struct.VariantAccess.html\" title=\"struct rmp_serde::decode::VariantAccess\">VariantAccess</a>&lt;'a, R&gt;","synthetic":false,"types":["rmp_serde::decode::VariantAccess"]}];
+implementors["rmp_serde"] = [{"text":"impl&lt;'de, 'a, R:&nbsp;Read&lt;'de&gt;&gt; VariantAccess&lt;'de&gt; for VariantAccess&lt;'a, R&gt;","synthetic":false,"types":[]}];
 if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

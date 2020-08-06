@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/adblock-0.3.0/src/filters/network.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>network.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../adblock/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">   1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/adblock-0.3.1/src/filters/network.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>network.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../adblock/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
 <span id="4">   4</span>
@@ -3200,8 +3200,6 @@
 <span id="3200">3200</span>
 <span id="3201">3201</span>
 <span id="3202">3202</span>
-<span id="3203">3203</span>
-<span id="3204">3204</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">idna</span>;
 <span class="kw">use</span> <span class="ident">regex</span>::<span class="ident">Regex</span>;
@@ -3947,47 +3945,47 @@
         }
     }
 
-    
+
     <span class="kw">fn</span> <span class="ident">get_cpt_mask</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">NetworkFilterMask</span> {
         <span class="self">self</span>.<span class="ident">mask</span> <span class="op">&amp;</span> <span class="ident">NetworkFilterMask</span>::<span class="ident">FROM_ANY</span>
     }
-    
+
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_fuzzy</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">FUZZY_MATCH</span>)
     }
-    
+
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_exception</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">IS_EXCEPTION</span>)
     }
-    
+
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_hostname_anchor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">IS_HOSTNAME_ANCHOR</span>)
     }
-    
+
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_right_anchor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">IS_RIGHT_ANCHOR</span>)
     }
-    
+
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_left_anchor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">IS_LEFT_ANCHOR</span>)
     }
-    
+
     <span class="kw">fn</span> <span class="ident">match_case</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">MATCH_CASE</span>)
     }
-    
+
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_important</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">IS_IMPORTANT</span>)
     }
-    
+
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_redirect</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">redirect</span>.<span class="ident">is_some</span>()
     }
-    
+
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_explicit_cancel</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">EXPLICIT_CANCEL</span>)
     }
-    
+
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_badfilter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">BAD_FILTER</span>)
     }
@@ -3995,43 +3993,43 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_generic_hide</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">GENERIC_HIDE</span>)
     }
-    
+
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_regex</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">IS_REGEX</span>)
     }
-    
+
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_complete_regex</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">IS_COMPLETE_REGEX</span>)
     }
-    
+
     <span class="kw">fn</span> <span class="ident">is_plain</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="op">!</span><span class="self">self</span>.<span class="ident">is_regex</span>()
     }
-    
+
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_csp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">IS_CSP</span>)
     }
-    
+
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">has_bug</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">bug</span>.<span class="ident">is_some</span>()
     }
-    
+
     <span class="kw">fn</span> <span class="ident">cpt_any</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">get_cpt_mask</span>().<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">FROM_ANY</span>)
     }
-    
+
     <span class="kw">fn</span> <span class="ident">third_party</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">THIRD_PARTY</span>)
     }
-    
+
     <span class="kw">fn</span> <span class="ident">first_party</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">FIRST_PARTY</span>)
     }
-    
+
     <span class="kw">fn</span> <span class="ident">for_http</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">FROM_HTTP</span>)
     }
-    
+
     <span class="kw">fn</span> <span class="ident">for_https</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">FROM_HTTPS</span>)
     }
@@ -4043,7 +4041,6 @@
 }
 
 <span class="kw">impl</span> <span class="ident">NetworkMatchable</span> <span class="kw">for</span> <span class="ident">NetworkFilter</span> {
-    
     <span class="kw">fn</span> <span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">request</span>: <span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="ident">check_options</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">request</span>) <span class="op">&amp;&amp;</span> <span class="ident">check_pattern</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">request</span>)
     }
@@ -4060,7 +4057,7 @@
             <span class="kw">if</span> <span class="ident">cache</span>.<span class="ident">is_some</span>() {
                 <span class="kw">return</span> <span class="ident">cache</span>.<span class="ident">as_ref</span>().<span class="ident">unwrap</span>().<span class="ident">clone</span>(); <span class="comment">// Only clones the Arc, not the entire regex</span>
             }
-        
+
             <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">compile_regex</span>(
                 <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">filter</span>,
                 <span class="self">self</span>.<span class="ident">is_right_anchor</span>(),
@@ -4234,7 +4231,6 @@
     }
     <span class="kw">let</span> <span class="ident">hostname_len</span> <span class="op">=</span> <span class="ident">hostname</span>.<span class="ident">len</span>();
 
-    
     <span class="kw">if</span> <span class="ident">filter_hostname_len</span> <span class="op">&gt;</span> <span class="ident">hostname_len</span> {
         <span class="comment">// `filterHostname` cannot be longer than actual hostname</span>
         <span class="bool-val">false</span>
@@ -4624,7 +4620,6 @@
         <span class="kw">return</span> <span class="bool-val">false</span>;
     }
 
-    
     <span class="comment">// Source URL must be among these domains to match</span>
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">included_domains</span>) <span class="op">=</span> <span class="ident">filter</span>.<span class="ident">opt_domains</span>.<span class="ident">as_ref</span>() {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">source_hashes</span>) <span class="op">=</span> <span class="ident">request</span>.<span class="ident">source_hostname_hashes</span>.<span class="ident">as_ref</span>() {
@@ -4655,7 +4650,7 @@
         }
     }
 
-    <span class="bool-val">true</span>   
+    <span class="bool-val">true</span>
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
@@ -5944,6 +5939,8 @@
         <span class="ident">filter_match_url</span>(<span class="string">&quot;||foo&quot;</span>, <span class="string">&quot;https://foo-bar.baz.com/bar&quot;</span>, <span class="bool-val">false</span>);
         <span class="ident">filter_match_url</span>(<span class="string">&quot;||foo.com&quot;</span>, <span class="string">&quot;https://foo.de&quot;</span>, <span class="bool-val">false</span>);
         <span class="ident">filter_match_url</span>(<span class="string">&quot;||foo.com&quot;</span>, <span class="string">&quot;https://bar.foo.de&quot;</span>, <span class="bool-val">false</span>);
+        <span class="ident">filter_match_url</span>(<span class="string">&quot;||s.foo.com&quot;</span>, <span class="string">&quot;https://substring.s.foo.com&quot;</span>, <span class="bool-val">true</span>);
+        <span class="ident">filter_match_url</span>(<span class="string">&quot;||s.foo.com&quot;</span>, <span class="string">&quot;https://substrings.foo.com&quot;</span>, <span class="bool-val">false</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -6234,7 +6231,6 @@
             <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">network_filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;http://example.net/adv&quot;</span>, <span class="string">&quot;http://bar.example.com&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>()) <span class="op">==</span> <span class="bool-val">false</span>);
             <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">network_filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;http://example.net/adv&quot;</span>, <span class="string">&quot;http://anotherexample.com&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>()) <span class="op">==</span> <span class="bool-val">false</span>);
         }
-        
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>

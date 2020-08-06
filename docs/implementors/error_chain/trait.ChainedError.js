@@ -1,5 +1,5 @@
 (function() {var implementors = {};
-implementors["addr"] = [{"text":"impl <a class=\"trait\" href=\"error_chain/trait.ChainedError.html\" title=\"trait error_chain::ChainedError\">ChainedError</a> for <a class=\"struct\" href=\"addr/errors/struct.Error.html\" title=\"struct addr::errors::Error\">Error</a>","synthetic":false,"types":["addr::errors::Error"]}];
+implementors["addr"] = [{"text":"impl ChainedError for Error","synthetic":false,"types":[]}];
 implementors["error_chain"] = [];
-implementors["psl_lexer"] = [{"text":"impl <a class=\"trait\" href=\"error_chain/trait.ChainedError.html\" title=\"trait error_chain::ChainedError\">ChainedError</a> for <a class=\"struct\" href=\"psl_lexer/errors/struct.Error.html\" title=\"struct psl_lexer::errors::Error\">Error</a>","synthetic":false,"types":["psl_lexer::errors::Error"]}];
+implementors["psl_lexer"] = [{"text":"impl ChainedError for Error","synthetic":false,"types":[]}];
 if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
