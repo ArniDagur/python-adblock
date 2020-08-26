@@ -22,9 +22,9 @@ class UrlSpecificResources:
 class FilterSet:
     def __init__(self, debug: bool = False) -> None:
         pass
-    def add_filter_list(self, filter_list: str, format: str) -> None:
+    def add_filter_list(self, filter_list: str, format: str = "standard") -> None:
         pass
-    def add_filters(self, filters: List[str], format: str) -> None:
+    def add_filters(self, filters: List[str], format: str = "standard") -> None:
         pass
 
 class Engine:
