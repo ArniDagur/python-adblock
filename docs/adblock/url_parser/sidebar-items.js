@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["get_host_domain",""]],"struct":[["RequestUrl",""]],"trait":[["UrlParser",""]]});
+initSidebarItems({"fn":[["parse_url","Return the string representation of the host (domain or IP address) for this URL, if any together with the URL."]],"struct":[["RequestUrl",""]],"trait":[["ResolvesDomain",""]]});

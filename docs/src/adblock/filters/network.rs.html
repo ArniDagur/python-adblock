@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/adblock-0.3.1/src/filters/network.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>network.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../adblock/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/adblock-0.3.2/src/filters/network.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>network.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../adblock/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
                 <a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
@@ -3201,6 +3201,20 @@
 <span id="3200">3200</span>
 <span id="3201">3201</span>
 <span id="3202">3202</span>
+<span id="3203">3203</span>
+<span id="3204">3204</span>
+<span id="3205">3205</span>
+<span id="3206">3206</span>
+<span id="3207">3207</span>
+<span id="3208">3208</span>
+<span id="3209">3209</span>
+<span id="3210">3210</span>
+<span id="3211">3211</span>
+<span id="3212">3212</span>
+<span id="3213">3213</span>
+<span id="3214">3214</span>
+<span id="3215">3215</span>
+<span id="3216">3216</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">idna</span>;
 <span class="kw">use</span> <span class="ident">regex</span>::<span class="ident">Regex</span>;
@@ -3211,8 +3225,7 @@
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">request</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">utils</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">utils</span>::<span class="ident">Hash</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cell</span>::<span class="ident">RefCell</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">rc</span>::<span class="ident">Rc</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::{<span class="ident">Arc</span>, <span class="ident">RwLock</span>};
 <span class="kw">use</span> <span class="ident">twoway</span>;
 
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TOKENS_BUFFER_SIZE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">200</span>;
@@ -3409,7 +3422,7 @@
     <span class="comment">// When the Regex hasn&#39;t been compiled, &lt;None&gt; is stored, afterwards Arc to Some&lt;CompiledRegex&gt;</span>
     <span class="comment">// to avoid expensive cloning of the Regex itself.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing</span>, <span class="ident">skip_deserializing</span>)]</span>
-    <span class="ident">regex</span>: <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">RefCell</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">CompiledRegex</span><span class="op">&gt;&gt;</span><span class="op">&gt;&gt;</span>
+    <span class="ident">regex</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">RwLock</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">CompiledRegex</span><span class="op">&gt;&gt;</span><span class="op">&gt;&gt;</span>
 }
 
 <span class="kw">impl</span> <span class="ident">NetworkFilter</span> {
@@ -3705,6 +3718,8 @@
                 <span class="op">&amp;&amp;</span> <span class="ident">line</span>[<span class="ident">filter_index_start</span>..].<span class="ident">starts_with</span>(<span class="string">&quot;ws://&quot;</span>)
             {
                 <span class="ident">mask</span>.<span class="ident">set</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">FROM_WEBSOCKET</span>, <span class="bool-val">true</span>);
+                <span class="ident">mask</span>.<span class="ident">set</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">FROM_HTTP</span>, <span class="bool-val">false</span>);
+                <span class="ident">mask</span>.<span class="ident">set</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">FROM_HTTPS</span>, <span class="bool-val">false</span>);
                 <span class="ident">mask</span>.<span class="ident">set</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">IS_LEFT_ANCHOR</span>, <span class="bool-val">false</span>);
                 <span class="ident">filter_index_start</span> <span class="op">=</span> <span class="ident">filter_index_end</span>;
             } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">filter_index_end</span> <span class="op">==</span> <span class="ident">filter_index_start</span> <span class="op">+</span> <span class="number">7</span>
@@ -3798,7 +3813,7 @@
             <span class="ident">fuzzy_signature</span>: <span class="ident">maybe_fuzzy_signature</span>,
             <span class="ident">opt_domains_union</span>,
             <span class="ident">opt_not_domains_union</span>,
-            <span class="ident">regex</span>: <span class="ident">Rc</span>::<span class="ident">new</span>(<span class="ident">RefCell</span>::<span class="ident">new</span>(<span class="prelude-val">None</span>))
+            <span class="ident">regex</span>: <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">RwLock</span>::<span class="ident">new</span>(<span class="prelude-val">None</span>))
         })
     }
 
@@ -3920,9 +3935,11 @@
         }
 
         <span class="comment">// Append tokens from hostname, if any</span>
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">hostname</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">hostname</span>.<span class="ident">as_ref</span>() {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hostname_tokens</span> <span class="op">=</span> <span class="ident">utils</span>::<span class="ident">tokenize</span>(<span class="kw-2">&amp;</span><span class="ident">hostname</span>);
-            <span class="ident">tokens</span>.<span class="ident">append</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">hostname_tokens</span>);
+        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">IS_HOSTNAME_REGEX</span>) {
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">hostname</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">hostname</span>.<span class="ident">as_ref</span>()  {
+                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hostname_tokens</span> <span class="op">=</span> <span class="ident">utils</span>::<span class="ident">tokenize</span>(<span class="kw-2">&amp;</span><span class="ident">hostname</span>);
+                <span class="ident">tokens</span>.<span class="ident">append</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">hostname_tokens</span>);
+            }
         }
 
         <span class="comment">// If we got no tokens for the filter/hostname part, then we will dispatch</span>
@@ -4038,7 +4055,7 @@
 
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">NetworkMatchable</span> {
     <span class="kw">fn</span> <span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">request</span>: <span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>) <span class="op">-&gt;</span> <span class="ident">bool</span>;
-    <span class="kw">fn</span> <span class="ident">get_regex</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">CompiledRegex</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">get_regex</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">CompiledRegex</span><span class="op">&gt;</span>;
 }
 
 <span class="kw">impl</span> <span class="ident">NetworkMatchable</span> <span class="kw">for</span> <span class="ident">NetworkFilter</span> {
@@ -4047,33 +4064,28 @@
     }
 
     <span class="comment">// Lazily get the regex if the filter has one</span>
-    <span class="kw">fn</span> <span class="ident">get_regex</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Rc</span><span class="op">&lt;</span><span class="ident">CompiledRegex</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">get_regex</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">CompiledRegex</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">is_regex</span>() <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">is_complete_regex</span>() {
-            <span class="kw">return</span> <span class="ident">Rc</span>::<span class="ident">new</span>(<span class="ident">CompiledRegex</span>::<span class="ident">MatchAll</span>);
+            <span class="kw">return</span> <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">CompiledRegex</span>::<span class="ident">MatchAll</span>);
         }
         <span class="comment">// Create a new scope to contain the lifetime of the</span>
-        <span class="comment">// dynamic borrow</span>
+        <span class="comment">// dynamic read borrow</span>
         {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cache</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">regex</span>.<span class="ident">borrow_mut</span>();
+            <span class="kw">let</span> <span class="ident">cache</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">regex</span>.<span class="ident">as_ref</span>().<span class="ident">read</span>().<span class="ident">unwrap</span>();
             <span class="kw">if</span> <span class="ident">cache</span>.<span class="ident">is_some</span>() {
-                <span class="kw">return</span> <span class="ident">cache</span>.<span class="ident">as_ref</span>().<span class="ident">unwrap</span>().<span class="ident">clone</span>(); <span class="comment">// Only clones the Arc, not the entire regex</span>
+                <span class="kw">return</span> <span class="ident">cache</span>.<span class="ident">as_ref</span>().<span class="ident">unwrap</span>().<span class="ident">clone</span>();
             }
-
-            <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">compile_regex</span>(
-                <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">filter</span>,
-                <span class="self">self</span>.<span class="ident">is_right_anchor</span>(),
-                <span class="self">self</span>.<span class="ident">is_left_anchor</span>(),
-                <span class="self">self</span>.<span class="ident">is_complete_regex</span>(),
-            );
-
-            <span class="kw-2">*</span><span class="ident">cache</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">Rc</span>::<span class="ident">new</span>(<span class="ident">regex</span>));
         }
-        <span class="comment">// Recursive call to return the just-cached value.</span>
-        <span class="comment">// Note that if we had not let the previous borrow</span>
-        <span class="comment">// of the cache fall out of scope then the subsequent</span>
-        <span class="comment">// recursive borrow would cause a dynamic thread panic.</span>
-        <span class="comment">// This is the major hazard of using `RefCell`.</span>
-        <span class="self">self</span>.<span class="ident">get_regex</span>()
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cache</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">regex</span>.<span class="ident">as_ref</span>().<span class="ident">write</span>().<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">compile_regex</span>(
+            <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">filter</span>,
+            <span class="self">self</span>.<span class="ident">is_right_anchor</span>(),
+            <span class="self">self</span>.<span class="ident">is_left_anchor</span>(),
+            <span class="self">self</span>.<span class="ident">is_complete_regex</span>(),
+        );
+        <span class="kw">let</span> <span class="ident">arc_regex</span> <span class="op">=</span> <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">regex</span>);
+        <span class="kw-2">*</span><span class="ident">cache</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">arc_regex</span>.<span class="ident">clone</span>());
+        <span class="ident">arc_regex</span>
     }
 }
 
@@ -6118,6 +6130,22 @@
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
+    <span class="kw">fn</span> <span class="ident">check_ws_vs_http_matching</span>() {
+        <span class="kw">let</span> <span class="ident">network_filter</span> <span class="op">=</span> <span class="ident">NetworkFilter</span>::<span class="ident">parse</span>(<span class="string">&quot;|ws://$domain=4shared.com&quot;</span>, <span class="bool-val">true</span>).<span class="ident">unwrap</span>();
+
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">network_filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;ws://example.com&quot;</span>, <span class="string">&quot;4shared.com&quot;</span>, <span class="string">&quot;websocket&quot;</span>).<span class="ident">unwrap</span>()));
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">network_filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;wss://example.com&quot;</span>, <span class="string">&quot;4shared.com&quot;</span>, <span class="string">&quot;websocket&quot;</span>).<span class="ident">unwrap</span>()));
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">network_filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;http://example.com&quot;</span>, <span class="string">&quot;4shared.com&quot;</span>, <span class="string">&quot;script&quot;</span>).<span class="ident">unwrap</span>()));
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">network_filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;https://example.com&quot;</span>, <span class="string">&quot;4shared.com&quot;</span>, <span class="string">&quot;script&quot;</span>).<span class="ident">unwrap</span>()));
+
+        <span class="comment">// The `ws://` and `wss://` protocols should be used, rather than the resource type.</span>
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">network_filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;ws://example.com&quot;</span>, <span class="string">&quot;4shared.com&quot;</span>, <span class="string">&quot;script&quot;</span>).<span class="ident">unwrap</span>()));
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">network_filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;wss://example.com&quot;</span>, <span class="string">&quot;4shared.com&quot;</span>, <span class="string">&quot;script&quot;</span>).<span class="ident">unwrap</span>()));
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">network_filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;http://example.com&quot;</span>, <span class="string">&quot;4shared.com&quot;</span>, <span class="string">&quot;websocket&quot;</span>).<span class="ident">unwrap</span>()));
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">network_filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;https://example.com&quot;</span>, <span class="string">&quot;4shared.com&quot;</span>, <span class="string">&quot;websocket&quot;</span>).<span class="ident">unwrap</span>()));
+    }
+
+    <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="comment">// options</span>
     <span class="kw">fn</span> <span class="ident">check_options_works</span>() {
         <span class="comment">// cpt test</span>
@@ -6313,7 +6341,7 @@
         {
             <span class="kw">let</span> <span class="ident">filter</span> <span class="op">=</span> <span class="string">r#&quot;/^https?:\/\/([0-9a-z\-]+\.)?(9anime|animeland|animenova|animeplus|animetoon|animewow|gamestorrent|goodanime|gogoanime|igg-games|kimcartoon|memecenter|readcomiconline|toonget|toonova|watchcartoononline)\.[a-z]{2,4}\/(?!([Ee]xternal|[Ii]mages|[Ss]cripts|[Uu]ploads|ac|ajax|assets|combined|content|cov|cover|(img\/bg)|(img\/icon)|inc|jwplayer|player|playlist-cat-rss|static|thumbs|wp-content|wp-includes)\/)(.*)/$image,other,script,~third-party,xmlhttprequest,domain=~animeland.hu&quot;#</span>;
             <span class="kw">let</span> <span class="ident">network_filter</span> <span class="op">=</span> <span class="ident">NetworkFilter</span>::<span class="ident">parse</span>(<span class="ident">filter</span>, <span class="bool-val">true</span>).<span class="ident">unwrap</span>();
-            <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Rc</span>::<span class="ident">try_unwrap</span>(<span class="ident">network_filter</span>.<span class="ident">get_regex</span>()).<span class="ident">unwrap</span>();
+            <span class="kw">let</span> <span class="ident">regex</span> <span class="op">=</span> <span class="ident">Arc</span>::<span class="ident">try_unwrap</span>(<span class="ident">network_filter</span>.<span class="ident">get_regex</span>()).<span class="ident">unwrap</span>();
             <span class="macro">assert</span><span class="macro">!</span>(
                 <span class="macro">matches</span><span class="macro">!</span>(<span class="ident">regex</span>, <span class="ident">CompiledRegex</span>::<span class="ident">Compiled</span>(<span class="kw">_</span>)),
                 <span class="string">&quot;Generated incorrect regex: {:?}&quot;</span>,
