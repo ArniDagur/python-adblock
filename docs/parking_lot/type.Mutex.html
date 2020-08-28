@@ -9,16 +9,16 @@ ever accessed when the mutex is locked.</p>
 <h1 id="fairness" class="section-header"><a href="#fairness">Fairness</a></h1>
 <p>A typical unfair lock can often end up in a situation where a single thread
 quickly acquires and releases the same mutex in succession, which can starve
-other threads waiting to acquire the mutex. While this improves performance
+other threads waiting to acquire the mutex. While this improves throughput
 because it doesn't force a context switch when a thread tries to re-acquire
 a mutex it has just released, this can starve other threads.</p>
 <p>This mutex uses <a href="https://trac.webkit.org/changeset/203350">eventual fairness</a>
 to ensure that the lock will be fair on average without sacrificing
-performance. This is done by forcing a fair unlock on average every 0.5ms,
+throughput. This is done by forcing a fair unlock on average every 0.5ms,
 which will force the lock to go to the next thread waiting for the mutex.</p>
 <p>Additionally, any critical section longer than 1ms will always use a fair
-unlock, which has a negligible performance impact compared to the length of
-the critical section.</p>
+unlock, which has a negligible impact on throughput considering the length
+of the critical section.</p>
 <p>You can also force a fair unlock by calling <code>MutexGuard::unlock_fair</code> when
 unlocking a mutex instead of simply dropping the <code>MutexGuard</code>.</p>
 <h1 id="differences-from-the-standard-library-mutex" class="section-header"><a href="#differences-from-the-standard-library-mutex">Differences from the standard library <code>Mutex</code></a></h1>

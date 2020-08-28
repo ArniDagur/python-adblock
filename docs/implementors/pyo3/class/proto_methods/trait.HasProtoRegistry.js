@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["adblock"] = [{"text":"impl HasProtoRegistry for BlockerResult","synthetic":false,"types":[]},{"text":"impl HasProtoRegistry for FilterSet","synthetic":false,"types":[]},{"text":"impl HasProtoRegistry for UrlSpecificResources","synthetic":false,"types":[]},{"text":"impl HasProtoRegistry for Engine","synthetic":false,"types":[]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

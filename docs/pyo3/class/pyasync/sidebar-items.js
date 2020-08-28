@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["PyAsyncAenterProtocol",""],["PyAsyncAexitProtocol",""],["PyAsyncAiterProtocol",""],["PyAsyncAnextProtocol",""],["PyAsyncAwaitProtocol",""],["PyAsyncProtocol","Python Async/Await support interface."]]});
+initSidebarItems({"enum":[["IterANextOutput",""]],"trait":[["PyAsyncAenterProtocol",""],["PyAsyncAexitProtocol",""],["PyAsyncAiterProtocol",""],["PyAsyncAnextProtocol",""],["PyAsyncAwaitProtocol",""],["PyAsyncProtocol","Python Async/Await support interface."]],"type":[["PyIterANextOutput",""]]});

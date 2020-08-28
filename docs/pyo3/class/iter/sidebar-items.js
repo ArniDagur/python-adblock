@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["PyIterIterProtocol",""],["PyIterNextProtocol",""],["PyIterProtocol","Python Iterator Interface."]]});
+initSidebarItems({"enum":[["IterNextOutput","Output of `__next__` which can either `yield` the next value in the iteration, or `return` a value to raise `StopIteration` in Python."]],"struct":[["PyIterMethods",""]],"trait":[["PyIterIterProtocol",""],["PyIterNextProtocol",""],["PyIterProtocol","Python Iterator Interface."]],"type":[["PyIterNextOutput",""]]});

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/pyo3-derive-backend-0.10.1/src/defs.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>defs.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../pyo3_derive_backend/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/pyo3-derive-backend-0.11.1/src/defs.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>defs.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../pyo3_derive_backend/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
                 <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
@@ -731,14 +731,162 @@
 <span id="730">730</span>
 <span id="731">731</span>
 <span id="732">732</span>
+<span id="733">733</span>
+<span id="734">734</span>
+<span id="735">735</span>
+<span id="736">736</span>
+<span id="737">737</span>
+<span id="738">738</span>
+<span id="739">739</span>
+<span id="740">740</span>
+<span id="741">741</span>
+<span id="742">742</span>
+<span id="743">743</span>
+<span id="744">744</span>
+<span id="745">745</span>
+<span id="746">746</span>
+<span id="747">747</span>
+<span id="748">748</span>
+<span id="749">749</span>
+<span id="750">750</span>
+<span id="751">751</span>
+<span id="752">752</span>
+<span id="753">753</span>
+<span id="754">754</span>
+<span id="755">755</span>
+<span id="756">756</span>
+<span id="757">757</span>
+<span id="758">758</span>
+<span id="759">759</span>
+<span id="760">760</span>
+<span id="761">761</span>
+<span id="762">762</span>
+<span id="763">763</span>
+<span id="764">764</span>
+<span id="765">765</span>
+<span id="766">766</span>
+<span id="767">767</span>
+<span id="768">768</span>
+<span id="769">769</span>
+<span id="770">770</span>
+<span id="771">771</span>
+<span id="772">772</span>
+<span id="773">773</span>
+<span id="774">774</span>
+<span id="775">775</span>
+<span id="776">776</span>
+<span id="777">777</span>
+<span id="778">778</span>
+<span id="779">779</span>
+<span id="780">780</span>
+<span id="781">781</span>
+<span id="782">782</span>
+<span id="783">783</span>
+<span id="784">784</span>
+<span id="785">785</span>
+<span id="786">786</span>
+<span id="787">787</span>
+<span id="788">788</span>
+<span id="789">789</span>
+<span id="790">790</span>
+<span id="791">791</span>
+<span id="792">792</span>
+<span id="793">793</span>
+<span id="794">794</span>
+<span id="795">795</span>
+<span id="796">796</span>
+<span id="797">797</span>
+<span id="798">798</span>
+<span id="799">799</span>
+<span id="800">800</span>
+<span id="801">801</span>
+<span id="802">802</span>
+<span id="803">803</span>
+<span id="804">804</span>
+<span id="805">805</span>
+<span id="806">806</span>
+<span id="807">807</span>
+<span id="808">808</span>
+<span id="809">809</span>
+<span id="810">810</span>
+<span id="811">811</span>
+<span id="812">812</span>
+<span id="813">813</span>
+<span id="814">814</span>
+<span id="815">815</span>
+<span id="816">816</span>
+<span id="817">817</span>
+<span id="818">818</span>
+<span id="819">819</span>
+<span id="820">820</span>
+<span id="821">821</span>
+<span id="822">822</span>
+<span id="823">823</span>
+<span id="824">824</span>
+<span id="825">825</span>
+<span id="826">826</span>
+<span id="827">827</span>
+<span id="828">828</span>
+<span id="829">829</span>
+<span id="830">830</span>
+<span id="831">831</span>
+<span id="832">832</span>
+<span id="833">833</span>
+<span id="834">834</span>
+<span id="835">835</span>
+<span id="836">836</span>
+<span id="837">837</span>
+<span id="838">838</span>
+<span id="839">839</span>
+<span id="840">840</span>
+<span id="841">841</span>
+<span id="842">842</span>
+<span id="843">843</span>
+<span id="844">844</span>
+<span id="845">845</span>
+<span id="846">846</span>
+<span id="847">847</span>
+<span id="848">848</span>
+<span id="849">849</span>
+<span id="850">850</span>
+<span id="851">851</span>
+<span id="852">852</span>
+<span id="853">853</span>
+<span id="854">854</span>
+<span id="855">855</span>
+<span id="856">856</span>
+<span id="857">857</span>
+<span id="858">858</span>
+<span id="859">859</span>
+<span id="860">860</span>
+<span id="861">861</span>
+<span id="862">862</span>
+<span id="863">863</span>
+<span id="864">864</span>
+<span id="865">865</span>
+<span id="866">866</span>
+<span id="867">867</span>
+<span id="868">868</span>
+<span id="869">869</span>
+<span id="870">870</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="comment">// Copyright (c) 2017-present PyO3 Project and Contributors</span>
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">func</span>::<span class="ident">MethodProto</span>;
 
+<span class="doccomment">/// Predicates for `#[pyproto]`.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Proto</span> {
+    <span class="doccomment">/// The name of this protocol. E.g., Iter.</span>
     <span class="kw">pub</span> <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>,
+    <span class="doccomment">/// The name of slot table. E.g., PyIterMethods.</span>
+    <span class="kw">pub</span> <span class="ident">slot_table</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>,
+    <span class="doccomment">/// The name of the setter used to set the table to `PyProtoRegistry`.</span>
+    <span class="kw">pub</span> <span class="ident">set_slot_table</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>,
+    <span class="doccomment">/// All methods.</span>
     <span class="kw">pub</span> <span class="ident">methods</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="ident">MethodProto</span>],
+    <span class="doccomment">/// All methods registered as normal methods like `#[pymethods]`.</span>
     <span class="kw">pub</span> <span class="ident">py_methods</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="ident">PyMethod</span>],
+    <span class="doccomment">/// All methods registered to the slot table.</span>
+    <span class="kw">pub</span> <span class="ident">slot_setters</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="ident">SlotSetter</span>],
 }
 
 <span class="kw">impl</span> <span class="ident">Proto</span> {
@@ -756,6 +904,7 @@
     }
 }
 
+<span class="doccomment">/// Represents a method registered as a normal method like `#[pymethods]`.</span>
 <span class="comment">// TODO(kngwyu): Currently only __radd__-like methods use METH_COEXIST to prevent</span>
 <span class="comment">// __add__-like methods from overriding them.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PyMethod</span> {
@@ -781,64 +930,79 @@
     }
 }
 
+<span class="doccomment">/// Represents a setter used to register a method to the method table.</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SlotSetter</span> {
+    <span class="doccomment">/// Protocols necessary for invoking this setter.</span>
+    <span class="doccomment">/// E.g., we need `__setattr__` and `__delattr__` for invoking `set_setdelitem`.</span>
+    <span class="kw">pub</span> <span class="ident">proto_names</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>],
+    <span class="doccomment">/// The name of the setter called to the method table.</span>
+    <span class="kw">pub</span> <span class="ident">set_function</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>,
+    <span class="doccomment">/// Represents a set of setters disabled by this setter.</span>
+    <span class="doccomment">/// E.g., `set_setdelitem` have to disable `set_setitem` and `set_delitem`.</span>
+    <span class="kw">pub</span> <span class="ident">skipped_setters</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>],
+}
+
+<span class="kw">impl</span> <span class="ident">SlotSetter</span> {
+    <span class="kw">const</span> <span class="ident">EMPTY_SETTERS</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[];
+    <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">names</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>], <span class="ident">set_function</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="ident">SlotSetter</span> {
+            <span class="ident">proto_names</span>: <span class="ident">names</span>,
+            <span class="ident">set_function</span>,
+            <span class="ident">skipped_setters</span>: <span class="self">Self</span>::<span class="ident">EMPTY_SETTERS</span>,
+        }
+    }
+}
+
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">OBJECT</span>: <span class="ident">Proto</span> <span class="op">=</span> <span class="ident">Proto</span> {
     <span class="ident">name</span>: <span class="string">&quot;Object&quot;</span>,
+    <span class="ident">slot_table</span>: <span class="string">&quot;pyo3::class::basic::PyObjectMethods&quot;</span>,
+    <span class="ident">set_slot_table</span>: <span class="string">&quot;set_basic_methods&quot;</span>,
     <span class="ident">methods</span>: <span class="kw-2">&amp;</span>[
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__getattr__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Name&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::basic::PyObjectGetAttrProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Ternary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__setattr__&quot;</span>,
             <span class="ident">arg1</span>: <span class="string">&quot;Name&quot;</span>,
             <span class="ident">arg2</span>: <span class="string">&quot;Value&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::basic::PyObjectSetAttrProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__delattr__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Name&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::basic::PyObjectDelAttrProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__str__&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::basic::PyObjectStrProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__repr__&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::basic::PyObjectReprProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__format__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Format&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::basic::PyObjectFormatProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__hash__&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::basic::PyObjectHashProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__bytes__&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::basic::PyObjectBytesProtocol&quot;</span>,
-        },
-        <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
-            <span class="ident">name</span>: <span class="string">&quot;__bool__&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
-            <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::basic::PyObjectBoolProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__richcmp__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::basic::PyObjectRichcmpProtocol&quot;</span>,
+        },
+        <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
+            <span class="ident">name</span>: <span class="string">&quot;__bool__&quot;</span>,
+            <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::basic::PyObjectBoolProtocol&quot;</span>,
         },
     ],
     <span class="ident">py_methods</span>: <span class="kw-2">&amp;</span>[
@@ -846,29 +1010,45 @@
         <span class="ident">PyMethod</span>::<span class="ident">new</span>(<span class="string">&quot;__bytes__&quot;</span>, <span class="string">&quot;pyo3::class::basic::BytesProtocolImpl&quot;</span>),
         <span class="ident">PyMethod</span>::<span class="ident">new</span>(<span class="string">&quot;__unicode__&quot;</span>, <span class="string">&quot;pyo3::class::basic::UnicodeProtocolImpl&quot;</span>),
     ],
+    <span class="ident">slot_setters</span>: <span class="kw-2">&amp;</span>[
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__str__&quot;</span>], <span class="string">&quot;set_str&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__repr__&quot;</span>], <span class="string">&quot;set_repr&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__hash__&quot;</span>], <span class="string">&quot;set_hash&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__getattr__&quot;</span>], <span class="string">&quot;set_getattr&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__richcmp__&quot;</span>], <span class="string">&quot;set_richcompare&quot;</span>),
+        <span class="ident">SlotSetter</span> {
+            <span class="ident">proto_names</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;__setattr__&quot;</span>, <span class="string">&quot;__delattr__&quot;</span>],
+            <span class="ident">set_function</span>: <span class="string">&quot;set_setdelattr&quot;</span>,
+            <span class="ident">skipped_setters</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;set_setattr&quot;</span>, <span class="string">&quot;set_delattr&quot;</span>],
+        },
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__setattr__&quot;</span>], <span class="string">&quot;set_setattr&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__delattr__&quot;</span>], <span class="string">&quot;set_delattr&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__bool__&quot;</span>], <span class="string">&quot;set_bool&quot;</span>),
+    ],
 };
 
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ASYNC</span>: <span class="ident">Proto</span> <span class="op">=</span> <span class="ident">Proto</span> {
     <span class="ident">name</span>: <span class="string">&quot;Async&quot;</span>,
+    <span class="ident">slot_table</span>: <span class="string">&quot;pyo3::ffi::PyAsyncMethods&quot;</span>,
+    <span class="ident">set_slot_table</span>: <span class="string">&quot;set_async_methods&quot;</span>,
     <span class="ident">methods</span>: <span class="kw-2">&amp;</span>[
-        <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
+        <span class="ident">MethodProto</span>::<span class="ident">UnaryS</span> {
             <span class="ident">name</span>: <span class="string">&quot;__await__&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
+            <span class="ident">arg</span>: <span class="string">&quot;Receiver&quot;</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::pyasync::PyAsyncAwaitProtocol&quot;</span>,
         },
-        <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
+        <span class="ident">MethodProto</span>::<span class="ident">UnaryS</span> {
             <span class="ident">name</span>: <span class="string">&quot;__aiter__&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
+            <span class="ident">arg</span>: <span class="string">&quot;Receiver&quot;</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::pyasync::PyAsyncAiterProtocol&quot;</span>,
         },
-        <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
+        <span class="ident">MethodProto</span>::<span class="ident">UnaryS</span> {
             <span class="ident">name</span>: <span class="string">&quot;__anext__&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
+            <span class="ident">arg</span>: <span class="string">&quot;Receiver&quot;</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::pyasync::PyAsyncAnextProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__aenter__&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::pyasync::PyAsyncAenterProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Quaternary</span> {
@@ -889,31 +1069,41 @@
             <span class="string">&quot;pyo3::class::pyasync::PyAsyncAexitProtocolImpl&quot;</span>,
         ),
     ],
+    <span class="ident">slot_setters</span>: <span class="kw-2">&amp;</span>[
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__await__&quot;</span>], <span class="string">&quot;set_await&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__aiter__&quot;</span>], <span class="string">&quot;set_aiter&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__anext__&quot;</span>], <span class="string">&quot;set_anext&quot;</span>),
+    ],
 };
 
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">BUFFER</span>: <span class="ident">Proto</span> <span class="op">=</span> <span class="ident">Proto</span> {
     <span class="ident">name</span>: <span class="string">&quot;Buffer&quot;</span>,
+    <span class="ident">slot_table</span>: <span class="string">&quot;pyo3::ffi::PyBufferProcs&quot;</span>,
+    <span class="ident">set_slot_table</span>: <span class="string">&quot;set_buffer_methods&quot;</span>,
     <span class="ident">methods</span>: <span class="kw-2">&amp;</span>[
         <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
             <span class="ident">name</span>: <span class="string">&quot;bf_getbuffer&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::buffer::PyBufferGetBufferProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
             <span class="ident">name</span>: <span class="string">&quot;bf_releasebuffer&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::buffer::PyBufferReleaseBufferProtocol&quot;</span>,
         },
     ],
     <span class="ident">py_methods</span>: <span class="kw-2">&amp;</span>[],
+    <span class="ident">slot_setters</span>: <span class="kw-2">&amp;</span>[
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;bf_getbuffer&quot;</span>], <span class="string">&quot;set_getbuffer&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;bf_releasebuffer&quot;</span>], <span class="string">&quot;set_releasebuffer&quot;</span>),
+    ],
 };
 
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CONTEXT</span>: <span class="ident">Proto</span> <span class="op">=</span> <span class="ident">Proto</span> {
     <span class="ident">name</span>: <span class="string">&quot;Context&quot;</span>,
+    <span class="ident">slot_table</span>: <span class="string">&quot;&quot;</span>,
+    <span class="ident">set_slot_table</span>: <span class="string">&quot;&quot;</span>,
     <span class="ident">methods</span>: <span class="kw-2">&amp;</span>[
         <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__enter__&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::context::PyContextEnterProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Quaternary</span> {
@@ -934,10 +1124,13 @@
             <span class="string">&quot;pyo3::class::context::PyContextExitProtocolImpl&quot;</span>,
         ),
     ],
+    <span class="ident">slot_setters</span>: <span class="kw-2">&amp;</span>[],
 };
 
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">GC</span>: <span class="ident">Proto</span> <span class="op">=</span> <span class="ident">Proto</span> {
     <span class="ident">name</span>: <span class="string">&quot;GC&quot;</span>,
+    <span class="ident">slot_table</span>: <span class="string">&quot;pyo3::class::gc::PyGCMethods&quot;</span>,
+    <span class="ident">set_slot_table</span>: <span class="string">&quot;set_gc_methods&quot;</span>,
     <span class="ident">methods</span>: <span class="kw-2">&amp;</span>[
         <span class="ident">MethodProto</span>::<span class="ident">Free</span> {
             <span class="ident">name</span>: <span class="string">&quot;__traverse__&quot;</span>,
@@ -949,35 +1142,39 @@
         },
     ],
     <span class="ident">py_methods</span>: <span class="kw-2">&amp;</span>[],
+    <span class="ident">slot_setters</span>: <span class="kw-2">&amp;</span>[
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__traverse__&quot;</span>], <span class="string">&quot;set_traverse&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__clear__&quot;</span>], <span class="string">&quot;set_clear&quot;</span>),
+    ],
 };
 
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DESCR</span>: <span class="ident">Proto</span> <span class="op">=</span> <span class="ident">Proto</span> {
     <span class="ident">name</span>: <span class="string">&quot;Descriptor&quot;</span>,
+    <span class="ident">slot_table</span>: <span class="string">&quot;pyo3::class::descr::PyDescrMethods&quot;</span>,
+    <span class="ident">set_slot_table</span>: <span class="string">&quot;set_descr_methods&quot;</span>,
     <span class="ident">methods</span>: <span class="kw-2">&amp;</span>[
-        <span class="ident">MethodProto</span>::<span class="ident">Ternary</span> {
+        <span class="ident">MethodProto</span>::<span class="ident">TernaryS</span> {
             <span class="ident">name</span>: <span class="string">&quot;__get__&quot;</span>,
-            <span class="ident">arg1</span>: <span class="string">&quot;Inst&quot;</span>,
-            <span class="ident">arg2</span>: <span class="string">&quot;Owner&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
+            <span class="ident">arg1</span>: <span class="string">&quot;Receiver&quot;</span>,
+            <span class="ident">arg2</span>: <span class="string">&quot;Inst&quot;</span>,
+            <span class="ident">arg3</span>: <span class="string">&quot;Owner&quot;</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::descr::PyDescrGetProtocol&quot;</span>,
         },
-        <span class="ident">MethodProto</span>::<span class="ident">Ternary</span> {
+        <span class="ident">MethodProto</span>::<span class="ident">TernaryS</span> {
             <span class="ident">name</span>: <span class="string">&quot;__set__&quot;</span>,
-            <span class="ident">arg1</span>: <span class="string">&quot;Inst&quot;</span>,
-            <span class="ident">arg2</span>: <span class="string">&quot;Value&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
+            <span class="ident">arg1</span>: <span class="string">&quot;Receiver&quot;</span>,
+            <span class="ident">arg2</span>: <span class="string">&quot;Inst&quot;</span>,
+            <span class="ident">arg3</span>: <span class="string">&quot;Value&quot;</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::descr::PyDescrSetProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__det__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Inst&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::descr::PyDescrDelProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__set_name__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Inst&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::descr::PyDescrSetNameProtocol&quot;</span>,
         },
     ],
@@ -988,57 +1185,62 @@
             <span class="string">&quot;pyo3::class::context::PyDescrNameProtocolImpl&quot;</span>,
         ),
     ],
+    <span class="ident">slot_setters</span>: <span class="kw-2">&amp;</span>[
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__get__&quot;</span>], <span class="string">&quot;set_descr_get&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__set__&quot;</span>], <span class="string">&quot;set_descr_set&quot;</span>),
+    ],
 };
 
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ITER</span>: <span class="ident">Proto</span> <span class="op">=</span> <span class="ident">Proto</span> {
     <span class="ident">name</span>: <span class="string">&quot;Iter&quot;</span>,
+    <span class="ident">slot_table</span>: <span class="string">&quot;pyo3::class::iter::PyIterMethods&quot;</span>,
+    <span class="ident">set_slot_table</span>: <span class="string">&quot;set_iter_methods&quot;</span>,
     <span class="ident">py_methods</span>: <span class="kw-2">&amp;</span>[],
     <span class="ident">methods</span>: <span class="kw-2">&amp;</span>[
         <span class="ident">MethodProto</span>::<span class="ident">UnaryS</span> {
             <span class="ident">name</span>: <span class="string">&quot;__iter__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Receiver&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::iter::PyIterIterProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">UnaryS</span> {
             <span class="ident">name</span>: <span class="string">&quot;__next__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Receiver&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::iter::PyIterNextProtocol&quot;</span>,
         },
+    ],
+    <span class="ident">slot_setters</span>: <span class="kw-2">&amp;</span>[
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__iter__&quot;</span>], <span class="string">&quot;set_iter&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__next__&quot;</span>], <span class="string">&quot;set_iternext&quot;</span>),
     ],
 };
 
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MAPPING</span>: <span class="ident">Proto</span> <span class="op">=</span> <span class="ident">Proto</span> {
     <span class="ident">name</span>: <span class="string">&quot;Mapping&quot;</span>,
+    <span class="ident">slot_table</span>: <span class="string">&quot;pyo3::ffi::PyMappingMethods&quot;</span>,
+    <span class="ident">set_slot_table</span>: <span class="string">&quot;set_mapping_methods&quot;</span>,
     <span class="ident">methods</span>: <span class="kw-2">&amp;</span>[
         <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__len__&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::mapping::PyMappingLenProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__getitem__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Key&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::mapping::PyMappingGetItemProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Ternary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__setitem__&quot;</span>,
             <span class="ident">arg1</span>: <span class="string">&quot;Key&quot;</span>,
             <span class="ident">arg2</span>: <span class="string">&quot;Value&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::mapping::PyMappingSetItemProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__delitem__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Key&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::mapping::PyMappingDelItemProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__reversed__&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::mapping::PyMappingReversedProtocol&quot;</span>,
         },
     ],
@@ -1046,126 +1248,140 @@
         <span class="string">&quot;__reversed__&quot;</span>,
         <span class="string">&quot;pyo3::class::mapping::PyMappingReversedProtocolImpl&quot;</span>,
     )],
+    <span class="ident">slot_setters</span>: <span class="kw-2">&amp;</span>[
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__len__&quot;</span>], <span class="string">&quot;set_length&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__getitem__&quot;</span>], <span class="string">&quot;set_getitem&quot;</span>),
+        <span class="ident">SlotSetter</span> {
+            <span class="ident">proto_names</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;__setitem__&quot;</span>, <span class="string">&quot;__delitem__&quot;</span>],
+            <span class="ident">set_function</span>: <span class="string">&quot;set_setdelitem&quot;</span>,
+            <span class="ident">skipped_setters</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;set_setitem&quot;</span>, <span class="string">&quot;set_delitem&quot;</span>],
+        },
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__setitem__&quot;</span>], <span class="string">&quot;set_setitem&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__delitem__&quot;</span>], <span class="string">&quot;set_delitem&quot;</span>),
+    ],
 };
 
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SEQ</span>: <span class="ident">Proto</span> <span class="op">=</span> <span class="ident">Proto</span> {
     <span class="ident">name</span>: <span class="string">&quot;Sequence&quot;</span>,
+    <span class="ident">slot_table</span>: <span class="string">&quot;pyo3::ffi::PySequenceMethods&quot;</span>,
+    <span class="ident">set_slot_table</span>: <span class="string">&quot;set_sequence_methods&quot;</span>,
     <span class="ident">methods</span>: <span class="kw-2">&amp;</span>[
         <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__len__&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::sequence::PySequenceLenProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__getitem__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Index&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::sequence::PySequenceGetItemProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Ternary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__setitem__&quot;</span>,
             <span class="ident">arg1</span>: <span class="string">&quot;Index&quot;</span>,
             <span class="ident">arg2</span>: <span class="string">&quot;Value&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::sequence::PySequenceSetItemProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__delitem__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Index&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::sequence::PySequenceDelItemProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__contains__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Item&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::sequence::PySequenceContainsProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__concat__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::sequence::PySequenceConcatProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__repeat__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Index&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::sequence::PySequenceRepeatProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__inplace_concat__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::sequence::PySequenceInplaceConcatProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__inplace_repeat__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Index&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::sequence::PySequenceInplaceRepeatProtocol&quot;</span>,
         },
     ],
     <span class="ident">py_methods</span>: <span class="kw-2">&amp;</span>[],
+    <span class="ident">slot_setters</span>: <span class="kw-2">&amp;</span>[
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__len__&quot;</span>], <span class="string">&quot;set_len&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__concat__&quot;</span>], <span class="string">&quot;set_concat&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__repeat__&quot;</span>], <span class="string">&quot;set_repeat&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__getitem__&quot;</span>], <span class="string">&quot;set_getitem&quot;</span>),
+        <span class="ident">SlotSetter</span> {
+            <span class="ident">proto_names</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;__setitem__&quot;</span>, <span class="string">&quot;__delitem__&quot;</span>],
+            <span class="ident">set_function</span>: <span class="string">&quot;set_setdelitem&quot;</span>,
+            <span class="ident">skipped_setters</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;set_setitem&quot;</span>, <span class="string">&quot;set_delitem&quot;</span>],
+        },
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__setitem__&quot;</span>], <span class="string">&quot;set_setitem&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__delitem__&quot;</span>], <span class="string">&quot;set_delitem&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__contains__&quot;</span>], <span class="string">&quot;set_contains&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__inplace_concat__&quot;</span>], <span class="string">&quot;set_inplace_concat&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__inplace_repeat__&quot;</span>], <span class="string">&quot;set_inplace_repeat&quot;</span>),
+    ],
 };
 
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NUM</span>: <span class="ident">Proto</span> <span class="op">=</span> <span class="ident">Proto</span> {
     <span class="ident">name</span>: <span class="string">&quot;Number&quot;</span>,
+    <span class="ident">slot_table</span>: <span class="string">&quot;pyo3::ffi::PyNumberMethods&quot;</span>,
+    <span class="ident">set_slot_table</span>: <span class="string">&quot;set_number_methods&quot;</span>,
     <span class="ident">methods</span>: <span class="kw-2">&amp;</span>[
         <span class="ident">MethodProto</span>::<span class="ident">BinaryS</span> {
             <span class="ident">name</span>: <span class="string">&quot;__add__&quot;</span>,
             <span class="ident">arg1</span>: <span class="string">&quot;Left&quot;</span>,
             <span class="ident">arg2</span>: <span class="string">&quot;Right&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberAddProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">BinaryS</span> {
             <span class="ident">name</span>: <span class="string">&quot;__sub__&quot;</span>,
             <span class="ident">arg1</span>: <span class="string">&quot;Left&quot;</span>,
             <span class="ident">arg2</span>: <span class="string">&quot;Right&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberSubProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">BinaryS</span> {
             <span class="ident">name</span>: <span class="string">&quot;__mul__&quot;</span>,
             <span class="ident">arg1</span>: <span class="string">&quot;Left&quot;</span>,
             <span class="ident">arg2</span>: <span class="string">&quot;Right&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberMulProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">BinaryS</span> {
             <span class="ident">name</span>: <span class="string">&quot;__matmul__&quot;</span>,
             <span class="ident">arg1</span>: <span class="string">&quot;Left&quot;</span>,
             <span class="ident">arg2</span>: <span class="string">&quot;Right&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberMatmulProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">BinaryS</span> {
             <span class="ident">name</span>: <span class="string">&quot;__truediv__&quot;</span>,
             <span class="ident">arg1</span>: <span class="string">&quot;Left&quot;</span>,
             <span class="ident">arg2</span>: <span class="string">&quot;Right&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberTruedivProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">BinaryS</span> {
             <span class="ident">name</span>: <span class="string">&quot;__floordiv__&quot;</span>,
             <span class="ident">arg1</span>: <span class="string">&quot;Left&quot;</span>,
             <span class="ident">arg2</span>: <span class="string">&quot;Right&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberFloordivProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">BinaryS</span> {
             <span class="ident">name</span>: <span class="string">&quot;__mod__&quot;</span>,
             <span class="ident">arg1</span>: <span class="string">&quot;Left&quot;</span>,
             <span class="ident">arg2</span>: <span class="string">&quot;Right&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberModProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">BinaryS</span> {
             <span class="ident">name</span>: <span class="string">&quot;__divmod__&quot;</span>,
             <span class="ident">arg1</span>: <span class="string">&quot;Left&quot;</span>,
             <span class="ident">arg2</span>: <span class="string">&quot;Right&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberDivmodProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">TernaryS</span> {
@@ -1173,251 +1389,209 @@
             <span class="ident">arg1</span>: <span class="string">&quot;Left&quot;</span>,
             <span class="ident">arg2</span>: <span class="string">&quot;Right&quot;</span>,
             <span class="ident">arg3</span>: <span class="string">&quot;Modulo&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberPowProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">BinaryS</span> {
             <span class="ident">name</span>: <span class="string">&quot;__lshift__&quot;</span>,
             <span class="ident">arg1</span>: <span class="string">&quot;Left&quot;</span>,
             <span class="ident">arg2</span>: <span class="string">&quot;Right&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberLShiftProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">BinaryS</span> {
             <span class="ident">name</span>: <span class="string">&quot;__rshift__&quot;</span>,
             <span class="ident">arg1</span>: <span class="string">&quot;Left&quot;</span>,
             <span class="ident">arg2</span>: <span class="string">&quot;Right&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberRShiftProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">BinaryS</span> {
             <span class="ident">name</span>: <span class="string">&quot;__and__&quot;</span>,
             <span class="ident">arg1</span>: <span class="string">&quot;Left&quot;</span>,
             <span class="ident">arg2</span>: <span class="string">&quot;Right&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberAndProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">BinaryS</span> {
             <span class="ident">name</span>: <span class="string">&quot;__xor__&quot;</span>,
             <span class="ident">arg1</span>: <span class="string">&quot;Left&quot;</span>,
             <span class="ident">arg2</span>: <span class="string">&quot;Right&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberXorProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">BinaryS</span> {
             <span class="ident">name</span>: <span class="string">&quot;__or__&quot;</span>,
             <span class="ident">arg1</span>: <span class="string">&quot;Left&quot;</span>,
             <span class="ident">arg2</span>: <span class="string">&quot;Right&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberOrProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__radd__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberRAddProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__rsub__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberRSubProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__rmul__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberRMulProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__rmatmul__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberRMatmulProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__rtruediv__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberRTruedivProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__rfloordiv__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberRFloordivProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__rmod__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberRModProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__rdivmod__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberRDivmodProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Ternary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__rpow__&quot;</span>,
             <span class="ident">arg1</span>: <span class="string">&quot;Other&quot;</span>,
             <span class="ident">arg2</span>: <span class="string">&quot;Modulo&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberRPowProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__rlshift__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberRLShiftProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__rrshift__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberRRShiftProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__rand__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberRAndProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__rxor__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberRXorProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__ror__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberROrProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__iadd__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberIAddProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__isub__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberISubProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__imul__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberIMulProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__imatmul__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberIMatmulProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__itruediv__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberITruedivProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__ifloordiv__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberIFloordivProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__imod__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberIModProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__ipow__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberIPowProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__ilshift__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberILShiftProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__irshift__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberIRShiftProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__iand__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberIAndProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__ixor__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberIXorProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__ior__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;Other&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">false</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberIOrProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__neg__&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberNegProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__pos__&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberPosProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__abs__&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberAbsProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__invert__&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberInvertProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__complex__&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberComplexProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__int__&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberIntProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__float__&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberFloatProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Unary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__index__&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberIndexProtocol&quot;</span>,
         },
         <span class="ident">MethodProto</span>::<span class="ident">Binary</span> {
             <span class="ident">name</span>: <span class="string">&quot;__round__&quot;</span>,
             <span class="ident">arg</span>: <span class="string">&quot;NDigits&quot;</span>,
-            <span class="ident">pyres</span>: <span class="bool-val">true</span>,
             <span class="ident">proto</span>: <span class="string">&quot;pyo3::class::number::PyNumberRoundProtocol&quot;</span>,
         },
     ],
@@ -1462,6 +1636,108 @@
             <span class="string">&quot;__round__&quot;</span>,
             <span class="string">&quot;pyo3::class::number::PyNumberRoundProtocolImpl&quot;</span>,
         ),
+    ],
+    <span class="ident">slot_setters</span>: <span class="kw-2">&amp;</span>[
+        <span class="ident">SlotSetter</span> {
+            <span class="ident">proto_names</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;__add__&quot;</span>],
+            <span class="ident">set_function</span>: <span class="string">&quot;set_add&quot;</span>,
+            <span class="ident">skipped_setters</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;set_radd&quot;</span>],
+        },
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__radd__&quot;</span>], <span class="string">&quot;set_radd&quot;</span>),
+        <span class="ident">SlotSetter</span> {
+            <span class="ident">proto_names</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;__sub__&quot;</span>],
+            <span class="ident">set_function</span>: <span class="string">&quot;set_sub&quot;</span>,
+            <span class="ident">skipped_setters</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;set_rsub&quot;</span>],
+        },
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__rsub__&quot;</span>], <span class="string">&quot;set_rsub&quot;</span>),
+        <span class="ident">SlotSetter</span> {
+            <span class="ident">proto_names</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;__mul__&quot;</span>],
+            <span class="ident">set_function</span>: <span class="string">&quot;set_mul&quot;</span>,
+            <span class="ident">skipped_setters</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;set_rmul&quot;</span>],
+        },
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__rmul__&quot;</span>], <span class="string">&quot;set_rmul&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__mod__&quot;</span>], <span class="string">&quot;set_mod&quot;</span>),
+        <span class="ident">SlotSetter</span> {
+            <span class="ident">proto_names</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;__divmod__&quot;</span>],
+            <span class="ident">set_function</span>: <span class="string">&quot;set_divmod&quot;</span>,
+            <span class="ident">skipped_setters</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;set_rdivmod&quot;</span>],
+        },
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__rdivmod__&quot;</span>], <span class="string">&quot;set_rdivmod&quot;</span>),
+        <span class="ident">SlotSetter</span> {
+            <span class="ident">proto_names</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;__pow__&quot;</span>],
+            <span class="ident">set_function</span>: <span class="string">&quot;set_pow&quot;</span>,
+            <span class="ident">skipped_setters</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;set_rpow&quot;</span>],
+        },
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__rpow__&quot;</span>], <span class="string">&quot;set_rpow&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__neg__&quot;</span>], <span class="string">&quot;set_neg&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__pos__&quot;</span>], <span class="string">&quot;set_pos&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__abs__&quot;</span>], <span class="string">&quot;set_abs&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__invert__&quot;</span>], <span class="string">&quot;set_invert&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__rdivmod__&quot;</span>], <span class="string">&quot;set_rdivmod&quot;</span>),
+        <span class="ident">SlotSetter</span> {
+            <span class="ident">proto_names</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;__lshift__&quot;</span>],
+            <span class="ident">set_function</span>: <span class="string">&quot;set_lshift&quot;</span>,
+            <span class="ident">skipped_setters</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;set_rlshift&quot;</span>],
+        },
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__rlshift__&quot;</span>], <span class="string">&quot;set_rlshift&quot;</span>),
+        <span class="ident">SlotSetter</span> {
+            <span class="ident">proto_names</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;__rshift__&quot;</span>],
+            <span class="ident">set_function</span>: <span class="string">&quot;set_rshift&quot;</span>,
+            <span class="ident">skipped_setters</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;set_rrshift&quot;</span>],
+        },
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__rrshift__&quot;</span>], <span class="string">&quot;set_rrshift&quot;</span>),
+        <span class="ident">SlotSetter</span> {
+            <span class="ident">proto_names</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;__and__&quot;</span>],
+            <span class="ident">set_function</span>: <span class="string">&quot;set_and&quot;</span>,
+            <span class="ident">skipped_setters</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;set_rand&quot;</span>],
+        },
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__rand__&quot;</span>], <span class="string">&quot;set_rand&quot;</span>),
+        <span class="ident">SlotSetter</span> {
+            <span class="ident">proto_names</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;__xor__&quot;</span>],
+            <span class="ident">set_function</span>: <span class="string">&quot;set_xor&quot;</span>,
+            <span class="ident">skipped_setters</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;set_rxor&quot;</span>],
+        },
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__rxor__&quot;</span>], <span class="string">&quot;set_rxor&quot;</span>),
+        <span class="ident">SlotSetter</span> {
+            <span class="ident">proto_names</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;__or__&quot;</span>],
+            <span class="ident">set_function</span>: <span class="string">&quot;set_or&quot;</span>,
+            <span class="ident">skipped_setters</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;set_ror&quot;</span>],
+        },
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__ror__&quot;</span>], <span class="string">&quot;set_ror&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__int__&quot;</span>], <span class="string">&quot;set_int&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__float__&quot;</span>], <span class="string">&quot;set_float&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__iadd__&quot;</span>], <span class="string">&quot;set_iadd&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__isub__&quot;</span>], <span class="string">&quot;set_isub&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__imul__&quot;</span>], <span class="string">&quot;set_imul&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__imod__&quot;</span>], <span class="string">&quot;set_imod&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__ipow__&quot;</span>], <span class="string">&quot;set_ipow&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__ilshift__&quot;</span>], <span class="string">&quot;set_ilshift&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__irshift__&quot;</span>], <span class="string">&quot;set_irshift&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__iand__&quot;</span>], <span class="string">&quot;set_iand&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__ixor__&quot;</span>], <span class="string">&quot;set_ixor&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__ior__&quot;</span>], <span class="string">&quot;set_ior&quot;</span>),
+        <span class="ident">SlotSetter</span> {
+            <span class="ident">proto_names</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;__floordiv__&quot;</span>],
+            <span class="ident">set_function</span>: <span class="string">&quot;set_floordiv&quot;</span>,
+            <span class="ident">skipped_setters</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;set_rfloordiv&quot;</span>],
+        },
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__rfloordiv__&quot;</span>], <span class="string">&quot;set_rfloordiv&quot;</span>),
+        <span class="ident">SlotSetter</span> {
+            <span class="ident">proto_names</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;__truediv__&quot;</span>],
+            <span class="ident">set_function</span>: <span class="string">&quot;set_truediv&quot;</span>,
+            <span class="ident">skipped_setters</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;set_rtruediv&quot;</span>],
+        },
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__rtruediv__&quot;</span>], <span class="string">&quot;set_rtruediv&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__ifloordiv__&quot;</span>], <span class="string">&quot;set_ifloordiv&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__itruediv__&quot;</span>], <span class="string">&quot;set_itruediv&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__index__&quot;</span>], <span class="string">&quot;set_index&quot;</span>),
+        <span class="ident">SlotSetter</span> {
+            <span class="ident">proto_names</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;__matmul__&quot;</span>],
+            <span class="ident">set_function</span>: <span class="string">&quot;set_matmul&quot;</span>,
+            <span class="ident">skipped_setters</span>: <span class="kw-2">&amp;</span>[<span class="string">&quot;set_rmatmul&quot;</span>],
+        },
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__rmatmul__&quot;</span>], <span class="string">&quot;set_rmatmul&quot;</span>),
+        <span class="ident">SlotSetter</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span>[<span class="string">&quot;__imatmul__&quot;</span>], <span class="string">&quot;set_imatmul&quot;</span>),
     ],
 };
 </pre></div>

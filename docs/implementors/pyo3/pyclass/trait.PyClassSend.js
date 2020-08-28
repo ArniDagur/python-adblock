@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["adblock"] = [{"text":"impl PyClassSend for BlockerResult","synthetic":false,"types":[]},{"text":"impl PyClassSend for FilterSet","synthetic":false,"types":[]},{"text":"impl PyClassSend for UrlSpecificResources","synthetic":false,"types":[]},{"text":"impl PyClassSend for Engine","synthetic":false,"types":[]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
