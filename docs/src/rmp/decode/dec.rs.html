@@ -71,10 +71,10 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This function will silently retry on every EINTR received from the underlying `Read` until</span>
 <span class="doccomment">/// successful read.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_f32</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_f32</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">f32</span>, <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">read_marker</span>(<span class="ident">rd</span>)<span class="question-mark">?</span> {
-        <span class="ident">Marker</span>::<span class="ident">F32</span> <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">read_data_f32</span>(<span class="ident">rd</span>)<span class="question-mark">?</span>),
-        <span class="ident">marker</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
+        <span class="ident">Marker</span>::<span class="ident">F32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">read_data_f32</span>(<span class="ident">rd</span>)<span class="question-mark">?</span>),
+        <span class="ident">marker</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
     }
 }
 
@@ -94,10 +94,10 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This function will silently retry on every EINTR received from the underlying `Read` until</span>
 <span class="doccomment">/// successful read.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_f64</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">f64</span>, <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_f64</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">f64</span>, <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">read_marker</span>(<span class="ident">rd</span>)<span class="question-mark">?</span> {
-        <span class="ident">Marker</span>::<span class="ident">F64</span> <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">read_data_f64</span>(<span class="ident">rd</span>)<span class="question-mark">?</span>),
-        <span class="ident">marker</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
+        <span class="ident">Marker</span>::<span class="ident">F64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">read_data_f64</span>(<span class="ident">rd</span>)<span class="question-mark">?</span>),
+        <span class="ident">marker</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
     }
 }
 </pre></div>

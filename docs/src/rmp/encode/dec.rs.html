@@ -47,7 +47,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This function will return `ValueWriteError` on any I/O error occurred while writing either the</span>
 <span class="doccomment">/// marker or the data.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_f32</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">f32</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ValueWriteError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_f32</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">f32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ValueWriteError</span><span class="op">&gt;</span> {
     <span class="ident">write_marker</span>(<span class="ident">wr</span>, <span class="ident">Marker</span>::<span class="ident">F32</span>)<span class="question-mark">?</span>;
     <span class="ident">write_data_f32</span>(<span class="ident">wr</span>, <span class="ident">val</span>)<span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(())
@@ -61,7 +61,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This function will return `ValueWriteError` on any I/O error occurred while writing either the</span>
 <span class="doccomment">/// marker or the data.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_f64</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">f64</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ValueWriteError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_f64</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">wr</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>, <span class="ident">val</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ValueWriteError</span><span class="op">&gt;</span> {
     <span class="ident">write_marker</span>(<span class="ident">wr</span>, <span class="ident">Marker</span>::<span class="ident">F64</span>)<span class="question-mark">?</span>;
     <span class="ident">write_data_f64</span>(<span class="ident">wr</span>, <span class="ident">val</span>)<span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(())

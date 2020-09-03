@@ -740,19 +740,19 @@
 <span class="doccomment">/// Holds temporally owned objects.</span>
 <span class="kw">struct</span> <span class="ident">ObjectHolder</span> {
     <span class="doccomment">/// Objects owned by the current thread</span>
-    <span class="ident">obj</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">PyObject</span><span class="op">&gt;&gt;</span>,
+    <span class="ident">obj</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">PyObject</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     <span class="doccomment">/// Non-python objects(e.g., String) owned by the current thread</span>
-    <span class="ident">any</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">any</span>::<span class="ident">Any</span><span class="op">&gt;&gt;</span>,
+    <span class="ident">any</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">dyn</span> <span class="ident">any</span>::<span class="ident">Any</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">ObjectHolder</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">obj</span>: <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="number">256</span>),
             <span class="ident">any</span>: <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="number">4</span>),
         }
     }
-    <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> (<span class="ident">usize</span>, <span class="ident">usize</span>) {
+    <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">usize</span>, <span class="ident">usize</span>) {
         (<span class="self">self</span>.<span class="ident">obj</span>.<span class="ident">len</span>(), <span class="self">self</span>.<span class="ident">any</span>.<span class="ident">len</span>())
     }
 }
@@ -778,7 +778,7 @@
 <span class="doccomment">///  1) for performance</span>
 <span class="doccomment">///  2) PyGILState_Check always returns 1 if the sub-interpreter APIs have ever been called,</span>
 <span class="doccomment">///     which could lead to incorrect conclusions that the GIL is held.</span>
-<span class="kw">fn</span> <span class="ident">gil_is_acquired</span>() <span class="op">-&gt;</span> <span class="ident">bool</span> {
+<span class="kw">fn</span> <span class="ident">gil_is_acquired</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
     <span class="ident">GIL_COUNT</span>.<span class="ident">with</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span>.<span class="ident">get</span>() <span class="op">&gt;</span> <span class="number">0</span>)
 }
 
@@ -808,8 +808,8 @@
     <span class="comment">// and multiple threads concurrently call &#39;prepare_freethreaded_python()&#39;.</span>
     <span class="comment">// Note that we do not protect against concurrent initialization of the Python runtime</span>
     <span class="comment">// by other users of the Python C API.</span>
-    <span class="ident">START</span>.<span class="ident">call_once</span>(<span class="op">||</span> <span class="kw">unsafe</span> {
-        <span class="kw">if</span> <span class="ident">ffi</span>::<span class="ident">Py_IsInitialized</span>() <span class="op">!=</span> <span class="number">0</span> {
+    <span class="ident">START</span>.<span class="ident">call_once</span>(<span class="op">|</span><span class="op">|</span> <span class="kw">unsafe</span> {
+        <span class="kw">if</span> <span class="ident">ffi</span>::<span class="ident">Py_IsInitialized</span>() <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
             <span class="comment">// If Python is already initialized, we expect Python threading to also be initialized,</span>
             <span class="comment">// as we can&#39;t make the existing Python main thread acquire the GIL.</span>
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">Py_3_7</span>))]</span>
@@ -833,7 +833,7 @@
                 <span class="comment">// Make sure Py_Finalize will be called before exiting.</span>
                 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">finalize</span>() {
                     <span class="kw">unsafe</span> {
-                        <span class="kw">if</span> <span class="ident">ffi</span>::<span class="ident">Py_IsInitialized</span>() <span class="op">!=</span> <span class="number">0</span> {
+                        <span class="kw">if</span> <span class="ident">ffi</span>::<span class="ident">Py_IsInitialized</span>() <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
                             <span class="ident">ffi</span>::<span class="ident">PyGILState_Ensure</span>();
                             <span class="ident">ffi</span>::<span class="ident">Py_Finalize</span>();
                         }
@@ -872,7 +872,7 @@
 <span class="attribute">#[<span class="ident">must_use</span>]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">GILGuard</span> {
     <span class="ident">gstate</span>: <span class="ident">ffi</span>::<span class="ident">PyGILState_STATE</span>,
-    <span class="ident">pool</span>: <span class="ident">ManuallyDrop</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">GILPool</span><span class="op">&gt;&gt;</span>,
+    <span class="ident">pool</span>: <span class="ident">ManuallyDrop</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">GILPool</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">GILGuard</span> {
@@ -884,7 +884,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// If PyO3 does not yet have a `GILPool` for tracking owned PyObject references, then this</span>
     <span class="doccomment">/// new `GILGuard` will also contain a `GILPool`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">acquire</span>() <span class="op">-&gt;</span> <span class="ident">GILGuard</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">acquire</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">GILGuard</span> {
         <span class="ident">prepare_freethreaded_python</span>();
 
         <span class="kw">unsafe</span> {
@@ -907,7 +907,7 @@
 
     <span class="doccomment">/// Retrieves the marker type that proves that the GIL was acquired.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">python</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Python</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">python</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Python</span> {
         <span class="kw">unsafe</span> { <span class="ident">Python</span>::<span class="ident">assume_gil_acquired</span>() }
     }
 }
@@ -925,12 +925,12 @@
 
 <span class="doccomment">/// Thread-safe storage for objects which were inc_ref / dec_ref while the GIL was not held.</span>
 <span class="kw">struct</span> <span class="ident">ReferencePool</span> {
-    <span class="ident">pointers_to_incref</span>: <span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">PyObject</span><span class="op">&gt;&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">pointers_to_decref</span>: <span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">PyObject</span><span class="op">&gt;&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">pointers_to_incref</span>: <span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">PyObject</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">pointers_to_decref</span>: <span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">PyObject</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">ReferencePool</span> {
-    <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">pointers_to_incref</span>: <span class="ident">const_mutex</span>(<span class="ident">Vec</span>::<span class="ident">new</span>()),
             <span class="ident">pointers_to_decref</span>: <span class="ident">const_mutex</span>(<span class="ident">Vec</span>::<span class="ident">new</span>()),
@@ -948,7 +948,7 @@
     <span class="kw">fn</span> <span class="ident">update_counts</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_py</span>: <span class="ident">Python</span>) {
         <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">swap_vec_with_lock</span> {
             <span class="comment">// Get vec from one of ReferencePool&#39;s mutexes via lock, swap vec if needed, unlock.</span>
-            (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">cell</span>:<span class="ident">expr</span>) <span class="op">=&gt;</span> {{
+            (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">cell</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {{
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">locked</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">cell</span>.<span class="ident">lock</span>();
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
                 <span class="kw">if</span> <span class="op">!</span><span class="ident">locked</span>.<span class="ident">is_empty</span>() {
@@ -993,7 +993,7 @@
     <span class="doccomment">/// # Safety</span>
     <span class="doccomment">/// As well as requiring the GIL, see the notes on `Python::new_pool`.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="ident">GILPool</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">GILPool</span> {
         <span class="ident">increment_gil_count</span>();
         <span class="comment">// Update counts of PyObjects / Py that have been cloned or dropped since last acquisition</span>
         <span class="ident">POOL</span>.<span class="ident">update_counts</span>(<span class="ident">Python</span>::<span class="ident">assume_gil_acquired</span>());
@@ -1004,7 +1004,7 @@
     }
 
     <span class="doccomment">/// Get the Python token associated with this `GILPool`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">python</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Python</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">python</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Python</span> {
         <span class="kw">unsafe</span> { <span class="ident">Python</span>::<span class="ident">assume_gil_acquired</span>() }
     }
 }
@@ -1080,7 +1080,7 @@
 <span class="doccomment">/// # Safety</span>
 <span class="doccomment">/// It is the caller&#39;s responsibility to ensure that the inferred lifetime &#39;p is not inferred by</span>
 <span class="doccomment">/// the Rust compiler to outlast the current GILPool.</span>
-<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">register_any</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span>, <span class="ident">T</span>: <span class="lifetime">&#39;static</span><span class="op">&gt;</span>(<span class="ident">obj</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">T</span> {
+<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">register_any</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span>, <span class="ident">T</span>: <span class="lifetime">&#39;static</span><span class="op">&gt;</span>(<span class="ident">obj</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">T</span> {
     <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">gil_is_acquired</span>());
     <span class="ident">OWNED_OBJECTS</span>.<span class="ident">with</span>(<span class="op">|</span><span class="ident">holder</span><span class="op">|</span> {
         <span class="kw">let</span> <span class="ident">boxed</span> <span class="op">=</span> <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">obj</span>);
@@ -1114,7 +1114,7 @@
 <span class="doccomment">/// Ensure the GIL is held, useful in implementation of APIs like PyErr::new where it&#39;s</span>
 <span class="doccomment">/// inconvenient to force the user to acquire the GIL.</span>
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ensure_gil</span>() <span class="op">-&gt;</span> <span class="ident">EnsureGIL</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ensure_gil</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">EnsureGIL</span> {
     <span class="kw">if</span> <span class="ident">gil_is_acquired</span>() {
         <span class="ident">EnsureGIL</span>(<span class="prelude-val">None</span>)
     } <span class="kw">else</span> {
@@ -1134,10 +1134,10 @@
     <span class="doccomment">/// Thus this method could be used to get access to a GIL token while the GIL is not held.</span>
     <span class="doccomment">/// Care should be taken to only use the returned Python in contexts where it is certain the</span>
     <span class="doccomment">/// GIL continues to be held.</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">python</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Python</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">python</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Python</span> {
         <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">gil</span>) <span class="op">=&gt;</span> <span class="ident">gil</span>.<span class="ident">python</span>(),
-            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="ident">Python</span>::<span class="ident">assume_gil_acquired</span>(),
+            <span class="prelude-val">Some</span>(<span class="ident">gil</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">gil</span>.<span class="ident">python</span>(),
+            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Python</span>::<span class="ident">assume_gil_acquired</span>(),
         }
     }
 }
@@ -1148,7 +1148,7 @@
     <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">ffi</span>, <span class="ident">gil</span>, <span class="ident">AsPyPointer</span>, <span class="ident">IntoPyPointer</span>, <span class="ident">PyObject</span>, <span class="ident">Python</span>, <span class="ident">ToPyObject</span>};
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ptr</span>::<span class="ident">NonNull</span>;
 
-    <span class="kw">fn</span> <span class="ident">get_object</span>(<span class="ident">py</span>: <span class="ident">Python</span>) <span class="op">-&gt;</span> <span class="ident">PyObject</span> {
+    <span class="kw">fn</span> <span class="ident">get_object</span>(<span class="ident">py</span>: <span class="ident">Python</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyObject</span> {
         <span class="comment">// Convenience function for getting a single unique object, using `new_pool` so as to leave</span>
         <span class="comment">// the original pool state unchanged.</span>
         <span class="kw">let</span> <span class="ident">pool</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">py</span>.<span class="ident">new_pool</span>() };
@@ -1158,7 +1158,7 @@
         <span class="ident">obj</span>.<span class="ident">to_object</span>(<span class="ident">py</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">owned_object_count</span>() <span class="op">-&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">fn</span> <span class="ident">owned_object_count</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
         <span class="ident">OWNED_OBJECTS</span>.<span class="ident">with</span>(<span class="op">|</span><span class="ident">holder</span><span class="op">|</span> <span class="ident">holder</span>.<span class="ident">borrow</span>().<span class="ident">obj</span>.<span class="ident">len</span>())
     }
 
@@ -1272,7 +1272,7 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_gil_counts</span>() {
         <span class="comment">// Check GILGuard and GILPool both increase counts correctly</span>
-        <span class="kw">let</span> <span class="ident">get_gil_count</span> <span class="op">=</span> <span class="op">||</span> <span class="ident">GIL_COUNT</span>.<span class="ident">with</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span>.<span class="ident">get</span>());
+        <span class="kw">let</span> <span class="ident">get_gil_count</span> <span class="op">=</span> <span class="op">|</span><span class="op">|</span> <span class="ident">GIL_COUNT</span>.<span class="ident">with</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span>.<span class="ident">get</span>());
 
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">get_gil_count</span>(), <span class="number">0</span>);
         <span class="kw">let</span> <span class="ident">gil</span> <span class="op">=</span> <span class="ident">Python</span>::<span class="ident">acquire_gil</span>();
@@ -1310,7 +1310,7 @@
 
         <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">gil_is_acquired</span>());
 
-        <span class="ident">py</span>.<span class="ident">allow_threads</span>(<span class="kw">move</span> <span class="op">||</span> {
+        <span class="ident">py</span>.<span class="ident">allow_threads</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
             <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">gil_is_acquired</span>());
 
             <span class="kw">let</span> <span class="ident">gil</span> <span class="op">=</span> <span class="ident">Python</span>::<span class="ident">acquire_gil</span>();
@@ -1389,7 +1389,7 @@
         <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> <span class="ident">obj</span>.<span class="ident">get_refcnt</span>(<span class="ident">py</span>);
 
         <span class="comment">// Move obj to a thread which does not have the GIL, and clone it</span>
-        <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">std</span>::<span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">||</span> {
+        <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">std</span>::<span class="ident">thread</span>::<span class="ident">spawn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
             <span class="comment">// Cloning without GIL should not update reference count</span>
             <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">redundant_clone</span>)]</span>
             <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">obj</span>.<span class="ident">clone</span>();

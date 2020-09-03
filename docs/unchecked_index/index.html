@@ -19,7 +19,7 @@ but it helps finding bugs in <code>unsafe</code> code. Test your code responsibl
      
     <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">perm</span>.<span class="ident">len</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">current</span> <span class="op">=</span> <span class="ident">i</span>;
-        <span class="kw">while</span> <span class="ident">i</span> <span class="op">!=</span> <span class="ident">perm</span>[<span class="ident">current</span>] {
+        <span class="kw">while</span> <span class="ident">i</span> <span class="op">!</span><span class="op">=</span> <span class="ident">perm</span>[<span class="ident">current</span>] {
             <span class="kw">let</span> <span class="ident">next</span> <span class="op">=</span> <span class="ident">perm</span>[<span class="ident">current</span>];
             <span class="comment">// move element from next to current</span>
             <span class="ident">v</span>.<span class="ident">swap</span>(<span class="ident">next</span>, <span class="ident">current</span>);

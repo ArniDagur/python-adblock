@@ -45,7 +45,7 @@
 
 <span class="kw">impl</span> <span class="ident">ConstSpec</span> {
     <span class="comment">// For now, the only valid attribute is `#[classattr]`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Ident</span>, <span class="ident">attrs</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">syn</span>::<span class="ident">Attribute</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ConstSpec</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Ident</span>, <span class="ident">attrs</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">syn</span>::<span class="ident">Attribute</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ConstSpec</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">new_attrs</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">is_class_attr</span> <span class="op">=</span> <span class="bool-val">false</span>;
 
@@ -64,7 +64,7 @@
 
         <span class="prelude-val">Ok</span>(<span class="ident">ConstSpec</span> {
             <span class="ident">is_class_attr</span>,
-            <span class="ident">python_name</span>: <span class="ident">parse_name_attribute</span>(<span class="ident">attrs</span>)<span class="question-mark">?</span>.<span class="ident">unwrap_or_else</span>(<span class="op">||</span> <span class="ident">name</span>.<span class="ident">unraw</span>()),
+            <span class="ident">python_name</span>: <span class="ident">parse_name_attribute</span>(<span class="ident">attrs</span>)<span class="question-mark">?</span>.<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">name</span>.<span class="ident">unraw</span>()),
         })
     }
 }

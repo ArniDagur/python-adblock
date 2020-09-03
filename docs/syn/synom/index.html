@@ -54,7 +54,7 @@ through the <a href="trait.Parser.html"><code>Parser</code></a> trait.</p>
 <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">parser</span>.<span class="ident">parse</span>(<span class="ident">tokens</span>)<span class="question-mark">?</span>;
 
 <span class="comment">// Parse zero or more outer attributes but not inner attributes.</span>
-<span class="macro">named</span><span class="macro">!</span>(<span class="ident">outer_attrs</span> <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Attribute</span><span class="op">&gt;</span>, <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>));
+<span class="macro">named</span><span class="macro">!</span>(<span class="ident">outer_attrs</span> <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Attribute</span><span class="op">&gt;</span>, <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>));
 <span class="kw">let</span> <span class="ident">attrs</span> <span class="op">=</span> <span class="ident">outer_attrs</span>.<span class="ident">parse</span>(<span class="ident">tokens</span>)<span class="question-mark">?</span>;</pre></div>
 <h1 id="implementing-a-parser-function" class="section-header"><a href="#implementing-a-parser-function">Implementing a parser function</a></h1>
 <p>Parser functions are usually implemented using the <a href="https://github.com/Geal/nom"><code>nom</code></a>-style parser

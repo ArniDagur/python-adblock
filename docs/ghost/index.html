@@ -38,7 +38,7 @@ define unit structs with generic parameters.</p>
 <span class="kw">fn</span> <span class="ident">main</span>() {
     <span class="comment">// Proof that MyPhantom behaves like PhantomData.</span>
     <span class="kw">let</span> <span class="kw">_</span>: <span class="ident">MyPhantom</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">MyPhantom</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>;
-    <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">0</span>, <span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">MyPhantom</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;&gt;</span>());
+    <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="number">0</span>, <span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">MyPhantom</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span>());
 }
 
 <span class="comment">// Proof that MyPhantom is not just a re-export of PhantomData.</span>
@@ -85,7 +85,7 @@ chapter</a> of the Rustonomicon.</p>
 <span class="attribute">#[<span class="ident">phantom</span>]</span>
 <span class="kw">struct</span> <span class="ident">ContravariantLifetime</span><span class="op">&lt;</span><span class="attribute">#[<span class="ident">contra</span>]</span> <span class="lifetime">&#39;a</span><span class="op">&gt;</span>;
 
-<span class="kw">fn</span> <span class="ident">f</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">arg</span>: <span class="ident">ContravariantLifetime</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">ContravariantLifetime</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">f</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">arg</span>: <span class="ident">ContravariantLifetime</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ContravariantLifetime</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span> {
     <span class="comment">// This coercion is only legal because the lifetime parameter is</span>
     <span class="comment">// contravariant. If it were covariant (the default) or invariant,</span>
     <span class="comment">// this would not compile.</span>

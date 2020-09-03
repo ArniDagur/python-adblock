@@ -223,7 +223,7 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PyClassAttributeDef</span> {
     <span class="kw">pub</span> <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>,
-    <span class="kw">pub</span> <span class="ident">meth</span>: <span class="kw">for</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span> <span class="kw">fn</span>(<span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">PyObject</span>,
+    <span class="kw">pub</span> <span class="ident">meth</span>: <span class="kw">for</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span> <span class="kw">fn</span>(<span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyObject</span>,
 }
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
@@ -252,12 +252,12 @@
 
 <span class="kw">impl</span> <span class="ident">PyMethodDef</span> {
     <span class="doccomment">/// Convert `PyMethodDef` to Python method definition struct `ffi::PyMethodDef`</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_method_def</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ffi</span>::<span class="ident">PyMethodDef</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_method_def</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ffi</span>::<span class="ident">PyMethodDef</span> {
         <span class="kw">let</span> <span class="ident">meth</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">ml_meth</span> {
-            <span class="ident">PyMethodType</span>::<span class="ident">PyCFunction</span>(<span class="ident">meth</span>) <span class="op">=&gt;</span> <span class="ident">meth</span>,
-            <span class="ident">PyMethodType</span>::<span class="ident">PyCFunctionWithKeywords</span>(<span class="ident">meth</span>) <span class="op">=&gt;</span> <span class="kw">unsafe</span> { <span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="ident">meth</span>) },
-            <span class="ident">PyMethodType</span>::<span class="ident">PyNewFunc</span>(<span class="ident">meth</span>) <span class="op">=&gt;</span> <span class="kw">unsafe</span> { <span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="ident">meth</span>) },
-            <span class="ident">PyMethodType</span>::<span class="ident">PyInitFunc</span>(<span class="ident">meth</span>) <span class="op">=&gt;</span> <span class="kw">unsafe</span> { <span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="ident">meth</span>) },
+            <span class="ident">PyMethodType</span>::<span class="ident">PyCFunction</span>(<span class="ident">meth</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">meth</span>,
+            <span class="ident">PyMethodType</span>::<span class="ident">PyCFunctionWithKeywords</span>(<span class="ident">meth</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> { <span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="ident">meth</span>) },
+            <span class="ident">PyMethodType</span>::<span class="ident">PyNewFunc</span>(<span class="ident">meth</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> { <span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="ident">meth</span>) },
+            <span class="ident">PyMethodType</span>::<span class="ident">PyInitFunc</span>(<span class="ident">meth</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">unsafe</span> { <span class="ident">std</span>::<span class="ident">mem</span>::<span class="ident">transmute</span>(<span class="ident">meth</span>) },
         };
 
         <span class="ident">ffi</span>::<span class="ident">PyMethodDef</span> {
@@ -274,7 +274,7 @@
 <span class="comment">// Manual implementation because `Python&lt;&#39;_&gt;` does not implement `Debug` and</span>
 <span class="comment">// trait bounds on `fn` compiler-generated derive impls are too restrictive.</span>
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">PyClassAttributeDef</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;PyClassAttributeDef&quot;</span>)
             .<span class="ident">field</span>(<span class="string">&quot;name&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">name</span>)
             .<span class="ident">finish</span>()
@@ -314,7 +314,7 @@
 <span class="doccomment">/// Indicates that the type `T` has some Python methods.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PyMethods</span> {
     <span class="doccomment">/// Returns all methods that are defined for a class.</span>
-    <span class="kw">fn</span> <span class="ident">py_methods</span>() <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">PyMethodDefType</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">py_methods</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">PyMethodDefType</span><span class="op">&gt;</span> {
         <span class="ident">Vec</span>::<span class="ident">new</span>()
     }
 }
@@ -327,10 +327,10 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;macros&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PyMethodsInventory</span>: <span class="ident">inventory</span>::<span class="ident">Collect</span> {
     <span class="doccomment">/// Create a new instance</span>
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">methods</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="ident">PyMethodDefType</span>]) <span class="op">-&gt;</span> <span class="self">Self</span>;
+    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">methods</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="ident">PyMethodDefType</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
 
     <span class="doccomment">/// Returns the methods for a single `#[pymethods] impl` block</span>
-    <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="ident">PyMethodDefType</span>];
+    <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="ident">PyMethodDefType</span>];
 }
 
 <span class="doccomment">/// Implemented for `#[pyclass]` in our proc macro code.</span>
@@ -343,7 +343,7 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;macros&quot;</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">HasMethodsInventory</span><span class="op">&gt;</span> <span class="ident">PyMethods</span> <span class="kw">for</span> <span class="ident">T</span> {
-    <span class="kw">fn</span> <span class="ident">py_methods</span>() <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">PyMethodDefType</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">py_methods</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">PyMethodDefType</span><span class="op">&gt;</span> {
         <span class="ident">inventory</span>::<span class="ident">iter</span>::<span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">Methods</span><span class="op">&gt;</span>
             .<span class="ident">into_iter</span>()
             .<span class="ident">flat_map</span>(<span class="ident">PyMethodsInventory</span>::<span class="ident">get</span>)

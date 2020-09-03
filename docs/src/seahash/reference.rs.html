@@ -185,17 +185,17 @@
 <span class="kw">use</span> <span class="ident">helper</span>;
 
 <span class="doccomment">/// Read an integer in little-endian.</span>
-<span class="kw">fn</span> <span class="ident">read_int</span>(<span class="ident">int</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="ident">u64</span> {
-    <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">int</span>.<span class="ident">len</span>() <span class="op">&lt;=</span> <span class="number">8</span>, <span class="string">&quot;The buffer length of the integer must be less than or equal to \
+<span class="kw">fn</span> <span class="ident">read_int</span>(<span class="ident">int</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+    <span class="macro">debug_assert</span><span class="macro">!</span>(<span class="ident">int</span>.<span class="ident">len</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="number">8</span>, <span class="string">&quot;The buffer length of the integer must be less than or equal to \
                   the one of an u64.&quot;</span>);
 
     <span class="comment">// Start at 0.</span>
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span> <span class="op">=</span> <span class="number">0</span>;
     <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">i</span> <span class="kw">in</span> <span class="ident">int</span>.<span class="ident">iter</span>().<span class="ident">rev</span>() {
         <span class="comment">// Shift up a byte.</span>
-        <span class="ident">x</span> <span class="op">&lt;&lt;</span><span class="op">=</span> <span class="number">8</span>;
+        <span class="ident">x</span> <span class="op">&lt;</span><span class="op">&lt;</span><span class="op">=</span> <span class="number">8</span>;
         <span class="comment">// Set the lower byte.</span>
-        <span class="ident">x</span> <span class="op">|=</span> <span class="ident">i</span> <span class="kw">as</span> <span class="ident">u64</span>;
+        <span class="ident">x</span> <span class="op">|</span><span class="op">=</span> <span class="ident">i</span> <span class="kw">as</span> <span class="ident">u64</span>;
     }
 
     <span class="ident">x</span>
@@ -232,7 +232,7 @@
     }
 
     <span class="doccomment">/// Calculate the final hash.</span>
-    <span class="kw">fn</span> <span class="ident">finish</span>(<span class="self">self</span>, <span class="ident">total</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">u64</span> {
+    <span class="kw">fn</span> <span class="ident">finish</span>(<span class="self">self</span>, <span class="ident">total</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
         <span class="comment">// Even though XORing is commutative, it doesn&#39;t matter, because the state vector&#39;s initial</span>
         <span class="comment">// components are mutually distinct, and thus swapping even and odd chunks will affect the</span>
         <span class="comment">// result, because it is sensitive to the initial condition. To add discreteness, we</span>
@@ -246,7 +246,7 @@
     }
 
     <span class="doccomment">/// Create a new state with some initial values (seed).</span>
-    <span class="kw">fn</span> <span class="ident">with_seeds</span>(<span class="ident">k1</span>: <span class="ident">u64</span>, <span class="ident">k2</span>: <span class="ident">u64</span>, <span class="ident">k3</span>: <span class="ident">u64</span>, <span class="ident">k4</span>: <span class="ident">u64</span>) <span class="op">-&gt;</span> <span class="ident">State</span> {
+    <span class="kw">fn</span> <span class="ident">with_seeds</span>(<span class="ident">k1</span>: <span class="ident">u64</span>, <span class="ident">k2</span>: <span class="ident">u64</span>, <span class="ident">k3</span>: <span class="ident">u64</span>, <span class="ident">k4</span>: <span class="ident">u64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">State</span> {
         <span class="ident">State</span> {
             <span class="comment">// These values are randomly generated.</span>
             <span class="ident">a</span>: <span class="ident">k1</span>,
@@ -263,7 +263,7 @@
 <span class="doccomment">/// specifically designed to take all sorts of hardware and software hacks into account to achieve</span>
 <span class="doccomment">/// maximal performance, but this makes code significantly less readable. As such, this version has</span>
 <span class="doccomment">/// only one goal: to make the algorithm readable and understandable.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hash</span>(<span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="ident">u64</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hash</span>(<span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
     <span class="ident">hash_seeded</span>(
         <span class="ident">buf</span>,
         <span class="number">0x16f11fe89b0d677c</span>,
@@ -274,7 +274,7 @@
 }
 
 <span class="doccomment">/// The seeded version of the reference implementation.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hash_seeded</span>(<span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">k1</span>: <span class="ident">u64</span>, <span class="ident">k2</span>: <span class="ident">u64</span>, <span class="ident">k3</span>: <span class="ident">u64</span>, <span class="ident">k4</span>: <span class="ident">u64</span>) <span class="op">-&gt;</span> <span class="ident">u64</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hash_seeded</span>(<span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">k1</span>: <span class="ident">u64</span>, <span class="ident">k2</span>: <span class="ident">u64</span>, <span class="ident">k3</span>: <span class="ident">u64</span>, <span class="ident">k4</span>: <span class="ident">u64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
     <span class="comment">// Initialize the state.</span>
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">state</span> <span class="op">=</span> <span class="ident">State</span>::<span class="ident">with_seeds</span>(<span class="ident">k1</span>, <span class="ident">k2</span>, <span class="ident">k3</span>, <span class="ident">k4</span>);
 

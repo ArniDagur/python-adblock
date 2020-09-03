@@ -2407,15 +2407,15 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;extra-traits&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">PartialEq</span> <span class="kw">for</span> <span class="ident">ItemMacro2</span> {
-    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">attrs</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">attrs</span>
-            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">vis</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">vis</span>
-            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">macro_token</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">macro_token</span>
-            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">ident</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">ident</span>
-            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">paren_token</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">paren_token</span>
-            <span class="op">&amp;&amp;</span> <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">args</span>) <span class="op">==</span> <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">args</span>)
-            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">brace_token</span> <span class="op">==</span> <span class="ident">other</span>.<span class="ident">brace_token</span>
-            <span class="op">&amp;&amp;</span> <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">body</span>) <span class="op">==</span> <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">body</span>)
+    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+        <span class="self">self</span>.<span class="ident">attrs</span> <span class="op">=</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">attrs</span>
+            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">vis</span> <span class="op">=</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">vis</span>
+            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">macro_token</span> <span class="op">=</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">macro_token</span>
+            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">ident</span> <span class="op">=</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">ident</span>
+            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">paren_token</span> <span class="op">=</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">paren_token</span>
+            <span class="op">&amp;&amp;</span> <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">args</span>) <span class="op">=</span><span class="op">=</span> <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">args</span>)
+            <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">brace_token</span> <span class="op">=</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">brace_token</span>
+            <span class="op">&amp;&amp;</span> <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">body</span>) <span class="op">=</span><span class="op">=</span> <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">body</span>)
     }
 }
 
@@ -2441,8 +2441,8 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;extra-traits&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">PartialEq</span> <span class="kw">for</span> <span class="ident">ItemVerbatim</span> {
-    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-        <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">tts</span>) <span class="op">==</span> <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">tts</span>)
+    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+        <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">tts</span>) <span class="op">=</span><span class="op">=</span> <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">tts</span>)
     }
 }
 
@@ -2457,9 +2457,9 @@
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">DeriveInput</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Item</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">input</span>: <span class="ident">DeriveInput</span>) <span class="op">-&gt;</span> <span class="ident">Item</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">input</span>: <span class="ident">DeriveInput</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Item</span> {
         <span class="kw">match</span> <span class="ident">input</span>.<span class="ident">data</span> {
-            <span class="ident">Data</span>::<span class="ident">Struct</span>(<span class="ident">data</span>) <span class="op">=&gt;</span> <span class="ident">Item</span>::<span class="ident">Struct</span>(<span class="ident">ItemStruct</span> {
+            <span class="ident">Data</span>::<span class="ident">Struct</span>(<span class="ident">data</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Item</span>::<span class="ident">Struct</span>(<span class="ident">ItemStruct</span> {
                 <span class="ident">attrs</span>: <span class="ident">input</span>.<span class="ident">attrs</span>,
                 <span class="ident">vis</span>: <span class="ident">input</span>.<span class="ident">vis</span>,
                 <span class="ident">struct_token</span>: <span class="ident">data</span>.<span class="ident">struct_token</span>,
@@ -2468,7 +2468,7 @@
                 <span class="ident">fields</span>: <span class="ident">data</span>.<span class="ident">fields</span>,
                 <span class="ident">semi_token</span>: <span class="ident">data</span>.<span class="ident">semi_token</span>,
             }),
-            <span class="ident">Data</span>::<span class="ident">Enum</span>(<span class="ident">data</span>) <span class="op">=&gt;</span> <span class="ident">Item</span>::<span class="ident">Enum</span>(<span class="ident">ItemEnum</span> {
+            <span class="ident">Data</span>::<span class="ident">Enum</span>(<span class="ident">data</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Item</span>::<span class="ident">Enum</span>(<span class="ident">ItemEnum</span> {
                 <span class="ident">attrs</span>: <span class="ident">input</span>.<span class="ident">attrs</span>,
                 <span class="ident">vis</span>: <span class="ident">input</span>.<span class="ident">vis</span>,
                 <span class="ident">enum_token</span>: <span class="ident">data</span>.<span class="ident">enum_token</span>,
@@ -2477,7 +2477,7 @@
                 <span class="ident">brace_token</span>: <span class="ident">data</span>.<span class="ident">brace_token</span>,
                 <span class="ident">variants</span>: <span class="ident">data</span>.<span class="ident">variants</span>,
             }),
-            <span class="ident">Data</span>::<span class="ident">Union</span>(<span class="ident">data</span>) <span class="op">=&gt;</span> <span class="ident">Item</span>::<span class="ident">Union</span>(<span class="ident">ItemUnion</span> {
+            <span class="ident">Data</span>::<span class="ident">Union</span>(<span class="ident">data</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Item</span>::<span class="ident">Union</span>(<span class="ident">ItemUnion</span> {
                 <span class="ident">attrs</span>: <span class="ident">input</span>.<span class="ident">attrs</span>,
                 <span class="ident">vis</span>: <span class="ident">input</span>.<span class="ident">vis</span>,
                 <span class="ident">union_token</span>: <span class="ident">data</span>.<span class="ident">union_token</span>,
@@ -2603,8 +2603,8 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;extra-traits&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">PartialEq</span> <span class="kw">for</span> <span class="ident">ForeignItemVerbatim</span> {
-    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-        <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">tts</span>) <span class="op">==</span> <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">tts</span>)
+    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+        <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">tts</span>) <span class="op">=</span><span class="op">=</span> <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">tts</span>)
     }
 }
 
@@ -2689,8 +2689,8 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;extra-traits&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">PartialEq</span> <span class="kw">for</span> <span class="ident">TraitItemVerbatim</span> {
-    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-        <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">tts</span>) <span class="op">==</span> <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">tts</span>)
+    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+        <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">tts</span>) <span class="op">=</span><span class="op">=</span> <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">tts</span>)
     }
 }
 
@@ -2780,8 +2780,8 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;extra-traits&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">PartialEq</span> <span class="kw">for</span> <span class="ident">ImplItemVerbatim</span> {
-    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-        <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">tts</span>) <span class="op">==</span> <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">tts</span>)
+    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+        <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">tts</span>) <span class="op">=</span><span class="op">=</span> <span class="ident">TokenStreamHelper</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">tts</span>)
     }
 }
 
@@ -2877,48 +2877,48 @@
     <span class="kw">use</span> <span class="ident">synom</span>::<span class="ident">Synom</span>;
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">Item</span> <span class="string">&quot;item&quot;</span> <span class="macro">alt</span><span class="macro">!</span>(
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemExternCrate</span>) <span class="op">=&gt;</span> { <span class="ident">Item</span>::<span class="ident">ExternCrate</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemExternCrate</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Item</span>::<span class="ident">ExternCrate</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemUse</span>) <span class="op">=&gt;</span> { <span class="ident">Item</span>::<span class="ident">Use</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemUse</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Item</span>::<span class="ident">Use</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemStatic</span>) <span class="op">=&gt;</span> { <span class="ident">Item</span>::<span class="ident">Static</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemStatic</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Item</span>::<span class="ident">Static</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemConst</span>) <span class="op">=&gt;</span> { <span class="ident">Item</span>::<span class="ident">Const</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemConst</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Item</span>::<span class="ident">Const</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemFn</span>) <span class="op">=&gt;</span> { <span class="ident">Item</span>::<span class="ident">Fn</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemFn</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Item</span>::<span class="ident">Fn</span> }
         <span class="op">|</span>
-        <span class="macro">call</span><span class="macro">!</span>(<span class="ident">unstable_async_fn</span>) <span class="op">=&gt;</span> { <span class="ident">Item</span>::<span class="ident">Verbatim</span> }
+        <span class="macro">call</span><span class="macro">!</span>(<span class="ident">unstable_async_fn</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Item</span>::<span class="ident">Verbatim</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemMod</span>) <span class="op">=&gt;</span> { <span class="ident">Item</span>::<span class="ident">Mod</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemMod</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Item</span>::<span class="ident">Mod</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemForeignMod</span>) <span class="op">=&gt;</span> { <span class="ident">Item</span>::<span class="ident">ForeignMod</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemForeignMod</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Item</span>::<span class="ident">ForeignMod</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemType</span>) <span class="op">=&gt;</span> { <span class="ident">Item</span>::<span class="ident">Type</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemType</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Item</span>::<span class="ident">Type</span> }
         <span class="op">|</span>
-        <span class="macro">call</span><span class="macro">!</span>(<span class="ident">unstable_existential_type</span>) <span class="op">=&gt;</span> { <span class="ident">Item</span>::<span class="ident">Verbatim</span> }
+        <span class="macro">call</span><span class="macro">!</span>(<span class="ident">unstable_existential_type</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Item</span>::<span class="ident">Verbatim</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemStruct</span>) <span class="op">=&gt;</span> { <span class="ident">Item</span>::<span class="ident">Struct</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemStruct</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Item</span>::<span class="ident">Struct</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemEnum</span>) <span class="op">=&gt;</span> { <span class="ident">Item</span>::<span class="ident">Enum</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemEnum</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Item</span>::<span class="ident">Enum</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemUnion</span>) <span class="op">=&gt;</span> { <span class="ident">Item</span>::<span class="ident">Union</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemUnion</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Item</span>::<span class="ident">Union</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemTrait</span>) <span class="op">=&gt;</span> { <span class="ident">Item</span>::<span class="ident">Trait</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemTrait</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Item</span>::<span class="ident">Trait</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemImpl</span>) <span class="op">=&gt;</span> { <span class="ident">Item</span>::<span class="ident">Impl</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemImpl</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Item</span>::<span class="ident">Impl</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemMacro</span>) <span class="op">=&gt;</span> { <span class="ident">Item</span>::<span class="ident">Macro</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemMacro</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Item</span>::<span class="ident">Macro</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemMacro2</span>) <span class="op">=&gt;</span> { <span class="ident">Item</span>::<span class="ident">Macro2</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ItemMacro2</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Item</span>::<span class="ident">Macro2</span> }
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ItemMacro</span> <span class="string">&quot;macro item&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">what</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">Path</span>::<span class="ident">parse_mod_style</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">bang</span>: <span class="macro">punct</span><span class="macro">!</span>(<span class="op">!</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">ident</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">body</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">tt</span>::<span class="ident">delimited</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">semi</span>: <span class="macro">cond</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">is_brace</span>(<span class="kw-2">&amp;</span><span class="ident">body</span>.<span class="number">0</span>), <span class="macro">punct</span><span class="macro">!</span>(;)) <span class="op">&gt;&gt;</span>
+        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">what</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">Path</span>::<span class="ident">parse_mod_style</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">bang</span>: <span class="macro">punct</span><span class="macro">!</span>(<span class="op">!</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">body</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">tt</span>::<span class="ident">delimited</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">semi</span>: <span class="macro">cond</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">is_brace</span>(<span class="kw-2">&amp;</span><span class="ident">body</span>.<span class="number">0</span>), <span class="macro">punct</span><span class="macro">!</span>(;)) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ItemMacro</span> {
             <span class="ident">attrs</span>: <span class="ident">attrs</span>,
             <span class="ident">ident</span>: <span class="ident">ident</span>,
@@ -2934,12 +2934,12 @@
 
     <span class="comment">// TODO: figure out the actual grammar; is body required to be braced?</span>
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ItemMacro2</span> <span class="string">&quot;macro2 item&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">macro_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">macro</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">args</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">tt</span>::<span class="ident">parenthesized</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">body</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">tt</span>::<span class="ident">braced</span>) <span class="op">&gt;&gt;</span>
+        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">macro_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">macro</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">args</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">tt</span>::<span class="ident">parenthesized</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">body</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">tt</span>::<span class="ident">braced</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ItemMacro2</span> {
             <span class="ident">attrs</span>: <span class="ident">attrs</span>,
             <span class="ident">vis</span>: <span class="ident">vis</span>,
@@ -2953,13 +2953,13 @@
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ItemExternCrate</span> <span class="string">&quot;extern crate item&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">extern_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">extern</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">crate_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">crate</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">rename</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">tuple</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">as</span>), <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>))) <span class="op">&gt;&gt;</span>
-        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;&gt;</span>
+        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">extern_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">extern</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">crate_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">crate</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">rename</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">tuple</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">as</span>), <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>))) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ItemExternCrate</span> {
             <span class="ident">attrs</span>: <span class="ident">attrs</span>,
             <span class="ident">vis</span>: <span class="ident">vis</span>,
@@ -2972,12 +2972,12 @@
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ItemUse</span> <span class="string">&quot;use item&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">use_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">use</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">leading_colon</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">punct</span><span class="macro">!</span>(::)) <span class="op">&gt;&gt;</span>
-        <span class="ident">tree</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">UseTree</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;&gt;</span>
+        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">use_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">use</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">leading_colon</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">punct</span><span class="macro">!</span>(::)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">tree</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">UseTree</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ItemUse</span> {
             <span class="ident">attrs</span>: <span class="ident">attrs</span>,
             <span class="ident">vis</span>: <span class="ident">vis</span>,
@@ -2988,34 +2988,34 @@
         })
     ));
 
-    <span class="macro">named</span><span class="macro">!</span>(<span class="ident">use_element</span> <span class="op">-&gt;</span> <span class="ident">Ident</span>, <span class="macro">alt</span><span class="macro">!</span>(
+    <span class="macro">named</span><span class="macro">!</span>(<span class="ident">use_element</span> <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Ident</span>, <span class="macro">alt</span><span class="macro">!</span>(
         <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>)
         <span class="op">|</span>
-        <span class="macro">keyword</span><span class="macro">!</span>(<span class="self">self</span>) <span class="op">=&gt;</span> { <span class="ident">Into</span>::<span class="ident">into</span> }
+        <span class="macro">keyword</span><span class="macro">!</span>(<span class="self">self</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Into</span>::<span class="ident">into</span> }
         <span class="op">|</span>
-        <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">super</span>) <span class="op">=&gt;</span> { <span class="ident">Into</span>::<span class="ident">into</span> }
+        <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">super</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Into</span>::<span class="ident">into</span> }
         <span class="op">|</span>
-        <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">crate</span>) <span class="op">=&gt;</span> { <span class="ident">Into</span>::<span class="ident">into</span> }
+        <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">crate</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Into</span>::<span class="ident">into</span> }
         <span class="op">|</span>
-        <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">extern</span>) <span class="op">=&gt;</span> { <span class="ident">Into</span>::<span class="ident">into</span> }
+        <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">extern</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Into</span>::<span class="ident">into</span> }
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">UseTree</span> <span class="string">&quot;use tree&quot;</span> <span class="macro">alt</span><span class="macro">!</span>(
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">UseRename</span>) <span class="op">=&gt;</span> { <span class="ident">UseTree</span>::<span class="ident">Rename</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">UseRename</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">UseTree</span>::<span class="ident">Rename</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">UsePath</span>) <span class="op">=&gt;</span> { <span class="ident">UseTree</span>::<span class="ident">Path</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">UsePath</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">UseTree</span>::<span class="ident">Path</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">UseName</span>) <span class="op">=&gt;</span> { <span class="ident">UseTree</span>::<span class="ident">Name</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">UseName</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">UseTree</span>::<span class="ident">Name</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">UseGlob</span>) <span class="op">=&gt;</span> { <span class="ident">UseTree</span>::<span class="ident">Glob</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">UseGlob</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">UseTree</span>::<span class="ident">Glob</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">UseGroup</span>) <span class="op">=&gt;</span> { <span class="ident">UseTree</span>::<span class="ident">Group</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">UseGroup</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">UseTree</span>::<span class="ident">Group</span> }
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">UsePath</span> <span class="string">&quot;use path&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">ident</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">use_element</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">colon2_token</span>: <span class="macro">punct</span><span class="macro">!</span>(::) <span class="op">&gt;&gt;</span>
-        <span class="ident">tree</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">UseTree</span>) <span class="op">&gt;&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">use_element</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">colon2_token</span>: <span class="macro">punct</span><span class="macro">!</span>(::) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">tree</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">UseTree</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">UsePath</span> {
             <span class="ident">ident</span>: <span class="ident">ident</span>,
             <span class="ident">colon2_token</span>: <span class="ident">colon2_token</span>,
@@ -3024,16 +3024,16 @@
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">UseName</span> <span class="string">&quot;use name&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">ident</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">use_element</span>) <span class="op">&gt;&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">use_element</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">UseName</span> {
             <span class="ident">ident</span>: <span class="ident">ident</span>,
         })
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">UseRename</span> <span class="string">&quot;use rename&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">ident</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">use_element</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">as_token</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">as</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">rename</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">use_element</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">as_token</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">as</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">rename</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">UseRename</span> {
             <span class="ident">ident</span>: <span class="ident">ident</span>,
             <span class="ident">as_token</span>: <span class="ident">as_token</span>,
@@ -3042,14 +3042,14 @@
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">UseGlob</span> <span class="string">&quot;use glob&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">star</span>: <span class="macro">punct</span><span class="macro">!</span>(<span class="kw-2">*</span>) <span class="op">&gt;&gt;</span>
+        <span class="ident">star</span>: <span class="macro">punct</span><span class="macro">!</span>(<span class="kw-2">*</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">UseGlob</span> {
             <span class="ident">star_token</span>: <span class="ident">star</span>,
         })
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">UseGroup</span> <span class="string">&quot;use group&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">list</span>: <span class="macro">braces</span><span class="macro">!</span>(<span class="ident">Punctuated</span>::<span class="ident">parse_terminated</span>) <span class="op">&gt;&gt;</span>
+        <span class="ident">list</span>: <span class="macro">braces</span><span class="macro">!</span>(<span class="ident">Punctuated</span>::<span class="ident">parse_terminated</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">UseGroup</span> {
             <span class="ident">brace_token</span>: <span class="ident">list</span>.<span class="number">0</span>,
             <span class="ident">items</span>: <span class="ident">list</span>.<span class="number">1</span>,
@@ -3057,16 +3057,16 @@
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ItemStatic</span> <span class="string">&quot;static item&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">static_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">static</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">mutability</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw-2">mut</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">colon</span>: <span class="macro">punct</span><span class="macro">!</span>(:) <span class="op">&gt;&gt;</span>
-        <span class="ident">ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">eq</span>: <span class="macro">punct</span><span class="macro">!</span>(<span class="op">=</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">value</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Expr</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;&gt;</span>
+        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">static_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">static</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">mutability</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw-2">mut</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">colon</span>: <span class="macro">punct</span><span class="macro">!</span>(:) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">eq</span>: <span class="macro">punct</span><span class="macro">!</span>(<span class="op">=</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">value</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Expr</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ItemStatic</span> {
             <span class="ident">attrs</span>: <span class="ident">attrs</span>,
             <span class="ident">vis</span>: <span class="ident">vis</span>,
@@ -3082,15 +3082,15 @@
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ItemConst</span> <span class="string">&quot;const item&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">const_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">const</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">colon</span>: <span class="macro">punct</span><span class="macro">!</span>(:) <span class="op">&gt;&gt;</span>
-        <span class="ident">ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">eq</span>: <span class="macro">punct</span><span class="macro">!</span>(<span class="op">=</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">value</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Expr</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;&gt;</span>
+        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">const_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">const</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">colon</span>: <span class="macro">punct</span><span class="macro">!</span>(:) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">eq</span>: <span class="macro">punct</span><span class="macro">!</span>(<span class="op">=</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">value</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Expr</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ItemConst</span> {
             <span class="ident">attrs</span>: <span class="ident">attrs</span>,
             <span class="ident">vis</span>: <span class="ident">vis</span>,
@@ -3105,21 +3105,21 @@
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ItemFn</span> <span class="string">&quot;fn item&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">outer_attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">constness</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">const</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">unsafety</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">unsafe</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">abi</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Abi</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">fn_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">fn</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">generics</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">inputs</span>: <span class="macro">parens</span><span class="macro">!</span>(<span class="ident">Punctuated</span>::<span class="ident">parse_terminated</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">ret</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ReturnType</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">where_clause</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;&gt;</span>
+        <span class="ident">outer_attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">constness</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">const</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">unsafety</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">unsafe</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">abi</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Abi</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">fn_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">fn</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">generics</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">inputs</span>: <span class="macro">parens</span><span class="macro">!</span>(<span class="ident">Punctuated</span>::<span class="ident">parse_terminated</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ret</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ReturnType</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">where_clause</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
         <span class="ident">inner_attrs_stmts</span>: <span class="macro">braces</span><span class="macro">!</span>(<span class="macro">tuple</span><span class="macro">!</span>(
             <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_inner</span>),
             <span class="macro">call</span><span class="macro">!</span>(<span class="ident">Block</span>::<span class="ident">parse_within</span>),
-        )) <span class="op">&gt;&gt;</span>
+        )) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ItemFn</span> {
             <span class="ident">attrs</span>: {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">attrs</span> <span class="op">=</span> <span class="ident">outer_attrs</span>;
@@ -3149,38 +3149,38 @@
         })
     ));
 
-    <span class="macro">named</span><span class="macro">!</span>(<span class="ident">unstable_async_fn</span> <span class="op">-&gt;</span> <span class="ident">ItemVerbatim</span>, <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">begin</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">verbatim</span>::<span class="ident">grab_cursor</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">const</span>)) <span class="op">&gt;&gt;</span>
-        <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">unsafe</span>)) <span class="op">&gt;&gt;</span>
-        <span class="macro">keyword</span><span class="macro">!</span>(<span class="ident">async</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Abi</span>)) <span class="op">&gt;&gt;</span>
-        <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">fn</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">parens</span><span class="macro">!</span>(<span class="ident">Punctuated</span>::<span class="op">&lt;</span><span class="ident">FnArg</span>, <span class="macro">Token</span><span class="macro">!</span>[,]<span class="op">&gt;</span>::<span class="ident">parse_terminated</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ReturnType</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;&gt;</span>
+    <span class="macro">named</span><span class="macro">!</span>(<span class="ident">unstable_async_fn</span> <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ItemVerbatim</span>, <span class="macro">do_parse</span><span class="macro">!</span>(
+        <span class="ident">begin</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">verbatim</span>::<span class="ident">grab_cursor</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">const</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">unsafe</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">keyword</span><span class="macro">!</span>(<span class="ident">async</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Abi</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">fn</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">parens</span><span class="macro">!</span>(<span class="ident">Punctuated</span>::<span class="op">&lt;</span><span class="ident">FnArg</span>, <span class="macro">Token</span><span class="macro">!</span>[,]<span class="op">&gt;</span>::<span class="ident">parse_terminated</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ReturnType</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
         <span class="macro">braces</span><span class="macro">!</span>(<span class="macro">tuple</span><span class="macro">!</span>(
             <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_inner</span>),
             <span class="macro">call</span><span class="macro">!</span>(<span class="ident">Block</span>::<span class="ident">parse_within</span>),
-        )) <span class="op">&gt;&gt;</span>
-        <span class="ident">end</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">verbatim</span>::<span class="ident">grab_cursor</span>) <span class="op">&gt;&gt;</span>
+        )) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">end</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">verbatim</span>::<span class="ident">grab_cursor</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ItemVerbatim</span> {
             <span class="ident">tts</span>: <span class="ident">verbatim</span>::<span class="ident">token_range</span>(<span class="ident">begin</span>..<span class="ident">end</span>),
         })
     ));
 
     <span class="kw">impl</span> <span class="ident">Synom</span> <span class="kw">for</span> <span class="ident">FnArg</span> {
-        <span class="macro">named</span><span class="macro">!</span>(<span class="ident">parse</span> <span class="op">-&gt;</span> <span class="self">Self</span>, <span class="macro">alt</span><span class="macro">!</span>(
+        <span class="macro">named</span><span class="macro">!</span>(<span class="ident">parse</span> <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>, <span class="macro">alt</span><span class="macro">!</span>(
             <span class="macro">do_parse</span><span class="macro">!</span>(
-                <span class="ident">and</span>: <span class="macro">punct</span><span class="macro">!</span>(<span class="kw-2">&amp;</span>) <span class="op">&gt;&gt;</span>
-                <span class="ident">lt</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Lifetime</span>)) <span class="op">&gt;&gt;</span>
-                <span class="ident">mutability</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw-2">mut</span>)) <span class="op">&gt;&gt;</span>
-                <span class="ident">self_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="self">self</span>) <span class="op">&gt;&gt;</span>
-                <span class="macro">not</span><span class="macro">!</span>(<span class="macro">punct</span><span class="macro">!</span>(:)) <span class="op">&gt;&gt;</span>
+                <span class="ident">and</span>: <span class="macro">punct</span><span class="macro">!</span>(<span class="kw-2">&amp;</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+                <span class="ident">lt</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Lifetime</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+                <span class="ident">mutability</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw-2">mut</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+                <span class="ident">self_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="self">self</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+                <span class="macro">not</span><span class="macro">!</span>(<span class="macro">punct</span><span class="macro">!</span>(:)) <span class="op">&gt;</span><span class="op">&gt;</span>
                 (<span class="ident">ArgSelfRef</span> {
                     <span class="ident">lifetime</span>: <span class="ident">lt</span>,
                     <span class="ident">mutability</span>: <span class="ident">mutability</span>,
@@ -3190,9 +3190,9 @@
             )
             <span class="op">|</span>
             <span class="macro">do_parse</span><span class="macro">!</span>(
-                <span class="ident">mutability</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw-2">mut</span>)) <span class="op">&gt;&gt;</span>
-                <span class="ident">self_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="self">self</span>) <span class="op">&gt;&gt;</span>
-                <span class="macro">not</span><span class="macro">!</span>(<span class="macro">punct</span><span class="macro">!</span>(:)) <span class="op">&gt;&gt;</span>
+                <span class="ident">mutability</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw-2">mut</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+                <span class="ident">self_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="self">self</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+                <span class="macro">not</span><span class="macro">!</span>(<span class="macro">punct</span><span class="macro">!</span>(:)) <span class="op">&gt;</span><span class="op">&gt;</span>
                 (<span class="ident">ArgSelf</span> {
                     <span class="ident">mutability</span>: <span class="ident">mutability</span>,
                     <span class="ident">self_token</span>: <span class="ident">self_</span>,
@@ -3200,9 +3200,9 @@
             )
             <span class="op">|</span>
             <span class="macro">do_parse</span><span class="macro">!</span>(
-                <span class="ident">pat</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Pat</span>) <span class="op">&gt;&gt;</span>
-                <span class="ident">colon</span>: <span class="macro">punct</span><span class="macro">!</span>(:) <span class="op">&gt;&gt;</span>
-                <span class="ident">ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;&gt;</span>
+                <span class="ident">pat</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Pat</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+                <span class="ident">colon</span>: <span class="macro">punct</span><span class="macro">!</span>(:) <span class="op">&gt;</span><span class="op">&gt;</span>
+                <span class="ident">ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
                 (<span class="ident">ArgCaptured</span> {
                     <span class="ident">pat</span>: <span class="ident">pat</span>,
                     <span class="ident">ty</span>: <span class="ident">ty</span>,
@@ -3210,21 +3210,21 @@
                 }.<span class="ident">into</span>())
             )
             <span class="op">|</span>
-            <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">=&gt;</span> { <span class="ident">FnArg</span>::<span class="ident">Ignored</span> }
+            <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">FnArg</span>::<span class="ident">Ignored</span> }
         ));
 
-        <span class="kw">fn</span> <span class="ident">description</span>() <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">description</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
             <span class="prelude-val">Some</span>(<span class="string">&quot;function argument&quot;</span>)
         }
     }
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ItemMod</span> <span class="string">&quot;mod item&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">outer_attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">mod_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">mod</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
+        <span class="ident">outer_attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">mod_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">mod</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
         <span class="ident">content_semi</span>: <span class="macro">alt</span><span class="macro">!</span>(
-            <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">=&gt;</span> {<span class="op">|</span><span class="ident">semi</span><span class="op">|</span> (
+            <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">=</span><span class="op">&gt;</span> {<span class="op">|</span><span class="ident">semi</span><span class="op">|</span> (
                 <span class="ident">Vec</span>::<span class="ident">new</span>(),
                 <span class="prelude-val">None</span>,
                 <span class="prelude-val">Some</span>(<span class="ident">semi</span>),
@@ -3235,12 +3235,12 @@
                     <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_inner</span>),
                     <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Item</span>::<span class="ident">parse</span>),
                 )
-            ) <span class="op">=&gt;</span> {<span class="op">|</span>(<span class="ident">brace</span>, (<span class="ident">inner_attrs</span>, <span class="ident">items</span>))<span class="op">|</span> (
+            ) <span class="op">=</span><span class="op">&gt;</span> {<span class="op">|</span>(<span class="ident">brace</span>, (<span class="ident">inner_attrs</span>, <span class="ident">items</span>))<span class="op">|</span> (
                 <span class="ident">inner_attrs</span>,
                 <span class="prelude-val">Some</span>((<span class="ident">brace</span>, <span class="ident">items</span>)),
                 <span class="prelude-val">None</span>,
             )}
-        ) <span class="op">&gt;&gt;</span>
+        ) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ItemMod</span> {
             <span class="ident">attrs</span>: {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">attrs</span> <span class="op">=</span> <span class="ident">outer_attrs</span>;
@@ -3256,12 +3256,12 @@
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ItemForeignMod</span> <span class="string">&quot;foreign mod item&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">outer_attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">abi</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Abi</span>) <span class="op">&gt;&gt;</span>
+        <span class="ident">outer_attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">abi</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Abi</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
         <span class="ident">braced_content</span>: <span class="macro">braces</span><span class="macro">!</span>(<span class="macro">tuple</span><span class="macro">!</span>(
             <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_inner</span>),
             <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">ForeignItem</span>::<span class="ident">parse</span>),
-        )) <span class="op">&gt;&gt;</span>
+        )) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ItemForeignMod</span> {
             <span class="ident">attrs</span>: {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">attrs</span> <span class="op">=</span> <span class="ident">outer_attrs</span>;
@@ -3275,29 +3275,29 @@
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ForeignItem</span> <span class="string">&quot;foreign item&quot;</span> <span class="macro">alt</span><span class="macro">!</span>(
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ForeignItemFn</span>) <span class="op">=&gt;</span> { <span class="ident">ForeignItem</span>::<span class="ident">Fn</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ForeignItemFn</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">ForeignItem</span>::<span class="ident">Fn</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ForeignItemStatic</span>) <span class="op">=&gt;</span> { <span class="ident">ForeignItem</span>::<span class="ident">Static</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ForeignItemStatic</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">ForeignItem</span>::<span class="ident">Static</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ForeignItemType</span>) <span class="op">=&gt;</span> { <span class="ident">ForeignItem</span>::<span class="ident">Type</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ForeignItemType</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">ForeignItem</span>::<span class="ident">Type</span> }
         <span class="op">|</span>
-        <span class="macro">call</span><span class="macro">!</span>(<span class="ident">foreign_item_macro</span>) <span class="op">=&gt;</span> { <span class="ident">ForeignItem</span>::<span class="ident">Verbatim</span> }
+        <span class="macro">call</span><span class="macro">!</span>(<span class="ident">foreign_item_macro</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">ForeignItem</span>::<span class="ident">Verbatim</span> }
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ForeignItemFn</span> <span class="string">&quot;foreign function&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">fn_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">fn</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">generics</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;&gt;</span>
+        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">fn_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">fn</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">generics</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
         <span class="ident">inputs</span>: <span class="macro">parens</span><span class="macro">!</span>(<span class="macro">do_parse</span><span class="macro">!</span>(
-            <span class="ident">args</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">Punctuated</span>::<span class="ident">parse_terminated</span>) <span class="op">&gt;&gt;</span>
-            <span class="ident">variadic</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">cond_reduce</span><span class="macro">!</span>(<span class="ident">args</span>.<span class="ident">empty_or_trailing</span>(), <span class="macro">punct</span><span class="macro">!</span>(...))) <span class="op">&gt;&gt;</span>
+            <span class="ident">args</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">Punctuated</span>::<span class="ident">parse_terminated</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+            <span class="ident">variadic</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">cond_reduce</span><span class="macro">!</span>(<span class="ident">args</span>.<span class="ident">empty_or_trailing</span>(), <span class="macro">punct</span><span class="macro">!</span>(...))) <span class="op">&gt;</span><span class="op">&gt;</span>
             (<span class="ident">args</span>, <span class="ident">variadic</span>)
-        )) <span class="op">&gt;&gt;</span>
-        <span class="ident">ret</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ReturnType</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">where_clause</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;&gt;</span>
+        )) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ret</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ReturnType</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">where_clause</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;</span><span class="op">&gt;</span>
         ({
             <span class="kw">let</span> (<span class="ident">parens</span>, (<span class="ident">inputs</span>, <span class="ident">variadic</span>)) <span class="op">=</span> <span class="ident">inputs</span>;
             <span class="ident">ForeignItemFn</span> {
@@ -3321,14 +3321,14 @@
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ForeignItemStatic</span> <span class="string">&quot;foreign static&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">static_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">static</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">mutability</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw-2">mut</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">colon</span>: <span class="macro">punct</span><span class="macro">!</span>(:) <span class="op">&gt;&gt;</span>
-        <span class="ident">ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;&gt;</span>
+        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">static_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">static</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">mutability</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw-2">mut</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">colon</span>: <span class="macro">punct</span><span class="macro">!</span>(:) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ForeignItemStatic</span> {
             <span class="ident">ident</span>: <span class="ident">ident</span>,
             <span class="ident">attrs</span>: <span class="ident">attrs</span>,
@@ -3342,11 +3342,11 @@
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ForeignItemType</span> <span class="string">&quot;foreign type&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">type_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">type</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;&gt;</span>
+        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">type_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">type</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ForeignItemType</span> {
             <span class="ident">attrs</span>: <span class="ident">attrs</span>,
             <span class="ident">vis</span>: <span class="ident">vis</span>,
@@ -3356,27 +3356,27 @@
         })
     ));
 
-    <span class="macro">named</span><span class="macro">!</span>(<span class="ident">foreign_item_macro</span> <span class="op">-&gt;</span> <span class="ident">ForeignItemVerbatim</span>, <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">begin</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">verbatim</span>::<span class="ident">grab_cursor</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">mac</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Macro</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">cond</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">is_brace</span>(<span class="kw-2">&amp;</span><span class="ident">mac</span>.<span class="ident">delimiter</span>), <span class="macro">punct</span><span class="macro">!</span>(;)) <span class="op">&gt;&gt;</span>
-        <span class="ident">end</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">verbatim</span>::<span class="ident">grab_cursor</span>) <span class="op">&gt;&gt;</span>
+    <span class="macro">named</span><span class="macro">!</span>(<span class="ident">foreign_item_macro</span> <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ForeignItemVerbatim</span>, <span class="macro">do_parse</span><span class="macro">!</span>(
+        <span class="ident">begin</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">verbatim</span>::<span class="ident">grab_cursor</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">mac</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Macro</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">cond</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">is_brace</span>(<span class="kw-2">&amp;</span><span class="ident">mac</span>.<span class="ident">delimiter</span>), <span class="macro">punct</span><span class="macro">!</span>(;)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">end</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">verbatim</span>::<span class="ident">grab_cursor</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ForeignItemVerbatim</span> {
             <span class="ident">tts</span>: <span class="ident">verbatim</span>::<span class="ident">token_range</span>(<span class="ident">begin</span>..<span class="ident">end</span>),
         })
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ItemType</span> <span class="string">&quot;type item&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">type_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">type</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">generics</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">where_clause</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">eq</span>: <span class="macro">punct</span><span class="macro">!</span>(<span class="op">=</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;&gt;</span>
+        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">type_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">type</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">generics</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">where_clause</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">eq</span>: <span class="macro">punct</span><span class="macro">!</span>(<span class="op">=</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ItemType</span> {
             <span class="ident">attrs</span>: <span class="ident">attrs</span>,
             <span class="ident">vis</span>: <span class="ident">vis</span>,
@@ -3392,52 +3392,52 @@
         })
     ));
 
-    <span class="macro">named</span><span class="macro">!</span>(<span class="ident">existential_type_helper</span>(<span class="ident">vis</span>: <span class="ident">bool</span>) <span class="op">-&gt;</span> <span class="ident">TokenStream</span>, <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">begin</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">verbatim</span>::<span class="ident">grab_cursor</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">cond_reduce</span><span class="macro">!</span>(<span class="ident">vis</span>, <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>)) <span class="op">&gt;&gt;</span>
-        <span class="macro">custom_keyword</span><span class="macro">!</span>(<span class="ident">existential</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">type</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">colon</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">punct</span><span class="macro">!</span>(:)) <span class="op">&gt;&gt;</span>
+    <span class="macro">named</span><span class="macro">!</span>(<span class="ident">existential_type_helper</span>(<span class="ident">vis</span>: <span class="ident">bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span>, <span class="macro">do_parse</span><span class="macro">!</span>(
+        <span class="ident">begin</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">verbatim</span>::<span class="ident">grab_cursor</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">cond_reduce</span><span class="macro">!</span>(<span class="ident">vis</span>, <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">custom_keyword</span><span class="macro">!</span>(<span class="ident">existential</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">type</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">colon</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">punct</span><span class="macro">!</span>(:)) <span class="op">&gt;</span><span class="op">&gt;</span>
         <span class="macro">cond</span><span class="macro">!</span>(
             <span class="ident">colon</span>.<span class="ident">is_some</span>(),
             <span class="ident">Punctuated</span>::<span class="op">&lt;</span><span class="ident">TypeParamBound</span>, <span class="macro">Token</span><span class="macro">!</span>[<span class="op">+</span>]<span class="op">&gt;</span>::<span class="ident">parse_separated_nonempty</span>
-        ) <span class="op">&gt;&gt;</span>
-        <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;&gt;</span>
-        <span class="ident">end</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">verbatim</span>::<span class="ident">grab_cursor</span>) <span class="op">&gt;&gt;</span>
+        ) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">end</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">verbatim</span>::<span class="ident">grab_cursor</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">verbatim</span>::<span class="ident">token_range</span>(<span class="ident">begin</span>..<span class="ident">end</span>))
     ));
 
-    <span class="macro">named</span><span class="macro">!</span>(<span class="ident">unstable_existential_type</span> <span class="op">-&gt;</span> <span class="ident">ItemVerbatim</span>, <span class="macro">map</span><span class="macro">!</span>(
+    <span class="macro">named</span><span class="macro">!</span>(<span class="ident">unstable_existential_type</span> <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ItemVerbatim</span>, <span class="macro">map</span><span class="macro">!</span>(
         <span class="macro">call</span><span class="macro">!</span>(<span class="ident">existential_type_helper</span>, <span class="bool-val">true</span>),
         <span class="op">|</span><span class="ident">tts</span><span class="op">|</span> <span class="ident">ItemVerbatim</span> { <span class="ident">tts</span>: <span class="ident">tts</span> }
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ItemStruct</span> <span class="string">&quot;struct item&quot;</span> <span class="macro">switch</span><span class="macro">!</span>(
         <span class="macro">map</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">DeriveInput</span>), <span class="ident">Into</span>::<span class="ident">into</span>),
-        <span class="ident">Item</span>::<span class="ident">Struct</span>(<span class="ident">item</span>) <span class="op">=&gt;</span> <span class="macro">value</span><span class="macro">!</span>(<span class="ident">item</span>)
+        <span class="ident">Item</span>::<span class="ident">Struct</span>(<span class="ident">item</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">value</span><span class="macro">!</span>(<span class="ident">item</span>)
         <span class="op">|</span>
-        <span class="kw">_</span> <span class="op">=&gt;</span> <span class="macro">reject</span><span class="macro">!</span>()
+        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">reject</span><span class="macro">!</span>()
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ItemEnum</span> <span class="string">&quot;enum item&quot;</span> <span class="macro">switch</span><span class="macro">!</span>(
         <span class="macro">map</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">DeriveInput</span>), <span class="ident">Into</span>::<span class="ident">into</span>),
-        <span class="ident">Item</span>::<span class="ident">Enum</span>(<span class="ident">item</span>) <span class="op">=&gt;</span> <span class="macro">value</span><span class="macro">!</span>(<span class="ident">item</span>)
+        <span class="ident">Item</span>::<span class="ident">Enum</span>(<span class="ident">item</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">value</span><span class="macro">!</span>(<span class="ident">item</span>)
         <span class="op">|</span>
-        <span class="kw">_</span> <span class="op">=&gt;</span> <span class="macro">reject</span><span class="macro">!</span>()
+        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">reject</span><span class="macro">!</span>()
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ItemUnion</span> <span class="string">&quot;union item&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">union_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="ident">union</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">generics</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">where_clause</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">fields</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">FieldsNamed</span>) <span class="op">&gt;&gt;</span>
+        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">union_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="ident">union</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">generics</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">where_clause</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">fields</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">FieldsNamed</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ItemUnion</span> {
             <span class="ident">attrs</span>: <span class="ident">attrs</span>,
             <span class="ident">vis</span>: <span class="ident">vis</span>,
@@ -3452,17 +3452,17 @@
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ItemTrait</span> <span class="string">&quot;trait item&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">unsafety</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">unsafe</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">auto_</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="ident">auto</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">trait_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">trait</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">generics</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">colon</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">punct</span><span class="macro">!</span>(:)) <span class="op">&gt;&gt;</span>
-        <span class="ident">bounds</span>: <span class="macro">cond</span><span class="macro">!</span>(<span class="ident">colon</span>.<span class="ident">is_some</span>(), <span class="ident">Punctuated</span>::<span class="ident">parse_separated_nonempty</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">where_clause</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">body</span>: <span class="macro">braces</span><span class="macro">!</span>(<span class="macro">many0</span><span class="macro">!</span>(<span class="ident">TraitItem</span>::<span class="ident">parse</span>)) <span class="op">&gt;&gt;</span>
+        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">unsafety</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">unsafe</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">auto_</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="ident">auto</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">trait_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">trait</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">generics</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">colon</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">punct</span><span class="macro">!</span>(:)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">bounds</span>: <span class="macro">cond</span><span class="macro">!</span>(<span class="ident">colon</span>.<span class="ident">is_some</span>(), <span class="ident">Punctuated</span>::<span class="ident">parse_separated_nonempty</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">where_clause</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">body</span>: <span class="macro">braces</span><span class="macro">!</span>(<span class="macro">many0</span><span class="macro">!</span>(<span class="ident">TraitItem</span>::<span class="ident">parse</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ItemTrait</span> {
             <span class="ident">attrs</span>: <span class="ident">attrs</span>,
             <span class="ident">vis</span>: <span class="ident">vis</span>,
@@ -3482,25 +3482,25 @@
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">TraitItem</span> <span class="string">&quot;trait item&quot;</span> <span class="macro">alt</span><span class="macro">!</span>(
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">TraitItemConst</span>) <span class="op">=&gt;</span> { <span class="ident">TraitItem</span>::<span class="ident">Const</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">TraitItemConst</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">TraitItem</span>::<span class="ident">Const</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">TraitItemMethod</span>) <span class="op">=&gt;</span> { <span class="ident">TraitItem</span>::<span class="ident">Method</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">TraitItemMethod</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">TraitItem</span>::<span class="ident">Method</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">TraitItemType</span>) <span class="op">=&gt;</span> { <span class="ident">TraitItem</span>::<span class="ident">Type</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">TraitItemType</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">TraitItem</span>::<span class="ident">Type</span> }
         <span class="op">|</span>
-        <span class="macro">call</span><span class="macro">!</span>(<span class="ident">unstable_trait_existential_type</span>) <span class="op">=&gt;</span> { <span class="ident">TraitItem</span>::<span class="ident">Verbatim</span> }
+        <span class="macro">call</span><span class="macro">!</span>(<span class="ident">unstable_trait_existential_type</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">TraitItem</span>::<span class="ident">Verbatim</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">TraitItemMacro</span>) <span class="op">=&gt;</span> { <span class="ident">TraitItem</span>::<span class="ident">Macro</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">TraitItemMacro</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">TraitItem</span>::<span class="ident">Macro</span> }
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">TraitItemConst</span> <span class="string">&quot;const trait item&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">const_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">const</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">colon</span>: <span class="macro">punct</span><span class="macro">!</span>(:) <span class="op">&gt;&gt;</span>
-        <span class="ident">ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">default</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">tuple</span><span class="macro">!</span>(<span class="macro">punct</span><span class="macro">!</span>(<span class="op">=</span>), <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Expr</span>))) <span class="op">&gt;&gt;</span>
-        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;&gt;</span>
+        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">const_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">const</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">colon</span>: <span class="macro">punct</span><span class="macro">!</span>(:) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">default</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">tuple</span><span class="macro">!</span>(<span class="macro">punct</span><span class="macro">!</span>(<span class="op">=</span>), <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Expr</span>))) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">TraitItemConst</span> {
             <span class="ident">attrs</span>: <span class="ident">attrs</span>,
             <span class="ident">const_token</span>: <span class="ident">const_</span>,
@@ -3513,25 +3513,25 @@
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">TraitItemMethod</span> <span class="string">&quot;method trait item&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">outer_attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">constness</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">const</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">unsafety</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">unsafe</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">abi</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Abi</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">fn_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">fn</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">generics</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">inputs</span>: <span class="macro">parens</span><span class="macro">!</span>(<span class="ident">Punctuated</span>::<span class="ident">parse_terminated</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">ret</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ReturnType</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">where_clause</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;&gt;</span>
+        <span class="ident">outer_attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">constness</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">const</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">unsafety</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">unsafe</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">abi</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Abi</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">fn_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">fn</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">generics</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">inputs</span>: <span class="macro">parens</span><span class="macro">!</span>(<span class="ident">Punctuated</span>::<span class="ident">parse_terminated</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ret</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ReturnType</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">where_clause</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
         <span class="ident">body</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">braces</span><span class="macro">!</span>(<span class="macro">tuple</span><span class="macro">!</span>(
             <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_inner</span>),
             <span class="macro">call</span><span class="macro">!</span>(<span class="ident">Block</span>::<span class="ident">parse_within</span>),
-        ))) <span class="op">&gt;&gt;</span>
-        <span class="ident">semi</span>: <span class="macro">cond</span><span class="macro">!</span>(<span class="ident">body</span>.<span class="ident">is_none</span>(), <span class="macro">punct</span><span class="macro">!</span>(;)) <span class="op">&gt;&gt;</span>
+        ))) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">semi</span>: <span class="macro">cond</span><span class="macro">!</span>(<span class="ident">body</span>.<span class="ident">is_none</span>(), <span class="macro">punct</span><span class="macro">!</span>(;)) <span class="op">&gt;</span><span class="op">&gt;</span>
         ({
             <span class="kw">let</span> (<span class="ident">inner_attrs</span>, <span class="ident">stmts</span>) <span class="op">=</span> <span class="kw">match</span> <span class="ident">body</span> {
-                <span class="prelude-val">Some</span>((<span class="ident">b</span>, (<span class="ident">inner_attrs</span>, <span class="ident">stmts</span>))) <span class="op">=&gt;</span> (<span class="ident">inner_attrs</span>, <span class="prelude-val">Some</span>((<span class="ident">stmts</span>, <span class="ident">b</span>))),
-                <span class="prelude-val">None</span> <span class="op">=&gt;</span> (<span class="ident">Vec</span>::<span class="ident">new</span>(), <span class="prelude-val">None</span>),
+                <span class="prelude-val">Some</span>((<span class="ident">b</span>, (<span class="ident">inner_attrs</span>, <span class="ident">stmts</span>))) <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">inner_attrs</span>, <span class="prelude-val">Some</span>((<span class="ident">stmts</span>, <span class="ident">b</span>))),
+                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">Vec</span>::<span class="ident">new</span>(), <span class="prelude-val">None</span>),
             };
             <span class="ident">TraitItemMethod</span> {
                 <span class="ident">attrs</span>: {
@@ -3568,15 +3568,15 @@
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">TraitItemType</span> <span class="string">&quot;trait item type&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">type_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">type</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">generics</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">colon</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">punct</span><span class="macro">!</span>(:)) <span class="op">&gt;&gt;</span>
-        <span class="ident">bounds</span>: <span class="macro">cond</span><span class="macro">!</span>(<span class="ident">colon</span>.<span class="ident">is_some</span>(), <span class="ident">Punctuated</span>::<span class="ident">parse_separated_nonempty</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">where_clause</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">default</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">tuple</span><span class="macro">!</span>(<span class="macro">punct</span><span class="macro">!</span>(<span class="op">=</span>), <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>))) <span class="op">&gt;&gt;</span>
-        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;&gt;</span>
+        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">type_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">type</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">generics</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">colon</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">punct</span><span class="macro">!</span>(:)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">bounds</span>: <span class="macro">cond</span><span class="macro">!</span>(<span class="ident">colon</span>.<span class="ident">is_some</span>(), <span class="ident">Punctuated</span>::<span class="ident">parse_separated_nonempty</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">where_clause</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">default</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">tuple</span><span class="macro">!</span>(<span class="macro">punct</span><span class="macro">!</span>(<span class="op">=</span>), <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>))) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">TraitItemType</span> {
             <span class="ident">attrs</span>: <span class="ident">attrs</span>,
             <span class="ident">type_token</span>: <span class="ident">type_</span>,
@@ -3592,15 +3592,15 @@
         })
     ));
 
-    <span class="macro">named</span><span class="macro">!</span>(<span class="ident">unstable_trait_existential_type</span> <span class="op">-&gt;</span> <span class="ident">TraitItemVerbatim</span>, <span class="macro">map</span><span class="macro">!</span>(
+    <span class="macro">named</span><span class="macro">!</span>(<span class="ident">unstable_trait_existential_type</span> <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TraitItemVerbatim</span>, <span class="macro">map</span><span class="macro">!</span>(
         <span class="macro">call</span><span class="macro">!</span>(<span class="ident">existential_type_helper</span>, <span class="bool-val">false</span>),
         <span class="op">|</span><span class="ident">tts</span><span class="op">|</span> <span class="ident">TraitItemVerbatim</span> { <span class="ident">tts</span>: <span class="ident">tts</span> }
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">TraitItemMacro</span> <span class="string">&quot;trait item macro&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">mac</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Macro</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">semi</span>: <span class="macro">cond</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">is_brace</span>(<span class="kw-2">&amp;</span><span class="ident">mac</span>.<span class="ident">delimiter</span>), <span class="macro">punct</span><span class="macro">!</span>(;)) <span class="op">&gt;&gt;</span>
+        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">mac</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Macro</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">semi</span>: <span class="macro">cond</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">is_brace</span>(<span class="kw-2">&amp;</span><span class="ident">mac</span>.<span class="ident">delimiter</span>), <span class="macro">punct</span><span class="macro">!</span>(;)) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">TraitItemMacro</span> {
             <span class="ident">attrs</span>: <span class="ident">attrs</span>,
             <span class="ident">mac</span>: <span class="ident">mac</span>,
@@ -3609,27 +3609,27 @@
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ItemImpl</span> <span class="string">&quot;impl item&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">outer_attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">defaultness</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="ident">default</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">unsafety</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">unsafe</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">impl_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">impl</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">generics</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;&gt;</span>
+        <span class="ident">outer_attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">defaultness</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="ident">default</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">unsafety</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">unsafe</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">impl_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">impl</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">generics</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
         <span class="ident">polarity_path</span>: <span class="macro">alt</span><span class="macro">!</span>(
             <span class="macro">do_parse</span><span class="macro">!</span>(
-                <span class="ident">polarity</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">punct</span><span class="macro">!</span>(<span class="op">!</span>)) <span class="op">&gt;&gt;</span>
-                <span class="ident">path</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Path</span>) <span class="op">&gt;&gt;</span>
-                <span class="ident">for_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">for</span>) <span class="op">&gt;&gt;</span>
+                <span class="ident">polarity</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">punct</span><span class="macro">!</span>(<span class="op">!</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+                <span class="ident">path</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Path</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+                <span class="ident">for_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">for</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
                 (<span class="prelude-val">Some</span>((<span class="ident">polarity</span>, <span class="ident">path</span>, <span class="ident">for_</span>)))
             )
             <span class="op">|</span>
-            <span class="macro">epsilon</span><span class="macro">!</span>() <span class="op">=&gt;</span> { <span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="prelude-val">None</span> }
-        ) <span class="op">&gt;&gt;</span>
-        <span class="ident">self_ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">where_clause</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;&gt;</span>
+            <span class="macro">epsilon</span><span class="macro">!</span>() <span class="op">=</span><span class="op">&gt;</span> { <span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="prelude-val">None</span> }
+        ) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">self_ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">where_clause</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
         <span class="ident">inner</span>: <span class="macro">braces</span><span class="macro">!</span>(<span class="macro">tuple</span><span class="macro">!</span>(
             <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_inner</span>),
             <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">ImplItem</span>::<span class="ident">parse</span>),
-        )) <span class="op">&gt;&gt;</span>
+        )) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ItemImpl</span> {
             <span class="ident">attrs</span>: {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">attrs</span> <span class="op">=</span> <span class="ident">outer_attrs</span>;
@@ -3651,30 +3651,30 @@
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ImplItem</span> <span class="string">&quot;item in impl block&quot;</span> <span class="macro">alt</span><span class="macro">!</span>(
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ImplItemConst</span>) <span class="op">=&gt;</span> { <span class="ident">ImplItem</span>::<span class="ident">Const</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ImplItemConst</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">ImplItem</span>::<span class="ident">Const</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ImplItemMethod</span>) <span class="op">=&gt;</span> { <span class="ident">ImplItem</span>::<span class="ident">Method</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ImplItemMethod</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">ImplItem</span>::<span class="ident">Method</span> }
         <span class="op">|</span>
-        <span class="macro">call</span><span class="macro">!</span>(<span class="ident">unstable_async_method</span>) <span class="op">=&gt;</span> { <span class="ident">ImplItem</span>::<span class="ident">Verbatim</span> }
+        <span class="macro">call</span><span class="macro">!</span>(<span class="ident">unstable_async_method</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">ImplItem</span>::<span class="ident">Verbatim</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ImplItemType</span>) <span class="op">=&gt;</span> { <span class="ident">ImplItem</span>::<span class="ident">Type</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ImplItemType</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">ImplItem</span>::<span class="ident">Type</span> }
         <span class="op">|</span>
-        <span class="macro">call</span><span class="macro">!</span>(<span class="ident">unstable_impl_existential_type</span>) <span class="op">=&gt;</span> { <span class="ident">ImplItem</span>::<span class="ident">Verbatim</span> }
+        <span class="macro">call</span><span class="macro">!</span>(<span class="ident">unstable_impl_existential_type</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">ImplItem</span>::<span class="ident">Verbatim</span> }
         <span class="op">|</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ImplItemMacro</span>) <span class="op">=&gt;</span> { <span class="ident">ImplItem</span>::<span class="ident">Macro</span> }
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ImplItemMacro</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">ImplItem</span>::<span class="ident">Macro</span> }
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ImplItemConst</span> <span class="string">&quot;const item in impl block&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">defaultness</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="ident">default</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">const_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">const</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">colon</span>: <span class="macro">punct</span><span class="macro">!</span>(:) <span class="op">&gt;&gt;</span>
-        <span class="ident">ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">eq</span>: <span class="macro">punct</span><span class="macro">!</span>(<span class="op">=</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">value</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Expr</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;&gt;</span>
+        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">defaultness</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="ident">default</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">const_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">const</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">colon</span>: <span class="macro">punct</span><span class="macro">!</span>(:) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">eq</span>: <span class="macro">punct</span><span class="macro">!</span>(<span class="op">=</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">value</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Expr</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ImplItemConst</span> {
             <span class="ident">attrs</span>: <span class="ident">attrs</span>,
             <span class="ident">vis</span>: <span class="ident">vis</span>,
@@ -3690,22 +3690,22 @@
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ImplItemMethod</span> <span class="string">&quot;method in impl block&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">outer_attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">defaultness</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="ident">default</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">constness</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">const</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">unsafety</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">unsafe</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">abi</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Abi</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">fn_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">fn</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">generics</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">inputs</span>: <span class="macro">parens</span><span class="macro">!</span>(<span class="ident">Punctuated</span>::<span class="ident">parse_terminated</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">ret</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ReturnType</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">where_clause</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;&gt;</span>
+        <span class="ident">outer_attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">defaultness</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="ident">default</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">constness</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">const</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">unsafety</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">unsafe</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">abi</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Abi</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">fn_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">fn</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">generics</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">inputs</span>: <span class="macro">parens</span><span class="macro">!</span>(<span class="ident">Punctuated</span>::<span class="ident">parse_terminated</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ret</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ReturnType</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">where_clause</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
         <span class="ident">inner_attrs_stmts</span>: <span class="macro">braces</span><span class="macro">!</span>(<span class="macro">tuple</span><span class="macro">!</span>(
             <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_inner</span>),
             <span class="macro">call</span><span class="macro">!</span>(<span class="ident">Block</span>::<span class="ident">parse_within</span>),
-        )) <span class="op">&gt;&gt;</span>
+        )) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ImplItemMethod</span> {
             <span class="ident">attrs</span>: {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">attrs</span> <span class="op">=</span> <span class="ident">outer_attrs</span>;
@@ -3738,42 +3738,42 @@
         })
     ));
 
-    <span class="macro">named</span><span class="macro">!</span>(<span class="ident">unstable_async_method</span> <span class="op">-&gt;</span> <span class="ident">ImplItemVerbatim</span>, <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">begin</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">verbatim</span>::<span class="ident">grab_cursor</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="ident">default</span>)) <span class="op">&gt;&gt;</span>
-        <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">const</span>)) <span class="op">&gt;&gt;</span>
-        <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">unsafe</span>)) <span class="op">&gt;&gt;</span>
-        <span class="macro">keyword</span><span class="macro">!</span>(<span class="ident">async</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Abi</span>)) <span class="op">&gt;&gt;</span>
-        <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">fn</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">parens</span><span class="macro">!</span>(<span class="ident">Punctuated</span>::<span class="op">&lt;</span><span class="ident">FnArg</span>, <span class="macro">Token</span><span class="macro">!</span>[,]<span class="op">&gt;</span>::<span class="ident">parse_terminated</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ReturnType</span>) <span class="op">&gt;&gt;</span>
-        <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;&gt;</span>
+    <span class="macro">named</span><span class="macro">!</span>(<span class="ident">unstable_async_method</span> <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImplItemVerbatim</span>, <span class="macro">do_parse</span><span class="macro">!</span>(
+        <span class="ident">begin</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">verbatim</span>::<span class="ident">grab_cursor</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="ident">default</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">const</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">unsafe</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">keyword</span><span class="macro">!</span>(<span class="ident">async</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Abi</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">fn</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">parens</span><span class="macro">!</span>(<span class="ident">Punctuated</span>::<span class="op">&lt;</span><span class="ident">FnArg</span>, <span class="macro">Token</span><span class="macro">!</span>[,]<span class="op">&gt;</span>::<span class="ident">parse_terminated</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">ReturnType</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
         <span class="macro">braces</span><span class="macro">!</span>(<span class="macro">tuple</span><span class="macro">!</span>(
             <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_inner</span>),
             <span class="macro">call</span><span class="macro">!</span>(<span class="ident">Block</span>::<span class="ident">parse_within</span>),
-        )) <span class="op">&gt;&gt;</span>
-        <span class="ident">end</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">verbatim</span>::<span class="ident">grab_cursor</span>) <span class="op">&gt;&gt;</span>
+        )) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">end</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">verbatim</span>::<span class="ident">grab_cursor</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ImplItemVerbatim</span> {
             <span class="ident">tts</span>: <span class="ident">verbatim</span>::<span class="ident">token_range</span>(<span class="ident">begin</span>..<span class="ident">end</span>),
         })
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ImplItemType</span> <span class="string">&quot;type in impl block&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">defaultness</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="ident">default</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">type_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">type</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">generics</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">where_clause</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">eq</span>: <span class="macro">punct</span><span class="macro">!</span>(<span class="op">=</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;&gt;</span>
+        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">defaultness</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="ident">default</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">type_</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">type</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">generics</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Generics</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">where_clause</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">syn</span><span class="macro">!</span>(<span class="ident">WhereClause</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">eq</span>: <span class="macro">punct</span><span class="macro">!</span>(<span class="op">=</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">semi</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ImplItemType</span> {
             <span class="ident">attrs</span>: <span class="ident">attrs</span>,
             <span class="ident">vis</span>: <span class="ident">vis</span>,
@@ -3790,15 +3790,15 @@
         })
     ));
 
-    <span class="macro">named</span><span class="macro">!</span>(<span class="ident">unstable_impl_existential_type</span> <span class="op">-&gt;</span> <span class="ident">ImplItemVerbatim</span>, <span class="macro">map</span><span class="macro">!</span>(
+    <span class="macro">named</span><span class="macro">!</span>(<span class="ident">unstable_impl_existential_type</span> <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImplItemVerbatim</span>, <span class="macro">map</span><span class="macro">!</span>(
         <span class="macro">call</span><span class="macro">!</span>(<span class="ident">existential_type_helper</span>, <span class="bool-val">true</span>),
         <span class="op">|</span><span class="ident">tts</span><span class="op">|</span> <span class="ident">ImplItemVerbatim</span> { <span class="ident">tts</span>: <span class="ident">tts</span> }
     ));
 
     <span class="macro">impl_synom</span><span class="macro">!</span>(<span class="ident">ImplItemMacro</span> <span class="string">&quot;macro in impl block&quot;</span> <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">mac</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Macro</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">semi</span>: <span class="macro">cond</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">is_brace</span>(<span class="kw-2">&amp;</span><span class="ident">mac</span>.<span class="ident">delimiter</span>), <span class="macro">punct</span><span class="macro">!</span>(;)) <span class="op">&gt;&gt;</span>
+        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">mac</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Macro</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">semi</span>: <span class="macro">cond</span><span class="macro">!</span>(<span class="op">!</span><span class="ident">is_brace</span>(<span class="kw-2">&amp;</span><span class="ident">mac</span>.<span class="ident">delimiter</span>), <span class="macro">punct</span><span class="macro">!</span>(;)) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ImplItemMacro</span> {
             <span class="ident">attrs</span>: <span class="ident">attrs</span>,
             <span class="ident">mac</span>: <span class="ident">mac</span>,
@@ -3806,10 +3806,10 @@
         })
     ));
 
-    <span class="kw">fn</span> <span class="ident">is_brace</span>(<span class="ident">delimiter</span>: <span class="kw-2">&amp;</span><span class="ident">MacroDelimiter</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">is_brace</span>(<span class="ident">delimiter</span>: <span class="kw-2">&amp;</span><span class="ident">MacroDelimiter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">delimiter</span> {
-            <span class="ident">MacroDelimiter</span>::<span class="ident">Brace</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">MacroDelimiter</span>::<span class="ident">Paren</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident">MacroDelimiter</span>::<span class="ident">Bracket</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="bool-val">false</span>,
+            <span class="ident">MacroDelimiter</span>::<span class="ident">Brace</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
+            <span class="ident">MacroDelimiter</span>::<span class="ident">Paren</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident">MacroDelimiter</span>::<span class="ident">Bracket</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
         }
     }
 }
@@ -3955,16 +3955,16 @@
             <span class="self">self</span>.<span class="ident">ident</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>);
             <span class="self">self</span>.<span class="ident">generics</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>);
             <span class="kw">match</span> <span class="self">self</span>.<span class="ident">fields</span> {
-                <span class="ident">Fields</span>::<span class="ident">Named</span>(<span class="kw-2">ref</span> <span class="ident">fields</span>) <span class="op">=&gt;</span> {
+                <span class="ident">Fields</span>::<span class="ident">Named</span>(<span class="kw-2">ref</span> <span class="ident">fields</span>) <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="self">self</span>.<span class="ident">generics</span>.<span class="ident">where_clause</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>);
                     <span class="ident">fields</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>);
                 }
-                <span class="ident">Fields</span>::<span class="ident">Unnamed</span>(<span class="kw-2">ref</span> <span class="ident">fields</span>) <span class="op">=&gt;</span> {
+                <span class="ident">Fields</span>::<span class="ident">Unnamed</span>(<span class="kw-2">ref</span> <span class="ident">fields</span>) <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="ident">fields</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>);
                     <span class="self">self</span>.<span class="ident">generics</span>.<span class="ident">where_clause</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>);
                     <span class="ident">TokensOrDefault</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">semi_token</span>).<span class="ident">to_tokens</span>(<span class="ident">tokens</span>);
                 }
-                <span class="ident">Fields</span>::<span class="ident">Unit</span> <span class="op">=&gt;</span> {
+                <span class="ident">Fields</span>::<span class="ident">Unit</span> <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="self">self</span>.<span class="ident">generics</span>.<span class="ident">where_clause</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>);
                     <span class="ident">TokensOrDefault</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">semi_token</span>).<span class="ident">to_tokens</span>(<span class="ident">tokens</span>);
                 }
@@ -4032,13 +4032,13 @@
             <span class="self">self</span>.<span class="ident">mac</span>.<span class="ident">bang_token</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>);
             <span class="self">self</span>.<span class="ident">ident</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>);
             <span class="kw">match</span> <span class="self">self</span>.<span class="ident">mac</span>.<span class="ident">delimiter</span> {
-                <span class="ident">MacroDelimiter</span>::<span class="ident">Paren</span>(<span class="kw-2">ref</span> <span class="ident">paren</span>) <span class="op">=&gt;</span> {
+                <span class="ident">MacroDelimiter</span>::<span class="ident">Paren</span>(<span class="kw-2">ref</span> <span class="ident">paren</span>) <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="ident">paren</span>.<span class="ident">surround</span>(<span class="ident">tokens</span>, <span class="op">|</span><span class="ident">tokens</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">mac</span>.<span class="ident">tts</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>));
                 }
-                <span class="ident">MacroDelimiter</span>::<span class="ident">Brace</span>(<span class="kw-2">ref</span> <span class="ident">brace</span>) <span class="op">=&gt;</span> {
+                <span class="ident">MacroDelimiter</span>::<span class="ident">Brace</span>(<span class="kw-2">ref</span> <span class="ident">brace</span>) <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="ident">brace</span>.<span class="ident">surround</span>(<span class="ident">tokens</span>, <span class="op">|</span><span class="ident">tokens</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">mac</span>.<span class="ident">tts</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>));
                 }
-                <span class="ident">MacroDelimiter</span>::<span class="ident">Bracket</span>(<span class="kw-2">ref</span> <span class="ident">bracket</span>) <span class="op">=&gt;</span> {
+                <span class="ident">MacroDelimiter</span>::<span class="ident">Bracket</span>(<span class="kw-2">ref</span> <span class="ident">bracket</span>) <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="ident">bracket</span>.<span class="ident">surround</span>(<span class="ident">tokens</span>, <span class="op">|</span><span class="ident">tokens</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">mac</span>.<span class="ident">tts</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>));
                 }
             }
@@ -4123,13 +4123,13 @@
             <span class="ident">tokens</span>.<span class="ident">append_all</span>(<span class="self">self</span>.<span class="ident">attrs</span>.<span class="ident">outer</span>());
             <span class="self">self</span>.<span class="ident">sig</span>.<span class="ident">to_tokens</span>(<span class="ident">tokens</span>);
             <span class="kw">match</span> <span class="self">self</span>.<span class="ident">default</span> {
-                <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">block</span>) <span class="op">=&gt;</span> {
+                <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">block</span>) <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="ident">block</span>.<span class="ident">brace_token</span>.<span class="ident">surround</span>(<span class="ident">tokens</span>, <span class="op">|</span><span class="ident">tokens</span><span class="op">|</span> {
                         <span class="ident">tokens</span>.<span class="ident">append_all</span>(<span class="self">self</span>.<span class="ident">attrs</span>.<span class="ident">inner</span>());
                         <span class="ident">tokens</span>.<span class="ident">append_all</span>(<span class="kw-2">&amp;</span><span class="ident">block</span>.<span class="ident">stmts</span>);
                     });
                 }
-                <span class="prelude-val">None</span> <span class="op">=&gt;</span> {
+                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="ident">TokensOrDefault</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">semi_token</span>).<span class="ident">to_tokens</span>(<span class="ident">tokens</span>);
                 }
             }

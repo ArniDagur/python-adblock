@@ -33,17 +33,17 @@ combinator macros <a href="../macro.punct.html"><code>punct!</code></a>, <a href
 
 <span class="comment">// Parse the ItemStatic struct shown above.</span>
 <span class="kw">impl</span> <span class="ident">Synom</span> <span class="kw">for</span> <span class="ident">ItemStatic</span> {
-    <span class="macro">named</span><span class="macro">!</span>(<span class="ident">parse</span> <span class="op">-&gt;</span> <span class="self">Self</span>, <span class="macro">do_parse</span><span class="macro">!</span>(
-        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">static_token</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">static</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">mutability</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw-2">mut</span>)) <span class="op">&gt;&gt;</span>
-        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">colon_token</span>: <span class="macro">punct</span><span class="macro">!</span>(:) <span class="op">&gt;&gt;</span>
-        <span class="ident">ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">eq_token</span>: <span class="macro">punct</span><span class="macro">!</span>(<span class="op">=</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">expr</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Expr</span>) <span class="op">&gt;&gt;</span>
-        <span class="ident">semi_token</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;&gt;</span>
+    <span class="macro">named</span><span class="macro">!</span>(<span class="ident">parse</span> <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>, <span class="macro">do_parse</span><span class="macro">!</span>(
+        <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">static_token</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">static</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">mutability</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw-2">mut</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ident</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">colon_token</span>: <span class="macro">punct</span><span class="macro">!</span>(:) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">eq_token</span>: <span class="macro">punct</span><span class="macro">!</span>(<span class="op">=</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">expr</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Expr</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+        <span class="ident">semi_token</span>: <span class="macro">punct</span><span class="macro">!</span>(;) <span class="op">&gt;</span><span class="op">&gt;</span>
         (<span class="ident">ItemStatic</span> {
             <span class="ident">attrs</span>, <span class="ident">vis</span>, <span class="ident">static_token</span>, <span class="ident">mutability</span>, <span class="ident">ident</span>, <span class="ident">colon_token</span>,
             <span class="ident">ty</span>: <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">ty</span>), <span class="ident">eq_token</span>, <span class="ident">expr</span>: <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">expr</span>), <span class="ident">semi_token</span>,

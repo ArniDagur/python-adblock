@@ -488,11 +488,11 @@
     <span class="doccomment">/// variant&#39;s fields uniformly.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`Field`]: struct.Field.html</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">punctuated</span>::<span class="ident">Iter</span><span class="op">&lt;</span><span class="ident">Field</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">punctuated</span>::<span class="ident">Iter</span><span class="op">&lt;</span><span class="ident">Field</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">Fields</span>::<span class="ident">Unit</span> <span class="op">=&gt;</span> <span class="ident">punctuated</span>::<span class="ident">Iter</span>::<span class="ident">private_empty</span>(),
-            <span class="ident">Fields</span>::<span class="ident">Named</span>(<span class="kw-2">ref</span> <span class="ident">f</span>) <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">named</span>.<span class="ident">iter</span>(),
-            <span class="ident">Fields</span>::<span class="ident">Unnamed</span>(<span class="kw-2">ref</span> <span class="ident">f</span>) <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">unnamed</span>.<span class="ident">iter</span>(),
+            <span class="ident">Fields</span>::<span class="ident">Unit</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">punctuated</span>::<span class="ident">Iter</span>::<span class="ident">private_empty</span>(),
+            <span class="ident">Fields</span>::<span class="ident">Named</span>(<span class="kw-2">ref</span> <span class="ident">f</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">f</span>.<span class="ident">named</span>.<span class="ident">iter</span>(),
+            <span class="ident">Fields</span>::<span class="ident">Unnamed</span>(<span class="kw-2">ref</span> <span class="ident">f</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">f</span>.<span class="ident">unnamed</span>.<span class="ident">iter</span>(),
         }
     }
 
@@ -501,11 +501,11 @@
     <span class="doccomment">/// struct or variant&#39;s fields uniformly.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`Field`]: struct.Field.html</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">punctuated</span>::<span class="ident">IterMut</span><span class="op">&lt;</span><span class="ident">Field</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">punctuated</span>::<span class="ident">IterMut</span><span class="op">&lt;</span><span class="ident">Field</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">Fields</span>::<span class="ident">Unit</span> <span class="op">=&gt;</span> <span class="ident">punctuated</span>::<span class="ident">IterMut</span>::<span class="ident">private_empty</span>(),
-            <span class="ident">Fields</span>::<span class="ident">Named</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">f</span>) <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">named</span>.<span class="ident">iter_mut</span>(),
-            <span class="ident">Fields</span>::<span class="ident">Unnamed</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">f</span>) <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">unnamed</span>.<span class="ident">iter_mut</span>(),
+            <span class="ident">Fields</span>::<span class="ident">Unit</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">punctuated</span>::<span class="ident">IterMut</span>::<span class="ident">private_empty</span>(),
+            <span class="ident">Fields</span>::<span class="ident">Named</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">f</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">f</span>.<span class="ident">named</span>.<span class="ident">iter_mut</span>(),
+            <span class="ident">Fields</span>::<span class="ident">Unnamed</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">f</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">f</span>.<span class="ident">unnamed</span>.<span class="ident">iter_mut</span>(),
         }
     }
 }
@@ -514,7 +514,7 @@
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Field</span>;
     <span class="kw">type</span> <span class="ident">IntoIter</span> <span class="op">=</span> <span class="ident">punctuated</span>::<span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">Field</span><span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">into_iter</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">IntoIter</span> {
+    <span class="kw">fn</span> <span class="ident">into_iter</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">IntoIter</span> {
         <span class="self">self</span>.<span class="ident">iter</span>()
     }
 }
@@ -523,7 +523,7 @@
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Field</span>;
     <span class="kw">type</span> <span class="ident">IntoIter</span> <span class="op">=</span> <span class="ident">punctuated</span>::<span class="ident">IterMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">Field</span><span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">into_iter</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">IntoIter</span> {
+    <span class="kw">fn</span> <span class="ident">into_iter</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">IntoIter</span> {
         <span class="self">self</span>.<span class="ident">iter_mut</span>()
     }
 }
@@ -605,17 +605,17 @@
     <span class="kw">use</span> <span class="ident">synom</span>::<span class="ident">Synom</span>;
 
     <span class="kw">impl</span> <span class="ident">Synom</span> <span class="kw">for</span> <span class="ident">Variant</span> {
-        <span class="macro">named</span><span class="macro">!</span>(<span class="ident">parse</span> <span class="op">-&gt;</span> <span class="self">Self</span>, <span class="macro">do_parse</span><span class="macro">!</span>(
-            <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-            <span class="ident">id</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
+        <span class="macro">named</span><span class="macro">!</span>(<span class="ident">parse</span> <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>, <span class="macro">do_parse</span><span class="macro">!</span>(
+            <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+            <span class="ident">id</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
             <span class="ident">fields</span>: <span class="macro">alt</span><span class="macro">!</span>(
-                <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">FieldsNamed</span>) <span class="op">=&gt;</span> { <span class="ident">Fields</span>::<span class="ident">Named</span> }
+                <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">FieldsNamed</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Fields</span>::<span class="ident">Named</span> }
                 <span class="op">|</span>
-                <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">FieldsUnnamed</span>) <span class="op">=&gt;</span> { <span class="ident">Fields</span>::<span class="ident">Unnamed</span> }
+                <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">FieldsUnnamed</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="ident">Fields</span>::<span class="ident">Unnamed</span> }
                 <span class="op">|</span>
-                <span class="macro">epsilon</span><span class="macro">!</span>() <span class="op">=&gt;</span> { <span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">Fields</span>::<span class="ident">Unit</span> }
-            ) <span class="op">&gt;&gt;</span>
-            <span class="ident">disr</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">tuple</span><span class="macro">!</span>(<span class="macro">punct</span><span class="macro">!</span>(<span class="op">=</span>), <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Expr</span>))) <span class="op">&gt;&gt;</span>
+                <span class="macro">epsilon</span><span class="macro">!</span>() <span class="op">=</span><span class="op">&gt;</span> { <span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">Fields</span>::<span class="ident">Unit</span> }
+            ) <span class="op">&gt;</span><span class="op">&gt;</span>
+            <span class="ident">disr</span>: <span class="macro">option</span><span class="macro">!</span>(<span class="macro">tuple</span><span class="macro">!</span>(<span class="macro">punct</span><span class="macro">!</span>(<span class="op">=</span>), <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Expr</span>))) <span class="op">&gt;</span><span class="op">&gt;</span>
             (<span class="ident">Variant</span> {
                 <span class="ident">ident</span>: <span class="ident">id</span>,
                 <span class="ident">attrs</span>: <span class="ident">attrs</span>,
@@ -624,13 +624,13 @@
             })
         ));
 
-        <span class="kw">fn</span> <span class="ident">description</span>() <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">description</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
             <span class="prelude-val">Some</span>(<span class="string">&quot;enum variant&quot;</span>)
         }
     }
 
     <span class="kw">impl</span> <span class="ident">Synom</span> <span class="kw">for</span> <span class="ident">FieldsNamed</span> {
-        <span class="macro">named</span><span class="macro">!</span>(<span class="ident">parse</span> <span class="op">-&gt;</span> <span class="self">Self</span>, <span class="macro">map</span><span class="macro">!</span>(
+        <span class="macro">named</span><span class="macro">!</span>(<span class="ident">parse</span> <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>, <span class="macro">map</span><span class="macro">!</span>(
             <span class="macro">braces</span><span class="macro">!</span>(<span class="macro">call</span><span class="macro">!</span>(<span class="ident">Punctuated</span>::<span class="ident">parse_terminated_with</span>, <span class="ident">Field</span>::<span class="ident">parse_named</span>)),
             <span class="op">|</span>(<span class="ident">brace</span>, <span class="ident">fields</span>)<span class="op">|</span> <span class="ident">FieldsNamed</span> {
                 <span class="ident">brace_token</span>: <span class="ident">brace</span>,
@@ -638,13 +638,13 @@
             }
         ));
 
-        <span class="kw">fn</span> <span class="ident">description</span>() <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">description</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
             <span class="prelude-val">Some</span>(<span class="string">&quot;named fields in a struct or struct variant&quot;</span>)
         }
     }
 
     <span class="kw">impl</span> <span class="ident">Synom</span> <span class="kw">for</span> <span class="ident">FieldsUnnamed</span> {
-        <span class="macro">named</span><span class="macro">!</span>(<span class="ident">parse</span> <span class="op">-&gt;</span> <span class="self">Self</span>, <span class="macro">map</span><span class="macro">!</span>(
+        <span class="macro">named</span><span class="macro">!</span>(<span class="ident">parse</span> <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>, <span class="macro">map</span><span class="macro">!</span>(
             <span class="macro">parens</span><span class="macro">!</span>(<span class="macro">call</span><span class="macro">!</span>(<span class="ident">Punctuated</span>::<span class="ident">parse_terminated_with</span>, <span class="ident">Field</span>::<span class="ident">parse_unnamed</span>)),
             <span class="op">|</span>(<span class="ident">paren</span>, <span class="ident">fields</span>)<span class="op">|</span> <span class="ident">FieldsUnnamed</span> {
                 <span class="ident">paren_token</span>: <span class="ident">paren</span>,
@@ -652,18 +652,18 @@
             }
         ));
 
-        <span class="kw">fn</span> <span class="ident">description</span>() <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">description</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
             <span class="prelude-val">Some</span>(<span class="string">&quot;unnamed fields in a tuple struct or tuple variant&quot;</span>)
         }
     }
 
     <span class="kw">impl</span> <span class="ident">Field</span> {
-        <span class="macro">named</span><span class="macro">!</span>(<span class="kw">pub</span> <span class="ident">parse_named</span> <span class="op">-&gt;</span> <span class="self">Self</span>, <span class="macro">do_parse</span><span class="macro">!</span>(
-            <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-            <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;&gt;</span>
-            <span class="ident">id</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;&gt;</span>
-            <span class="ident">colon</span>: <span class="macro">punct</span><span class="macro">!</span>(:) <span class="op">&gt;&gt;</span>
-            <span class="ident">ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;&gt;</span>
+        <span class="macro">named</span><span class="macro">!</span>(<span class="kw">pub</span> <span class="ident">parse_named</span> <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>, <span class="macro">do_parse</span><span class="macro">!</span>(
+            <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+            <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+            <span class="ident">id</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Ident</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+            <span class="ident">colon</span>: <span class="macro">punct</span><span class="macro">!</span>(:) <span class="op">&gt;</span><span class="op">&gt;</span>
+            <span class="ident">ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
             (<span class="ident">Field</span> {
                 <span class="ident">ident</span>: <span class="prelude-val">Some</span>(<span class="ident">id</span>),
                 <span class="ident">vis</span>: <span class="ident">vis</span>,
@@ -673,10 +673,10 @@
             })
         ));
 
-        <span class="macro">named</span><span class="macro">!</span>(<span class="kw">pub</span> <span class="ident">parse_unnamed</span> <span class="op">-&gt;</span> <span class="self">Self</span>, <span class="macro">do_parse</span><span class="macro">!</span>(
-            <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;&gt;</span>
-            <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;&gt;</span>
-            <span class="ident">ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;&gt;</span>
+        <span class="macro">named</span><span class="macro">!</span>(<span class="kw">pub</span> <span class="ident">parse_unnamed</span> <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>, <span class="macro">do_parse</span><span class="macro">!</span>(
+            <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_outer</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+            <span class="ident">vis</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Visibility</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+            <span class="ident">ty</span>: <span class="macro">syn</span><span class="macro">!</span>(<span class="ident">Type</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
             (<span class="ident">Field</span> {
                 <span class="ident">ident</span>: <span class="prelude-val">None</span>,
                 <span class="ident">colon_token</span>: <span class="prelude-val">None</span>,
@@ -688,10 +688,10 @@
     }
 
     <span class="kw">impl</span> <span class="ident">Synom</span> <span class="kw">for</span> <span class="ident">Visibility</span> {
-        <span class="macro">named</span><span class="macro">!</span>(<span class="ident">parse</span> <span class="op">-&gt;</span> <span class="self">Self</span>, <span class="macro">alt</span><span class="macro">!</span>(
+        <span class="macro">named</span><span class="macro">!</span>(<span class="ident">parse</span> <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>, <span class="macro">alt</span><span class="macro">!</span>(
             <span class="macro">do_parse</span><span class="macro">!</span>(
-                <span class="ident">pub_token</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">pub</span>) <span class="op">&gt;&gt;</span>
-                <span class="ident">other</span>: <span class="macro">parens</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">crate</span>)) <span class="op">&gt;&gt;</span>
+                <span class="ident">pub_token</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">pub</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+                <span class="ident">other</span>: <span class="macro">parens</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">crate</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
                 (<span class="ident">Visibility</span>::<span class="ident">Restricted</span>(<span class="ident">VisRestricted</span> {
                     <span class="ident">pub_token</span>: <span class="ident">pub_token</span>,
                     <span class="ident">paren_token</span>: <span class="ident">other</span>.<span class="number">0</span>,
@@ -701,16 +701,16 @@
             )
             <span class="op">|</span>
             <span class="macro">do_parse</span><span class="macro">!</span>(
-                <span class="ident">crate_token</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">crate</span>) <span class="op">&gt;&gt;</span>
-                <span class="macro">not</span><span class="macro">!</span>(<span class="macro">punct</span><span class="macro">!</span>(::)) <span class="op">&gt;&gt;</span>
+                <span class="ident">crate_token</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">crate</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+                <span class="macro">not</span><span class="macro">!</span>(<span class="macro">punct</span><span class="macro">!</span>(::)) <span class="op">&gt;</span><span class="op">&gt;</span>
                 (<span class="ident">Visibility</span>::<span class="ident">Crate</span>(<span class="ident">VisCrate</span> {
                     <span class="ident">crate_token</span>: <span class="ident">crate_token</span>,
                 }))
             )
             <span class="op">|</span>
             <span class="macro">do_parse</span><span class="macro">!</span>(
-                <span class="ident">pub_token</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">pub</span>) <span class="op">&gt;&gt;</span>
-                <span class="ident">other</span>: <span class="macro">parens</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="self">self</span>)) <span class="op">&gt;&gt;</span>
+                <span class="ident">pub_token</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">pub</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+                <span class="ident">other</span>: <span class="macro">parens</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="self">self</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
                 (<span class="ident">Visibility</span>::<span class="ident">Restricted</span>(<span class="ident">VisRestricted</span> {
                     <span class="ident">pub_token</span>: <span class="ident">pub_token</span>,
                     <span class="ident">paren_token</span>: <span class="ident">other</span>.<span class="number">0</span>,
@@ -720,8 +720,8 @@
             )
             <span class="op">|</span>
             <span class="macro">do_parse</span><span class="macro">!</span>(
-                <span class="ident">pub_token</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">pub</span>) <span class="op">&gt;&gt;</span>
-                <span class="ident">other</span>: <span class="macro">parens</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">super</span>)) <span class="op">&gt;&gt;</span>
+                <span class="ident">pub_token</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">pub</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+                <span class="ident">other</span>: <span class="macro">parens</span><span class="macro">!</span>(<span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">super</span>)) <span class="op">&gt;</span><span class="op">&gt;</span>
                 (<span class="ident">Visibility</span>::<span class="ident">Restricted</span>(<span class="ident">VisRestricted</span> {
                     <span class="ident">pub_token</span>: <span class="ident">pub_token</span>,
                     <span class="ident">paren_token</span>: <span class="ident">other</span>.<span class="number">0</span>,
@@ -731,12 +731,12 @@
             )
             <span class="op">|</span>
             <span class="macro">do_parse</span><span class="macro">!</span>(
-                <span class="ident">pub_token</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">pub</span>) <span class="op">&gt;&gt;</span>
+                <span class="ident">pub_token</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">pub</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
                 <span class="ident">other</span>: <span class="macro">parens</span><span class="macro">!</span>(<span class="macro">do_parse</span><span class="macro">!</span>(
-                    <span class="ident">in_tok</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">in</span>) <span class="op">&gt;&gt;</span>
-                    <span class="ident">restricted</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">Path</span>::<span class="ident">parse_mod_style</span>) <span class="op">&gt;&gt;</span>
+                    <span class="ident">in_tok</span>: <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">in</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+                    <span class="ident">restricted</span>: <span class="macro">call</span><span class="macro">!</span>(<span class="ident">Path</span>::<span class="ident">parse_mod_style</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
                     (<span class="ident">in_tok</span>, <span class="ident">restricted</span>)
-                )) <span class="op">&gt;&gt;</span>
+                )) <span class="op">&gt;</span><span class="op">&gt;</span>
                 (<span class="ident">Visibility</span>::<span class="ident">Restricted</span>(<span class="ident">VisRestricted</span> {
                     <span class="ident">pub_token</span>: <span class="ident">pub_token</span>,
                     <span class="ident">paren_token</span>: <span class="ident">other</span>.<span class="number">0</span>,
@@ -745,16 +745,16 @@
                 }))
             )
             <span class="op">|</span>
-            <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">pub</span>) <span class="op">=&gt;</span> { <span class="op">|</span><span class="ident">tok</span><span class="op">|</span> {
+            <span class="macro">keyword</span><span class="macro">!</span>(<span class="kw">pub</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="op">|</span><span class="ident">tok</span><span class="op">|</span> {
                 <span class="ident">Visibility</span>::<span class="ident">Public</span>(<span class="ident">VisPublic</span> {
                     <span class="ident">pub_token</span>: <span class="ident">tok</span>,
                 })
             } }
             <span class="op">|</span>
-            <span class="macro">epsilon</span><span class="macro">!</span>() <span class="op">=&gt;</span> { <span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">Visibility</span>::<span class="ident">Inherited</span> }
+            <span class="macro">epsilon</span><span class="macro">!</span>() <span class="op">=</span><span class="op">&gt;</span> { <span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">Visibility</span>::<span class="ident">Inherited</span> }
         ));
 
-        <span class="kw">fn</span> <span class="ident">description</span>() <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">description</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
             <span class="prelude-val">Some</span>(<span class="string">&quot;visibility qualifier such as `pub`&quot;</span>)
         }
     }

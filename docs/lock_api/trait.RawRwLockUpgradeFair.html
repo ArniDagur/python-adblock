@@ -5,16 +5,13 @@
     unsafe fn <a href='#method.bump_upgradable' class='fnname'>bump_upgradable</a>(&amp;self) { ... }
 }</pre></div><div class='docblock'><p>Additional methods for RwLocks which support upgradable locks and fair
 unlocking.</p>
-</div>
-            <h2 id='required-methods' class='small-section-header'>Required methods<a href='#required-methods' class='anchor'></a></h2><div class='methods'><h3 id='tymethod.unlock_upgradable_fair' class='method'><code>unsafe fn <a href='#tymethod.unlock_upgradable_fair' class='fnname'>unlock_upgradable_fair</a>(&amp;self)</code></h3><div class='docblock'><p>Releases an upgradable lock using a fair unlock protocol.</p>
+</div><h2 id='required-methods' class='small-section-header'>Required methods<a href='#required-methods' class='anchor'></a></h2><div class='methods'><h3 id='tymethod.unlock_upgradable_fair' class='method'><code>unsafe fn <a href='#tymethod.unlock_upgradable_fair' class='fnname'>unlock_upgradable_fair</a>(&amp;self)</code></h3><div class='docblock'><p>Releases an upgradable lock using a fair unlock protocol.</p>
 <h1 id="safety" class="section-header"><a href="#safety">Safety</a></h1>
 <p>This method may only be called if an upgradable lock is held in the current context.</p>
-</div></div><span class='loading-content'>Loading content...</span>
-            <h2 id='provided-methods' class='small-section-header'>Provided methods<a href='#provided-methods' class='anchor'></a></h2><div class='methods'><h3 id='method.bump_upgradable' class='method'><code>unsafe fn <a href='#method.bump_upgradable' class='fnname'>bump_upgradable</a>(&amp;self)</code></h3><div class='docblock'><p>Temporarily yields an upgradable lock to a waiting thread if there is one.</p>
+</div></div><span class='loading-content'>Loading content...</span><h2 id='provided-methods' class='small-section-header'>Provided methods<a href='#provided-methods' class='anchor'></a></h2><div class='methods'><h3 id='method.bump_upgradable' class='method'><code>unsafe fn <a href='#method.bump_upgradable' class='fnname'>bump_upgradable</a>(&amp;self)</code></h3><div class='docblock'><p>Temporarily yields an upgradable lock to a waiting thread if there is one.</p>
 <p>This method is functionally equivalent to calling <code>unlock_upgradable_fair</code> followed
 by <code>lock_upgradable</code>, however it can be much more efficient in the case where there
 are no waiting threads.</p>
 <h1 id="safety-1" class="section-header"><a href="#safety-1">Safety</a></h1>
 <p>This method may only be called if an upgradable lock is held in the current context.</p>
-</div></div><span class='loading-content'>Loading content...</span>
-            <h2 id='implementors' class='small-section-header'>Implementors<a href='#implementors' class='anchor'></a></h2><div class='item-list' id='implementors-list'></div><span class='loading-content'>Loading content...</span><script type="text/javascript" src="../implementors/lock_api/trait.RawRwLockUpgradeFair.js" async></script></section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../";window.currentCrate = "lock_api";</script><script src="../main.js"></script><script defer src="../search-index.js"></script></body></html>
+</div></div><span class='loading-content'>Loading content...</span><h2 id='implementors' class='small-section-header'>Implementors<a href='#implementors' class='anchor'></a></h2><div class='item-list' id='implementors-list'></div><span class='loading-content'>Loading content...</span><script type="text/javascript" src="../implementors/lock_api/trait.RawRwLockUpgradeFair.js" async></script></section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../";window.currentCrate = "lock_api";</script><script src="../main.js"></script><script defer src="../search-index.js"></script></body></html>

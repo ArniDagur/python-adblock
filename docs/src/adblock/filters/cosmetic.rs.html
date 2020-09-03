@@ -1563,12 +1563,12 @@
     <span class="doccomment">/// Boolean flags for cosmetic filter rules.</span>
     <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CosmeticFilterMask</span>: <span class="ident">u8</span> {
-        <span class="kw">const</span> <span class="ident">UNHIDE</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;&lt;</span> <span class="number">0</span>;
-        <span class="kw">const</span> <span class="ident">SCRIPT_INJECT</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;&lt;</span> <span class="number">1</span>;
-        <span class="kw">const</span> <span class="ident">IS_UNICODE</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;&lt;</span> <span class="number">2</span>;
-        <span class="kw">const</span> <span class="ident">IS_CLASS_SELECTOR</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;&lt;</span> <span class="number">3</span>;
-        <span class="kw">const</span> <span class="ident">IS_ID_SELECTOR</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;&lt;</span> <span class="number">4</span>;
-        <span class="kw">const</span> <span class="ident">IS_SIMPLE</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;&lt;</span> <span class="number">5</span>;
+        <span class="kw">const</span> <span class="ident">UNHIDE</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">0</span>;
+        <span class="kw">const</span> <span class="ident">SCRIPT_INJECT</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">1</span>;
+        <span class="kw">const</span> <span class="ident">IS_UNICODE</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">2</span>;
+        <span class="kw">const</span> <span class="ident">IS_CLASS_SELECTOR</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">3</span>;
+        <span class="kw">const</span> <span class="ident">IS_ID_SELECTOR</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">4</span>;
+        <span class="kw">const</span> <span class="ident">IS_SIMPLE</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">5</span>;
 
         <span class="comment">// Careful with checking for NONE - will always match</span>
         <span class="kw">const</span> <span class="ident">NONE</span> <span class="op">=</span> <span class="number">0</span>;
@@ -1578,11 +1578,11 @@
 <span class="doccomment">/// Struct representing a parsed cosmetic filter rule.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CosmeticFilter</span> {
-    <span class="kw">pub</span> <span class="ident">entities</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">hostnames</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">entities</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">hostnames</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     <span class="kw">pub</span> <span class="ident">mask</span>: <span class="ident">CosmeticFilterMask</span>,
-    <span class="kw">pub</span> <span class="ident">not_entities</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">not_hostnames</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">not_entities</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">not_hostnames</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     <span class="kw">pub</span> <span class="ident">raw_line</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
     <span class="kw">pub</span> <span class="ident">selector</span>: <span class="ident">String</span>,
     <span class="kw">pub</span> <span class="ident">key</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
@@ -1598,7 +1598,7 @@
 
 <span class="kw">impl</span> <span class="ident">CosmeticFilter</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">locations_before_sharp</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">line</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>, <span class="ident">sharp_index</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span>(<span class="ident">CosmeticFilterLocationType</span>, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>)<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">locations_before_sharp</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">line</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>, <span class="ident">sharp_index</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span>(<span class="ident">CosmeticFilterLocationType</span>, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>)<span class="op">&gt;</span> {
         <span class="ident">line</span>[<span class="number">0</span>..<span class="ident">sharp_index</span>].<span class="ident">split</span>(<span class="string">&#39;,&#39;</span>).<span class="ident">filter_map</span>(<span class="op">|</span><span class="ident">part</span><span class="op">|</span> {
             <span class="kw">if</span> <span class="ident">part</span>.<span class="ident">is_empty</span>() {
                 <span class="kw">return</span> <span class="prelude-val">None</span>;
@@ -1618,10 +1618,10 @@
             };
             <span class="kw">let</span> <span class="ident">location</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">hostname</span>[<span class="ident">start</span>..<span class="ident">end</span>];
             <span class="prelude-val">Some</span>(<span class="kw">match</span> (<span class="ident">negation</span>, <span class="ident">entity</span>) {
-                (<span class="bool-val">true</span>, <span class="bool-val">true</span>) <span class="op">=&gt;</span> (<span class="ident">CosmeticFilterLocationType</span>::<span class="ident">NotEntity</span>, <span class="ident">location</span>),
-                (<span class="bool-val">true</span>, <span class="bool-val">false</span>) <span class="op">=&gt;</span> (<span class="ident">CosmeticFilterLocationType</span>::<span class="ident">NotHostname</span>, <span class="ident">location</span>),
-                (<span class="bool-val">false</span>, <span class="bool-val">true</span>) <span class="op">=&gt;</span> (<span class="ident">CosmeticFilterLocationType</span>::<span class="ident">Entity</span>, <span class="ident">location</span>),
-                (<span class="bool-val">false</span>, <span class="bool-val">false</span>) <span class="op">=&gt;</span> (<span class="ident">CosmeticFilterLocationType</span>::<span class="ident">Hostname</span>, <span class="ident">location</span>),
+                (<span class="bool-val">true</span>, <span class="bool-val">true</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">CosmeticFilterLocationType</span>::<span class="ident">NotEntity</span>, <span class="ident">location</span>),
+                (<span class="bool-val">true</span>, <span class="bool-val">false</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">CosmeticFilterLocationType</span>::<span class="ident">NotHostname</span>, <span class="ident">location</span>),
+                (<span class="bool-val">false</span>, <span class="bool-val">true</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">CosmeticFilterLocationType</span>::<span class="ident">Entity</span>, <span class="ident">location</span>),
+                (<span class="bool-val">false</span>, <span class="bool-val">false</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">CosmeticFilterLocationType</span>::<span class="ident">Hostname</span>, <span class="ident">location</span>),
             })
         })
     }
@@ -1646,7 +1646,7 @@
         <span class="ident">line</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">sharp_index</span>: <span class="ident">usize</span>,
         <span class="ident">mask</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">CosmeticFilterMask</span>
-    ) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;&gt;</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;&gt;</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;&gt;</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;&gt;</span>), <span class="ident">CosmeticFilterError</span><span class="op">&gt;</span> {
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span>), <span class="ident">CosmeticFilterError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">entities_vec</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">not_entities_vec</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hostnames_vec</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
@@ -1657,25 +1657,25 @@
             <span class="kw">if</span> <span class="ident">location</span>.<span class="ident">is_ascii</span>() {
                 <span class="ident">hostname</span>.<span class="ident">push_str</span>(<span class="ident">location</span>);
             } <span class="kw">else</span> {
-                <span class="kw-2">*</span><span class="ident">mask</span> <span class="op">|=</span> <span class="ident">CosmeticFilterMask</span>::<span class="ident">IS_UNICODE</span>;
+                <span class="kw-2">*</span><span class="ident">mask</span> <span class="op">|</span><span class="op">=</span> <span class="ident">CosmeticFilterMask</span>::<span class="ident">IS_UNICODE</span>;
                 <span class="kw">match</span> <span class="ident">idna</span>::<span class="ident">domain_to_ascii</span>(<span class="ident">location</span>) {
-                    <span class="prelude-val">Ok</span>(<span class="ident">x</span>) <span class="op">=&gt;</span> <span class="ident">hostname</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="ident">x</span>),
-                    <span class="prelude-val">Err</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">CosmeticFilterError</span>::<span class="ident">PunycodeError</span>),
+                    <span class="prelude-val">Ok</span>(<span class="ident">x</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">hostname</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="ident">x</span>),
+                    <span class="prelude-val">Err</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">CosmeticFilterError</span>::<span class="ident">PunycodeError</span>),
                 }
             }
             <span class="kw">let</span> <span class="ident">hash</span> <span class="op">=</span> <span class="kw">crate</span>::<span class="ident">utils</span>::<span class="ident">fast_hash</span>(<span class="kw-2">&amp;</span><span class="ident">hostname</span>);
             <span class="kw">match</span> <span class="ident">location_type</span> {
-                <span class="ident">CosmeticFilterLocationType</span>::<span class="ident">NotEntity</span> <span class="op">=&gt;</span> <span class="ident">not_entities_vec</span>.<span class="ident">push</span>(<span class="ident">hash</span>),
-                <span class="ident">CosmeticFilterLocationType</span>::<span class="ident">NotHostname</span> <span class="op">=&gt;</span> <span class="ident">not_hostnames_vec</span>.<span class="ident">push</span>(<span class="ident">hash</span>),
-                <span class="ident">CosmeticFilterLocationType</span>::<span class="ident">Entity</span> <span class="op">=&gt;</span> <span class="ident">entities_vec</span>.<span class="ident">push</span>(<span class="ident">hash</span>),
-                <span class="ident">CosmeticFilterLocationType</span>::<span class="ident">Hostname</span> <span class="op">=&gt;</span> <span class="ident">hostnames_vec</span>.<span class="ident">push</span>(<span class="ident">hash</span>),
+                <span class="ident">CosmeticFilterLocationType</span>::<span class="ident">NotEntity</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">not_entities_vec</span>.<span class="ident">push</span>(<span class="ident">hash</span>),
+                <span class="ident">CosmeticFilterLocationType</span>::<span class="ident">NotHostname</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">not_hostnames_vec</span>.<span class="ident">push</span>(<span class="ident">hash</span>),
+                <span class="ident">CosmeticFilterLocationType</span>::<span class="ident">Entity</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">entities_vec</span>.<span class="ident">push</span>(<span class="ident">hash</span>),
+                <span class="ident">CosmeticFilterLocationType</span>::<span class="ident">Hostname</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">hostnames_vec</span>.<span class="ident">push</span>(<span class="ident">hash</span>),
             }
         }
 
         <span class="doccomment">/// Sorts `vec` and wraps it in `Some` if it&#39;s not empty, or returns `None` if it is.</span>
         <span class="attribute">#[<span class="ident">inline</span>]</span>
-        <span class="kw">fn</span> <span class="ident">sorted_or_none</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">std</span>::<span class="ident">cmp</span>::<span class="ident">Ord</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="ident">vec</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span> {
-            <span class="kw">if</span><span class="op">!</span><span class="ident">vec</span>.<span class="ident">is_empty</span>() {
+        <span class="kw">fn</span> <span class="ident">sorted_or_none</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">std</span>::<span class="ident">cmp</span>::<span class="ident">Ord</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="ident">vec</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+            <span class="macro">if</span><span class="macro">!</span><span class="ident">vec</span>.<span class="ident">is_empty</span>() {
                 <span class="ident">vec</span>.<span class="ident">sort</span>();
                 <span class="prelude-val">Some</span>(<span class="ident">vec</span>)
             } <span class="kw">else</span> {
@@ -1703,33 +1703,33 @@
         <span class="ident">suffix_start_index</span>: <span class="ident">usize</span>,
         <span class="ident">selector</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>,
         <span class="ident">style</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>
-    ) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">CosmeticFilterError</span><span class="op">&gt;</span> {
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">CosmeticFilterError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">index_after_colon</span> <span class="op">=</span> <span class="ident">suffix_start_index</span>;
         <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">colon_index</span>) <span class="op">=</span> <span class="ident">line</span>[<span class="ident">index_after_colon</span>..].<span class="ident">find</span>(<span class="string">&#39;:&#39;</span>) {
             <span class="kw">let</span> <span class="ident">colon_index</span> <span class="op">=</span> <span class="ident">colon_index</span> <span class="op">+</span> <span class="ident">index_after_colon</span>;
             <span class="ident">index_after_colon</span> <span class="op">=</span> <span class="ident">colon_index</span> <span class="op">+</span> <span class="number">1</span>;
             <span class="kw">let</span> <span class="ident">content_after_colon</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">line</span>[<span class="ident">index_after_colon</span>..];
             <span class="kw">if</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;style&quot;</span>) {
-                <span class="kw">if</span> <span class="ident">content_after_colon</span>.<span class="ident">chars</span>().<span class="ident">nth</span>(<span class="number">5</span>) <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="string">&#39;(&#39;</span>) <span class="op">&amp;&amp;</span> <span class="ident">content_after_colon</span>.<span class="ident">chars</span>().<span class="ident">nth</span>(<span class="ident">content_after_colon</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>) <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="string">&#39;)&#39;</span>) {
+                <span class="kw">if</span> <span class="ident">content_after_colon</span>.<span class="ident">chars</span>().<span class="ident">nth</span>(<span class="number">5</span>) <span class="op">=</span><span class="op">=</span> <span class="prelude-val">Some</span>(<span class="string">&#39;(&#39;</span>) <span class="op">&amp;&amp;</span> <span class="ident">content_after_colon</span>.<span class="ident">chars</span>().<span class="ident">nth</span>(<span class="ident">content_after_colon</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>) <span class="op">=</span><span class="op">=</span> <span class="prelude-val">Some</span>(<span class="string">&#39;)&#39;</span>) {
                     <span class="kw-2">*</span><span class="ident">selector</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">line</span>[<span class="ident">suffix_start_index</span>..<span class="ident">colon_index</span>];
                     <span class="kw-2">*</span><span class="ident">style</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">content_after_colon</span>[<span class="number">6</span>..<span class="ident">content_after_colon</span>.<span class="ident">len</span>()<span class="op">-</span><span class="number">1</span>].<span class="ident">to_string</span>());
                 } <span class="kw">else</span> {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">CosmeticFilterError</span>::<span class="ident">InvalidStyleSpecifier</span>);
                 }
             } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;-abp-&quot;</span>)
-            <span class="op">||</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;contains&quot;</span>)
-            <span class="op">||</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;has&quot;</span>)
-            <span class="op">||</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;if&quot;</span>)
-            <span class="op">||</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;if-not&quot;</span>)
-            <span class="op">||</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;matches-css&quot;</span>)
-            <span class="op">||</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;matches-css-after&quot;</span>)
-            <span class="op">||</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;matches-css-before&quot;</span>)
-            <span class="op">||</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;properties&quot;</span>)
-            <span class="op">||</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;subject&quot;</span>)
-            <span class="op">||</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;xpath&quot;</span>)
-            <span class="op">||</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;nth-ancestor&quot;</span>)
-            <span class="op">||</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;upward&quot;</span>)
-            <span class="op">||</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;remove&quot;</span>)
+            <span class="op">|</span><span class="op">|</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;contains&quot;</span>)
+            <span class="op">|</span><span class="op">|</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;has&quot;</span>)
+            <span class="op">|</span><span class="op">|</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;if&quot;</span>)
+            <span class="op">|</span><span class="op">|</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;if-not&quot;</span>)
+            <span class="op">|</span><span class="op">|</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;matches-css&quot;</span>)
+            <span class="op">|</span><span class="op">|</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;matches-css-after&quot;</span>)
+            <span class="op">|</span><span class="op">|</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;matches-css-before&quot;</span>)
+            <span class="op">|</span><span class="op">|</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;properties&quot;</span>)
+            <span class="op">|</span><span class="op">|</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;subject&quot;</span>)
+            <span class="op">|</span><span class="op">|</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;xpath&quot;</span>)
+            <span class="op">|</span><span class="op">|</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;nth-ancestor&quot;</span>)
+            <span class="op">|</span><span class="op">|</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;upward&quot;</span>)
+            <span class="op">|</span><span class="op">|</span> <span class="ident">content_after_colon</span>.<span class="ident">starts_with</span>(<span class="string">&quot;remove&quot;</span>)
             {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">CosmeticFilterError</span>::<span class="ident">UnsupportedSyntax</span>);
             }
@@ -1739,18 +1739,18 @@
 
     <span class="doccomment">/// Parse the rule in `line` into a `CosmeticFilter`. If `debug` is true, the original rule</span>
     <span class="doccomment">/// will be reported in the resulting `CosmeticFilter` struct as well.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">line</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">debug</span>: <span class="ident">bool</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">CosmeticFilter</span>, <span class="ident">CosmeticFilterError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">line</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">debug</span>: <span class="ident">bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">CosmeticFilter</span>, <span class="ident">CosmeticFilterError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">mask</span> <span class="op">=</span> <span class="ident">CosmeticFilterMask</span>::<span class="ident">NONE</span>;
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">sharp_index</span>) <span class="op">=</span> <span class="ident">line</span>.<span class="ident">find</span>(<span class="string">&#39;#&#39;</span>) {
             <span class="kw">let</span> <span class="ident">after_sharp_index</span> <span class="op">=</span> <span class="ident">sharp_index</span> <span class="op">+</span> <span class="number">1</span>;
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">suffix_start_index</span> <span class="op">=</span> <span class="ident">after_sharp_index</span> <span class="op">+</span> <span class="number">1</span>;
 
             <span class="kw">if</span> <span class="ident">line</span>[<span class="ident">after_sharp_index</span>..].<span class="ident">starts_with</span>(<span class="string">&quot;@&quot;</span>) {
-                <span class="kw">if</span> <span class="ident">sharp_index</span> <span class="op">==</span> <span class="number">0</span> {
+                <span class="kw">if</span> <span class="ident">sharp_index</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">CosmeticFilterError</span>::<span class="ident">GenericUnhide</span>);
                 }
-                <span class="ident">mask</span> <span class="op">|=</span> <span class="ident">CosmeticFilterMask</span>::<span class="ident">UNHIDE</span>;
-                <span class="ident">suffix_start_index</span> <span class="op">+=</span> <span class="number">1</span>;
+                <span class="ident">mask</span> <span class="op">|</span><span class="op">=</span> <span class="ident">CosmeticFilterMask</span>::<span class="ident">UNHIDE</span>;
+                <span class="ident">suffix_start_index</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
             }
 
             <span class="comment">// 1 - sharp_index</span>
@@ -1771,15 +1771,15 @@
 
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">selector</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">line</span>[<span class="ident">suffix_start_index</span>..];
 
-            <span class="kw">if</span> <span class="ident">selector</span>.<span class="ident">trim</span>().<span class="ident">len</span>() <span class="op">==</span> <span class="number">0</span> {
+            <span class="kw">if</span> <span class="ident">selector</span>.<span class="ident">trim</span>().<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">CosmeticFilterError</span>::<span class="ident">EmptyRule</span>);
             }
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">style</span> <span class="op">=</span> <span class="prelude-val">None</span>;
             <span class="kw">if</span> <span class="ident">line</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">suffix_start_index</span> <span class="op">&gt;</span> <span class="number">4</span> <span class="op">&amp;&amp;</span> <span class="ident">line</span>[<span class="ident">suffix_start_index</span>..].<span class="ident">starts_with</span>(<span class="string">&quot;+js(&quot;</span>) <span class="op">&amp;&amp;</span> <span class="ident">line</span>.<span class="ident">ends_with</span>(<span class="string">&quot;)&quot;</span>) {
-                <span class="kw">if</span> <span class="ident">sharp_index</span> <span class="op">==</span> <span class="number">0</span> {
+                <span class="kw">if</span> <span class="ident">sharp_index</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">CosmeticFilterError</span>::<span class="ident">GenericScriptInject</span>);
                 }
-                <span class="ident">mask</span> <span class="op">|=</span> <span class="ident">CosmeticFilterMask</span>::<span class="ident">SCRIPT_INJECT</span>;
+                <span class="ident">mask</span> <span class="op">|</span><span class="op">=</span> <span class="ident">CosmeticFilterMask</span>::<span class="ident">SCRIPT_INJECT</span>;
                 <span class="ident">selector</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">line</span>[<span class="ident">suffix_start_index</span> <span class="op">+</span> <span class="number">4</span>..<span class="ident">line</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>];
             } <span class="kw">else</span> {
                 <span class="ident">CosmeticFilter</span>::<span class="ident">parse_after_sharp_nonscript</span>(<span class="ident">line</span>, <span class="ident">suffix_start_index</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">selector</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">style</span>)<span class="question-mark">?</span>;
@@ -1790,32 +1790,32 @@
             } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">style</span>) <span class="op">=</span> <span class="ident">style</span> {
                 <span class="kw">if</span> <span class="op">!</span><span class="ident">is_valid_css_style</span>(<span class="ident">style</span>) {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">CosmeticFilterError</span>::<span class="ident">InvalidCssStyle</span>);
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">sharp_index</span> <span class="op">==</span> <span class="number">0</span> {
+                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">sharp_index</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">CosmeticFilterError</span>::<span class="ident">GenericStyle</span>);
                 }
             }
 
-            <span class="kw">if</span> (<span class="ident">not_entities</span>.<span class="ident">is_some</span>() <span class="op">||</span> <span class="ident">not_hostnames</span>.<span class="ident">is_some</span>()) <span class="op">&amp;&amp;</span> <span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">CosmeticFilterMask</span>::<span class="ident">UNHIDE</span>) {
+            <span class="kw">if</span> (<span class="ident">not_entities</span>.<span class="ident">is_some</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">not_hostnames</span>.<span class="ident">is_some</span>()) <span class="op">&amp;&amp;</span> <span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">CosmeticFilterMask</span>::<span class="ident">UNHIDE</span>) {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">CosmeticFilterError</span>::<span class="ident">DoubleNegation</span>);
             }
 
             <span class="kw">if</span> <span class="op">!</span><span class="ident">selector</span>.<span class="ident">is_ascii</span>() {
-                <span class="ident">mask</span> <span class="op">|=</span> <span class="ident">CosmeticFilterMask</span>::<span class="ident">IS_UNICODE</span>;
+                <span class="ident">mask</span> <span class="op">|</span><span class="op">=</span> <span class="ident">CosmeticFilterMask</span>::<span class="ident">IS_UNICODE</span>;
             }
 
             <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">CosmeticFilterMask</span>::<span class="ident">SCRIPT_INJECT</span>) {
                 <span class="kw">if</span> <span class="ident">selector</span>.<span class="ident">starts_with</span>(<span class="string">&#39;.&#39;</span>) {
                     <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">key_from_selector</span>(<span class="ident">selector</span>)<span class="question-mark">?</span>;
-                    <span class="ident">mask</span> <span class="op">|=</span> <span class="ident">CosmeticFilterMask</span>::<span class="ident">IS_CLASS_SELECTOR</span>;
-                    <span class="kw">if</span> <span class="ident">key</span> <span class="op">==</span> <span class="ident">selector</span> {
-                        <span class="ident">mask</span> <span class="op">|=</span> <span class="ident">CosmeticFilterMask</span>::<span class="ident">IS_SIMPLE</span>;
+                    <span class="ident">mask</span> <span class="op">|</span><span class="op">=</span> <span class="ident">CosmeticFilterMask</span>::<span class="ident">IS_CLASS_SELECTOR</span>;
+                    <span class="kw">if</span> <span class="ident">key</span> <span class="op">=</span><span class="op">=</span> <span class="ident">selector</span> {
+                        <span class="ident">mask</span> <span class="op">|</span><span class="op">=</span> <span class="ident">CosmeticFilterMask</span>::<span class="ident">IS_SIMPLE</span>;
                     }
                     <span class="prelude-val">Some</span>(<span class="ident">String</span>::<span class="ident">from</span>(<span class="kw-2">&amp;</span><span class="ident">key</span>[<span class="number">1</span>..]))
                 } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">selector</span>.<span class="ident">starts_with</span>(<span class="string">&#39;#&#39;</span>) {
                     <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="ident">key_from_selector</span>(<span class="ident">selector</span>)<span class="question-mark">?</span>;
-                    <span class="ident">mask</span> <span class="op">|=</span> <span class="ident">CosmeticFilterMask</span>::<span class="ident">IS_ID_SELECTOR</span>;
-                    <span class="kw">if</span> <span class="ident">key</span> <span class="op">==</span> <span class="ident">selector</span> {
-                        <span class="ident">mask</span> <span class="op">|=</span> <span class="ident">CosmeticFilterMask</span>::<span class="ident">IS_SIMPLE</span>;
+                    <span class="ident">mask</span> <span class="op">|</span><span class="op">=</span> <span class="ident">CosmeticFilterMask</span>::<span class="ident">IS_ID_SELECTOR</span>;
+                    <span class="kw">if</span> <span class="ident">key</span> <span class="op">=</span><span class="op">=</span> <span class="ident">selector</span> {
+                        <span class="ident">mask</span> <span class="op">|</span><span class="op">=</span> <span class="ident">CosmeticFilterMask</span>::<span class="ident">IS_SIMPLE</span>;
                     }
                     <span class="prelude-val">Some</span>(<span class="ident">String</span>::<span class="ident">from</span>(<span class="kw-2">&amp;</span><span class="ident">key</span>[<span class="number">1</span>..]))
                 } <span class="kw">else</span> {
@@ -1847,10 +1847,10 @@
 
     <span class="doccomment">/// Any cosmetic filter rule that specifies (possibly negated) hostnames or entities has a</span>
     <span class="doccomment">/// hostname constraint.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">has_hostname_constraint</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">hostnames</span>.<span class="ident">is_some</span>() <span class="op">||</span>
-            <span class="self">self</span>.<span class="ident">entities</span>.<span class="ident">is_some</span>() <span class="op">||</span>
-            <span class="self">self</span>.<span class="ident">not_entities</span>.<span class="ident">is_some</span>() <span class="op">||</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">has_hostname_constraint</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+        <span class="self">self</span>.<span class="ident">hostnames</span>.<span class="ident">is_some</span>() <span class="op">|</span><span class="op">|</span>
+            <span class="self">self</span>.<span class="ident">entities</span>.<span class="ident">is_some</span>() <span class="op">|</span><span class="op">|</span>
+            <span class="self">self</span>.<span class="ident">not_entities</span>.<span class="ident">is_some</span>() <span class="op">|</span><span class="op">|</span>
             <span class="self">self</span>.<span class="ident">not_hostnames</span>.<span class="ident">is_some</span>()
     }
 
@@ -1864,10 +1864,10 @@
     <span class="doccomment">/// &#39;hidden&#39; generic rule if one applies.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Note that this behavior is not applied to script injections or custom style rules.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hidden_generic_rule</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CosmeticFilter</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">hostnames</span>.<span class="ident">is_some</span>() <span class="op">||</span> <span class="self">self</span>.<span class="ident">entities</span>.<span class="ident">is_some</span>() {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hidden_generic_rule</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CosmeticFilter</span><span class="op">&gt;</span> {
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">hostnames</span>.<span class="ident">is_some</span>() <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">entities</span>.<span class="ident">is_some</span>() {
             <span class="prelude-val">None</span>
-        } <span class="kw">else</span> <span class="kw">if</span> (<span class="self">self</span>.<span class="ident">not_hostnames</span>.<span class="ident">is_some</span>() <span class="op">||</span> <span class="self">self</span>.<span class="ident">not_entities</span>.<span class="ident">is_some</span>()) <span class="op">&amp;&amp;</span>
+        } <span class="kw">else</span> <span class="kw">if</span> (<span class="self">self</span>.<span class="ident">not_hostnames</span>.<span class="ident">is_some</span>() <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">not_entities</span>.<span class="ident">is_some</span>()) <span class="op">&amp;&amp;</span>
             (<span class="self">self</span>.<span class="ident">style</span>.<span class="ident">is_none</span>() <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">CosmeticFilterMask</span>::<span class="ident">SCRIPT_INJECT</span>))
         {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">generic_rule</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">clone</span>();
@@ -1882,7 +1882,7 @@
 
 <span class="doccomment">/// Returns a slice of `hostname` up to and including the segment that overlaps with the first</span>
 <span class="doccomment">/// segment of `domain`. This has the effect of stripping &quot;.com&quot;, &quot;.co.uk&quot;, etc.</span>
-<span class="kw">fn</span> <span class="ident">get_hostname_without_public_suffix</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">hostname</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>, <span class="ident">domain</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">get_hostname_without_public_suffix</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">hostname</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>, <span class="ident">domain</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hostname_without_public_suffix</span> <span class="op">=</span> <span class="prelude-val">None</span>;
 
     <span class="kw">let</span> <span class="ident">index_of_dot</span> <span class="op">=</span> <span class="ident">domain</span>.<span class="ident">find</span>(<span class="string">&#39;.&#39;</span>);
@@ -1900,9 +1900,9 @@
 <span class="doccomment">/// specific.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Check the `label_hashing` tests for examples.</span>
-<span class="kw">fn</span> <span class="ident">get_hashes_from_labels</span>(<span class="ident">hostname</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">end</span>: <span class="ident">usize</span>, <span class="ident">start_of_domain</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">get_hashes_from_labels</span>(<span class="ident">hostname</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">end</span>: <span class="ident">usize</span>, <span class="ident">start_of_domain</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hashes</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
-    <span class="kw">if</span> <span class="ident">end</span> <span class="op">==</span> <span class="number">0</span> {
+    <span class="kw">if</span> <span class="ident">end</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
         <span class="kw">return</span> <span class="ident">hashes</span>;
     }
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dot_ptr</span> <span class="op">=</span> <span class="ident">start_of_domain</span>;
@@ -1919,7 +1919,7 @@
 
 <span class="doccomment">/// Returns a `Vec` of the hashes of all segments of `hostname` that may match an</span>
 <span class="doccomment">/// entity-constrained rule.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_entity_hashes_from_labels</span>(<span class="ident">hostname</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">domain</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_entity_hashes_from_labels</span>(<span class="ident">hostname</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">domain</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">hostname_without_public_suffix</span> <span class="op">=</span> <span class="ident">get_hostname_without_public_suffix</span>(<span class="ident">hostname</span>, <span class="ident">domain</span>);
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">hostname_without_public_suffix</span>) <span class="op">=</span> <span class="ident">hostname_without_public_suffix</span> {
         <span class="ident">get_hashes_from_labels</span>(
@@ -1934,17 +1934,17 @@
 
 <span class="doccomment">/// Returns a `Vec` of the hashes of all segments of `hostname` that may match a</span>
 <span class="doccomment">/// hostname-constrained rule.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_hostname_hashes_from_labels</span>(<span class="ident">hostname</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">domain</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_hostname_hashes_from_labels</span>(<span class="ident">hostname</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">domain</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span> {
     <span class="ident">get_hashes_from_labels</span>(<span class="ident">hostname</span>, <span class="ident">hostname</span>.<span class="ident">len</span>(), <span class="ident">hostname</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">domain</span>.<span class="ident">len</span>())
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span><span class="op">=</span><span class="string">&quot;css-validation&quot;</span>))]</span>
 <span class="kw">mod</span> <span class="ident">css_validation</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_valid_css_selector</span>(<span class="ident">_selector</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_valid_css_selector</span>(<span class="ident">_selector</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="bool-val">true</span>
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_valid_css_style</span>(<span class="ident">_style</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_valid_css_style</span>(<span class="ident">_style</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="bool-val">true</span>
     }
 }
@@ -1959,14 +1959,14 @@
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>::{<span class="ident">Display</span>, <span class="ident">Formatter</span>, <span class="ident">Error</span>};
     <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">fmt</span>::{<span class="ident">Write</span>, <span class="prelude-ty">Result</span> <span class="kw">as</span> <span class="ident">FmtResult</span>};
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_valid_css_selector</span>(<span class="ident">selector</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_valid_css_selector</span>(<span class="ident">selector</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pi</span> <span class="op">=</span> <span class="ident">ParserInput</span>::<span class="ident">new</span>(<span class="ident">selector</span>);
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">parser</span> <span class="op">=</span> <span class="ident">Parser</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">pi</span>);
         <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">Selector</span>::<span class="ident">parse</span>(<span class="kw-2">&amp;</span><span class="ident">SelectorParseImpl</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">parser</span>);
         <span class="ident">r</span>.<span class="ident">is_ok</span>()
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_valid_css_style</span>(<span class="ident">style</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_valid_css_style</span>(<span class="ident">style</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="kw">if</span> <span class="ident">style</span>.<span class="ident">contains</span>(<span class="string">&#39;\\&#39;</span>) {
             <span class="kw">return</span> <span class="bool-val">false</span>;
         }
@@ -2010,11 +2010,11 @@
     <span class="kw">struct</span> <span class="ident">DummyValue</span>;
 
     <span class="kw">impl</span> <span class="ident">Display</span> <span class="kw">for</span> <span class="ident">DummyValue</span> {
-        <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Formatter</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> { <span class="prelude-val">Ok</span>(()) }
+        <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> { <span class="prelude-val">Ok</span>(()) }
     }
 
     <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">DummyValue</span> {
-        <span class="kw">fn</span> <span class="ident">from</span>(<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>) <span class="op">-&gt;</span> <span class="self">Self</span> { <span class="ident">DummyValue</span> }
+        <span class="kw">fn</span> <span class="ident">from</span>(<span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> { <span class="ident">DummyValue</span> }
     }
 
     <span class="doccomment">/// Dummy struct for non-tree-structural pseudo-classes.</span>
@@ -2023,11 +2023,11 @@
 
     <span class="kw">impl</span> <span class="ident">selectors</span>::<span class="ident">parser</span>::<span class="ident">NonTSPseudoClass</span> <span class="kw">for</span> <span class="ident">NonTSPseudoClass</span> {
         <span class="kw">type</span> <span class="ident">Impl</span> <span class="op">=</span> <span class="ident">SelectorImpl</span>;
-        <span class="kw">fn</span> <span class="ident">is_active_or_hover</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> { <span class="bool-val">false</span> }
+        <span class="kw">fn</span> <span class="ident">is_active_or_hover</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> { <span class="bool-val">false</span> }
     }
 
     <span class="kw">impl</span> <span class="ident">cssparser</span>::<span class="ident">ToCss</span> <span class="kw">for</span> <span class="ident">NonTSPseudoClass</span> {
-        <span class="kw">fn</span> <span class="ident">to_css</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>) <span class="op">-&gt;</span> <span class="ident">FmtResult</span> { <span class="prelude-val">Ok</span>(()) }
+        <span class="kw">fn</span> <span class="ident">to_css</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">FmtResult</span> { <span class="prelude-val">Ok</span>(()) }
     }
 
     <span class="doccomment">/// Dummy struct for pseudo-elements.</span>
@@ -2037,13 +2037,13 @@
     <span class="kw">impl</span> <span class="ident">selectors</span>::<span class="ident">parser</span>::<span class="ident">PseudoElement</span> <span class="kw">for</span> <span class="ident">PseudoElement</span> {
         <span class="kw">type</span> <span class="ident">Impl</span> <span class="op">=</span> <span class="ident">SelectorImpl</span>;
 
-        <span class="kw">fn</span> <span class="ident">supports_pseudo_class</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_pseudo_class</span>: <span class="kw-2">&amp;</span><span class="ident">NonTSPseudoClass</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> { <span class="bool-val">true</span> }
+        <span class="kw">fn</span> <span class="ident">supports_pseudo_class</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_pseudo_class</span>: <span class="kw-2">&amp;</span><span class="ident">NonTSPseudoClass</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> { <span class="bool-val">true</span> }
 
-        <span class="kw">fn</span> <span class="ident">valid_after_slotted</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> { <span class="bool-val">true</span> }
+        <span class="kw">fn</span> <span class="ident">valid_after_slotted</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> { <span class="bool-val">true</span> }
     }
 
     <span class="kw">impl</span> <span class="ident">cssparser</span>::<span class="ident">ToCss</span> <span class="kw">for</span> <span class="ident">PseudoElement</span> {
-        <span class="kw">fn</span> <span class="ident">to_css</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_dest</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>) <span class="op">-&gt;</span> <span class="ident">FmtResult</span> { <span class="prelude-val">Ok</span>(()) }
+        <span class="kw">fn</span> <span class="ident">to_css</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_dest</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">FmtResult</span> { <span class="prelude-val">Ok</span>(()) }
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -2068,7 +2068,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This should only be called once `selector` has been verified to start with either a &quot;#&quot; or &quot;.&quot;</span>
 <span class="doccomment">/// character.</span>
-<span class="kw">fn</span> <span class="ident">key_from_selector</span>(<span class="ident">selector</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">CosmeticFilterError</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">key_from_selector</span>(<span class="ident">selector</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">CosmeticFilterError</span><span class="op">&gt;</span> {
     <span class="comment">// If there are no escape characters in the selector, just take the first class or id token.</span>
     <span class="kw">let</span> <span class="ident">mat</span> <span class="op">=</span> <span class="ident">RE_PLAIN_SELECTOR</span>.<span class="ident">find</span>(<span class="ident">selector</span>);
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">location</span>) <span class="op">=</span> <span class="ident">mat</span> {
@@ -2090,20 +2090,20 @@
         <span class="kw">for</span> <span class="ident">capture</span> <span class="kw">in</span> <span class="ident">mat</span> {
             <span class="comment">// Unwrap is safe because the 0th capture group is the match itself</span>
             <span class="kw">let</span> <span class="ident">location</span> <span class="op">=</span> <span class="ident">capture</span>.<span class="ident">get</span>(<span class="number">0</span>).<span class="ident">unwrap</span>();
-            <span class="ident">key</span> <span class="op">+=</span> <span class="kw-2">&amp;</span><span class="ident">escaped</span>[<span class="ident">beginning</span>..<span class="ident">location</span>.<span class="ident">start</span>()];
+            <span class="ident">key</span> <span class="op">+</span><span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">escaped</span>[<span class="ident">beginning</span>..<span class="ident">location</span>.<span class="ident">start</span>()];
             <span class="ident">beginning</span> <span class="op">=</span> <span class="ident">location</span>.<span class="ident">end</span>();
             <span class="comment">// Unwrap is safe because there is a capture group specified in the regex</span>
             <span class="kw">let</span> <span class="ident">capture</span> <span class="op">=</span> <span class="ident">capture</span>.<span class="ident">get</span>(<span class="number">1</span>).<span class="ident">unwrap</span>().<span class="ident">as_str</span>();
-            <span class="kw">if</span> <span class="ident">capture</span>.<span class="ident">chars</span>().<span class="ident">count</span>() <span class="op">==</span> <span class="number">1</span> {   <span class="comment">// Check number of unicode characters rather than byte length</span>
-                <span class="ident">key</span> <span class="op">+=</span> <span class="ident">capture</span>;
+            <span class="kw">if</span> <span class="ident">capture</span>.<span class="ident">chars</span>().<span class="ident">count</span>() <span class="op">=</span><span class="op">=</span> <span class="number">1</span> {   <span class="comment">// Check number of unicode characters rather than byte length</span>
+                <span class="ident">key</span> <span class="op">+</span><span class="op">=</span> <span class="ident">capture</span>;
             } <span class="kw">else</span> {
                 <span class="comment">// This u32 conversion can overflow</span>
                 <span class="kw">let</span> <span class="ident">codepoint</span> <span class="op">=</span> <span class="ident">u32</span>::<span class="ident">from_str_radix</span>(<span class="kw-2">&amp;</span><span class="ident">capture</span>[..<span class="ident">capture</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>], <span class="number">16</span>)
                     .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">CosmeticFilterError</span>::<span class="ident">InvalidCssSelector</span>)<span class="question-mark">?</span>;
 
                 <span class="comment">// Not all u32s are valid Unicode codepoints</span>
-                <span class="ident">key</span> <span class="op">+=</span> <span class="kw-2">&amp;</span><span class="ident">core</span>::<span class="ident">char</span>::<span class="ident">from_u32</span>(<span class="ident">codepoint</span>)
-                    .<span class="ident">ok_or_else</span>(<span class="op">||</span> <span class="ident">CosmeticFilterError</span>::<span class="ident">InvalidCssSelector</span>)<span class="question-mark">?</span>
+                <span class="ident">key</span> <span class="op">+</span><span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">core</span>::<span class="ident">char</span>::<span class="ident">from_u32</span>(<span class="ident">codepoint</span>)
+                    .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">CosmeticFilterError</span>::<span class="ident">InvalidCssSelector</span>)<span class="question-mark">?</span>
                     .<span class="ident">to_string</span>();
             }
         }
@@ -2162,10 +2162,10 @@
     <span class="doccomment">/// An easily modified summary of a `CosmeticFilter` rule to be used in tests.</span>
     <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">PartialEq</span>)]</span>
     <span class="kw">struct</span> <span class="ident">CosmeticFilterBreakdown</span> {
-        <span class="ident">entities</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;&gt;</span>,
-        <span class="ident">hostnames</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;&gt;</span>,
-        <span class="ident">not_entities</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;&gt;</span>,
-        <span class="ident">not_hostnames</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;&gt;</span>,
+        <span class="ident">entities</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">hostnames</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">not_entities</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">not_hostnames</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span>,
         <span class="ident">selector</span>: <span class="ident">String</span>,
         <span class="ident">key</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
         <span class="ident">style</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
@@ -2178,7 +2178,7 @@
     }
 
     <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">CosmeticFilter</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CosmeticFilterBreakdown</span> {
-        <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">CosmeticFilter</span>) <span class="op">-&gt;</span> <span class="ident">CosmeticFilterBreakdown</span> {
+        <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">CosmeticFilter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">CosmeticFilterBreakdown</span> {
             <span class="ident">CosmeticFilterBreakdown</span> {
                 <span class="ident">entities</span>: <span class="ident">filter</span>.<span class="ident">entities</span>.<span class="ident">as_ref</span>().<span class="ident">cloned</span>(),
                 <span class="ident">hostnames</span>: <span class="ident">filter</span>.<span class="ident">hostnames</span>.<span class="ident">as_ref</span>().<span class="ident">cloned</span>(),
@@ -2198,13 +2198,13 @@
     }
 
     <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">CosmeticFilter</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CosmeticFilterBreakdown</span> {
-        <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">filter</span>: <span class="ident">CosmeticFilter</span>) <span class="op">-&gt;</span> <span class="ident">CosmeticFilterBreakdown</span> {
+        <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">filter</span>: <span class="ident">CosmeticFilter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">CosmeticFilterBreakdown</span> {
             (<span class="kw-2">&amp;</span><span class="ident">filter</span>).<span class="ident">into</span>()
         }
     }
 
     <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">CosmeticFilterBreakdown</span> {
-        <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
             <span class="ident">CosmeticFilterBreakdown</span> {
                 <span class="ident">entities</span>: <span class="prelude-val">None</span>,
                 <span class="ident">hostnames</span>: <span class="prelude-val">None</span>,
@@ -2277,7 +2277,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// For convenience, the return value is wrapped in a `Some()` to be consumed by a</span>
     <span class="doccomment">/// `CosmeticFilterBreakdown`.</span>
-    <span class="kw">fn</span> <span class="ident">sort_hash_domains</span>(<span class="ident">domains</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">sort_hash_domains</span>(<span class="ident">domains</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hashes</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">domains</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="kw">crate</span>::<span class="ident">utils</span>::<span class="ident">fast_hash</span>(<span class="ident">d</span>)).<span class="ident">collect</span>();
         <span class="ident">hashes</span>.<span class="ident">sort</span>();
         <span class="prelude-val">Some</span>(<span class="ident">hashes</span>)
@@ -2880,15 +2880,15 @@
     <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">utils</span>::<span class="ident">bin_lookup</span>;
 
     <span class="kw">trait</span> <span class="ident">MatchByStr</span> {
-        <span class="kw">fn</span> <span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">request_entities</span>: <span class="kw-2">&amp;</span>[<span class="ident">Hash</span>], <span class="ident">request_hostnames</span>: <span class="kw-2">&amp;</span>[<span class="ident">Hash</span>]) <span class="op">-&gt;</span> <span class="ident">bool</span>;
-        <span class="kw">fn</span> <span class="ident">matches_str</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">hostname</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">domain</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">bool</span>;
+        <span class="kw">fn</span> <span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">request_entities</span>: <span class="kw-2">&amp;</span>[<span class="ident">Hash</span>], <span class="ident">request_hostnames</span>: <span class="kw-2">&amp;</span>[<span class="ident">Hash</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>;
+        <span class="kw">fn</span> <span class="ident">matches_str</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">hostname</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">domain</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>;
     }
 
     <span class="kw">impl</span> <span class="ident">MatchByStr</span> <span class="kw">for</span> <span class="ident">CosmeticFilter</span> {
         <span class="doccomment">/// `hostname` and `domain` should be specified as, e.g. &quot;subdomain.domain.com&quot; and</span>
         <span class="doccomment">/// &quot;domain.com&quot;, respectively, to . This function will panic if the specified `domain` is</span>
         <span class="doccomment">/// shorter than the specified `hostname`.</span>
-        <span class="kw">fn</span> <span class="ident">matches_str</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">hostname</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">domain</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+        <span class="kw">fn</span> <span class="ident">matches_str</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">hostname</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">domain</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">let</span> <span class="ident">request_entities</span> <span class="op">=</span> <span class="ident">get_entity_hashes_from_labels</span>(<span class="ident">hostname</span>, <span class="ident">domain</span>);
 
             <span class="kw">let</span> <span class="ident">request_hostnames</span> <span class="op">=</span> <span class="ident">get_hostname_hashes_from_labels</span>(<span class="ident">hostname</span>, <span class="ident">domain</span>);
@@ -2901,7 +2901,7 @@
         <span class="doccomment">///</span>
         <span class="doccomment">/// See the `matches_str` test function for an example of how to convert hostnames and</span>
         <span class="doccomment">/// domains into the appropriate hash lists.</span>
-        <span class="kw">fn</span> <span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">request_entities</span>: <span class="kw-2">&amp;</span>[<span class="ident">Hash</span>], <span class="ident">request_hostnames</span>: <span class="kw-2">&amp;</span>[<span class="ident">Hash</span>]) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+        <span class="kw">fn</span> <span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">request_entities</span>: <span class="kw-2">&amp;</span>[<span class="ident">Hash</span>], <span class="ident">request_hostnames</span>: <span class="kw-2">&amp;</span>[<span class="ident">Hash</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
             <span class="kw">let</span> <span class="ident">has_hostname_constraint</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">has_hostname_constraint</span>();
             <span class="kw">if</span> <span class="op">!</span><span class="ident">has_hostname_constraint</span> {
                 <span class="kw">return</span> <span class="bool-val">true</span>;
@@ -2922,7 +2922,7 @@
                 }
             }
 
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">hostnames</span>.<span class="ident">is_some</span>() <span class="op">||</span> <span class="self">self</span>.<span class="ident">entities</span>.<span class="ident">is_some</span>() {
+            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">hostnames</span>.<span class="ident">is_some</span>() <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">entities</span>.<span class="ident">is_some</span>() {
                 <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">filter_hostnames</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">hostnames</span> {
                     <span class="kw">if</span> <span class="ident">request_hostnames</span>.<span class="ident">iter</span>().<span class="ident">any</span>(<span class="op">|</span><span class="ident">hash</span><span class="op">|</span> <span class="ident">bin_lookup</span>(<span class="ident">filter_hostnames</span>, <span class="kw-2">*</span><span class="ident">hash</span>)) {
                         <span class="kw">return</span> <span class="bool-val">true</span>;

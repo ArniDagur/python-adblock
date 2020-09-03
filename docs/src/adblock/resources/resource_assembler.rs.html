@@ -420,13 +420,13 @@
 <span class="doccomment">/// aliases.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This is read from the `redirectableResources` map.</span>
-<span class="kw">fn</span> <span class="ident">read_redirectable_resource_mapping</span>(<span class="ident">mapfile_data</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ResourceProperties</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">read_redirectable_resource_mapping</span>(<span class="ident">mapfile_data</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ResourceProperties</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">resource_properties</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
 
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">current_resource</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ResourceProperties</span><span class="op">&gt;</span> <span class="op">=</span> <span class="prelude-val">None</span>;
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">found_mapping</span> <span class="op">=</span> <span class="bool-val">false</span>;
 
-    <span class="kw">for</span> <span class="ident">line</span> <span class="kw">in</span> <span class="ident">mapfile_data</span>.<span class="ident">lines</span>().<span class="ident">skip_while</span>(<span class="op">|</span><span class="ident">line</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">line</span> <span class="op">!=</span> <span class="ident">REDIRECTABLE_RESOURCES_DECLARATION</span>).<span class="ident">skip</span>(<span class="number">1</span>) {
+    <span class="kw">for</span> <span class="ident">line</span> <span class="kw">in</span> <span class="ident">mapfile_data</span>.<span class="ident">lines</span>().<span class="ident">skip_while</span>(<span class="op">|</span><span class="ident">line</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">line</span> <span class="op">!</span><span class="op">=</span> <span class="ident">REDIRECTABLE_RESOURCES_DECLARATION</span>).<span class="ident">skip</span>(<span class="number">1</span>) {
         <span class="ident">found_mapping</span> <span class="op">=</span> <span class="bool-val">true</span>;
 
         <span class="kw">let</span> <span class="ident">key_capture</span> <span class="op">=</span> <span class="ident">MAP_NAME_KEY_RE</span>.<span class="ident">captures</span>(<span class="ident">line</span>);
@@ -445,9 +445,9 @@
 
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">current_resource</span>) <span class="op">=</span> <span class="ident">current_resource</span> {
                 <span class="kw">match</span> <span class="ident">property_key</span> {
-                    <span class="string">&quot;alias&quot;</span> <span class="op">=&gt;</span> <span class="ident">current_resource</span>.<span class="ident">alias</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">property_value</span>.<span class="ident">to_owned</span>()),
-                    <span class="string">&quot;data&quot;</span> <span class="op">=&gt;</span> <span class="ident">current_resource</span>.<span class="ident">data</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">property_value</span>.<span class="ident">to_owned</span>()),
-                    <span class="ident">other</span> <span class="op">=&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;unexpected key: {}&quot;</span>, <span class="ident">other</span>),
+                    <span class="string">&quot;alias&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">current_resource</span>.<span class="ident">alias</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">property_value</span>.<span class="ident">to_owned</span>()),
+                    <span class="string">&quot;data&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">current_resource</span>.<span class="ident">data</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">property_value</span>.<span class="ident">to_owned</span>()),
+                    <span class="ident">other</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;unexpected key: {}&quot;</span>, <span class="ident">other</span>),
                 }
             } <span class="kw">else</span> {
                 <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;could not find beginning of resource in alias map&quot;</span>);
@@ -479,7 +479,7 @@
 
 <span class="doccomment">/// Reads data from a file in the form of uBlock Origin&#39;s `scriptlets.js` file and produces</span>
 <span class="doccomment">/// templatable scriptlets for use in cosmetic filtering.</span>
-<span class="kw">fn</span> <span class="ident">read_template_resources</span>(<span class="ident">scriptlets_data</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">read_template_resources</span>(<span class="ident">scriptlets_data</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">resources</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
 
     <span class="kw">let</span> <span class="ident">uncommented</span> <span class="op">=</span> <span class="ident">TOP_COMMENT_RE</span>.<span class="ident">replace_all</span>(<span class="kw-2">&amp;</span><span class="ident">scriptlets_data</span>, <span class="string">&quot;&quot;</span>);
@@ -488,7 +488,7 @@
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">script</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">new</span>();
 
     <span class="kw">for</span> <span class="ident">line</span> <span class="kw">in</span> <span class="ident">uncommented</span>.<span class="ident">lines</span>() {
-        <span class="kw">if</span> <span class="ident">line</span>.<span class="ident">starts_with</span>(<span class="string">&#39;#&#39;</span>) <span class="op">||</span> <span class="ident">line</span>.<span class="ident">starts_with</span>(<span class="string">&quot;// &quot;</span>) {
+        <span class="kw">if</span> <span class="ident">line</span>.<span class="ident">starts_with</span>(<span class="string">&#39;#&#39;</span>) <span class="op">|</span><span class="op">|</span> <span class="ident">line</span>.<span class="ident">starts_with</span>(<span class="string">&quot;// &quot;</span>) {
             <span class="kw">continue</span>;
         }
 
@@ -508,7 +508,7 @@
         }
 
         <span class="kw">if</span> <span class="ident">NON_EMPTY_LINE_RE</span>.<span class="ident">is_match</span>(<span class="ident">line</span>) {
-            <span class="ident">script</span> <span class="op">+=</span> <span class="ident">line</span>.<span class="ident">trim</span>();
+            <span class="ident">script</span> <span class="op">+</span><span class="op">=</span> <span class="ident">line</span>.<span class="ident">trim</span>();
             <span class="kw">continue</span>;
         }
 
@@ -534,16 +534,16 @@
 
 <span class="doccomment">/// Reads byte data from an arbitrary resource file, and assembles a `Resource` from it with the</span>
 <span class="doccomment">/// provided `resource_info`.</span>
-<span class="kw">fn</span> <span class="ident">build_resource_from_file_contents</span>(<span class="ident">resource_contents</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">resource_info</span>: <span class="kw-2">&amp;</span><span class="ident">ResourceProperties</span>) <span class="op">-&gt;</span> <span class="ident">Resource</span> {
+<span class="kw">fn</span> <span class="ident">build_resource_from_file_contents</span>(<span class="ident">resource_contents</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">resource_info</span>: <span class="kw-2">&amp;</span><span class="ident">ResourceProperties</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Resource</span> {
     <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">resource_info</span>.<span class="ident">name</span>.<span class="ident">to_owned</span>();
     <span class="kw">let</span> <span class="ident">aliases</span> <span class="op">=</span> <span class="ident">resource_info</span>.<span class="ident">alias</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">alias</span><span class="op">|</span> <span class="ident">alias</span>.<span class="ident">to_string</span>()).<span class="ident">collect</span>();
     <span class="kw">let</span> <span class="ident">mimetype</span> <span class="op">=</span> <span class="ident">MimeType</span>::<span class="ident">from_extension</span>(<span class="kw-2">&amp;</span><span class="ident">resource_info</span>.<span class="ident">name</span>[..]);
     <span class="kw">let</span> <span class="ident">content</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">mimetype</span> {
-        <span class="ident">MimeType</span>::<span class="ident">ApplicationJavascript</span> <span class="op">|</span> <span class="ident">MimeType</span>::<span class="ident">TextHtml</span> <span class="op">|</span> <span class="ident">MimeType</span>::<span class="ident">TextPlain</span> <span class="op">=&gt;</span> {
+        <span class="ident">MimeType</span>::<span class="ident">ApplicationJavascript</span> <span class="op">|</span> <span class="ident">MimeType</span>::<span class="ident">TextHtml</span> <span class="op">|</span> <span class="ident">MimeType</span>::<span class="ident">TextPlain</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="kw">let</span> <span class="ident">utf8string</span> <span class="op">=</span> <span class="ident">std</span>::<span class="ident">str</span>::<span class="ident">from_utf8</span>(<span class="ident">resource_contents</span>).<span class="ident">unwrap</span>();
             <span class="ident">base64</span>::<span class="ident">encode</span>(<span class="kw-2">&amp;</span><span class="ident">utf8string</span>.<span class="ident">replace</span>(<span class="string">&#39;\r&#39;</span>, <span class="string">&quot;&quot;</span>))
         }
-        <span class="kw">_</span> <span class="op">=&gt;</span> {
+        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="ident">base64</span>::<span class="ident">encode</span>(<span class="kw-2">&amp;</span><span class="ident">resource_contents</span>)
         }
     };
@@ -558,7 +558,7 @@
 
 <span class="doccomment">/// Produces a `Resource` from the `web_accessible_resource_dir` directory according to the</span>
 <span class="doccomment">/// information in `resource_info.</span>
-<span class="kw">fn</span> <span class="ident">read_resource_from_web_accessible_dir</span>(<span class="ident">web_accessible_resource_dir</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">resource_info</span>: <span class="kw-2">&amp;</span><span class="ident">ResourceProperties</span>) <span class="op">-&gt;</span> <span class="ident">Resource</span> {
+<span class="kw">fn</span> <span class="ident">read_resource_from_web_accessible_dir</span>(<span class="ident">web_accessible_resource_dir</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">resource_info</span>: <span class="kw-2">&amp;</span><span class="ident">ResourceProperties</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Resource</span> {
     <span class="kw">let</span> <span class="ident">resource_path</span> <span class="op">=</span> <span class="ident">web_accessible_resource_dir</span>.<span class="ident">join</span>(<span class="kw-2">&amp;</span><span class="ident">resource_info</span>.<span class="ident">name</span>);
     <span class="kw">if</span> <span class="op">!</span><span class="ident">resource_path</span>.<span class="ident">is_file</span>() {
         <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Expected {:?} to be a file&quot;</span>, <span class="ident">resource_path</span>);
@@ -581,7 +581,7 @@
 <span class="doccomment">/// templatable scriptlet files for use in cosmetic filtering</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// The resulting resources can be serialized into JSON using `serde_json`.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">assemble_web_accessible_resources</span>(<span class="ident">web_accessible_resource_dir</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">redirect_engine_path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">assemble_web_accessible_resources</span>(<span class="ident">web_accessible_resource_dir</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">redirect_engine_path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">mapfile_data</span> <span class="op">=</span> <span class="ident">std</span>::<span class="ident">fs</span>::<span class="ident">read_to_string</span>(<span class="ident">redirect_engine_path</span>).<span class="ident">expect</span>(<span class="string">&quot;read aliases path&quot;</span>);
     <span class="kw">let</span> <span class="ident">resource_properties</span> <span class="op">=</span> <span class="ident">read_redirectable_resource_mapping</span>(<span class="kw-2">&amp;</span><span class="ident">mapfile_data</span>);
 
@@ -590,7 +590,7 @@
     }).<span class="ident">collect</span>()
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">assemble_scriptlet_resources</span>(<span class="ident">scriptlets_path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">assemble_scriptlet_resources</span>(<span class="ident">scriptlets_path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Resource</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">scriptlets_data</span> <span class="op">=</span> <span class="ident">std</span>::<span class="ident">fs</span>::<span class="ident">read_to_string</span>(<span class="ident">scriptlets_path</span>).<span class="ident">expect</span>(<span class="string">&quot;read scriptlets path&quot;</span>);
     <span class="ident">read_template_resources</span>(<span class="kw-2">&amp;</span><span class="ident">scriptlets_data</span>)
 }
@@ -648,7 +648,7 @@
             <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">resources</span>.<span class="ident">iter</span>()
                 .<span class="ident">find</span>(<span class="op">|</span><span class="ident">resource</span><span class="op">|</span> {
                     <span class="kw">if</span> <span class="kw">let</span> <span class="ident">ResourceType</span>::<span class="ident">Mime</span>(<span class="kw">_</span>) <span class="op">=</span> <span class="ident">resource</span>.<span class="ident">kind</span> {
-                        <span class="ident">resource</span>.<span class="ident">name</span> <span class="op">==</span> <span class="ident">name</span>
+                        <span class="ident">resource</span>.<span class="ident">name</span> <span class="op">=</span><span class="op">=</span> <span class="ident">name</span>
                     } <span class="kw">else</span> {
                         <span class="bool-val">false</span>
                     }
@@ -718,8 +718,8 @@
             <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">resources</span>.<span class="ident">iter</span>()
                 .<span class="ident">find</span>(<span class="op">|</span><span class="ident">resource</span><span class="op">|</span> {
                     <span class="kw">match</span> <span class="ident">resource</span>.<span class="ident">kind</span> {
-                        <span class="ident">ResourceType</span>::<span class="ident">Template</span> <span class="op">|</span> <span class="ident">ResourceType</span>::<span class="ident">Mime</span>(<span class="ident">MimeType</span>::<span class="ident">ApplicationJavascript</span>) <span class="op">=&gt;</span> <span class="ident">resource</span>.<span class="ident">name</span> <span class="op">==</span> <span class="ident">name</span>,
-                        <span class="kw">_</span> <span class="op">=&gt;</span> <span class="bool-val">false</span>,
+                        <span class="ident">ResourceType</span>::<span class="ident">Template</span> <span class="op">|</span> <span class="ident">ResourceType</span>::<span class="ident">Mime</span>(<span class="ident">MimeType</span>::<span class="ident">ApplicationJavascript</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">resource</span>.<span class="ident">name</span> <span class="op">=</span><span class="op">=</span> <span class="ident">name</span>,
+                        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
                     }
                 })
                 .<span class="ident">is_some</span>(), <span class="string">&quot;failed to find {}&quot;</span>, <span class="ident">name</span>);

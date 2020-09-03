@@ -421,15 +421,15 @@
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">iter</span>::<span class="ident">FromIterator</span>;
 
 <span class="kw">trait</span> <span class="ident">Optimization</span> {
-    <span class="kw">fn</span> <span class="ident">fusion</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">filters</span>: <span class="kw-2">&amp;</span>[<span class="ident">NetworkFilter</span>]) <span class="op">-&gt;</span> <span class="ident">NetworkFilter</span>;
-    <span class="kw">fn</span> <span class="ident">group_by_criteria</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">NetworkFilter</span>) <span class="op">-&gt;</span> <span class="ident">String</span>;
-    <span class="kw">fn</span> <span class="ident">select</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">NetworkFilter</span>) <span class="op">-&gt;</span> <span class="ident">bool</span>;
+    <span class="kw">fn</span> <span class="ident">fusion</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">filters</span>: <span class="kw-2">&amp;</span>[<span class="ident">NetworkFilter</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">NetworkFilter</span>;
+    <span class="kw">fn</span> <span class="ident">group_by_criteria</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">NetworkFilter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span>;
+    <span class="kw">fn</span> <span class="ident">select</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">NetworkFilter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>;
 }
 
 <span class="doccomment">/**
  * Fusion a set of `filters` by applying optimizations sequentially.
  */</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">optimize</span>(<span class="ident">filters</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NetworkFilter</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NetworkFilter</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">optimize</span>(<span class="ident">filters</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NetworkFilter</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NetworkFilter</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">optimized</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NetworkFilter</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
 
     <span class="comment">// let union_domain_group = UnionDomainGroup {};</span>
@@ -448,7 +448,7 @@
 <span class="kw">fn</span> <span class="ident">apply_optimisation</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Optimization</span><span class="op">&gt;</span>(
     <span class="ident">optimization</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>,
     <span class="ident">filters</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NetworkFilter</span><span class="op">&gt;</span>,
-) <span class="op">-&gt;</span> (<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NetworkFilter</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NetworkFilter</span><span class="op">&gt;</span>) {
+) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NetworkFilter</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NetworkFilter</span><span class="op">&gt;</span>) {
     <span class="kw">let</span> (<span class="ident">positive</span>, <span class="kw-2">mut</span> <span class="ident">negative</span>): (<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NetworkFilter</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NetworkFilter</span><span class="op">&gt;</span>) <span class="op">=</span>
         <span class="ident">filters</span>.<span class="ident">into_iter</span>().<span class="ident">partition_map</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> {
             <span class="kw">if</span> <span class="ident">optimization</span>.<span class="ident">select</span>(<span class="kw-2">&amp;</span><span class="ident">f</span>) {
@@ -458,7 +458,7 @@
             }
         });
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">to_fuse</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NetworkFilter</span><span class="op">&gt;&gt;</span> <span class="op">=</span> <span class="ident">HashMap</span>::<span class="ident">with_capacity</span>(<span class="ident">positive</span>.<span class="ident">len</span>());
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">to_fuse</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NetworkFilter</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">HashMap</span>::<span class="ident">with_capacity</span>(<span class="ident">positive</span>.<span class="ident">len</span>());
     <span class="ident">positive</span>
         .<span class="ident">into_iter</span>()
         .<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">insert_dup</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">to_fuse</span>, <span class="ident">optimization</span>.<span class="ident">group_by_criteria</span>(<span class="kw-2">&amp;</span><span class="ident">f</span>), <span class="ident">f</span>));
@@ -478,7 +478,7 @@
     (<span class="ident">fused</span>, <span class="ident">negative</span>)
 }
 
-<span class="kw">fn</span> <span class="ident">insert_dup</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span>(<span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">V</span><span class="op">&gt;&gt;</span>, <span class="ident">k</span>: <span class="ident">K</span>, <span class="ident">v</span>: <span class="ident">V</span>)
+<span class="kw">fn</span> <span class="ident">insert_dup</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">V</span><span class="op">&gt;</span>(<span class="ident">map</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">K</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">V</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">k</span>: <span class="ident">K</span>, <span class="ident">v</span>: <span class="ident">V</span>)
 <span class="kw">where</span>
     <span class="ident">K</span>: <span class="ident">std</span>::<span class="ident">cmp</span>::<span class="ident">Ord</span> <span class="op">+</span> <span class="ident">std</span>::<span class="ident">hash</span>::<span class="ident">Hash</span>,
 {
@@ -490,7 +490,7 @@
 <span class="kw">impl</span> <span class="ident">Optimization</span> <span class="kw">for</span> <span class="ident">SimplePatternGroup</span> {
     <span class="comment">// Group simple patterns, into a single filter</span>
 
-    <span class="kw">fn</span> <span class="ident">fusion</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">filters</span>: <span class="kw-2">&amp;</span>[<span class="ident">NetworkFilter</span>]) <span class="op">-&gt;</span> <span class="ident">NetworkFilter</span> {
+    <span class="kw">fn</span> <span class="ident">fusion</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">filters</span>: <span class="kw-2">&amp;</span>[<span class="ident">NetworkFilter</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">NetworkFilter</span> {
         <span class="kw">let</span> <span class="ident">base_filter</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">filters</span>[<span class="number">0</span>]; <span class="comment">// FIXME: can technically panic, if filters list is empty</span>
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">filter</span> <span class="op">=</span> <span class="ident">base_filter</span>.<span class="ident">clone</span>();
 
@@ -501,15 +501,15 @@
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">flat_patterns</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="ident">filters</span>.<span class="ident">len</span>());
             <span class="kw">for</span> <span class="ident">f</span> <span class="kw">in</span> <span class="ident">filters</span> {
                 <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">f</span>.<span class="ident">filter</span> {
-                    <span class="ident">FilterPart</span>::<span class="ident">Empty</span> <span class="op">=&gt;</span> (),
-                    <span class="ident">FilterPart</span>::<span class="ident">Simple</span>(<span class="ident">s</span>) <span class="op">=&gt;</span> <span class="ident">flat_patterns</span>.<span class="ident">push</span>(<span class="ident">s</span>.<span class="ident">clone</span>()),
-                    <span class="ident">FilterPart</span>::<span class="ident">AnyOf</span>(<span class="ident">s</span>) <span class="op">=&gt;</span> <span class="ident">flat_patterns</span>.<span class="ident">extend_from_slice</span>(<span class="ident">s</span>)
+                    <span class="ident">FilterPart</span>::<span class="ident">Empty</span> <span class="op">=</span><span class="op">&gt;</span> (),
+                    <span class="ident">FilterPart</span>::<span class="ident">Simple</span>(<span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">flat_patterns</span>.<span class="ident">push</span>(<span class="ident">s</span>.<span class="ident">clone</span>()),
+                    <span class="ident">FilterPart</span>::<span class="ident">AnyOf</span>(<span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">flat_patterns</span>.<span class="ident">extend_from_slice</span>(<span class="ident">s</span>)
                 }
             }
 
             <span class="kw">if</span> <span class="ident">flat_patterns</span>.<span class="ident">is_empty</span>() {
                 <span class="ident">filter</span>.<span class="ident">filter</span> <span class="op">=</span> <span class="ident">FilterPart</span>::<span class="ident">Empty</span>;
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">flat_patterns</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">1</span> {
+            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">flat_patterns</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">1</span> {
                 <span class="ident">filter</span>.<span class="ident">filter</span> <span class="op">=</span> <span class="ident">FilterPart</span>::<span class="ident">Simple</span>(<span class="ident">flat_patterns</span>[<span class="number">0</span>].<span class="ident">clone</span>())
             } <span class="kw">else</span> {
                 <span class="ident">filter</span>.<span class="ident">filter</span> <span class="op">=</span> <span class="ident">FilterPart</span>::<span class="ident">AnyOf</span>(<span class="ident">flat_patterns</span>)
@@ -534,10 +534,10 @@
         <span class="ident">filter</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">group_by_criteria</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">NetworkFilter</span>) <span class="op">-&gt;</span> <span class="ident">String</span> {
+    <span class="kw">fn</span> <span class="ident">group_by_criteria</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">NetworkFilter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
         <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{:b}:{:?}&quot;</span>, <span class="ident">filter</span>.<span class="ident">mask</span>, <span class="ident">filter</span>.<span class="ident">is_complete_regex</span>())
     }
-    <span class="kw">fn</span> <span class="ident">select</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">NetworkFilter</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">select</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">NetworkFilter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="op">!</span><span class="ident">filter</span>.<span class="ident">is_fuzzy</span>()
             <span class="op">&amp;&amp;</span> <span class="ident">filter</span>.<span class="ident">opt_domains</span>.<span class="ident">is_none</span>()
             <span class="op">&amp;&amp;</span> <span class="ident">filter</span>.<span class="ident">opt_not_domains</span>.<span class="ident">is_none</span>()
@@ -552,7 +552,7 @@
 
 <span class="kw">impl</span> <span class="ident">Optimization</span> <span class="kw">for</span> <span class="ident">UnionDomainGroup</span> {
 
-    <span class="kw">fn</span> <span class="ident">fusion</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">filters</span>: <span class="kw-2">&amp;</span>[<span class="ident">NetworkFilter</span>]) <span class="op">-&gt;</span> <span class="ident">NetworkFilter</span> {
+    <span class="kw">fn</span> <span class="ident">fusion</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">filters</span>: <span class="kw-2">&amp;</span>[<span class="ident">NetworkFilter</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">NetworkFilter</span> {
         <span class="kw">let</span> <span class="ident">base_filter</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">filters</span>[<span class="number">0</span>]; <span class="comment">// FIXME: can technically panic, if filters list is empty</span>
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">filter</span> <span class="op">=</span> <span class="ident">base_filter</span>.<span class="ident">clone</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">domains</span> <span class="op">=</span> <span class="ident">HashSet</span>::<span class="ident">new</span>();
@@ -599,15 +599,15 @@
         <span class="ident">filter</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">group_by_criteria</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">NetworkFilter</span>) <span class="op">-&gt;</span> <span class="ident">String</span> {
+    <span class="kw">fn</span> <span class="ident">group_by_criteria</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">NetworkFilter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
         <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{:?}:{}:{:b}:{:?}&quot;</span>, <span class="ident">filter</span>.<span class="ident">hostname</span>.<span class="ident">as_ref</span>(), <span class="ident">filter</span>.<span class="ident">filter</span>.<span class="ident">string_view</span>().<span class="ident">unwrap_or_default</span>(), <span class="ident">filter</span>.<span class="ident">mask</span>, <span class="ident">filter</span>.<span class="ident">redirect</span>.<span class="ident">as_ref</span>())
     }
 
-    <span class="kw">fn</span> <span class="ident">select</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">NetworkFilter</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">select</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">NetworkFilter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="op">!</span><span class="ident">filter</span>.<span class="ident">is_fuzzy</span>()
             <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">filter</span>.<span class="ident">is_csp</span>()
             <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">filter</span>.<span class="ident">has_bug</span>()
-            <span class="op">&amp;&amp;</span> (<span class="ident">filter</span>.<span class="ident">opt_domains</span>.<span class="ident">is_some</span>() <span class="op">||</span> <span class="ident">filter</span>.<span class="ident">opt_not_domains</span>.<span class="ident">is_some</span>())
+            <span class="op">&amp;&amp;</span> (<span class="ident">filter</span>.<span class="ident">opt_domains</span>.<span class="ident">is_some</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">filter</span>.<span class="ident">opt_not_domains</span>.<span class="ident">is_some</span>())
     }
 }
 
@@ -622,7 +622,7 @@
 
     <span class="kw">fn</span> <span class="ident">check_regex_match</span>(<span class="ident">regex</span>: <span class="kw-2">&amp;</span><span class="ident">CompiledRegex</span>, <span class="ident">pattern</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">matches</span>: <span class="ident">bool</span>) {
         <span class="kw">let</span> <span class="ident">is_match</span> <span class="op">=</span> <span class="ident">regex</span>.<span class="ident">is_match</span>(<span class="ident">pattern</span>);
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">is_match</span> <span class="op">==</span> <span class="ident">matches</span>, <span class="string">&quot;Expected {} match {} = {}&quot;</span>, <span class="ident">regex</span>.<span class="ident">to_string</span>(), <span class="ident">pattern</span>, <span class="ident">matches</span>);
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">is_match</span> <span class="op">=</span><span class="op">=</span> <span class="ident">matches</span>, <span class="string">&quot;Expected {} match {} = {}&quot;</span>, <span class="ident">regex</span>.<span class="ident">to_string</span>(), <span class="ident">pattern</span>, <span class="ident">matches</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -770,8 +770,8 @@
             <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">filter_domains</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">dom</span>));
         }
 
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;https://example.com/analytics-v1/foobar&quot;</span>, <span class="string">&quot;https://google.com&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>()) <span class="op">==</span> <span class="bool-val">true</span>);
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;https://example.com/analytics-v1/foobar&quot;</span>, <span class="string">&quot;https://foo.leadpages.net&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>()) <span class="op">==</span> <span class="bool-val">false</span>);
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;https://example.com/analytics-v1/foobar&quot;</span>, <span class="string">&quot;https://google.com&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>()) <span class="op">=</span><span class="op">=</span> <span class="bool-val">true</span>);
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;https://example.com/analytics-v1/foobar&quot;</span>, <span class="string">&quot;https://foo.leadpages.net&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>()) <span class="op">=</span><span class="op">=</span> <span class="bool-val">false</span>);
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -823,10 +823,10 @@
             <span class="string">&quot;/analytics-v1&quot;</span>
         );
 
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;https://example.com/analytics-v1/foobar&quot;</span>, <span class="string">&quot;https://google.com&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>()) <span class="op">==</span> <span class="bool-val">true</span>);
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;https://example.com/analytics-v1/foobar&quot;</span>, <span class="string">&quot;https://example.com&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>()) <span class="op">==</span> <span class="bool-val">true</span>);
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;https://example.com/analytics-v1/foobar&quot;</span>, <span class="string">&quot;https://exampletwo.com&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>()) <span class="op">==</span> <span class="bool-val">true</span>);
-        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;https://example.com/analytics-v1/foobar&quot;</span>, <span class="string">&quot;https://foo.leadpages.net&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>()) <span class="op">==</span> <span class="bool-val">false</span>);
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;https://example.com/analytics-v1/foobar&quot;</span>, <span class="string">&quot;https://google.com&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>()) <span class="op">=</span><span class="op">=</span> <span class="bool-val">true</span>);
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;https://example.com/analytics-v1/foobar&quot;</span>, <span class="string">&quot;https://example.com&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>()) <span class="op">=</span><span class="op">=</span> <span class="bool-val">true</span>);
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;https://example.com/analytics-v1/foobar&quot;</span>, <span class="string">&quot;https://exampletwo.com&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>()) <span class="op">=</span><span class="op">=</span> <span class="bool-val">true</span>);
+        <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;https://example.com/analytics-v1/foobar&quot;</span>, <span class="string">&quot;https://foo.leadpages.net&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>()) <span class="op">=</span><span class="op">=</span> <span class="bool-val">false</span>);
     }
 
 }

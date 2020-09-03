@@ -255,21 +255,21 @@
 
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">resources</span>::{<span class="ident">MimeType</span>, <span class="ident">Resource</span>, <span class="ident">ResourceType</span>};
 
-<span class="kw">static</span> <span class="ident">ESCAPE_SCRIPTLET_ARG_RE</span>: <span class="ident">Lazy</span><span class="op">&lt;</span><span class="ident">Regex</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">||</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r#&quot;[\\&#39;&quot;]&quot;#</span>).<span class="ident">unwrap</span>());
+<span class="kw">static</span> <span class="ident">ESCAPE_SCRIPTLET_ARG_RE</span>: <span class="ident">Lazy</span><span class="op">&lt;</span><span class="ident">Regex</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r#&quot;[\\&#39;&quot;]&quot;#</span>).<span class="ident">unwrap</span>());
 
 <span class="kw">static</span> <span class="ident">TEMPLATE_ARGUMENT_RE</span>: [<span class="ident">Lazy</span><span class="op">&lt;</span><span class="ident">Regex</span><span class="op">&gt;</span>; <span class="number">9</span>] <span class="op">=</span> [
-    <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">||</span> <span class="ident">template_argument_regex</span>(<span class="number">1</span>)),
-    <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">||</span> <span class="ident">template_argument_regex</span>(<span class="number">2</span>)),
-    <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">||</span> <span class="ident">template_argument_regex</span>(<span class="number">3</span>)),
-    <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">||</span> <span class="ident">template_argument_regex</span>(<span class="number">4</span>)),
-    <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">||</span> <span class="ident">template_argument_regex</span>(<span class="number">5</span>)),
-    <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">||</span> <span class="ident">template_argument_regex</span>(<span class="number">6</span>)),
-    <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">||</span> <span class="ident">template_argument_regex</span>(<span class="number">7</span>)),
-    <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">||</span> <span class="ident">template_argument_regex</span>(<span class="number">8</span>)),
-    <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">||</span> <span class="ident">template_argument_regex</span>(<span class="number">9</span>)),
+    <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">template_argument_regex</span>(<span class="number">1</span>)),
+    <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">template_argument_regex</span>(<span class="number">2</span>)),
+    <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">template_argument_regex</span>(<span class="number">3</span>)),
+    <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">template_argument_regex</span>(<span class="number">4</span>)),
+    <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">template_argument_regex</span>(<span class="number">5</span>)),
+    <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">template_argument_regex</span>(<span class="number">6</span>)),
+    <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">template_argument_regex</span>(<span class="number">7</span>)),
+    <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">template_argument_regex</span>(<span class="number">8</span>)),
+    <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">template_argument_regex</span>(<span class="number">9</span>)),
 ];
 
-<span class="kw">fn</span> <span class="ident">template_argument_regex</span>(<span class="ident">i</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">Regex</span> {
+<span class="kw">fn</span> <span class="ident">template_argument_regex</span>(<span class="ident">i</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Regex</span> {
     <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">r&quot;\{{\{{{}\}}\}}&quot;</span>, <span class="ident">i</span>)).<span class="ident">unwrap</span>()
 }
 
@@ -282,13 +282,13 @@
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">base64</span>::<span class="ident">DecodeError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ScriptletResourceError</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="kw">_</span>: <span class="ident">base64</span>::<span class="ident">DecodeError</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="kw">_</span>: <span class="ident">base64</span>::<span class="ident">DecodeError</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">ScriptletResourceError</span>::<span class="ident">InvalidBase64Content</span>
     }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">std</span>::<span class="ident">string</span>::<span class="ident">FromUtf8Error</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ScriptletResourceError</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="kw">_</span>: <span class="ident">std</span>::<span class="ident">string</span>::<span class="ident">FromUtf8Error</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="kw">_</span>: <span class="ident">std</span>::<span class="ident">string</span>::<span class="ident">FromUtf8Error</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">ScriptletResourceError</span>::<span class="ident">InvalidUtf8Content</span>
     }
 }
@@ -300,7 +300,7 @@
 
 <span class="kw">impl</span> <span class="ident">ScriptletResource</span> {
     <span class="doccomment">/// Omit the 0th element of `args` (the scriptlet name) when calling this method.</span>
-    <span class="kw">fn</span> <span class="ident">patch</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">args</span>: <span class="kw-2">&amp;</span>[<span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">str</span><span class="op">&gt;</span>]) <span class="op">-&gt;</span> <span class="ident">String</span> {
+    <span class="kw">fn</span> <span class="ident">patch</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">args</span>: <span class="kw-2">&amp;</span>[<span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">str</span><span class="op">&gt;</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">scriptlet</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">scriptlet</span>.<span class="ident">to_owned</span>();
         <span class="ident">args</span>.<span class="ident">into_iter</span>().<span class="ident">enumerate</span>().<span class="ident">for_each</span>(<span class="op">|</span>(<span class="ident">i</span>, <span class="ident">arg</span>)<span class="op">|</span> {
             <span class="ident">scriptlet</span> <span class="op">=</span> <span class="ident">TEMPLATE_ARGUMENT_RE</span>[<span class="ident">i</span>].<span class="ident">replace</span>(<span class="kw-2">&amp;</span><span class="ident">scriptlet</span>, <span class="ident">arg</span> <span class="kw">as</span> <span class="kw-2">&amp;</span><span class="ident">str</span>).<span class="ident">to_string</span>();
@@ -315,7 +315,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">ScriptletResourceStorage</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_resources</span>(<span class="ident">resources</span>: <span class="kw-2">&amp;</span>[<span class="ident">Resource</span>]) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_resources</span>(<span class="ident">resources</span>: <span class="kw-2">&amp;</span>[<span class="ident">Resource</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">self_</span> <span class="op">=</span> <span class="self">Self</span>::<span class="ident">default</span>();
 
         <span class="ident">resources</span>.<span class="ident">iter</span>().<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">resource</span><span class="op">|</span> <span class="ident">self_</span>.<span class="ident">add_resource</span>(<span class="kw-2">&amp;</span><span class="ident">resource</span>).<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">eprintln</span><span class="macro">!</span>(<span class="string">&quot;Failed to add resource: {:?}&quot;</span>, <span class="ident">e</span>)));
@@ -323,15 +323,15 @@
         <span class="ident">self_</span>
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_resource</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">resource</span>: <span class="kw-2">&amp;</span><span class="ident">Resource</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ScriptletResourceError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_resource</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">resource</span>: <span class="kw-2">&amp;</span><span class="ident">Resource</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ScriptletResourceError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">scriptlet</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">resource</span>.<span class="ident">kind</span> {
-            <span class="ident">ResourceType</span>::<span class="ident">Mime</span>(<span class="ident">MimeType</span>::<span class="ident">ApplicationJavascript</span>) <span class="op">|</span> <span class="ident">ResourceType</span>::<span class="ident">Template</span> <span class="op">=&gt;</span> {
+            <span class="ident">ResourceType</span>::<span class="ident">Mime</span>(<span class="ident">MimeType</span>::<span class="ident">ApplicationJavascript</span>) <span class="op">|</span> <span class="ident">ResourceType</span>::<span class="ident">Template</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">scriptlet</span> <span class="op">=</span> <span class="ident">ScriptletResource</span> {
                     <span class="ident">scriptlet</span>: <span class="ident">String</span>::<span class="ident">from_utf8</span>(<span class="ident">base64</span>::<span class="ident">decode</span>(<span class="kw-2">&amp;</span><span class="ident">resource</span>.<span class="ident">content</span>)<span class="question-mark">?</span>)<span class="question-mark">?</span>,
                 };
                 <span class="prelude-val">Some</span>((<span class="ident">resource</span>.<span class="ident">name</span>.<span class="ident">to_owned</span>(), <span class="ident">resource</span>.<span class="ident">aliases</span>.<span class="ident">to_owned</span>(), <span class="ident">scriptlet</span>))
             }
-            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="prelude-val">None</span>
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>
         };
 
         <span class="ident">scriptlet</span>.<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">name</span>, <span class="ident">res_aliases</span>, <span class="ident">resource</span>)<span class="op">|</span> {
@@ -344,7 +344,7 @@
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_scriptlet</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">scriptlet_args</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">ScriptletResourceError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_scriptlet</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">scriptlet_args</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">ScriptletResourceError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">scriptlet_args</span> <span class="op">=</span> <span class="ident">parse_scriptlet_args</span>(<span class="ident">scriptlet_args</span>);
         <span class="kw">if</span> <span class="ident">scriptlet_args</span>.<span class="ident">is_empty</span>() {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ScriptletResourceError</span>::<span class="ident">MissingScriptletName</span>);
@@ -353,13 +353,13 @@
         <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">scriptlet_args</span>[<span class="number">1</span>..];
         <span class="kw">let</span> <span class="ident">template</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">resources</span>
             .<span class="ident">get</span>(<span class="ident">scriptlet_name</span>)
-            .<span class="ident">ok_or_else</span>(<span class="op">||</span> <span class="ident">ScriptletResourceError</span>::<span class="ident">NoMatchingScriptlet</span>)<span class="question-mark">?</span>;
+            .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">ScriptletResourceError</span>::<span class="ident">NoMatchingScriptlet</span>)<span class="question-mark">?</span>;
 
         <span class="prelude-val">Ok</span>(<span class="ident">template</span>.<span class="ident">patch</span>(<span class="ident">args</span>))
     }
 }
 
-<span class="kw">fn</span> <span class="ident">without_js_extension</span>(<span class="ident">scriptlet_name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span> {
+<span class="kw">fn</span> <span class="ident">without_js_extension</span>(<span class="ident">scriptlet_name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span> {
     <span class="kw">if</span> <span class="ident">scriptlet_name</span>.<span class="ident">ends_with</span>(<span class="string">&quot;.js&quot;</span>) {
         <span class="kw-2">&amp;</span><span class="ident">scriptlet_name</span>[..<span class="ident">scriptlet_name</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">3</span>]
     } <span class="kw">else</span> {
@@ -371,13 +371,13 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// A literal comma is produced by the &#39;\,&#39; pattern. Otherwise, all &#39;\&#39;, &#39;&quot;&#39;, and &#39;&#39;&#39; characters</span>
 <span class="doccomment">/// are erased in the resulting arguments.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse_scriptlet_args</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">args</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">str</span><span class="op">&gt;&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse_scriptlet_args</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">args</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">str</span><span class="op">&gt;</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args_vec</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">find_start</span> <span class="op">=</span> <span class="number">0</span>;
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">after_last_delim</span> <span class="op">=</span> <span class="number">0</span>;
     <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">comma_loc</span>) <span class="op">=</span> <span class="ident">args</span>[<span class="ident">find_start</span>..].<span class="ident">find</span>(<span class="string">&#39;,&#39;</span>) {
         <span class="kw">let</span> <span class="ident">comma_loc</span> <span class="op">=</span> <span class="ident">find_start</span> <span class="op">+</span> <span class="ident">comma_loc</span>;
-        <span class="kw">if</span> <span class="kw-2">&amp;</span><span class="ident">args</span>[<span class="ident">comma_loc</span> <span class="op">-</span> <span class="number">1</span>..<span class="ident">comma_loc</span>] <span class="op">==</span> <span class="string">&quot;\\&quot;</span> {
+        <span class="kw">if</span> <span class="kw-2">&amp;</span><span class="ident">args</span>[<span class="ident">comma_loc</span> <span class="op">-</span> <span class="number">1</span>..<span class="ident">comma_loc</span>] <span class="op">=</span><span class="op">=</span> <span class="string">&quot;\\&quot;</span> {
             <span class="ident">find_start</span> <span class="op">=</span> <span class="ident">comma_loc</span> <span class="op">+</span> <span class="number">1</span>;
             <span class="kw">continue</span>;
         }
@@ -385,7 +385,7 @@
         <span class="ident">after_last_delim</span> <span class="op">=</span> <span class="ident">comma_loc</span> <span class="op">+</span> <span class="number">1</span>;
         <span class="ident">find_start</span> <span class="op">=</span> <span class="ident">comma_loc</span> <span class="op">+</span> <span class="number">1</span>;
     }
-    <span class="kw">if</span> <span class="ident">after_last_delim</span> <span class="op">!=</span> <span class="ident">args</span>.<span class="ident">len</span>() {
+    <span class="kw">if</span> <span class="ident">after_last_delim</span> <span class="op">!</span><span class="op">=</span> <span class="ident">args</span>.<span class="ident">len</span>() {
         <span class="ident">args_vec</span>.<span class="ident">push</span>(<span class="ident">ESCAPE_SCRIPTLET_ARG_RE</span>.<span class="ident">replace_all</span>(<span class="ident">args</span>[<span class="ident">after_last_delim</span>..].<span class="ident">trim</span>(), <span class="string">&quot;&quot;</span>));
     }
 
@@ -411,7 +411,7 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">parse_argslist_empty</span>() {
         <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">parse_scriptlet_args</span>(<span class="string">&quot;&quot;</span>);
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">args</span>, <span class="ident">Vec</span>::<span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;&gt;</span>::<span class="ident">new</span>());
+        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">args</span>, <span class="ident">Vec</span>::<span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">new</span>());
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>

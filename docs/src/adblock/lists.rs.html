@@ -484,26 +484,26 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;content-blocking&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">RuleTypes</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span>::<span class="ident">All</span>
     }
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;content-blocking&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">RuleTypes</span> {
-    <span class="kw">fn</span> <span class="ident">loads_network_rules</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">loads_network_rules</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="self">Self</span>::<span class="ident">All</span> <span class="op">=&gt;</span> <span class="bool-val">true</span>,
-            <span class="self">Self</span>::<span class="ident">NetworkOnly</span> <span class="op">=&gt;</span> <span class="bool-val">true</span>,
-            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="bool-val">false</span>,
+            <span class="self">Self</span>::<span class="ident">All</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
+            <span class="self">Self</span>::<span class="ident">NetworkOnly</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">loads_cosmetic_rules</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">loads_cosmetic_rules</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="self">Self</span>::<span class="ident">All</span> <span class="op">=&gt;</span> <span class="bool-val">true</span>,
-            <span class="self">Self</span>::<span class="ident">CosmeticOnly</span> <span class="op">=&gt;</span> <span class="bool-val">true</span>,
-            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="bool-val">false</span>,
+            <span class="self">Self</span>::<span class="ident">All</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
+            <span class="self">Self</span>::<span class="ident">CosmeticOnly</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
         }
     }
 }
@@ -523,7 +523,7 @@
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">FilterSet</span> {
     <span class="doccomment">/// Equivalent to `FilterSet::new(false)`, or `FilterSet::new(true)` when compiled in test</span>
     <span class="doccomment">/// configuration.</span>
-    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">test</span>))]</span>
         <span class="kw">let</span> <span class="ident">debug</span> <span class="op">=</span> <span class="bool-val">false</span>;
 
@@ -538,7 +538,7 @@
     <span class="doccomment">/// Creates a new `FilterSet`. `debug` specifies whether or not to save information about the</span>
     <span class="doccomment">/// original raw filter rules alongside the more compact internal representation. If enabled,</span>
     <span class="doccomment">/// this information will be passed to the corresponding `Engine`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">debug</span>: <span class="ident">bool</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">debug</span>: <span class="ident">bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">debug</span>,
             <span class="ident">network_filters</span>: <span class="ident">Vec</span>::<span class="ident">new</span>(),
@@ -549,7 +549,7 @@
     <span class="doccomment">/// Adds the contents of an entire filter list to this `FilterSet`. Filters that cannot be</span>
     <span class="doccomment">/// parsed successfully are ignored.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_filter_list</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">filter_list</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">format</span>: <span class="ident">FilterFormat</span>) {
-        <span class="kw">let</span> <span class="ident">rules</span> <span class="op">=</span> <span class="ident">filter_list</span>.<span class="ident">lines</span>().<span class="ident">map</span>(<span class="ident">str</span>::<span class="ident">to_string</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;&gt;</span>();
+        <span class="kw">let</span> <span class="ident">rules</span> <span class="op">=</span> <span class="ident">filter_list</span>.<span class="ident">lines</span>().<span class="ident">map</span>(<span class="ident">str</span>::<span class="ident">to_string</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
         <span class="self">self</span>.<span class="ident">add_filters</span>(<span class="kw-2">&amp;</span><span class="ident">rules</span>, <span class="ident">format</span>);
     }
 
@@ -562,11 +562,11 @@
     }
 
     <span class="doccomment">/// Adds the string representation of a single filter rule to this `FilterSet`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_filter</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">format</span>: <span class="ident">FilterFormat</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">FilterParseError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_filter</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">format</span>: <span class="ident">FilterFormat</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">FilterParseError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">filter_parsed</span> <span class="op">=</span> <span class="ident">parse_filter</span>(<span class="ident">filter</span>, <span class="self">self</span>.<span class="ident">debug</span>, <span class="ident">format</span>);
         <span class="kw">match</span> <span class="ident">filter_parsed</span><span class="question-mark">?</span> {
-            <span class="ident">ParsedFilter</span>::<span class="ident">Network</span>(<span class="ident">filter</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">network_filters</span>.<span class="ident">push</span>(<span class="ident">filter</span>),
-            <span class="ident">ParsedFilter</span>::<span class="ident">Cosmetic</span>(<span class="ident">filter</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">cosmetic_filters</span>.<span class="ident">push</span>(<span class="ident">filter</span>),
+            <span class="ident">ParsedFilter</span>::<span class="ident">Network</span>(<span class="ident">filter</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">network_filters</span>.<span class="ident">push</span>(<span class="ident">filter</span>),
+            <span class="ident">ParsedFilter</span>::<span class="ident">Cosmetic</span>(<span class="ident">filter</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">cosmetic_filters</span>.<span class="ident">push</span>(<span class="ident">filter</span>),
         }
         <span class="prelude-val">Ok</span>(())
     }
@@ -580,7 +580,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// This function will fail if the `FilterSet` was not created in debug mode.</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;content-blocking&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_content_blocking</span>(<span class="self">self</span>, <span class="ident">rule_types</span>: <span class="ident">RuleTypes</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">crate</span>::<span class="ident">content_blocking</span>::<span class="ident">CbRule</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>), ()<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_content_blocking</span>(<span class="self">self</span>, <span class="ident">rule_types</span>: <span class="ident">RuleTypes</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">crate</span>::<span class="ident">content_blocking</span>::<span class="ident">CbRule</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>), ()<span class="op">&gt;</span> {
         <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">TryInto</span>;
         <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">content_blocking</span>;
 
@@ -600,8 +600,8 @@
                     <span class="ident">filters_used</span>.<span class="ident">push</span>(<span class="ident">original_rule</span>);
                     <span class="ident">equivalent</span>.<span class="ident">into_iter</span>().<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">cb_rule</span><span class="op">|</span> {
                         <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">cb_rule</span>.<span class="ident">action</span>.<span class="ident">typ</span> {
-                            <span class="ident">content_blocking</span>::<span class="ident">CbType</span>::<span class="ident">IgnorePreviousRules</span> <span class="op">=&gt;</span> <span class="ident">ignore_previous_rules</span>.<span class="ident">push</span>(<span class="ident">cb_rule</span>),
-                            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="ident">other_rules</span>.<span class="ident">push</span>(<span class="ident">cb_rule</span>),
+                            <span class="ident">content_blocking</span>::<span class="ident">CbType</span>::<span class="ident">IgnorePreviousRules</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ignore_previous_rules</span>.<span class="ident">push</span>(<span class="ident">cb_rule</span>),
+                            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">other_rules</span>.<span class="ident">push</span>(<span class="ident">cb_rule</span>),
                         }
                     });
                 }
@@ -614,8 +614,8 @@
                 <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">cb_rule</span>) <span class="op">=</span> <span class="ident">TryInto</span>::<span class="op">&lt;</span><span class="ident">content_blocking</span>::<span class="ident">CbRule</span><span class="op">&gt;</span>::<span class="ident">try_into</span>(<span class="ident">filter</span>) {
                     <span class="ident">filters_used</span>.<span class="ident">push</span>(<span class="ident">original_rule</span>);
                     <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">cb_rule</span>.<span class="ident">action</span>.<span class="ident">typ</span> {
-                        <span class="ident">content_blocking</span>::<span class="ident">CbType</span>::<span class="ident">IgnorePreviousRules</span> <span class="op">=&gt;</span> <span class="ident">ignore_previous_rules</span>.<span class="ident">push</span>(<span class="ident">cb_rule</span>),
-                        <span class="kw">_</span> <span class="op">=&gt;</span> <span class="ident">other_rules</span>.<span class="ident">push</span>(<span class="ident">cb_rule</span>),
+                        <span class="ident">content_blocking</span>::<span class="ident">CbType</span>::<span class="ident">IgnorePreviousRules</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ignore_previous_rules</span>.<span class="ident">push</span>(<span class="ident">cb_rule</span>),
+                        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">other_rules</span>.<span class="ident">push</span>(<span class="ident">cb_rule</span>),
                     }
                 }
             });
@@ -659,13 +659,13 @@
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">NetworkFilter</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ParsedFilter</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">v</span>: <span class="ident">NetworkFilter</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">v</span>: <span class="ident">NetworkFilter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">ParsedFilter</span>::<span class="ident">Network</span>(<span class="ident">v</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">CosmeticFilter</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ParsedFilter</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">v</span>: <span class="ident">CosmeticFilter</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">v</span>: <span class="ident">CosmeticFilter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">ParsedFilter</span>::<span class="ident">Cosmetic</span>(<span class="ident">v</span>)
     }
 }
@@ -680,13 +680,13 @@
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">NetworkFilterError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">FilterParseError</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">v</span>: <span class="ident">NetworkFilterError</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">v</span>: <span class="ident">NetworkFilterError</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">FilterParseError</span>::<span class="ident">Network</span>(<span class="ident">v</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">CosmeticFilterError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">FilterParseError</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">v</span>: <span class="ident">CosmeticFilterError</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">v</span>: <span class="ident">CosmeticFilterError</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">FilterParseError</span>::<span class="ident">Cosmetic</span>(<span class="ident">v</span>)
     }
 }
@@ -696,7 +696,7 @@
     <span class="ident">line</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
     <span class="ident">debug</span>: <span class="ident">bool</span>,
     <span class="ident">format</span>: <span class="ident">FilterFormat</span>,
-) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ParsedFilter</span>, <span class="ident">FilterParseError</span><span class="op">&gt;</span> {
+) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ParsedFilter</span>, <span class="ident">FilterParseError</span><span class="op">&gt;</span> {
 
     <span class="kw">let</span> <span class="ident">filter</span> <span class="op">=</span> <span class="ident">line</span>.<span class="ident">trim</span>();
 
@@ -705,18 +705,18 @@
     }
 
     <span class="kw">match</span> <span class="ident">format</span> {
-        <span class="ident">FilterFormat</span>::<span class="ident">Standard</span> <span class="op">=&gt;</span> {
+        <span class="ident">FilterFormat</span>::<span class="ident">Standard</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="kw">match</span> <span class="ident">detect_filter_type</span>(<span class="ident">filter</span>) {
-                <span class="ident">FilterType</span>::<span class="ident">Network</span> <span class="op">=&gt;</span> <span class="ident">NetworkFilter</span>::<span class="ident">parse</span>(<span class="ident">filter</span>, <span class="ident">debug</span>)
+                <span class="ident">FilterType</span>::<span class="ident">Network</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">NetworkFilter</span>::<span class="ident">parse</span>(<span class="ident">filter</span>, <span class="ident">debug</span>)
                     .<span class="ident">map</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">f</span>.<span class="ident">into</span>())
                     .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">e</span>.<span class="ident">into</span>()),
-                <span class="ident">FilterType</span>::<span class="ident">Cosmetic</span> <span class="op">=&gt;</span> <span class="ident">CosmeticFilter</span>::<span class="ident">parse</span>(<span class="ident">filter</span>, <span class="ident">debug</span>)
+                <span class="ident">FilterType</span>::<span class="ident">Cosmetic</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">CosmeticFilter</span>::<span class="ident">parse</span>(<span class="ident">filter</span>, <span class="ident">debug</span>)
                     .<span class="ident">map</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">f</span>.<span class="ident">into</span>())
                     .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">e</span>.<span class="ident">into</span>()),
-                <span class="kw">_</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">FilterParseError</span>::<span class="ident">Unsupported</span>),
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">FilterParseError</span>::<span class="ident">Unsupported</span>),
             }
         }
-        <span class="ident">FilterFormat</span>::<span class="ident">Hosts</span> <span class="op">=&gt;</span> {
+        <span class="ident">FilterFormat</span>::<span class="ident">Hosts</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="kw">if</span> <span class="ident">filter</span>.<span class="ident">starts_with</span>(<span class="string">&#39;!&#39;</span>) {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">FilterParseError</span>::<span class="ident">Unsupported</span>);
             }
@@ -737,17 +737,17 @@
             <span class="comment">// Take the last of at most 2 whitespace separated fields</span>
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">filter_parts</span> <span class="op">=</span> <span class="ident">filter</span>.<span class="ident">split_whitespace</span>();
             <span class="kw">let</span> <span class="ident">hostname</span> <span class="op">=</span> <span class="kw">match</span> (<span class="ident">filter_parts</span>.<span class="ident">next</span>(), <span class="ident">filter_parts</span>.<span class="ident">next</span>(), <span class="ident">filter_parts</span>.<span class="ident">next</span>()) {
-                (<span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">FilterParseError</span>::<span class="ident">Unsupported</span>),
-                (<span class="prelude-val">Some</span>(<span class="ident">hostname</span>), <span class="prelude-val">None</span>, <span class="prelude-val">None</span>) <span class="op">=&gt;</span> <span class="ident">hostname</span>,
-                (<span class="prelude-val">Some</span>(<span class="ident">_ip</span>), <span class="prelude-val">Some</span>(<span class="ident">hostname</span>), <span class="prelude-val">None</span>) <span class="op">=&gt;</span> <span class="ident">hostname</span>,
-                (<span class="prelude-val">Some</span>(<span class="kw">_</span>), <span class="prelude-val">Some</span>(<span class="kw">_</span>), <span class="prelude-val">Some</span>(<span class="kw">_</span>)) <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">FilterParseError</span>::<span class="ident">Unsupported</span>),
-                <span class="kw">_</span> <span class="op">=&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
+                (<span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">FilterParseError</span>::<span class="ident">Unsupported</span>),
+                (<span class="prelude-val">Some</span>(<span class="ident">hostname</span>), <span class="prelude-val">None</span>, <span class="prelude-val">None</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">hostname</span>,
+                (<span class="prelude-val">Some</span>(<span class="ident">_ip</span>), <span class="prelude-val">Some</span>(<span class="ident">hostname</span>), <span class="prelude-val">None</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">hostname</span>,
+                (<span class="prelude-val">Some</span>(<span class="kw">_</span>), <span class="prelude-val">Some</span>(<span class="kw">_</span>), <span class="prelude-val">Some</span>(<span class="kw">_</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">FilterParseError</span>::<span class="ident">Unsupported</span>),
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
             };
 
             <span class="comment">// Matches in hosts lists are usually redirected to localhost. For that reason, some</span>
             <span class="comment">// lists include an entry for &quot;localhost&quot;, which should be explicitly ignored when</span>
             <span class="comment">// performing request-level adblocking.</span>
-            <span class="kw">if</span> <span class="ident">hostname</span> <span class="op">==</span> <span class="string">&quot;localhost&quot;</span> {
+            <span class="kw">if</span> <span class="ident">hostname</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;localhost&quot;</span> {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">FilterParseError</span>::<span class="ident">Unsupported</span>);
             }
 
@@ -763,7 +763,7 @@
     <span class="ident">list</span>: <span class="kw-2">&amp;</span>[<span class="ident">String</span>],
     <span class="ident">debug</span>: <span class="ident">bool</span>,
     <span class="ident">format</span>: <span class="ident">FilterFormat</span>,
-) <span class="op">-&gt;</span> (<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NetworkFilter</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">CosmeticFilter</span><span class="op">&gt;</span>) {
+) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">NetworkFilter</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">CosmeticFilter</span><span class="op">&gt;</span>) {
 
     <span class="kw">let</span> <span class="ident">list_iter</span> <span class="op">=</span> <span class="ident">list</span>.<span class="ident">iter</span>();
 
@@ -771,8 +771,8 @@
         .<span class="ident">map</span>(<span class="op">|</span><span class="ident">line</span><span class="op">|</span> <span class="ident">parse_filter</span>(<span class="ident">line</span>, <span class="ident">debug</span>, <span class="ident">format</span>))
         .<span class="ident">filter_map</span>(<span class="prelude-ty">Result</span>::<span class="ident">ok</span>)
         .<span class="ident">partition_map</span>(<span class="op">|</span><span class="ident">filter</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">filter</span> {
-            <span class="ident">ParsedFilter</span>::<span class="ident">Network</span>(<span class="ident">f</span>) <span class="op">=&gt;</span> <span class="ident">Either</span>::<span class="ident">Left</span>(<span class="ident">f</span>),
-            <span class="ident">ParsedFilter</span>::<span class="ident">Cosmetic</span>(<span class="ident">f</span>) <span class="op">=&gt;</span> <span class="ident">Either</span>::<span class="ident">Right</span>(<span class="ident">f</span>),
+            <span class="ident">ParsedFilter</span>::<span class="ident">Network</span>(<span class="ident">f</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Either</span>::<span class="ident">Left</span>(<span class="ident">f</span>),
+            <span class="ident">ParsedFilter</span>::<span class="ident">Cosmetic</span>(<span class="ident">f</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Either</span>::<span class="ident">Right</span>(<span class="ident">f</span>),
         });
 
     (<span class="ident">network_filters</span>, <span class="ident">cosmetic_filters</span>)
@@ -784,17 +784,17 @@
  * performed before calling a more specific parser to create an instance of
  * `NetworkFilter` or `CosmeticFilter`.
  */</span>
-<span class="kw">fn</span> <span class="ident">detect_filter_type</span>(<span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">FilterType</span> {
+<span class="kw">fn</span> <span class="ident">detect_filter_type</span>(<span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">FilterType</span> {
     <span class="comment">// Ignore comments</span>
-    <span class="kw">if</span> <span class="ident">filter</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">1</span>
-        <span class="op">||</span> <span class="ident">filter</span>.<span class="ident">starts_with</span>(<span class="string">&#39;!&#39;</span>)
-        <span class="op">||</span> (<span class="ident">filter</span>.<span class="ident">starts_with</span>(<span class="string">&#39;#&#39;</span>) <span class="op">&amp;&amp;</span> <span class="ident">filter</span>[<span class="number">1</span>..].<span class="ident">starts_with</span>(<span class="ident">char</span>::<span class="ident">is_whitespace</span>))
-        <span class="op">||</span> <span class="ident">filter</span>.<span class="ident">starts_with</span>(<span class="string">&quot;[Adblock&quot;</span>)
+    <span class="kw">if</span> <span class="ident">filter</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">1</span>
+        <span class="op">|</span><span class="op">|</span> <span class="ident">filter</span>.<span class="ident">starts_with</span>(<span class="string">&#39;!&#39;</span>)
+        <span class="op">|</span><span class="op">|</span> (<span class="ident">filter</span>.<span class="ident">starts_with</span>(<span class="string">&#39;#&#39;</span>) <span class="op">&amp;&amp;</span> <span class="ident">filter</span>[<span class="number">1</span>..].<span class="ident">starts_with</span>(<span class="ident">char</span>::<span class="ident">is_whitespace</span>))
+        <span class="op">|</span><span class="op">|</span> <span class="ident">filter</span>.<span class="ident">starts_with</span>(<span class="string">&quot;[Adblock&quot;</span>)
     {
         <span class="kw">return</span> <span class="ident">FilterType</span>::<span class="ident">NotSupported</span>;
     }
 
-    <span class="kw">if</span> <span class="ident">filter</span>.<span class="ident">starts_with</span>(<span class="string">&#39;|&#39;</span>) <span class="op">||</span> <span class="ident">filter</span>.<span class="ident">starts_with</span>(<span class="string">&quot;@@|&quot;</span>) {
+    <span class="kw">if</span> <span class="ident">filter</span>.<span class="ident">starts_with</span>(<span class="string">&#39;|&#39;</span>) <span class="op">|</span><span class="op">|</span> <span class="ident">filter</span>.<span class="ident">starts_with</span>(<span class="string">&quot;@@|&quot;</span>) {
         <span class="kw">return</span> <span class="ident">FilterType</span>::<span class="ident">Network</span>;
     }
 
@@ -813,14 +813,14 @@
         <span class="comment">// `#%#` `#@%#`</span>
         <span class="comment">// `#?#`</span>
         <span class="kw">if</span> <span class="ident">filter</span>[<span class="ident">after_sharp_index</span>..].<span class="ident">starts_with</span>(<span class="comment">/* #@$# */</span> <span class="string">&quot;@$#&quot;</span>)
-            <span class="op">||</span> <span class="ident">filter</span>[<span class="ident">after_sharp_index</span>..].<span class="ident">starts_with</span>(<span class="comment">/* #@%# */</span> <span class="string">&quot;@%#&quot;</span>)
-            <span class="op">||</span> <span class="ident">filter</span>[<span class="ident">after_sharp_index</span>..].<span class="ident">starts_with</span>(<span class="comment">/* #%# */</span> <span class="string">&quot;%#&quot;</span>)
-            <span class="op">||</span> <span class="ident">filter</span>[<span class="ident">after_sharp_index</span>..].<span class="ident">starts_with</span>(<span class="comment">/* #$# */</span> <span class="string">&quot;$#&quot;</span>)
-            <span class="op">||</span> <span class="ident">filter</span>[<span class="ident">after_sharp_index</span>..].<span class="ident">starts_with</span>(<span class="comment">/* #?# */</span> <span class="string">&quot;?#&quot;</span>)
+            <span class="op">|</span><span class="op">|</span> <span class="ident">filter</span>[<span class="ident">after_sharp_index</span>..].<span class="ident">starts_with</span>(<span class="comment">/* #@%# */</span> <span class="string">&quot;@%#&quot;</span>)
+            <span class="op">|</span><span class="op">|</span> <span class="ident">filter</span>[<span class="ident">after_sharp_index</span>..].<span class="ident">starts_with</span>(<span class="comment">/* #%# */</span> <span class="string">&quot;%#&quot;</span>)
+            <span class="op">|</span><span class="op">|</span> <span class="ident">filter</span>[<span class="ident">after_sharp_index</span>..].<span class="ident">starts_with</span>(<span class="comment">/* #$# */</span> <span class="string">&quot;$#&quot;</span>)
+            <span class="op">|</span><span class="op">|</span> <span class="ident">filter</span>[<span class="ident">after_sharp_index</span>..].<span class="ident">starts_with</span>(<span class="comment">/* #?# */</span> <span class="string">&quot;?#&quot;</span>)
         {
             <span class="kw">return</span> <span class="ident">FilterType</span>::<span class="ident">NotSupported</span>;
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">filter</span>[<span class="ident">after_sharp_index</span>..].<span class="ident">starts_with</span>(<span class="comment">/* ## */</span> <span class="string">&#39;#&#39;</span>)
-            <span class="op">||</span> <span class="ident">filter</span>[<span class="ident">after_sharp_index</span>..].<span class="ident">starts_with</span>(<span class="comment">/* #@# */</span> <span class="string">&quot;@#&quot;</span>)
+            <span class="op">|</span><span class="op">|</span> <span class="ident">filter</span>[<span class="ident">after_sharp_index</span>..].<span class="ident">starts_with</span>(<span class="comment">/* #@# */</span> <span class="string">&quot;@#&quot;</span>)
         {
             <span class="comment">// Parse supported cosmetic filter</span>
             <span class="comment">// `##` `#@#`</span>

@@ -139,10 +139,10 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This function will silently retry on every EINTR received from the underlying `Read` until</span>
 <span class="doccomment">/// successful read.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_pfix</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_pfix</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">read_marker</span>(<span class="ident">rd</span>)<span class="question-mark">?</span> {
-        <span class="ident">Marker</span>::<span class="ident">FixPos</span>(<span class="ident">val</span>) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">val</span>),
-        <span class="ident">marker</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
+        <span class="ident">Marker</span>::<span class="ident">FixPos</span>(<span class="ident">val</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">val</span>),
+        <span class="ident">marker</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
     }
 }
 
@@ -157,10 +157,10 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// It also returns `ValueReadError::TypeMismatch` if the actual type is not equal with the</span>
 <span class="doccomment">/// expected one, indicating you with the actual type.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_u8</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_u8</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">read_marker</span>(<span class="ident">rd</span>)<span class="question-mark">?</span> {
-        <span class="ident">Marker</span>::<span class="ident">U8</span> <span class="op">=&gt;</span> <span class="ident">read_data_u8</span>(<span class="ident">rd</span>),
-        <span class="ident">marker</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
+        <span class="ident">Marker</span>::<span class="ident">U8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">read_data_u8</span>(<span class="ident">rd</span>),
+        <span class="ident">marker</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
     }
 }
 
@@ -180,10 +180,10 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This function will silently retry on every EINTR received from the underlying `Read` until</span>
 <span class="doccomment">/// successful read.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_u16</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u16</span>, <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_u16</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u16</span>, <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">read_marker</span>(<span class="ident">rd</span>)<span class="question-mark">?</span> {
-        <span class="ident">Marker</span>::<span class="ident">U16</span> <span class="op">=&gt;</span> <span class="ident">read_data_u16</span>(<span class="ident">rd</span>),
-        <span class="ident">marker</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
+        <span class="ident">Marker</span>::<span class="ident">U16</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">read_data_u16</span>(<span class="ident">rd</span>),
+        <span class="ident">marker</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
     }
 }
 
@@ -203,10 +203,10 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This function will silently retry on every EINTR received from the underlying `Read` until</span>
 <span class="doccomment">/// successful read.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_u32</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_u32</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">read_marker</span>(<span class="ident">rd</span>)<span class="question-mark">?</span> {
-        <span class="ident">Marker</span>::<span class="ident">U32</span> <span class="op">=&gt;</span> <span class="ident">read_data_u32</span>(<span class="ident">rd</span>),
-        <span class="ident">marker</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
+        <span class="ident">Marker</span>::<span class="ident">U32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">read_data_u32</span>(<span class="ident">rd</span>),
+        <span class="ident">marker</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
     }
 }
 
@@ -226,10 +226,10 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This function will silently retry on every EINTR received from the underlying `Read` until</span>
 <span class="doccomment">/// successful read.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_u64</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u64</span>, <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_u64</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u64</span>, <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">read_marker</span>(<span class="ident">rd</span>)<span class="question-mark">?</span> {
-        <span class="ident">Marker</span>::<span class="ident">U64</span> <span class="op">=&gt;</span> <span class="ident">read_data_u64</span>(<span class="ident">rd</span>),
-        <span class="ident">marker</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
+        <span class="ident">Marker</span>::<span class="ident">U64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">read_data_u64</span>(<span class="ident">rd</span>),
+        <span class="ident">marker</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
     }
 }
 </pre></div>

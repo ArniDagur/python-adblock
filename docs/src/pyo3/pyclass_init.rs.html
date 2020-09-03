@@ -208,7 +208,7 @@
 <span class="doccomment">/// This trait is intended to use internally for distinguishing `#[pyclass]` and</span>
 <span class="doccomment">/// Python native types.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PyObjectInit</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PyTypeInfo</span><span class="op">&gt;</span>: <span class="ident">Sized</span> {
-    <span class="kw">fn</span> <span class="ident">init_class</span><span class="op">&lt;</span><span class="ident">L</span>: <span class="ident">PyLayout</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span>(<span class="self">self</span>, <span class="ident">layout</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">L</span>);
+    <span class="kw">fn</span> <span class="ident">init_class</span><span class="op">&lt;</span><span class="ident">L</span>: <span class="ident">PyLayout</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">layout</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">L</span>);
     <span class="macro">private_decl</span><span class="macro">!</span> {}
 }
 
@@ -216,7 +216,7 @@
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PyNativeTypeInitializer</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PyTypeInfo</span><span class="op">&gt;</span>(<span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>);
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PyTypeInfo</span><span class="op">&gt;</span> <span class="ident">PyObjectInit</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">PyNativeTypeInitializer</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">init_class</span><span class="op">&lt;</span><span class="ident">L</span>: <span class="ident">PyLayout</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span>(<span class="self">self</span>, <span class="ident">_layout</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">L</span>) {}
+    <span class="kw">fn</span> <span class="ident">init_class</span><span class="op">&lt;</span><span class="ident">L</span>: <span class="ident">PyLayout</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">_layout</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">L</span>) {}
     <span class="macro">private_impl</span><span class="macro">!</span> {}
 }
 
@@ -272,7 +272,7 @@
     <span class="doccomment">/// Constract new initialzer from value `T` and base class&#39; initializer.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// We recommend to mainly use `add_subclass`, instead of directly call `new`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">init</span>: <span class="ident">T</span>, <span class="ident">super_init</span>: <span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">BaseType</span> <span class="kw">as</span> <span class="ident">PyTypeInfo</span><span class="op">&gt;</span>::<span class="ident">Initializer</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">init</span>: <span class="ident">T</span>, <span class="ident">super_init</span>: <span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">BaseType</span> <span class="kw">as</span> <span class="ident">PyTypeInfo</span><span class="op">&gt;</span>::<span class="ident">Initializer</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span> { <span class="ident">init</span>, <span class="ident">super_init</span> }
     }
 
@@ -305,7 +305,7 @@
     <span class="doccomment">///     }</span>
     <span class="doccomment">/// }</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_subclass</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">subclass_value</span>: <span class="ident">S</span>) <span class="op">-&gt;</span> <span class="ident">PyClassInitializer</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_subclass</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">subclass_value</span>: <span class="ident">S</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyClassInitializer</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">S</span>: <span class="ident">PyClass</span> <span class="op">+</span> <span class="ident">PyTypeInfo</span><span class="op">&lt;</span><span class="ident">BaseType</span> <span class="op">=</span> <span class="ident">T</span><span class="op">&gt;</span>,
         <span class="ident">S</span>::<span class="ident">BaseLayout</span>: <span class="ident">PySizedLayout</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
@@ -316,7 +316,7 @@
 
     <span class="doccomment">/// Create a new PyCell and initialize it.</span>
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create_cell</span>(<span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyCell</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create_cell</span>(<span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyCell</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">PyClass</span>,
         <span class="ident">T</span>::<span class="ident">BaseLayout</span>: <span class="ident">PyBorrowFlagLayout</span><span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">BaseType</span><span class="op">&gt;</span>,
@@ -334,7 +334,7 @@
         <span class="self">self</span>,
         <span class="ident">py</span>: <span class="ident">Python</span>,
         <span class="ident">subtype</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">crate</span>::<span class="ident">ffi</span>::<span class="ident">PyTypeObject</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyCell</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span>
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">PyCell</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">PyClass</span>,
         <span class="ident">T</span>::<span class="ident">BaseLayout</span>: <span class="ident">PyBorrowFlagLayout</span><span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">BaseType</span><span class="op">&gt;</span>,
@@ -346,7 +346,7 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PyClass</span><span class="op">&gt;</span> <span class="ident">PyObjectInit</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">PyClassInitializer</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">init_class</span><span class="op">&lt;</span><span class="ident">L</span>: <span class="ident">PyLayout</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span>(<span class="self">self</span>, <span class="ident">layout</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">L</span>) {
+    <span class="kw">fn</span> <span class="ident">init_class</span><span class="op">&lt;</span><span class="ident">L</span>: <span class="ident">PyLayout</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">layout</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">L</span>) {
         <span class="kw">let</span> <span class="self">Self</span> { <span class="ident">init</span>, <span class="ident">super_init</span> } <span class="op">=</span> <span class="self">self</span>;
         <span class="kw">unsafe</span> {
             <span class="ident">layout</span>.<span class="ident">py_init</span>(<span class="ident">init</span>);
@@ -361,9 +361,9 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">PyClassInitializer</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">PyClass</span>,
-    <span class="ident">T</span>::<span class="ident">BaseType</span>: <span class="ident">PyTypeInfo</span><span class="op">&lt;</span><span class="ident">Initializer</span> <span class="op">=</span> <span class="ident">PyNativeTypeInitializer</span><span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">BaseType</span><span class="op">&gt;&gt;</span>,
+    <span class="ident">T</span>::<span class="ident">BaseType</span>: <span class="ident">PyTypeInfo</span><span class="op">&lt;</span><span class="ident">Initializer</span> <span class="op">=</span> <span class="ident">PyNativeTypeInitializer</span><span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">BaseType</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">PyClassInitializer</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyClassInitializer</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
         <span class="self">Self</span>::<span class="ident">new</span>(<span class="ident">value</span>, <span class="ident">PyNativeTypeInitializer</span>(<span class="ident">PhantomData</span>))
     }
 }
@@ -372,10 +372,10 @@
 <span class="kw">where</span>
     <span class="ident">S</span>: <span class="ident">PyClass</span> <span class="op">+</span> <span class="ident">PyTypeInfo</span><span class="op">&lt;</span><span class="ident">BaseType</span> <span class="op">=</span> <span class="ident">B</span><span class="op">&gt;</span>,
     <span class="ident">S</span>::<span class="ident">BaseLayout</span>: <span class="ident">PySizedLayout</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>,
-    <span class="ident">B</span>: <span class="ident">PyClass</span> <span class="op">+</span> <span class="ident">PyTypeInfo</span><span class="op">&lt;</span><span class="ident">Initializer</span> <span class="op">=</span> <span class="ident">PyClassInitializer</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;&gt;</span>,
-    <span class="ident">B</span>::<span class="ident">BaseType</span>: <span class="ident">PyTypeInfo</span><span class="op">&lt;</span><span class="ident">Initializer</span> <span class="op">=</span> <span class="ident">PyNativeTypeInitializer</span><span class="op">&lt;</span><span class="ident">B</span>::<span class="ident">BaseType</span><span class="op">&gt;&gt;</span>,
+    <span class="ident">B</span>: <span class="ident">PyClass</span> <span class="op">+</span> <span class="ident">PyTypeInfo</span><span class="op">&lt;</span><span class="ident">Initializer</span> <span class="op">=</span> <span class="ident">PyClassInitializer</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">B</span>::<span class="ident">BaseType</span>: <span class="ident">PyTypeInfo</span><span class="op">&lt;</span><span class="ident">Initializer</span> <span class="op">=</span> <span class="ident">PyNativeTypeInitializer</span><span class="op">&lt;</span><span class="ident">B</span>::<span class="ident">BaseType</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">sub_and_base</span>: (<span class="ident">S</span>, <span class="ident">B</span>)) <span class="op">-&gt;</span> <span class="ident">PyClassInitializer</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">sub_and_base</span>: (<span class="ident">S</span>, <span class="ident">B</span>)) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyClassInitializer</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span> {
         <span class="kw">let</span> (<span class="ident">sub</span>, <span class="ident">base</span>) <span class="op">=</span> <span class="ident">sub_and_base</span>;
         <span class="ident">PyClassInitializer</span>::<span class="ident">from</span>(<span class="ident">base</span>).<span class="ident">add_subclass</span>(<span class="ident">sub</span>)
     }
@@ -383,14 +383,14 @@
 
 <span class="comment">// Implementation which propagates the error from input PyResult. Useful in proc macro</span>
 <span class="comment">// code where `#[new]` may or may not return PyResult.</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">TryFrom</span><span class="op">&lt;</span><span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;&gt;</span> <span class="kw">for</span> <span class="ident">PyClassInitializer</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span> <span class="ident">TryFrom</span><span class="op">&lt;</span><span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">PyClassInitializer</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">PyClass</span>,
-    <span class="ident">U</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">PyClassInitializer</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;&gt;</span>,
+    <span class="ident">U</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">PyClassInitializer</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 {
     <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">PyErr</span>;
 
-    <span class="kw">fn</span> <span class="ident">try_from</span>(<span class="ident">result</span>: <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">try_from</span>(<span class="ident">result</span>: <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="ident">result</span>.<span class="ident">map</span>(<span class="ident">Into</span>::<span class="ident">into</span>)
     }
 }

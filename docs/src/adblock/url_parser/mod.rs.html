@@ -140,7 +140,7 @@
 <span class="comment">// mod parser_regex;</span>
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;embedded-domain-resolver&quot;</span>))]</span>
-<span class="kw">static</span> <span class="ident">DOMAIN_RESOLVER</span>: <span class="ident">once_cell</span>::<span class="ident">sync</span>::<span class="ident">OnceCell</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">ResolvesDomain</span><span class="op">&gt;&gt;</span> <span class="op">=</span> <span class="ident">once_cell</span>::<span class="ident">sync</span>::<span class="ident">OnceCell</span>::<span class="ident">new</span>();
+<span class="kw">static</span> <span class="ident">DOMAIN_RESOLVER</span>: <span class="ident">once_cell</span>::<span class="ident">sync</span>::<span class="ident">OnceCell</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="ident">dyn</span> <span class="ident">ResolvesDomain</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">once_cell</span>::<span class="ident">sync</span>::<span class="ident">OnceCell</span>::<span class="ident">new</span>();
 
 <span class="doccomment">/// Sets the library&#39;s domain resolver implementation.</span>
 <span class="doccomment">///</span>
@@ -148,7 +148,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// Will return the resolver if it has already been previously set.</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;embedded-domain-resolver&quot;</span>))]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_domain_resolver</span>(<span class="ident">resolver</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">ResolvesDomain</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">ResolvesDomain</span><span class="op">&gt;&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_domain_resolver</span>(<span class="ident">resolver</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">dyn</span> <span class="ident">ResolvesDomain</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">dyn</span> <span class="ident">ResolvesDomain</span><span class="op">&gt;</span><span class="op">&gt;</span> {
     <span class="ident">DOMAIN_RESOLVER</span>.<span class="ident">set</span>(<span class="ident">resolver</span>)
 }
 
@@ -157,13 +157,13 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;embedded-domain-resolver&quot;</span>)]</span>
 <span class="kw">impl</span> <span class="ident">ResolvesDomain</span> <span class="kw">for</span> <span class="ident">DefaultResolver</span> {
-    <span class="kw">fn</span> <span class="ident">get_host_domain</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">host</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> (<span class="ident">usize</span>, <span class="ident">usize</span>) {
+    <span class="kw">fn</span> <span class="ident">get_host_domain</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">host</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">usize</span>, <span class="ident">usize</span>) {
         <span class="kw">if</span> <span class="ident">host</span>.<span class="ident">is_empty</span>() {
             (<span class="number">0</span>, <span class="number">0</span>)
         } <span class="kw">else</span> {
             <span class="kw">match</span> <span class="ident">host</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">addr</span>::<span class="ident">DomainName</span><span class="op">&gt;</span>() {
-                <span class="prelude-val">Err</span>(<span class="ident">_e</span>) <span class="op">=&gt;</span> (<span class="number">0</span>, <span class="ident">host</span>.<span class="ident">len</span>()),
-                <span class="prelude-val">Ok</span>(<span class="ident">domain</span>) <span class="op">=&gt;</span> {
+                <span class="prelude-val">Err</span>(<span class="ident">_e</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="number">0</span>, <span class="ident">host</span>.<span class="ident">len</span>()),
+                <span class="prelude-val">Ok</span>(<span class="ident">domain</span>) <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="kw">let</span> <span class="ident">root</span> <span class="op">=</span> <span class="ident">domain</span>.<span class="ident">root</span>();
                     <span class="kw">let</span> <span class="ident">domain_str</span> <span class="op">=</span> <span class="ident">root</span>.<span class="ident">to_str</span>();
                     <span class="kw">let</span> <span class="ident">domain_len</span> <span class="op">=</span> <span class="ident">domain_str</span>.<span class="ident">len</span>();
@@ -203,7 +203,7 @@
     <span class="doccomment">/// let (start, end) = resolver.get_host_domain(host);</span>
     <span class="doccomment">/// assert_eq!(&amp;host[start..end], &quot;b.co.uk&quot;);</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">get_host_domain</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">host</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> (<span class="ident">usize</span>, <span class="ident">usize</span>);
+    <span class="kw">fn</span> <span class="ident">get_host_domain</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">host</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">usize</span>, <span class="ident">usize</span>);
 }
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RequestUrl</span> {
@@ -214,19 +214,19 @@
 }
 
 <span class="kw">impl</span> <span class="ident">RequestUrl</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">schema</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">schema</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">url</span>[..<span class="self">self</span>.<span class="ident">schema_end</span>]
     }
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hostname</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">hostname</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">url</span>[<span class="self">self</span>.<span class="ident">hostname_pos</span>.<span class="number">0</span>..<span class="self">self</span>.<span class="ident">hostname_pos</span>.<span class="number">1</span>]
     }
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">domain</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">domain</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">url</span>[<span class="self">self</span>.<span class="ident">hostname_pos</span>.<span class="number">0</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">domain</span>.<span class="number">0</span> .. <span class="self">self</span>.<span class="ident">hostname_pos</span>.<span class="number">0</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">domain</span>.<span class="number">1</span>]
     }
 }
 
 <span class="doccomment">/// Return the start and end indices of the domain of the given hostname.</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">get_host_domain</span>(<span class="ident">host</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> (<span class="ident">usize</span>, <span class="ident">usize</span>) {
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">get_host_domain</span>(<span class="ident">host</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">usize</span>, <span class="ident">usize</span>) {
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;embedded-domain-resolver&quot;</span>))]</span>
     <span class="kw">let</span> <span class="ident">domain_resolver</span> <span class="op">=</span> <span class="ident">DOMAIN_RESOLVER</span>.<span class="ident">get</span>().<span class="ident">expect</span>(<span class="string">&quot;An external domain resolver must be set when the `embedded-domain-resolver` feature is disabled.&quot;</span>);
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;embedded-domain-resolver&quot;</span>)]</span>
@@ -239,17 +239,17 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// As part of hostname parsing, punycode decoding is used to convert URLs with UTF characters to plain ASCII ones.</span>
 <span class="doccomment">/// Serialisation then contains this decoded URL that is used for further matching.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse_url</span>(<span class="ident">url</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">RequestUrl</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse_url</span>(<span class="ident">url</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">RequestUrl</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">parsed</span> <span class="op">=</span> <span class="ident">parser</span>::<span class="ident">Hostname</span>::<span class="ident">parse</span>(<span class="kw-2">&amp;</span><span class="ident">url</span>).<span class="ident">ok</span>();
     <span class="ident">parsed</span>.<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">h</span><span class="op">|</span> {
         <span class="kw">match</span> <span class="ident">h</span>.<span class="ident">host_str</span>() {
-            <span class="prelude-val">Some</span>(<span class="ident">_host</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">RequestUrl</span> {
+            <span class="prelude-val">Some</span>(<span class="ident">_host</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">RequestUrl</span> {
                 <span class="ident">url</span>: <span class="ident">h</span>.<span class="ident">url_str</span>().<span class="ident">to_owned</span>(),
                 <span class="ident">schema_end</span>: <span class="ident">h</span>.<span class="ident">scheme_end</span>,
                 <span class="ident">hostname_pos</span>: (<span class="ident">h</span>.<span class="ident">host_start</span>, <span class="ident">h</span>.<span class="ident">host_end</span>),
                 <span class="ident">domain</span>: <span class="ident">get_host_domain</span>(<span class="kw-2">&amp;</span><span class="ident">h</span>.<span class="ident">url_str</span>()[<span class="ident">h</span>.<span class="ident">host_start</span>..<span class="ident">h</span>.<span class="ident">host_end</span>])
             }),
-            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="prelude-val">None</span>
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>
         }
     })
 }
@@ -261,7 +261,7 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;embedded-domain-resolver&quot;</span>)]</span>
     <span class="kw">fn</span> <span class="ident">test_get_host_domain</span>() {
-        <span class="kw">fn</span> <span class="ident">domain</span>(<span class="ident">host</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span> {
+        <span class="kw">fn</span> <span class="ident">domain</span>(<span class="ident">host</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span> {
             <span class="kw">let</span> <span class="ident">resolver</span> <span class="op">=</span> <span class="ident">DefaultResolver</span>;
             <span class="kw">let</span> (<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span> <span class="ident">resolver</span>.<span class="ident">get_host_domain</span>(<span class="ident">host</span>);
             <span class="kw-2">&amp;</span><span class="ident">host</span>[<span class="ident">a</span>..<span class="ident">b</span>]

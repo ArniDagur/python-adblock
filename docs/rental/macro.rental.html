@@ -6,19 +6,19 @@
 		<span class="kw">mod</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">rental_mod</span>:<span class="ident">ident</span> {
 			$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">body</span>:<span class="ident">tt</span>)<span class="op">*</span>
 		}
-	} <span class="op">=&gt;</span> { ... };
+	} <span class="op">=</span><span class="op">&gt;</span> { ... };
     {
 		$(<span class="attribute">#[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">attr</span>:<span class="ident">meta</span>]</span>)<span class="op">*</span>
 		<span class="kw">pub</span> <span class="kw">mod</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">rental_mod</span>:<span class="ident">ident</span> {
 			$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">body</span>:<span class="ident">tt</span>)<span class="op">*</span>
 		}
-	} <span class="op">=&gt;</span> { ... };
+	} <span class="op">=</span><span class="op">&gt;</span> { ... };
     {
 		$(<span class="attribute">#[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">attr</span>:<span class="ident">meta</span>]</span>)<span class="op">*</span>
 		<span class="kw">pub</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">vis</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="kw">mod</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">rental_mod</span>:<span class="ident">ident</span> {
 			$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">body</span>:<span class="ident">tt</span>)<span class="op">*</span>
 		}
-	} <span class="op">=&gt;</span> { ... };
+	} <span class="op">=</span><span class="op">&gt;</span> { ... };
 }</pre></div>
 </div><div class='docblock'><p>The bedrock of this crate, this macro will generate self-referential structs.</p>
 <p>This macro is invoked in item position. The body parses as valid rust and contains no special syntax. Only certain constructs are allowed, and a few special attributes and lifetimes are recognized.</p>
@@ -43,7 +43,7 @@
         <span class="attribute">#[<span class="ident">rental</span>]</span>
         <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MyRental</span> {
             <span class="ident">foo</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Foo</span><span class="op">&gt;</span>,
-            <span class="ident">bar</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Bar</span><span class="op">&lt;</span><span class="lifetime">&#39;foo</span><span class="op">&gt;&gt;</span>,
+            <span class="ident">bar</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">Bar</span><span class="op">&lt;</span><span class="lifetime">&#39;foo</span><span class="op">&gt;</span><span class="op">&gt;</span>,
             <span class="ident">qux</span>: <span class="ident">Qux</span><span class="op">&lt;</span><span class="lifetime">&#39;foo</span>, <span class="lifetime">&#39;bar</span><span class="op">&gt;</span>,
         }
     }

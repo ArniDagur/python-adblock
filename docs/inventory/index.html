@@ -27,7 +27,7 @@ registry with an invocation of <code>inventory::collect!</code>.</p>
 }
 
 <span class="kw">impl</span> <span class="ident">Flag</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">short</span>: <span class="ident">char</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">short</span>: <span class="ident">char</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">Flag</span> { <span class="ident">short</span>, <span class="ident">name</span> }
     }
 }

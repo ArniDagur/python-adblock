@@ -195,14 +195,14 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This function will silently retry on every EINTR received from the underlying `Read` until</span>
 <span class="doccomment">/// successful read.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_fixext1</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">i8</span>, <span class="ident">u8</span>), <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_fixext1</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">i8</span>, <span class="ident">u8</span>), <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">read_marker</span>(<span class="ident">rd</span>)<span class="question-mark">?</span> {
-        <span class="ident">Marker</span>::<span class="ident">FixExt1</span> <span class="op">=&gt;</span> {
+        <span class="ident">Marker</span>::<span class="ident">FixExt1</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="ident">read_data_i8</span>(<span class="ident">rd</span>)<span class="question-mark">?</span>;
             <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">read_data_u8</span>(<span class="ident">rd</span>)<span class="question-mark">?</span>;
             <span class="prelude-val">Ok</span>((<span class="ident">ty</span>, <span class="ident">data</span>))
         }
-        <span class="ident">marker</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
+        <span class="ident">marker</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
     }
 }
 
@@ -219,13 +219,13 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This function will return `ValueReadError` on any I/O error while reading either the marker or</span>
 <span class="doccomment">/// the data.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_fixext2</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">i8</span>, [<span class="ident">u8</span>; <span class="number">2</span>]), <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_fixext2</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">i8</span>, [<span class="ident">u8</span>; <span class="number">2</span>]), <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">read_marker</span>(<span class="ident">rd</span>)<span class="question-mark">?</span> {
-        <span class="ident">Marker</span>::<span class="ident">FixExt2</span> <span class="op">=&gt;</span> {
+        <span class="ident">Marker</span>::<span class="ident">FixExt2</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> [<span class="number">0</span>; <span class="number">2</span>];
             <span class="ident">read_fixext_data</span>(<span class="ident">rd</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">ty</span><span class="op">|</span> (<span class="ident">ty</span>, <span class="ident">buf</span>))
         }
-        <span class="ident">marker</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
+        <span class="ident">marker</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
     }
 }
 
@@ -242,13 +242,13 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This function will return `ValueReadError` on any I/O error while reading either the marker or</span>
 <span class="doccomment">/// the data.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_fixext4</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">i8</span>, [<span class="ident">u8</span>; <span class="number">4</span>]), <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_fixext4</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">i8</span>, [<span class="ident">u8</span>; <span class="number">4</span>]), <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">read_marker</span>(<span class="ident">rd</span>)<span class="question-mark">?</span> {
-        <span class="ident">Marker</span>::<span class="ident">FixExt4</span> <span class="op">=&gt;</span> {
+        <span class="ident">Marker</span>::<span class="ident">FixExt4</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> [<span class="number">0</span>; <span class="number">4</span>];
             <span class="ident">read_fixext_data</span>(<span class="ident">rd</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">ty</span><span class="op">|</span> (<span class="ident">ty</span>, <span class="ident">buf</span>))
         }
-        <span class="ident">marker</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
+        <span class="ident">marker</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
     }
 }
 
@@ -265,13 +265,13 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This function will return `ValueReadError` on any I/O error while reading either the marker or</span>
 <span class="doccomment">/// the data.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_fixext8</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">i8</span>, [<span class="ident">u8</span>; <span class="number">8</span>]), <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_fixext8</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">i8</span>, [<span class="ident">u8</span>; <span class="number">8</span>]), <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">read_marker</span>(<span class="ident">rd</span>)<span class="question-mark">?</span> {
-        <span class="ident">Marker</span>::<span class="ident">FixExt8</span> <span class="op">=&gt;</span> {
+        <span class="ident">Marker</span>::<span class="ident">FixExt8</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> [<span class="number">0</span>; <span class="number">8</span>];
             <span class="ident">read_fixext_data</span>(<span class="ident">rd</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">ty</span><span class="op">|</span> (<span class="ident">ty</span>, <span class="ident">buf</span>))
         }
-        <span class="ident">marker</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
+        <span class="ident">marker</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
     }
 }
 
@@ -288,21 +288,21 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// This function will return `ValueReadError` on any I/O error while reading either the marker or</span>
 <span class="doccomment">/// the data.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_fixext16</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">i8</span>, [<span class="ident">u8</span>; <span class="number">16</span>]), <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_fixext16</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">i8</span>, [<span class="ident">u8</span>; <span class="number">16</span>]), <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">read_marker</span>(<span class="ident">rd</span>)<span class="question-mark">?</span> {
-        <span class="ident">Marker</span>::<span class="ident">FixExt16</span> <span class="op">=&gt;</span> {
+        <span class="ident">Marker</span>::<span class="ident">FixExt16</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> [<span class="number">0</span>; <span class="number">16</span>];
             <span class="ident">read_fixext_data</span>(<span class="ident">rd</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buf</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">ty</span><span class="op">|</span> (<span class="ident">ty</span>, <span class="ident">buf</span>))
         }
-        <span class="ident">marker</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
+        <span class="ident">marker</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
     }
 }
 
-<span class="kw">fn</span> <span class="ident">read_fixext_data</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i8</span>, <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">read_fixext_data</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i8</span>, <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">id</span> <span class="op">=</span> <span class="ident">read_data_i8</span>(<span class="ident">rd</span>)<span class="question-mark">?</span>;
     <span class="kw">match</span> <span class="ident">rd</span>.<span class="ident">read_exact</span>(<span class="ident">buf</span>) {
-        <span class="prelude-val">Ok</span>(()) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">id</span>),
-        <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">InvalidDataRead</span>(<span class="ident">err</span>)),
+        <span class="prelude-val">Ok</span>(()) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">id</span>),
+        <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">InvalidDataRead</span>(<span class="ident">err</span>)),
     }
 }
 
@@ -325,17 +325,17 @@
     <span class="kw">pub</span> <span class="ident">size</span>: <span class="ident">u32</span>,
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_ext_meta</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ExtMeta</span>, <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_ext_meta</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">rd</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ExtMeta</span>, <span class="ident">ValueReadError</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">read_marker</span>(<span class="ident">rd</span>)<span class="question-mark">?</span> {
-        <span class="ident">Marker</span>::<span class="ident">FixExt1</span> <span class="op">=&gt;</span> <span class="number">1</span>,
-        <span class="ident">Marker</span>::<span class="ident">FixExt2</span> <span class="op">=&gt;</span> <span class="number">2</span>,
-        <span class="ident">Marker</span>::<span class="ident">FixExt4</span> <span class="op">=&gt;</span> <span class="number">4</span>,
-        <span class="ident">Marker</span>::<span class="ident">FixExt8</span> <span class="op">=&gt;</span> <span class="number">8</span>,
-        <span class="ident">Marker</span>::<span class="ident">FixExt16</span> <span class="op">=&gt;</span> <span class="number">16</span>,
-        <span class="ident">Marker</span>::<span class="ident">Ext8</span> <span class="op">=&gt;</span> <span class="ident">read_data_u8</span>(<span class="ident">rd</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">u32</span>,
-        <span class="ident">Marker</span>::<span class="ident">Ext16</span> <span class="op">=&gt;</span> <span class="ident">read_data_u16</span>(<span class="ident">rd</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">u32</span>,
-        <span class="ident">Marker</span>::<span class="ident">Ext32</span> <span class="op">=&gt;</span> <span class="ident">read_data_u32</span>(<span class="ident">rd</span>)<span class="question-mark">?</span>,
-        <span class="ident">marker</span> <span class="op">=&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
+        <span class="ident">Marker</span>::<span class="ident">FixExt1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">1</span>,
+        <span class="ident">Marker</span>::<span class="ident">FixExt2</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">2</span>,
+        <span class="ident">Marker</span>::<span class="ident">FixExt4</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">4</span>,
+        <span class="ident">Marker</span>::<span class="ident">FixExt8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">8</span>,
+        <span class="ident">Marker</span>::<span class="ident">FixExt16</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">16</span>,
+        <span class="ident">Marker</span>::<span class="ident">Ext8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">read_data_u8</span>(<span class="ident">rd</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">u32</span>,
+        <span class="ident">Marker</span>::<span class="ident">Ext16</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">read_data_u16</span>(<span class="ident">rd</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">u32</span>,
+        <span class="ident">Marker</span>::<span class="ident">Ext32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">read_data_u32</span>(<span class="ident">rd</span>)<span class="question-mark">?</span>,
+        <span class="ident">marker</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ValueReadError</span>::<span class="ident">TypeMismatch</span>(<span class="ident">marker</span>)),
     };
 
     <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="ident">read_data_i8</span>(<span class="ident">rd</span>)<span class="question-mark">?</span>;

@@ -403,9 +403,9 @@
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">default_new</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PyTypeInfo</span><span class="op">&gt;</span>(
     <span class="ident">py</span>: <span class="ident">Python</span>,
     <span class="ident">subtype</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyTypeObject</span>,
-) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span> {
+) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span> {
     <span class="comment">// if the class derives native types(e.g., PyDict), call special new</span>
-    <span class="kw">if</span> <span class="ident">T</span>::<span class="ident">FLAGS</span> <span class="op">&amp;</span> <span class="ident">type_flags</span>::<span class="ident">EXTENDED</span> <span class="op">!=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">T</span>::<span class="ident">BaseLayout</span>::<span class="ident">IS_NATIVE_TYPE</span> {
+    <span class="kw">if</span> <span class="ident">T</span>::<span class="ident">FLAGS</span> <span class="op">&amp;</span> <span class="ident">type_flags</span>::<span class="ident">EXTENDED</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">T</span>::<span class="ident">BaseLayout</span>::<span class="ident">IS_NATIVE_TYPE</span> {
         <span class="kw">let</span> <span class="ident">base_tp</span> <span class="op">=</span> <span class="ident">T</span>::<span class="ident">BaseType</span>::<span class="ident">type_object_raw</span>(<span class="ident">py</span>);
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">base_new</span>) <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">base_tp</span>).<span class="ident">tp_new</span> {
             <span class="kw">return</span> <span class="ident">base_new</span>(<span class="ident">subtype</span>, <span class="ident">ptr</span>::<span class="ident">null_mut</span>(), <span class="ident">ptr</span>::<span class="ident">null_mut</span>());
@@ -421,7 +421,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Safety</span>
     <span class="doccomment">/// This function must return a valid pointer to the Python heap.</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">py</span>: <span class="ident">Python</span>, <span class="ident">subtype</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyTypeObject</span>) <span class="op">-&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Layout</span> {
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">py</span>: <span class="ident">Python</span>, <span class="ident">subtype</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyTypeObject</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="self">Self</span>::<span class="ident">Layout</span> {
         <span class="ident">default_new</span>::<span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>(<span class="ident">py</span>, <span class="ident">subtype</span>) <span class="kw">as</span> <span class="kw">_</span>
     }
 
@@ -439,13 +439,13 @@
         }
 
         <span class="kw">match</span> (<span class="kw-2">*</span><span class="ident">ffi</span>::<span class="ident">Py_TYPE</span>(<span class="ident">obj</span>.<span class="ident">as_ptr</span>())).<span class="ident">tp_free</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">free</span>) <span class="op">=&gt;</span> <span class="ident">free</span>(<span class="ident">obj</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>),
-            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="ident">tp_free_fallback</span>(<span class="ident">obj</span>.<span class="ident">as_ptr</span>()),
+            <span class="prelude-val">Some</span>(<span class="ident">free</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">free</span>(<span class="ident">obj</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>),
+            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">tp_free_fallback</span>(<span class="ident">obj</span>.<span class="ident">as_ptr</span>()),
         }
     }
 }
 
-<span class="kw">fn</span> <span class="ident">tp_dealloc</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PyClassAlloc</span><span class="op">&gt;</span>() <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">destructor</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">tp_dealloc</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PyClassAlloc</span><span class="op">&gt;</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">destructor</span><span class="op">&gt;</span> {
     <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">dealloc</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>)
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">PyClassAlloc</span>,
@@ -459,7 +459,7 @@
 
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">tp_free_fallback</span>(<span class="ident">obj</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>) {
     <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="ident">ffi</span>::<span class="ident">Py_TYPE</span>(<span class="ident">obj</span>);
-    <span class="kw">if</span> <span class="ident">ffi</span>::<span class="ident">PyType_IS_GC</span>(<span class="ident">ty</span>) <span class="op">!=</span> <span class="number">0</span> {
+    <span class="kw">if</span> <span class="ident">ffi</span>::<span class="ident">PyType_IS_GC</span>(<span class="ident">ty</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
         <span class="ident">ffi</span>::<span class="ident">PyObject_GC_Del</span>(<span class="ident">obj</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>);
     } <span class="kw">else</span> {
         <span class="ident">ffi</span>::<span class="ident">PyObject_Free</span>(<span class="ident">obj</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">c_void</span>);
@@ -467,7 +467,7 @@
 
     <span class="comment">// For heap types, PyType_GenericAlloc calls INCREF on the type objects,</span>
     <span class="comment">// so we need to call DECREF here:</span>
-    <span class="kw">if</span> <span class="ident">ffi</span>::<span class="ident">PyType_HasFeature</span>(<span class="ident">ty</span>, <span class="ident">ffi</span>::<span class="ident">Py_TPFLAGS_HEAPTYPE</span>) <span class="op">!=</span> <span class="number">0</span> {
+    <span class="kw">if</span> <span class="ident">ffi</span>::<span class="ident">PyType_HasFeature</span>(<span class="ident">ty</span>, <span class="ident">ffi</span>::<span class="ident">Py_TPFLAGS_HEAPTYPE</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
         <span class="ident">ffi</span>::<span class="ident">Py_DECREF</span>(<span class="ident">ty</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span>);
     }
 }
@@ -478,7 +478,7 @@
 <span class="doccomment">/// The `#[pyclass]` attribute automatically implements this trait for your Rust struct,</span>
 <span class="doccomment">/// so you don&#39;t have to use this trait directly.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PyClass</span>:
-    <span class="ident">PyTypeInfo</span><span class="op">&lt;</span><span class="ident">Layout</span> <span class="op">=</span> <span class="ident">PyCell</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>, <span class="ident">AsRefTarget</span> <span class="op">=</span> <span class="ident">PyCell</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;&gt;</span>
+    <span class="ident">PyTypeInfo</span><span class="op">&lt;</span><span class="ident">Layout</span> <span class="op">=</span> <span class="ident">PyCell</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>, <span class="ident">AsRefTarget</span> <span class="op">=</span> <span class="ident">PyCell</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span><span class="op">&gt;</span>
     <span class="op">+</span> <span class="ident">Sized</span>
     <span class="op">+</span> <span class="ident">PyClassSend</span>
     <span class="op">+</span> <span class="ident">PyClassAlloc</span>
@@ -499,23 +499,23 @@
     <span class="ident">py</span>: <span class="ident">Python</span>,
     <span class="ident">module_name</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>,
     <span class="ident">type_object</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyTypeObject</span>,
-) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
+) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">PyClass</span>,
 {
     <span class="ident">type_object</span>.<span class="ident">tp_doc</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">T</span>::<span class="ident">DESCRIPTION</span> {
         <span class="comment">// PyPy will segfault if passed only a nul terminator as `tp_doc`, ptr::null() is OK though.</span>
-        <span class="string">&quot;\0&quot;</span> <span class="op">=&gt;</span> <span class="ident">ptr</span>::<span class="ident">null</span>(),
-        <span class="ident">s</span> <span class="kw">if</span> <span class="ident">s</span>.<span class="ident">as_bytes</span>().<span class="ident">ends_with</span>(<span class="string">b&quot;\0&quot;</span>) <span class="op">=&gt;</span> <span class="ident">s</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw">_</span>,
+        <span class="string">&quot;\0&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ptr</span>::<span class="ident">null</span>(),
+        <span class="ident">s</span> <span class="kw">if</span> <span class="ident">s</span>.<span class="ident">as_bytes</span>().<span class="ident">ends_with</span>(<span class="string">b&quot;\0&quot;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">s</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw">_</span>,
         <span class="comment">// If the description is not null-terminated, create CString and leak it</span>
-        <span class="ident">s</span> <span class="op">=&gt;</span> <span class="ident">CString</span>::<span class="ident">new</span>(<span class="ident">s</span>)<span class="question-mark">?</span>.<span class="ident">into_raw</span>(),
+        <span class="ident">s</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">CString</span>::<span class="ident">new</span>(<span class="ident">s</span>)<span class="question-mark">?</span>.<span class="ident">into_raw</span>(),
     };
 
     <span class="ident">type_object</span>.<span class="ident">tp_base</span> <span class="op">=</span> <span class="ident">T</span>::<span class="ident">BaseType</span>::<span class="ident">type_object_raw</span>(<span class="ident">py</span>);
 
     <span class="ident">type_object</span>.<span class="ident">tp_name</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">module_name</span> {
-        <span class="prelude-val">Some</span>(<span class="ident">module_name</span>) <span class="op">=&gt;</span> <span class="ident">CString</span>::<span class="ident">new</span>(<span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}.{}&quot;</span>, <span class="ident">module_name</span>, <span class="ident">T</span>::<span class="ident">NAME</span>))<span class="question-mark">?</span>.<span class="ident">into_raw</span>(),
-        <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="ident">CString</span>::<span class="ident">new</span>(<span class="ident">T</span>::<span class="ident">NAME</span>)<span class="question-mark">?</span>.<span class="ident">into_raw</span>(),
+        <span class="prelude-val">Some</span>(<span class="ident">module_name</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">CString</span>::<span class="ident">new</span>(<span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}.{}&quot;</span>, <span class="ident">module_name</span>, <span class="ident">T</span>::<span class="ident">NAME</span>))<span class="question-mark">?</span>.<span class="ident">into_raw</span>(),
+        <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">CString</span>::<span class="ident">new</span>(<span class="ident">T</span>::<span class="ident">NAME</span>)<span class="question-mark">?</span>.<span class="ident">into_raw</span>(),
     };
 
     <span class="comment">// dealloc</span>
@@ -528,13 +528,13 @@
 
     <span class="comment">// __dict__ support</span>
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">dict_offset</span>) <span class="op">=</span> <span class="ident">T</span>::<span class="ident">Dict</span>::<span class="ident">OFFSET</span> {
-        <span class="ident">offset</span> <span class="op">+=</span> <span class="ident">dict_offset</span> <span class="kw">as</span> <span class="ident">ffi</span>::<span class="ident">Py_ssize_t</span>;
+        <span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">dict_offset</span> <span class="kw">as</span> <span class="ident">ffi</span>::<span class="ident">Py_ssize_t</span>;
         <span class="ident">type_object</span>.<span class="ident">tp_dictoffset</span> <span class="op">=</span> <span class="ident">offset</span>;
     }
 
     <span class="comment">// weakref support</span>
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">weakref_offset</span>) <span class="op">=</span> <span class="ident">T</span>::<span class="ident">WeakRef</span>::<span class="ident">OFFSET</span> {
-        <span class="ident">offset</span> <span class="op">+=</span> <span class="ident">weakref_offset</span> <span class="kw">as</span> <span class="ident">ffi</span>::<span class="ident">Py_ssize_t</span>;
+        <span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">weakref_offset</span> <span class="kw">as</span> <span class="ident">ffi</span>::<span class="ident">Py_ssize_t</span>;
         <span class="ident">type_object</span>.<span class="ident">tp_weaklistoffset</span> <span class="op">=</span> <span class="ident">offset</span>;
     }
 
@@ -567,7 +567,7 @@
             <span class="kw">unsafe</span> { <span class="ident">p</span>.<span class="ident">as_mut</span>() }.<span class="ident">nb_bool</span> <span class="op">=</span> <span class="ident">nb_bool</span>;
             <span class="ident">p</span>.<span class="ident">as_ptr</span>()
         })
-        .<span class="ident">unwrap_or_else</span>(<span class="op">||</span> <span class="ident">nb_bool</span>.<span class="ident">map_or_else</span>(<span class="ident">ptr</span>::<span class="ident">null_mut</span>, <span class="ident">ffi</span>::<span class="ident">PyNumberMethods</span>::<span class="ident">from_nb_bool</span>));
+        .<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">nb_bool</span>.<span class="ident">map_or_else</span>(<span class="ident">ptr</span>::<span class="ident">null_mut</span>, <span class="ident">ffi</span>::<span class="ident">PyNumberMethods</span>::<span class="ident">from_nb_bool</span>));
     <span class="comment">// mapping methods</span>
     <span class="ident">type_object</span>.<span class="ident">tp_as_mapping</span> <span class="op">=</span> <span class="ident">T</span>::<span class="ident">mapping_methods</span>().<span class="ident">map_or_else</span>(<span class="ident">ptr</span>::<span class="ident">null_mut</span>, <span class="op">|</span><span class="ident">p</span><span class="op">|</span> <span class="ident">p</span>.<span class="ident">as_ptr</span>());
     <span class="comment">// sequence methods</span>
@@ -606,7 +606,7 @@
 
     <span class="comment">// register type object</span>
     <span class="kw">unsafe</span> {
-        <span class="kw">if</span> <span class="ident">ffi</span>::<span class="ident">PyType_Ready</span>(<span class="ident">type_object</span>) <span class="op">==</span> <span class="number">0</span> {
+        <span class="kw">if</span> <span class="ident">ffi</span>::<span class="ident">PyType_Ready</span>(<span class="ident">type_object</span>) <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
             <span class="prelude-val">Ok</span>(())
         } <span class="kw">else</span> {
             <span class="ident">PyErr</span>::<span class="ident">fetch</span>(<span class="ident">py</span>).<span class="ident">into</span>()
@@ -615,27 +615,27 @@
 }
 
 <span class="kw">fn</span> <span class="ident">py_class_flags</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PyTypeInfo</span><span class="op">&gt;</span>(<span class="ident">type_object</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyTypeObject</span>) {
-    <span class="kw">if</span> <span class="ident">type_object</span>.<span class="ident">tp_traverse</span> <span class="op">!=</span> <span class="prelude-val">None</span>
-        <span class="op">||</span> <span class="ident">type_object</span>.<span class="ident">tp_clear</span> <span class="op">!=</span> <span class="prelude-val">None</span>
-        <span class="op">||</span> <span class="ident">T</span>::<span class="ident">FLAGS</span> <span class="op">&amp;</span> <span class="ident">type_flags</span>::<span class="ident">GC</span> <span class="op">!=</span> <span class="number">0</span>
+    <span class="kw">if</span> <span class="ident">type_object</span>.<span class="ident">tp_traverse</span> <span class="op">!</span><span class="op">=</span> <span class="prelude-val">None</span>
+        <span class="op">|</span><span class="op">|</span> <span class="ident">type_object</span>.<span class="ident">tp_clear</span> <span class="op">!</span><span class="op">=</span> <span class="prelude-val">None</span>
+        <span class="op">|</span><span class="op">|</span> <span class="ident">T</span>::<span class="ident">FLAGS</span> <span class="op">&amp;</span> <span class="ident">type_flags</span>::<span class="ident">GC</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
     {
         <span class="ident">type_object</span>.<span class="ident">tp_flags</span> <span class="op">=</span> <span class="ident">ffi</span>::<span class="ident">Py_TPFLAGS_DEFAULT</span> <span class="op">|</span> <span class="ident">ffi</span>::<span class="ident">Py_TPFLAGS_HAVE_GC</span>;
     } <span class="kw">else</span> {
         <span class="ident">type_object</span>.<span class="ident">tp_flags</span> <span class="op">=</span> <span class="ident">ffi</span>::<span class="ident">Py_TPFLAGS_DEFAULT</span>;
     }
-    <span class="kw">if</span> <span class="ident">T</span>::<span class="ident">FLAGS</span> <span class="op">&amp;</span> <span class="ident">type_flags</span>::<span class="ident">BASETYPE</span> <span class="op">!=</span> <span class="number">0</span> {
-        <span class="ident">type_object</span>.<span class="ident">tp_flags</span> <span class="op">|=</span> <span class="ident">ffi</span>::<span class="ident">Py_TPFLAGS_BASETYPE</span>;
+    <span class="kw">if</span> <span class="ident">T</span>::<span class="ident">FLAGS</span> <span class="op">&amp;</span> <span class="ident">type_flags</span>::<span class="ident">BASETYPE</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
+        <span class="ident">type_object</span>.<span class="ident">tp_flags</span> <span class="op">|</span><span class="op">=</span> <span class="ident">ffi</span>::<span class="ident">Py_TPFLAGS_BASETYPE</span>;
     }
 }
 
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">py_class_attributes</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PyMethods</span><span class="op">&gt;</span>() <span class="op">-&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">PyClassAttributeDef</span><span class="op">&gt;</span> {
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">py_class_attributes</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PyMethods</span><span class="op">&gt;</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">PyClassAttributeDef</span><span class="op">&gt;</span> {
     <span class="ident">T</span>::<span class="ident">py_methods</span>().<span class="ident">into_iter</span>().<span class="ident">filter_map</span>(<span class="op">|</span><span class="ident">def</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">def</span> {
-        <span class="ident">PyMethodDefType</span>::<span class="ident">ClassAttribute</span>(<span class="ident">attr</span>) <span class="op">=&gt;</span> <span class="prelude-val">Some</span>(<span class="kw-2">*</span><span class="ident">attr</span>),
-        <span class="kw">_</span> <span class="op">=&gt;</span> <span class="prelude-val">None</span>,
+        <span class="ident">PyMethodDefType</span>::<span class="ident">ClassAttribute</span>(<span class="ident">attr</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="kw-2">*</span><span class="ident">attr</span>),
+        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
     })
 }
 
-<span class="kw">fn</span> <span class="ident">py_class_method_defs</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PyMethods</span><span class="op">&gt;</span>() <span class="op">-&gt;</span> (
+<span class="kw">fn</span> <span class="ident">py_class_method_defs</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PyMethods</span><span class="op">&gt;</span>() <span class="op">-</span><span class="op">&gt;</span> (
     <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">newfunc</span><span class="op">&gt;</span>,
     <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">PyCFunctionWithKeywords</span><span class="op">&gt;</span>,
     <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">PyMethodDef</span><span class="op">&gt;</span>,
@@ -646,12 +646,12 @@
 
     <span class="kw">for</span> <span class="ident">def</span> <span class="kw">in</span> <span class="ident">T</span>::<span class="ident">py_methods</span>() {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">def</span> {
-            <span class="ident">PyMethodDefType</span>::<span class="ident">New</span>(<span class="kw-2">ref</span> <span class="ident">def</span>) <span class="op">=&gt;</span> {
+            <span class="ident">PyMethodDefType</span>::<span class="ident">New</span>(<span class="kw-2">ref</span> <span class="ident">def</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">if</span> <span class="kw">let</span> <span class="ident">class</span>::<span class="ident">methods</span>::<span class="ident">PyMethodType</span>::<span class="ident">PyNewFunc</span>(<span class="ident">meth</span>) <span class="op">=</span> <span class="ident">def</span>.<span class="ident">ml_meth</span> {
                     <span class="ident">new</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">meth</span>)
                 }
             }
-            <span class="ident">PyMethodDefType</span>::<span class="ident">Call</span>(<span class="kw-2">ref</span> <span class="ident">def</span>) <span class="op">=&gt;</span> {
+            <span class="ident">PyMethodDefType</span>::<span class="ident">Call</span>(<span class="kw-2">ref</span> <span class="ident">def</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">if</span> <span class="kw">let</span> <span class="ident">class</span>::<span class="ident">methods</span>::<span class="ident">PyMethodType</span>::<span class="ident">PyCFunctionWithKeywords</span>(<span class="ident">meth</span>) <span class="op">=</span> <span class="ident">def</span>.<span class="ident">ml_meth</span> {
                     <span class="ident">call</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">meth</span>)
                 } <span class="kw">else</span> {
@@ -660,22 +660,22 @@
             }
             <span class="ident">PyMethodDefType</span>::<span class="ident">Method</span>(<span class="kw-2">ref</span> <span class="ident">def</span>)
             <span class="op">|</span> <span class="ident">PyMethodDefType</span>::<span class="ident">Class</span>(<span class="kw-2">ref</span> <span class="ident">def</span>)
-            <span class="op">|</span> <span class="ident">PyMethodDefType</span>::<span class="ident">Static</span>(<span class="kw-2">ref</span> <span class="ident">def</span>) <span class="op">=&gt;</span> {
+            <span class="op">|</span> <span class="ident">PyMethodDefType</span>::<span class="ident">Static</span>(<span class="kw-2">ref</span> <span class="ident">def</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="ident">defs</span>.<span class="ident">push</span>(<span class="ident">def</span>.<span class="ident">as_method_def</span>());
             }
-            <span class="kw">_</span> <span class="op">=&gt;</span> (),
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> (),
         }
     }
 
     (<span class="ident">new</span>, <span class="ident">call</span>, <span class="ident">defs</span>)
 }
 
-<span class="kw">fn</span> <span class="ident">py_class_properties</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PyMethods</span><span class="op">&gt;</span>() <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">PyGetSetDef</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">py_class_properties</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PyMethods</span><span class="op">&gt;</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ffi</span>::<span class="ident">PyGetSetDef</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">defs</span> <span class="op">=</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">HashMap</span>::<span class="ident">new</span>();
 
     <span class="kw">for</span> <span class="ident">def</span> <span class="kw">in</span> <span class="ident">T</span>::<span class="ident">py_methods</span>() {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">def</span> {
-            <span class="ident">PyMethodDefType</span>::<span class="ident">Getter</span>(<span class="kw-2">ref</span> <span class="ident">getter</span>) <span class="op">=&gt;</span> {
+            <span class="ident">PyMethodDefType</span>::<span class="ident">Getter</span>(<span class="kw-2">ref</span> <span class="ident">getter</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">getter</span>.<span class="ident">name</span>.<span class="ident">to_string</span>();
                 <span class="kw">if</span> <span class="op">!</span><span class="ident">defs</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">name</span>) {
                     <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">defs</span>.<span class="ident">insert</span>(<span class="ident">name</span>.<span class="ident">clone</span>(), <span class="ident">ffi</span>::<span class="ident">PyGetSetDef_INIT</span>);
@@ -683,7 +683,7 @@
                 <span class="kw">let</span> <span class="ident">def</span> <span class="op">=</span> <span class="ident">defs</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">name</span>).<span class="ident">expect</span>(<span class="string">&quot;Failed to call get_mut&quot;</span>);
                 <span class="ident">getter</span>.<span class="ident">copy_to</span>(<span class="ident">def</span>);
             }
-            <span class="ident">PyMethodDefType</span>::<span class="ident">Setter</span>(<span class="kw-2">ref</span> <span class="ident">setter</span>) <span class="op">=&gt;</span> {
+            <span class="ident">PyMethodDefType</span>::<span class="ident">Setter</span>(<span class="kw-2">ref</span> <span class="ident">setter</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">setter</span>.<span class="ident">name</span>.<span class="ident">to_string</span>();
                 <span class="kw">if</span> <span class="op">!</span><span class="ident">defs</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">name</span>) {
                     <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">defs</span>.<span class="ident">insert</span>(<span class="ident">name</span>.<span class="ident">clone</span>(), <span class="ident">ffi</span>::<span class="ident">PyGetSetDef_INIT</span>);
@@ -691,7 +691,7 @@
                 <span class="kw">let</span> <span class="ident">def</span> <span class="op">=</span> <span class="ident">defs</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">name</span>).<span class="ident">expect</span>(<span class="string">&quot;Failed to call get_mut&quot;</span>);
                 <span class="ident">setter</span>.<span class="ident">copy_to</span>(<span class="ident">def</span>);
             }
-            <span class="kw">_</span> <span class="op">=&gt;</span> (),
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> (),
         }
     }
 
@@ -712,7 +712,7 @@
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PyClassThreadChecker</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>: <span class="ident">Sized</span> {
     <span class="kw">fn</span> <span class="ident">ensure</span>(<span class="kw-2">&amp;</span><span class="self">self</span>);
-    <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="self">Self</span>;
+    <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
     <span class="macro">private_decl</span><span class="macro">!</span> {}
 }
 
@@ -722,7 +722,7 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Send</span><span class="op">&gt;</span> <span class="ident">PyClassThreadChecker</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ThreadCheckerStub</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">ensure</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {}
-    <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">ThreadCheckerStub</span>(<span class="ident">PhantomData</span>)
     }
     <span class="macro">private_impl</span><span class="macro">!</span> {}
@@ -730,7 +730,7 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PyNativeType</span><span class="op">&gt;</span> <span class="ident">PyClassThreadChecker</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ThreadCheckerStub</span><span class="op">&lt;</span><span class="kw">crate</span>::<span class="ident">PyObject</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">ensure</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {}
-    <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">ThreadCheckerStub</span>(<span class="ident">PhantomData</span>)
     }
     <span class="macro">private_impl</span><span class="macro">!</span> {}
@@ -743,14 +743,14 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">PyClassThreadChecker</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ThreadCheckerImpl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">ensure</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="kw">if</span> <span class="ident">thread</span>::<span class="ident">current</span>().<span class="ident">id</span>() <span class="op">!=</span> <span class="self">self</span>.<span class="number">0</span> {
+        <span class="kw">if</span> <span class="ident">thread</span>::<span class="ident">current</span>().<span class="ident">id</span>() <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="number">0</span> {
             <span class="macro">panic</span><span class="macro">!</span>(
                 <span class="string">&quot;{} is unsendable, but sent to another thread!&quot;</span>,
                 <span class="ident">std</span>::<span class="ident">any</span>::<span class="ident">type_name</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>()
             );
         }
     }
-    <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">ThreadCheckerImpl</span>(<span class="ident">thread</span>::<span class="ident">current</span>().<span class="ident">id</span>(), <span class="ident">PhantomData</span>)
     }
     <span class="macro">private_impl</span><span class="macro">!</span> {}
@@ -765,7 +765,7 @@
     <span class="kw">fn</span> <span class="ident">ensure</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="self">self</span>.<span class="number">1</span>.<span class="ident">ensure</span>();
     }
-    <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">ThreadCheckerInherited</span>(<span class="ident">PhantomData</span>, <span class="ident">U</span>::<span class="ident">ThreadChecker</span>::<span class="ident">new</span>())
     }
     <span class="macro">private_impl</span><span class="macro">!</span> {}

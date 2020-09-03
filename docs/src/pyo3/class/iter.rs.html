@@ -191,14 +191,14 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_variables</span>)]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PyIterProtocol</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>: <span class="ident">PyClass</span> {
-    <span class="kw">fn</span> <span class="ident">__iter__</span>(<span class="ident">slf</span>: <span class="self">Self</span>::<span class="ident">Receiver</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="prelude-ty">Result</span>
+    <span class="kw">fn</span> <span class="ident">__iter__</span>(<span class="ident">slf</span>: <span class="self">Self</span>::<span class="ident">Receiver</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="prelude-ty">Result</span>
     <span class="kw">where</span>
         <span class="self">Self</span>: <span class="ident">PyIterIterProtocol</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>,
     {
         <span class="macro">unimplemented</span><span class="macro">!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">__next__</span>(<span class="ident">slf</span>: <span class="self">Self</span>::<span class="ident">Receiver</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="prelude-ty">Result</span>
+    <span class="kw">fn</span> <span class="ident">__next__</span>(<span class="ident">slf</span>: <span class="self">Self</span>::<span class="ident">Receiver</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="prelude-ty">Result</span>
     <span class="kw">where</span>
         <span class="self">Self</span>: <span class="ident">PyIterNextProtocol</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>,
     {
@@ -254,10 +254,10 @@
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PyIterNextOutput</span> <span class="op">=</span> <span class="ident">IterNextOutput</span><span class="op">&lt;</span><span class="ident">PyObject</span>, <span class="ident">PyObject</span><span class="op">&gt;</span>;
 
 <span class="kw">impl</span> <span class="ident">IntoPyCallbackOutput</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">PyIterNextOutput</span> {
-    <span class="kw">fn</span> <span class="ident">convert</span>(<span class="self">self</span>, <span class="ident">_py</span>: <span class="ident">Python</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">convert</span>(<span class="self">self</span>, <span class="ident">_py</span>: <span class="ident">Python</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">ffi</span>::<span class="ident">PyObject</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">IterNextOutput</span>::<span class="ident">Yield</span>(<span class="ident">o</span>) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">o</span>.<span class="ident">into_ptr</span>()),
-            <span class="ident">IterNextOutput</span>::<span class="ident">Return</span>(<span class="ident">opt</span>) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="kw">crate</span>::<span class="ident">exceptions</span>::<span class="ident">StopIteration</span>::<span class="ident">py_err</span>((<span class="ident">opt</span>,))),
+            <span class="ident">IterNextOutput</span>::<span class="ident">Yield</span>(<span class="ident">o</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">o</span>.<span class="ident">into_ptr</span>()),
+            <span class="ident">IterNextOutput</span>::<span class="ident">Return</span>(<span class="ident">opt</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="kw">crate</span>::<span class="ident">exceptions</span>::<span class="ident">StopIteration</span>::<span class="ident">py_err</span>((<span class="ident">opt</span>,))),
         }
     }
 }
@@ -267,10 +267,10 @@
     <span class="ident">T</span>: <span class="ident">IntoPy</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span>,
     <span class="ident">U</span>: <span class="ident">IntoPy</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span>,
 {
-    <span class="kw">fn</span> <span class="ident">convert</span>(<span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyIterNextOutput</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">convert</span>(<span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyIterNextOutput</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">IterNextOutput</span>::<span class="ident">Yield</span>(<span class="ident">o</span>) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">IterNextOutput</span>::<span class="ident">Yield</span>(<span class="ident">o</span>.<span class="ident">into_py</span>(<span class="ident">py</span>))),
-            <span class="ident">IterNextOutput</span>::<span class="ident">Return</span>(<span class="ident">o</span>) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">IterNextOutput</span>::<span class="ident">Return</span>(<span class="ident">o</span>.<span class="ident">into_py</span>(<span class="ident">py</span>))),
+            <span class="ident">IterNextOutput</span>::<span class="ident">Yield</span>(<span class="ident">o</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">IterNextOutput</span>::<span class="ident">Yield</span>(<span class="ident">o</span>.<span class="ident">into_py</span>(<span class="ident">py</span>))),
+            <span class="ident">IterNextOutput</span>::<span class="ident">Return</span>(<span class="ident">o</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">IterNextOutput</span>::<span class="ident">Return</span>(<span class="ident">o</span>.<span class="ident">into_py</span>(<span class="ident">py</span>))),
         }
     }
 }
@@ -279,10 +279,10 @@
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">IntoPy</span><span class="op">&lt;</span><span class="ident">PyObject</span><span class="op">&gt;</span>,
 {
-    <span class="kw">fn</span> <span class="ident">convert</span>(<span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyIterNextOutput</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">convert</span>(<span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">PyIterNextOutput</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">o</span>) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">PyIterNextOutput</span>::<span class="ident">Yield</span>(<span class="ident">o</span>.<span class="ident">into_py</span>(<span class="ident">py</span>))),
-            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">PyIterNextOutput</span>::<span class="ident">Return</span>(<span class="ident">py</span>.<span class="prelude-val">None</span>())),
+            <span class="prelude-val">Some</span>(<span class="ident">o</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">PyIterNextOutput</span>::<span class="ident">Yield</span>(<span class="ident">o</span>.<span class="ident">into_py</span>(<span class="ident">py</span>))),
+            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">PyIterNextOutput</span>::<span class="ident">Return</span>(<span class="ident">py</span>.<span class="prelude-val">None</span>())),
         }
     }
 }

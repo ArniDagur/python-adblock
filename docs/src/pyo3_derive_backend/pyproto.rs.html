@@ -194,21 +194,21 @@
 <span class="kw">use</span> <span class="ident">quote</span>::<span class="ident">ToTokens</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">HashSet</span>;
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">build_py_proto</span>(<span class="ident">ast</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">syn</span>::<span class="ident">ItemImpl</span>) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TokenStream</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">build_py_proto</span>(<span class="ident">ast</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">syn</span>::<span class="ident">ItemImpl</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TokenStream</span><span class="op">&gt;</span> {
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="kw">_</span>, <span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">path</span>, <span class="kw">_</span>)) <span class="op">=</span> <span class="ident">ast</span>.<span class="ident">trait_</span> {
         <span class="kw">let</span> <span class="ident">proto</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">segment</span>) <span class="op">=</span> <span class="ident">path</span>.<span class="ident">segments</span>.<span class="ident">last</span>() {
             <span class="kw">match</span> <span class="ident">segment</span>.<span class="ident">ident</span>.<span class="ident">to_string</span>().<span class="ident">as_str</span>() {
-                <span class="string">&quot;PyObjectProtocol&quot;</span> <span class="op">=&gt;</span> <span class="kw-2">&amp;</span><span class="ident">defs</span>::<span class="ident">OBJECT</span>,
-                <span class="string">&quot;PyAsyncProtocol&quot;</span> <span class="op">=&gt;</span> <span class="kw-2">&amp;</span><span class="ident">defs</span>::<span class="ident">ASYNC</span>,
-                <span class="string">&quot;PyMappingProtocol&quot;</span> <span class="op">=&gt;</span> <span class="kw-2">&amp;</span><span class="ident">defs</span>::<span class="ident">MAPPING</span>,
-                <span class="string">&quot;PyIterProtocol&quot;</span> <span class="op">=&gt;</span> <span class="kw-2">&amp;</span><span class="ident">defs</span>::<span class="ident">ITER</span>,
-                <span class="string">&quot;PyContextProtocol&quot;</span> <span class="op">=&gt;</span> <span class="kw-2">&amp;</span><span class="ident">defs</span>::<span class="ident">CONTEXT</span>,
-                <span class="string">&quot;PySequenceProtocol&quot;</span> <span class="op">=&gt;</span> <span class="kw-2">&amp;</span><span class="ident">defs</span>::<span class="ident">SEQ</span>,
-                <span class="string">&quot;PyNumberProtocol&quot;</span> <span class="op">=&gt;</span> <span class="kw-2">&amp;</span><span class="ident">defs</span>::<span class="ident">NUM</span>,
-                <span class="string">&quot;PyDescrProtocol&quot;</span> <span class="op">=&gt;</span> <span class="kw-2">&amp;</span><span class="ident">defs</span>::<span class="ident">DESCR</span>,
-                <span class="string">&quot;PyBufferProtocol&quot;</span> <span class="op">=&gt;</span> <span class="kw-2">&amp;</span><span class="ident">defs</span>::<span class="ident">BUFFER</span>,
-                <span class="string">&quot;PyGCProtocol&quot;</span> <span class="op">=&gt;</span> <span class="kw-2">&amp;</span><span class="ident">defs</span>::<span class="ident">GC</span>,
-                <span class="kw">_</span> <span class="op">=&gt;</span> {
+                <span class="string">&quot;PyObjectProtocol&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">defs</span>::<span class="ident">OBJECT</span>,
+                <span class="string">&quot;PyAsyncProtocol&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">defs</span>::<span class="ident">ASYNC</span>,
+                <span class="string">&quot;PyMappingProtocol&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">defs</span>::<span class="ident">MAPPING</span>,
+                <span class="string">&quot;PyIterProtocol&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">defs</span>::<span class="ident">ITER</span>,
+                <span class="string">&quot;PyContextProtocol&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">defs</span>::<span class="ident">CONTEXT</span>,
+                <span class="string">&quot;PySequenceProtocol&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">defs</span>::<span class="ident">SEQ</span>,
+                <span class="string">&quot;PyNumberProtocol&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">defs</span>::<span class="ident">NUM</span>,
+                <span class="string">&quot;PyDescrProtocol&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">defs</span>::<span class="ident">DESCR</span>,
+                <span class="string">&quot;PyBufferProtocol&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">defs</span>::<span class="ident">BUFFER</span>,
+                <span class="string">&quot;PyGCProtocol&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">defs</span>::<span class="ident">GC</span>,
+                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
                         <span class="ident">path</span>,
                         <span class="string">&quot;#[pyproto] can not be used with this block&quot;</span>,
@@ -243,7 +243,7 @@
     <span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Type</span>,
     <span class="ident">impls</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">syn</span>::<span class="ident">ImplItem</span><span class="op">&gt;</span>,
     <span class="ident">proto</span>: <span class="kw-2">&amp;</span><span class="ident">defs</span>::<span class="ident">Proto</span>,
-) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TokenStream</span><span class="op">&gt;</span> {
+) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TokenStream</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">trait_impls</span> <span class="op">=</span> <span class="ident">TokenStream</span>::<span class="ident">new</span>();
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">py_methods</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">method_names</span> <span class="op">=</span> <span class="ident">HashSet</span>::<span class="ident">new</span>();
@@ -300,7 +300,7 @@
     })
 }
 
-<span class="kw">fn</span> <span class="ident">inventory_submission</span>(<span class="ident">py_methods</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TokenStream</span><span class="op">&gt;</span>, <span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Type</span>) <span class="op">-&gt;</span> <span class="ident">TokenStream</span> {
+<span class="kw">fn</span> <span class="ident">inventory_submission</span>(<span class="ident">py_methods</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TokenStream</span><span class="op">&gt;</span>, <span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Type</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
     <span class="kw">if</span> <span class="ident">py_methods</span>.<span class="ident">is_empty</span>() {
         <span class="kw">return</span> <span class="macro">quote</span><span class="macro">!</span> {};
     }
@@ -318,7 +318,7 @@
     <span class="ident">method_names</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
     <span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Type</span>,
     <span class="ident">proto</span>: <span class="kw-2">&amp;</span><span class="ident">defs</span>::<span class="ident">Proto</span>,
-) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TokenStream</span><span class="op">&gt;</span> {
+) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TokenStream</span><span class="op">&gt;</span> {
     <span class="comment">// Some setters cannot coexist.</span>
     <span class="comment">// E.g., if we have `__add__`, we need to skip `set_radd`.</span>
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">skipped_setters</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
@@ -360,7 +360,7 @@
     })
 }
 
-<span class="kw">fn</span> <span class="ident">typename_hash</span>(<span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Type</span>) <span class="op">-&gt;</span> <span class="ident">u64</span> {
+<span class="kw">fn</span> <span class="ident">typename_hash</span>(<span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Type</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
     <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">hash</span>::{<span class="ident">Hash</span>, <span class="ident">Hasher</span>};
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hasher</span> <span class="op">=</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">hash_map</span>::<span class="ident">DefaultHasher</span>::<span class="ident">new</span>();
     <span class="ident">ty</span>.<span class="ident">hash</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">hasher</span>);

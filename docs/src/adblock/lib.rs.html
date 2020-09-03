@@ -563,7 +563,7 @@
 
 <span class="doccomment">/// Brave&#39;s adblocking library in Python!</span>
 <span class="attribute">#[<span class="ident">pymodule</span>]</span>
-<span class="kw">fn</span> <span class="ident">adblock</span>(<span class="ident">_py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>, <span class="ident">m</span>: <span class="kw-2">&amp;</span><span class="ident">PyModule</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">adblock</span>(<span class="ident">_py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>, <span class="ident">m</span>: <span class="kw-2">&amp;</span><span class="ident">PyModule</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="ident">m</span>.<span class="ident">add</span>(<span class="string">&quot;__version__&quot;</span>, <span class="macro">env</span><span class="macro">!</span>(<span class="string">&quot;CARGO_PKG_VERSION&quot;</span>))<span class="question-mark">?</span>;
     <span class="ident">m</span>.<span class="ident">add_class</span>::<span class="op">&lt;</span><span class="ident">Engine</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
     <span class="ident">m</span>.<span class="ident">add_class</span>::<span class="op">&lt;</span><span class="ident">FilterSet</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
@@ -620,7 +620,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">BlockerResult</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">RustBlockerResult</span> {
-    <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">BlockerResult</span> {
+    <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">BlockerResult</span> {
         <span class="ident">BlockerResult</span> {
             <span class="ident">matched</span>: <span class="self">self</span>.<span class="ident">matched</span>,
             <span class="ident">explicit_cancel</span>: <span class="self">self</span>.<span class="ident">explicit_cancel</span>,
@@ -635,7 +635,7 @@
 
 <span class="attribute">#[<span class="ident">pyproto</span>]</span>
 <span class="kw">impl</span> <span class="ident">PyObjectProtocol</span> <span class="kw">for</span> <span class="ident">BlockerResult</span> {
-    <span class="kw">fn</span> <span class="ident">__repr__</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">__repr__</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
         <span class="prelude-val">Ok</span>(<span class="macro">format</span><span class="macro">!</span>(
             <span class="string">&quot;BlockerResult({}, {}, {}, {:?}, {:?}, {:?}, {:?})&quot;</span>,
             <span class="self">self</span>.<span class="ident">matched</span>,
@@ -659,50 +659,50 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Error</span> <span class="kw">for</span> <span class="ident">BlockerError</span> {
-    <span class="kw">fn</span> <span class="ident">source</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span>(<span class="kw">dyn</span> <span class="ident">Error</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>)<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">source</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span>(<span class="ident">dyn</span> <span class="ident">Error</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>)<span class="op">&gt;</span> {
         <span class="prelude-val">None</span>
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Display</span> <span class="kw">for</span> <span class="ident">BlockerError</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="macro">write</span><span class="macro">!</span>(
             <span class="ident">f</span>,
             <span class="string">&quot;{}&quot;</span>,
             <span class="kw">match</span> <span class="self">self</span> {
-                <span class="self">Self</span>::<span class="ident">SerializationError</span> <span class="op">=&gt;</span> <span class="string">&quot;Serialization error&quot;</span>,
-                <span class="self">Self</span>::<span class="ident">DeserializationError</span> <span class="op">=&gt;</span> <span class="string">&quot;Deserialization error&quot;</span>,
-                <span class="self">Self</span>::<span class="ident">OptimizedFilterExistence</span> <span class="op">=&gt;</span> <span class="string">&quot;Optimized filter exists&quot;</span>,
-                <span class="self">Self</span>::<span class="ident">BadFilterAddUnsupported</span> <span class="op">=&gt;</span> <span class="string">&quot;Bad filter add unsupported&quot;</span>,
-                <span class="self">Self</span>::<span class="ident">FilterExists</span> <span class="op">=&gt;</span> <span class="string">&quot;Filter exists&quot;</span>,
+                <span class="self">Self</span>::<span class="ident">SerializationError</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Serialization error&quot;</span>,
+                <span class="self">Self</span>::<span class="ident">DeserializationError</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Deserialization error&quot;</span>,
+                <span class="self">Self</span>::<span class="ident">OptimizedFilterExistence</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Optimized filter exists&quot;</span>,
+                <span class="self">Self</span>::<span class="ident">BadFilterAddUnsupported</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Bad filter add unsupported&quot;</span>,
+                <span class="self">Self</span>::<span class="ident">FilterExists</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Filter exists&quot;</span>,
             }
         )
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">PyErr</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">BlockerError</span> {
-    <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">PyErr</span> {
+    <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyErr</span> {
         <span class="ident">PyErr</span>::<span class="ident">new</span>::<span class="op">&lt;</span><span class="ident">PyValueError</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>))
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">BlockerError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">RustBlockerError</span> {
-    <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">BlockerError</span> {
+    <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">BlockerError</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="self">Self</span>::<span class="ident">SerializationError</span> <span class="op">=&gt;</span> <span class="ident">BlockerError</span>::<span class="ident">SerializationError</span>,
-            <span class="self">Self</span>::<span class="ident">DeserializationError</span> <span class="op">=&gt;</span> <span class="ident">BlockerError</span>::<span class="ident">DeserializationError</span>,
-            <span class="self">Self</span>::<span class="ident">OptimizedFilterExistence</span> <span class="op">=&gt;</span> <span class="ident">BlockerError</span>::<span class="ident">OptimizedFilterExistence</span>,
-            <span class="self">Self</span>::<span class="ident">BadFilterAddUnsupported</span> <span class="op">=&gt;</span> <span class="ident">BlockerError</span>::<span class="ident">BadFilterAddUnsupported</span>,
-            <span class="self">Self</span>::<span class="ident">FilterExists</span> <span class="op">=&gt;</span> <span class="ident">BlockerError</span>::<span class="ident">FilterExists</span>,
+            <span class="self">Self</span>::<span class="ident">SerializationError</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">BlockerError</span>::<span class="ident">SerializationError</span>,
+            <span class="self">Self</span>::<span class="ident">DeserializationError</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">BlockerError</span>::<span class="ident">DeserializationError</span>,
+            <span class="self">Self</span>::<span class="ident">OptimizedFilterExistence</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">BlockerError</span>::<span class="ident">OptimizedFilterExistence</span>,
+            <span class="self">Self</span>::<span class="ident">BadFilterAddUnsupported</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">BlockerError</span>::<span class="ident">BadFilterAddUnsupported</span>,
+            <span class="self">Self</span>::<span class="ident">FilterExists</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">BlockerError</span>::<span class="ident">FilterExists</span>,
         }
     }
 }
 
-<span class="kw">fn</span> <span class="ident">filter_format_from_string</span>(<span class="ident">filter_format</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">FilterFormat</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">filter_format_from_string</span>(<span class="ident">filter_format</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">FilterFormat</span><span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">filter_format</span> {
-        <span class="string">&quot;standard&quot;</span> <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">FilterFormat</span>::<span class="ident">Standard</span>),
-        <span class="string">&quot;hosts&quot;</span> <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">FilterFormat</span>::<span class="ident">Hosts</span>),
-        <span class="kw">_</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">PyErr</span>::<span class="ident">new</span>::<span class="op">&lt;</span><span class="ident">PyValueError</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="string">&quot;Invalid format value&quot;</span>)),
+        <span class="string">&quot;standard&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">FilterFormat</span>::<span class="ident">Standard</span>),
+        <span class="string">&quot;hosts&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">FilterFormat</span>::<span class="ident">Hosts</span>),
+        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">PyErr</span>::<span class="ident">new</span>::<span class="op">&lt;</span><span class="ident">PyValueError</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="string">&quot;Invalid format value&quot;</span>)),
     }
 }
 
@@ -727,7 +727,7 @@
     <span class="doccomment">/// will be passed to the corresponding Engine.</span>
     <span class="attribute">#[<span class="ident">new</span>]</span>
     <span class="attribute">#[<span class="ident">args</span>(<span class="ident">debug</span> <span class="op">=</span> <span class="bool-val">false</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">debug</span>: <span class="ident">bool</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">debug</span>: <span class="ident">bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">filter_set</span>: <span class="ident">RustFilterSet</span>::<span class="ident">new</span>(<span class="ident">debug</span>),
         }
@@ -740,7 +740,7 @@
     <span class="doccomment">/// or &quot;hosts&quot;.</span>
     <span class="attribute">#[<span class="ident">text_signature</span> <span class="op">=</span> <span class="string">&quot;($self, filter_list, format)&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">args</span>(<span class="ident">filter_list</span>, <span class="ident">format</span> <span class="op">=</span> <span class="string">&quot;\&quot;standard\&quot;&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_filter_list</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">filter_list</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">format</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_filter_list</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">filter_list</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">format</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">filter_format</span> <span class="op">=</span> <span class="ident">filter_format_from_string</span>(<span class="ident">format</span>)<span class="question-mark">?</span>;
         <span class="self">self</span>.<span class="ident">filter_set</span>.<span class="ident">add_filter_list</span>(<span class="ident">filter_list</span>, <span class="ident">filter_format</span>);
         <span class="prelude-val">Ok</span>(())
@@ -753,7 +753,7 @@
     <span class="doccomment">/// or &quot;hosts&quot;.</span>
     <span class="attribute">#[<span class="ident">text_signature</span> <span class="op">=</span> <span class="string">&quot;($self, filters, format)&quot;</span>]</span>
     <span class="attribute">#[<span class="ident">args</span>(<span class="ident">filters</span>, <span class="ident">format</span> <span class="op">=</span> <span class="string">&quot;\&quot;standard\&quot;&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_filters</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">filters</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>, <span class="ident">format</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_filters</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">filters</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>, <span class="ident">format</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">filter_format</span> <span class="op">=</span> <span class="ident">filter_format_from_string</span>(<span class="ident">format</span>)<span class="question-mark">?</span>;
         <span class="self">self</span>.<span class="ident">filter_set</span>.<span class="ident">add_filters</span>(<span class="kw-2">&amp;</span><span class="ident">filters</span>, <span class="ident">filter_format</span>);
         <span class="prelude-val">Ok</span>(())
@@ -770,7 +770,7 @@
     <span class="doccomment">/// A map of CSS selectors on the page to respective non-hide style rules,</span>
     <span class="doccomment">/// i.e. any required styles other than `display: none`.</span>
     <span class="attribute">#[<span class="ident">pyo3</span>(<span class="ident">get</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">style_selectors</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">style_selectors</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     <span class="doccomment">/// A set of any class or id CSS selectors that should not have generic</span>
     <span class="doccomment">/// rules applied.</span>
     <span class="comment">// In practice, these should be passed to `class_id_stylesheet` and not</span>
@@ -784,7 +784,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">UrlSpecificResources</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">RustUrlSpecificResources</span> {
-    <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">UrlSpecificResources</span> {
+    <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">UrlSpecificResources</span> {
         <span class="ident">UrlSpecificResources</span> {
             <span class="ident">hide_selectors</span>: <span class="self">self</span>.<span class="ident">hide_selectors</span>,
             <span class="ident">style_selectors</span>: <span class="self">self</span>.<span class="ident">style_selectors</span>,
@@ -796,7 +796,7 @@
 
 <span class="attribute">#[<span class="ident">pyproto</span>]</span>
 <span class="kw">impl</span> <span class="ident">PyObjectProtocol</span> <span class="kw">for</span> <span class="ident">UrlSpecificResources</span> {
-    <span class="kw">fn</span> <span class="ident">__repr__</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">__repr__</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
         <span class="prelude-val">Ok</span>(<span class="macro">format</span><span class="macro">!</span>(
             <span class="string">&quot;UrlSpecificResources&lt;{} hide selectors, {} style selectors, {} exceptions, injected_javascript={:?}&gt;&quot;</span>,
             <span class="self">self</span>.<span class="ident">hide_selectors</span>.<span class="ident">len</span>(),
@@ -837,7 +837,7 @@
     <span class="doccomment">/// Create a new adblocking engine</span>
     <span class="attribute">#[<span class="ident">new</span>]</span>
     <span class="attribute">#[<span class="ident">args</span>(<span class="ident">filter_set</span>, <span class="ident">optimize</span> <span class="op">=</span> <span class="bool-val">true</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">filter_set</span>: <span class="ident">FilterSet</span>, <span class="ident">optimize</span>: <span class="ident">bool</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">filter_set</span>: <span class="ident">FilterSet</span>, <span class="ident">optimize</span>: <span class="ident">bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">engine</span> <span class="op">=</span> <span class="ident">RustEngine</span>::<span class="ident">from_filter_set</span>(<span class="ident">filter_set</span>.<span class="ident">filter_set</span>, <span class="ident">optimize</span>);
         <span class="self">Self</span> { <span class="ident">engine</span> }
     }
@@ -856,7 +856,7 @@
         <span class="ident">url</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">source_url</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">request_type</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">BlockerResult</span> {
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">BlockerResult</span> {
         <span class="kw">let</span> <span class="ident">blocker_result</span> <span class="op">=</span> <span class="self">self</span>
             .<span class="ident">engine</span>
             .<span class="ident">check_network_urls</span>(<span class="ident">url</span>, <span class="ident">source_url</span>, <span class="ident">request_type</span>);
@@ -881,7 +881,7 @@
         <span class="ident">source_hostname</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">request_type</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">third_party_request</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">BlockerResult</span> {
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">BlockerResult</span> {
         <span class="kw">let</span> <span class="ident">blocker_result</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">engine</span>.<span class="ident">check_network_urls_with_hostnames</span>(
             <span class="ident">url</span>,
             <span class="ident">hostname</span>,
@@ -917,7 +917,7 @@
         <span class="ident">third_party_request</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span>,
         <span class="ident">previously_matched_rule</span>: <span class="ident">bool</span>,
         <span class="ident">force_check_exceptions</span>: <span class="ident">bool</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">BlockerResult</span> {
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">BlockerResult</span> {
         <span class="kw">let</span> <span class="ident">blocker_result</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">engine</span>.<span class="ident">check_network_urls_with_hostnames_subset</span>(
             <span class="ident">url</span>,
             <span class="ident">hostname</span>,
@@ -933,17 +933,17 @@
     <span class="doccomment">/// Serialize this blocking engine to bytes. They can then be deserialized</span>
     <span class="doccomment">/// using `deserialize()` to get the same engine again.</span>
     <span class="attribute">#[<span class="ident">text_signature</span> <span class="op">=</span> <span class="string">&quot;($self)&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">serialize</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">PyBytes</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">serialize</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">py</span>: <span class="ident">Python</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> <span class="ident">PyBytes</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">serialize_inner</span>()<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">py_bytes</span> <span class="op">=</span> <span class="ident">PyBytes</span>::<span class="ident">new</span>(<span class="ident">py</span>, <span class="kw-2">&amp;</span><span class="ident">bytes</span>);
         <span class="prelude-val">Ok</span>(<span class="ident">py_bytes</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">serialize_inner</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">serialize_inner</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">engine</span>.<span class="ident">serialize</span>();
         <span class="kw">match</span> <span class="ident">result</span> {
-            <span class="prelude-val">Ok</span>(<span class="ident">x</span>) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">x</span>),
-            <span class="prelude-val">Err</span>(<span class="ident">error</span>) <span class="op">=&gt;</span> {
+            <span class="prelude-val">Ok</span>(<span class="ident">x</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">x</span>),
+            <span class="prelude-val">Err</span>(<span class="ident">error</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">my_blocker_error</span>: <span class="ident">BlockerError</span> <span class="op">=</span> <span class="ident">error</span>.<span class="ident">into</span>();
                 <span class="prelude-val">Err</span>(<span class="ident">my_blocker_error</span>.<span class="ident">into</span>())
             }
@@ -954,7 +954,7 @@
     <span class="doccomment">/// deserialized using `deserialize_from_file()` to get the same engine</span>
     <span class="doccomment">/// again.</span>
     <span class="attribute">#[<span class="ident">text_signature</span> <span class="op">=</span> <span class="string">&quot;($self, file)&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">serialize_to_file</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">serialize_to_file</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">serialize_inner</span>()<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fd</span> <span class="op">=</span> <span class="ident">fs</span>::<span class="ident">OpenOptions</span>::<span class="ident">new</span>()
             .<span class="ident">create</span>(<span class="bool-val">true</span>)
@@ -967,11 +967,11 @@
 
     <span class="doccomment">/// Deserialize a blocking engine from bytes produced with `serialize()`.</span>
     <span class="attribute">#[<span class="ident">text_signature</span> <span class="op">=</span> <span class="string">&quot;($self, serialized)&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">deserialize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">serialized</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">deserialize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">serialized</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">engine</span>.<span class="ident">deserialize</span>(<span class="ident">serialized</span>);
         <span class="kw">match</span> <span class="ident">result</span> {
-            <span class="prelude-val">Ok</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(()),
-            <span class="prelude-val">Err</span>(<span class="ident">error</span>) <span class="op">=&gt;</span> {
+            <span class="prelude-val">Ok</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(()),
+            <span class="prelude-val">Err</span>(<span class="ident">error</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">my_blocker_error</span>: <span class="ident">BlockerError</span> <span class="op">=</span> <span class="ident">error</span>.<span class="ident">into</span>();
                 <span class="prelude-val">Err</span>(<span class="ident">my_blocker_error</span>.<span class="ident">into</span>())
             }
@@ -981,7 +981,7 @@
     <span class="doccomment">/// Deserialize a blocking engine from file produced with</span>
     <span class="doccomment">/// `serialize_to_file()`.</span>
     <span class="attribute">#[<span class="ident">text_signature</span> <span class="op">=</span> <span class="string">&quot;($self, file)&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">deserialize_from_file</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">deserialize_from_file</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fd</span> <span class="op">=</span> <span class="ident">fs</span>::<span class="ident">File</span>::<span class="ident">open</span>(<span class="ident">file</span>)<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
         <span class="ident">fd</span>.<span class="ident">read_to_end</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">data</span>)<span class="question-mark">?</span>;
@@ -990,7 +990,7 @@
 
     <span class="doccomment">/// Checks if the given filter exists in the blocking engine.</span>
     <span class="attribute">#[<span class="ident">text_signature</span> <span class="op">=</span> <span class="string">&quot;($self, filter)&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">filter_exists</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">filter_exists</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">engine</span>.<span class="ident">filter_exists</span>(<span class="ident">filter</span>)
     }
 
@@ -1028,7 +1028,7 @@
     <span class="doccomment">/// Tags can be used to cheaply enable or disable network rules with a</span>
     <span class="doccomment">/// corresponding $tag option.</span>
     <span class="attribute">#[<span class="ident">text_signature</span> <span class="op">=</span> <span class="string">&quot;($self, tag)&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tag_exists</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">tag</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tag_exists</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">tag</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">engine</span>.<span class="ident">tag_exists</span>(<span class="ident">tag</span>)
     }
 
@@ -1037,7 +1037,7 @@
     <span class="doccomment">/// page should be passed to hidden_class_id_selectors to obtain any</span>
     <span class="doccomment">/// stylesheets consisting of generic rules.</span>
     <span class="attribute">#[<span class="ident">text_signature</span> <span class="op">=</span> <span class="string">&quot;($self, url)&quot;</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">url_cosmetic_resources</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">url</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-&gt;</span> <span class="ident">UrlSpecificResources</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">url_cosmetic_resources</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">url</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">UrlSpecificResources</span> {
         <span class="self">self</span>.<span class="ident">engine</span>.<span class="ident">url_cosmetic_resources</span>(<span class="ident">url</span>).<span class="ident">into</span>()
     }
 
@@ -1054,7 +1054,7 @@
         <span class="ident">classes</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
         <span class="ident">ids</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
         <span class="ident">exceptions</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;&gt;</span> {
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PyResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="prelude-val">Ok</span>(<span class="self">self</span>
             .<span class="ident">engine</span>
             .<span class="ident">hidden_class_id_selectors</span>(<span class="kw-2">&amp;</span><span class="ident">classes</span>, <span class="kw-2">&amp;</span><span class="ident">ids</span>, <span class="kw-2">&amp;</span><span class="ident">exceptions</span>))

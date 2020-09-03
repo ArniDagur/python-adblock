@@ -216,9 +216,9 @@
     <span class="kw">use</span> <span class="ident">synom</span>::<span class="ident">Synom</span>;
 
     <span class="kw">impl</span> <span class="ident">Synom</span> <span class="kw">for</span> <span class="ident">File</span> {
-        <span class="macro">named</span><span class="macro">!</span>(<span class="ident">parse</span> <span class="op">-&gt;</span> <span class="self">Self</span>, <span class="macro">do_parse</span><span class="macro">!</span>(
-            <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_inner</span>) <span class="op">&gt;&gt;</span>
-            <span class="ident">items</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Item</span>::<span class="ident">parse</span>) <span class="op">&gt;&gt;</span>
+        <span class="macro">named</span><span class="macro">!</span>(<span class="ident">parse</span> <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>, <span class="macro">do_parse</span><span class="macro">!</span>(
+            <span class="ident">attrs</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Attribute</span>::<span class="ident">parse_inner</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
+            <span class="ident">items</span>: <span class="macro">many0</span><span class="macro">!</span>(<span class="ident">Item</span>::<span class="ident">parse</span>) <span class="op">&gt;</span><span class="op">&gt;</span>
             (<span class="ident">File</span> {
                 <span class="ident">shebang</span>: <span class="prelude-val">None</span>,
                 <span class="ident">attrs</span>: <span class="ident">attrs</span>,
@@ -226,7 +226,7 @@
             })
         ));
 
-        <span class="kw">fn</span> <span class="ident">description</span>() <span class="op">-&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">description</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> {
             <span class="prelude-val">Some</span>(<span class="string">&quot;crate&quot;</span>)
         }
     }

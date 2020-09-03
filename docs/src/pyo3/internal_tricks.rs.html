@@ -37,31 +37,31 @@
 
 <span class="doccomment">/// A marker type that makes the type !Send.</span>
 <span class="doccomment">/// Temporal hack until https://github.com/rust-lang/rust/issues/13231 is resolved.</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">type</span> <span class="ident">Unsendable</span> <span class="op">=</span> <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">Rc</span><span class="op">&lt;</span>()<span class="op">&gt;&gt;</span>;
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">type</span> <span class="ident">Unsendable</span> <span class="op">=</span> <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">Rc</span><span class="op">&lt;</span>()<span class="op">&gt;</span><span class="op">&gt;</span>;
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PrivateMarker</span>;
 
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">private_decl</span> {
-    () <span class="op">=&gt;</span> {
+    () <span class="op">=</span><span class="op">&gt;</span> {
         <span class="doccomment">/// This trait is private to implement; this method exists to make it</span>
         <span class="doccomment">/// impossible to implement outside the crate.</span>
-        <span class="kw">fn</span> <span class="ident">__private__</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw">crate</span>::<span class="ident">internal_tricks</span>::<span class="ident">PrivateMarker</span>;
+        <span class="kw">fn</span> <span class="ident">__private__</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">crate</span>::<span class="ident">internal_tricks</span>::<span class="ident">PrivateMarker</span>;
     };
 }
 
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">private_impl</span> {
-    () <span class="op">=&gt;</span> {
+    () <span class="op">=</span><span class="op">&gt;</span> {
         <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-        <span class="kw">fn</span> <span class="ident">__private__</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw">crate</span>::<span class="ident">internal_tricks</span>::<span class="ident">PrivateMarker</span> {
+        <span class="kw">fn</span> <span class="ident">__private__</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">crate</span>::<span class="ident">internal_tricks</span>::<span class="ident">PrivateMarker</span> {
             <span class="kw">crate</span>::<span class="ident">internal_tricks</span>::<span class="ident">PrivateMarker</span>
         }
     };
 }
 
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">pyo3_exception</span> {
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>: <span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">base</span>: <span class="ident">ty</span>) <span class="op">=&gt;</span> {
-        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">impl_exception_boilerplate</span><span class="op">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>);
-        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">create_exception_type_object</span><span class="op">!</span>(<span class="ident">pyo3_runtime</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">base</span>);
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>: <span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">base</span>: <span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">impl_exception_boilerplate</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>);
+        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">create_exception_type_object</span><span class="macro">!</span>(<span class="macro-nonterminal">pyo3_runtime</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">base</span>);
     };
 }
 </pre></div>

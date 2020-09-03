@@ -298,14 +298,14 @@
 }
 
 <span class="kw">impl</span> <span class="ident">syn</span>::<span class="ident">parse</span>::<span class="ident">Parse</span> <span class="kw">for</span> <span class="ident">PyFunctionAttr</span> {
-    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="ident">ParseBuffer</span>) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="ident">ParseBuffer</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">attr</span> <span class="op">=</span> <span class="ident">Punctuated</span>::<span class="op">&lt;</span><span class="ident">NestedMeta</span>, <span class="ident">syn</span>::<span class="macro">Token</span><span class="macro">!</span>[,]<span class="op">&gt;</span>::<span class="ident">parse_terminated</span>(<span class="ident">input</span>)<span class="question-mark">?</span>;
         <span class="self">Self</span>::<span class="ident">from_meta</span>(<span class="kw-2">&amp;</span><span class="ident">attr</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">PyFunctionAttr</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_meta</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">iter</span>: <span class="kw">impl</span> <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">NestedMeta</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_meta</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">iter</span>: <span class="kw">impl</span> <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">NestedMeta</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">slf</span> <span class="op">=</span> <span class="ident">PyFunctionAttr</span>::<span class="ident">default</span>();
 
         <span class="kw">for</span> <span class="ident">item</span> <span class="kw">in</span> <span class="ident">iter</span> {
@@ -314,16 +314,16 @@
         <span class="prelude-val">Ok</span>(<span class="ident">slf</span>)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_item</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">item</span>: <span class="kw-2">&amp;</span><span class="ident">NestedMeta</span>) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_item</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">item</span>: <span class="kw-2">&amp;</span><span class="ident">NestedMeta</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="ident">item</span> {
-            <span class="ident">NestedMeta</span>::<span class="ident">Meta</span>(<span class="ident">syn</span>::<span class="ident">Meta</span>::<span class="ident">Path</span>(<span class="kw-2">ref</span> <span class="ident">ident</span>)) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">add_work</span>(<span class="ident">item</span>, <span class="ident">ident</span>)<span class="question-mark">?</span>,
-            <span class="ident">NestedMeta</span>::<span class="ident">Meta</span>(<span class="ident">syn</span>::<span class="ident">Meta</span>::<span class="ident">NameValue</span>(<span class="kw-2">ref</span> <span class="ident">nv</span>)) <span class="op">=&gt;</span> {
+            <span class="ident">NestedMeta</span>::<span class="ident">Meta</span>(<span class="ident">syn</span>::<span class="ident">Meta</span>::<span class="ident">Path</span>(<span class="kw-2">ref</span> <span class="ident">ident</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">add_work</span>(<span class="ident">item</span>, <span class="ident">ident</span>)<span class="question-mark">?</span>,
+            <span class="ident">NestedMeta</span>::<span class="ident">Meta</span>(<span class="ident">syn</span>::<span class="ident">Meta</span>::<span class="ident">NameValue</span>(<span class="kw-2">ref</span> <span class="ident">nv</span>)) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="self">self</span>.<span class="ident">add_name_value</span>(<span class="ident">item</span>, <span class="ident">nv</span>)<span class="question-mark">?</span>;
             }
-            <span class="ident">NestedMeta</span>::<span class="ident">Lit</span>(<span class="kw-2">ref</span> <span class="ident">lit</span>) <span class="op">=&gt;</span> {
+            <span class="ident">NestedMeta</span>::<span class="ident">Lit</span>(<span class="kw-2">ref</span> <span class="ident">lit</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="self">self</span>.<span class="ident">add_literal</span>(<span class="ident">item</span>, <span class="ident">lit</span>)<span class="question-mark">?</span>;
             }
-            <span class="ident">NestedMeta</span>::<span class="ident">Meta</span>(<span class="ident">syn</span>::<span class="ident">Meta</span>::<span class="ident">List</span>(<span class="kw-2">ref</span> <span class="ident">list</span>)) <span class="op">=&gt;</span> {
+            <span class="ident">NestedMeta</span>::<span class="ident">Meta</span>(<span class="ident">syn</span>::<span class="ident">Meta</span>::<span class="ident">List</span>(<span class="kw-2">ref</span> <span class="ident">list</span>)) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
                     <span class="ident">list</span>,
                     <span class="string">&quot;List is not supported as argument&quot;</span>,
@@ -333,24 +333,24 @@
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">fn</span> <span class="ident">add_literal</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">item</span>: <span class="kw-2">&amp;</span><span class="ident">NestedMeta</span>, <span class="ident">lit</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Lit</span>) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">add_literal</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">item</span>: <span class="kw-2">&amp;</span><span class="ident">NestedMeta</span>, <span class="ident">lit</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Lit</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="ident">lit</span> {
-            <span class="ident">syn</span>::<span class="ident">Lit</span>::<span class="ident">Str</span>(<span class="kw-2">ref</span> <span class="ident">lits</span>) <span class="kw">if</span> <span class="ident">lits</span>.<span class="ident">value</span>() <span class="op">==</span> <span class="string">&quot;*&quot;</span> <span class="op">=&gt;</span> {
+            <span class="ident">syn</span>::<span class="ident">Lit</span>::<span class="ident">Str</span>(<span class="kw-2">ref</span> <span class="ident">lits</span>) <span class="kw">if</span> <span class="ident">lits</span>.<span class="ident">value</span>() <span class="op">=</span><span class="op">=</span> <span class="string">&quot;*&quot;</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="comment">// &quot;*&quot;</span>
                 <span class="self">self</span>.<span class="ident">vararg_is_ok</span>(<span class="ident">item</span>)<span class="question-mark">?</span>;
                 <span class="self">self</span>.<span class="ident">has_varargs</span> <span class="op">=</span> <span class="bool-val">true</span>;
                 <span class="self">self</span>.<span class="ident">arguments</span>.<span class="ident">push</span>(<span class="ident">Argument</span>::<span class="ident">VarArgsSeparator</span>);
                 <span class="prelude-val">Ok</span>(())
             }
-            <span class="kw">_</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
                 <span class="ident">item</span>,
                 <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;Only \&quot;*\&quot; is supported here, got: {:?}&quot;</span>, <span class="ident">lit</span>),
             )),
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">add_work</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">item</span>: <span class="kw-2">&amp;</span><span class="ident">NestedMeta</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">has_kw</span> <span class="op">||</span> <span class="self">self</span>.<span class="ident">has_kwargs</span> {
+    <span class="kw">fn</span> <span class="ident">add_work</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">item</span>: <span class="kw-2">&amp;</span><span class="ident">NestedMeta</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">has_kw</span> <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">has_kwargs</span> {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
                 <span class="ident">item</span>,
                 <span class="string">&quot;Positional argument or varargs(*) is not allowed after keyword arguments&quot;</span>,
@@ -366,8 +366,8 @@
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">fn</span> <span class="ident">vararg_is_ok</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">item</span>: <span class="kw-2">&amp;</span><span class="ident">NestedMeta</span>) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">has_kwargs</span> <span class="op">||</span> <span class="self">self</span>.<span class="ident">has_varargs</span> {
+    <span class="kw">fn</span> <span class="ident">vararg_is_ok</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">item</span>: <span class="kw-2">&amp;</span><span class="ident">NestedMeta</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">has_kwargs</span> <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">has_varargs</span> {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
                 <span class="ident">item</span>,
                 <span class="string">&quot;* is not allowed after varargs(*) or kwargs(**)&quot;</span>,
@@ -376,7 +376,7 @@
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">fn</span> <span class="ident">kw_arg_is_ok</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">item</span>: <span class="kw-2">&amp;</span><span class="ident">NestedMeta</span>) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">kw_arg_is_ok</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">item</span>: <span class="kw-2">&amp;</span><span class="ident">NestedMeta</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">has_kwargs</span> {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
                 <span class="ident">item</span>,
@@ -391,7 +391,7 @@
         <span class="ident">item</span>: <span class="kw-2">&amp;</span><span class="ident">NestedMeta</span>,
         <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">Path</span>,
         <span class="ident">value</span>: <span class="ident">String</span>,
-    ) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">kw_arg_is_ok</span>(<span class="ident">item</span>)<span class="question-mark">?</span>;
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">has_varargs</span> {
             <span class="comment">// kw only</span>
@@ -404,15 +404,15 @@
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">fn</span> <span class="ident">add_name_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">item</span>: <span class="kw-2">&amp;</span><span class="ident">NestedMeta</span>, <span class="ident">nv</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">MetaNameValue</span>) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">add_name_value</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">item</span>: <span class="kw-2">&amp;</span><span class="ident">NestedMeta</span>, <span class="ident">nv</span>: <span class="kw-2">&amp;</span><span class="ident">syn</span>::<span class="ident">MetaNameValue</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="ident">nv</span>.<span class="ident">lit</span> {
-            <span class="ident">syn</span>::<span class="ident">Lit</span>::<span class="ident">Str</span>(<span class="kw-2">ref</span> <span class="ident">litstr</span>) <span class="op">=&gt;</span> {
-                <span class="kw">if</span> <span class="ident">litstr</span>.<span class="ident">value</span>() <span class="op">==</span> <span class="string">&quot;*&quot;</span> {
+            <span class="ident">syn</span>::<span class="ident">Lit</span>::<span class="ident">Str</span>(<span class="kw-2">ref</span> <span class="ident">litstr</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="kw">if</span> <span class="ident">litstr</span>.<span class="ident">value</span>() <span class="op">=</span><span class="op">=</span> <span class="string">&quot;*&quot;</span> {
                     <span class="comment">// args=&quot;*&quot;</span>
                     <span class="self">self</span>.<span class="ident">vararg_is_ok</span>(<span class="ident">item</span>)<span class="question-mark">?</span>;
                     <span class="self">self</span>.<span class="ident">has_varargs</span> <span class="op">=</span> <span class="bool-val">true</span>;
                     <span class="self">self</span>.<span class="ident">arguments</span>.<span class="ident">push</span>(<span class="ident">Argument</span>::<span class="ident">VarArgs</span>(<span class="ident">nv</span>.<span class="ident">path</span>.<span class="ident">clone</span>()));
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">litstr</span>.<span class="ident">value</span>() <span class="op">==</span> <span class="string">&quot;**&quot;</span> {
+                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">litstr</span>.<span class="ident">value</span>() <span class="op">=</span><span class="op">=</span> <span class="string">&quot;**&quot;</span> {
                     <span class="comment">// kwargs=&quot;**&quot;</span>
                     <span class="self">self</span>.<span class="ident">kw_arg_is_ok</span>(<span class="ident">item</span>)<span class="question-mark">?</span>;
                     <span class="self">self</span>.<span class="ident">has_kwargs</span> <span class="op">=</span> <span class="bool-val">true</span>;
@@ -421,13 +421,13 @@
                     <span class="self">self</span>.<span class="ident">add_nv_common</span>(<span class="ident">item</span>, <span class="kw-2">&amp;</span><span class="ident">nv</span>.<span class="ident">path</span>, <span class="ident">litstr</span>.<span class="ident">value</span>())<span class="question-mark">?</span>;
                 }
             }
-            <span class="ident">syn</span>::<span class="ident">Lit</span>::<span class="ident">Int</span>(<span class="kw-2">ref</span> <span class="ident">litint</span>) <span class="op">=&gt;</span> {
+            <span class="ident">syn</span>::<span class="ident">Lit</span>::<span class="ident">Int</span>(<span class="kw-2">ref</span> <span class="ident">litint</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="self">self</span>.<span class="ident">add_nv_common</span>(<span class="ident">item</span>, <span class="kw-2">&amp;</span><span class="ident">nv</span>.<span class="ident">path</span>, <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">litint</span>))<span class="question-mark">?</span>;
             }
-            <span class="ident">syn</span>::<span class="ident">Lit</span>::<span class="ident">Bool</span>(<span class="kw-2">ref</span> <span class="ident">litb</span>) <span class="op">=&gt;</span> {
+            <span class="ident">syn</span>::<span class="ident">Lit</span>::<span class="ident">Bool</span>(<span class="kw-2">ref</span> <span class="ident">litb</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="self">self</span>.<span class="ident">add_nv_common</span>(<span class="ident">item</span>, <span class="kw-2">&amp;</span><span class="ident">nv</span>.<span class="ident">path</span>, <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">litb</span>.<span class="ident">value</span>))<span class="question-mark">?</span>;
             }
-            <span class="kw">_</span> <span class="op">=&gt;</span> {
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new_spanned</span>(
                     <span class="ident">nv</span>.<span class="ident">lit</span>.<span class="ident">clone</span>(),
                     <span class="string">&quot;Only string literal is supported&quot;</span>,
@@ -438,16 +438,16 @@
     }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse_name_attribute</span>(<span class="ident">attrs</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">syn</span>::<span class="ident">Attribute</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">syn</span>::<span class="ident">Ident</span><span class="op">&gt;&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse_name_attribute</span>(<span class="ident">attrs</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">syn</span>::<span class="ident">Attribute</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">syn</span>::<span class="ident">Ident</span><span class="op">&gt;</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">name_attrs</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
 
     <span class="comment">// Using retain will extract all name attributes from the attribute list</span>
     <span class="ident">attrs</span>.<span class="ident">retain</span>(<span class="op">|</span><span class="ident">attr</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">attr</span>.<span class="ident">parse_meta</span>() {
-        <span class="prelude-val">Ok</span>(<span class="ident">syn</span>::<span class="ident">Meta</span>::<span class="ident">NameValue</span>(<span class="kw-2">ref</span> <span class="ident">nv</span>)) <span class="kw">if</span> <span class="ident">nv</span>.<span class="ident">path</span>.<span class="ident">is_ident</span>(<span class="string">&quot;name&quot;</span>) <span class="op">=&gt;</span> {
+        <span class="prelude-val">Ok</span>(<span class="ident">syn</span>::<span class="ident">Meta</span>::<span class="ident">NameValue</span>(<span class="kw-2">ref</span> <span class="ident">nv</span>)) <span class="kw">if</span> <span class="ident">nv</span>.<span class="ident">path</span>.<span class="ident">is_ident</span>(<span class="string">&quot;name&quot;</span>) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="ident">name_attrs</span>.<span class="ident">push</span>((<span class="ident">nv</span>.<span class="ident">lit</span>.<span class="ident">clone</span>(), <span class="ident">attr</span>.<span class="ident">span</span>()));
             <span class="bool-val">false</span>
         }
-        <span class="kw">_</span> <span class="op">=&gt;</span> <span class="bool-val">true</span>,
+        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
     });
 
     <span class="kw">if</span> <span class="number">1</span> <span class="op">&lt;</span> <span class="ident">name_attrs</span>.<span class="ident">len</span>() {
@@ -458,23 +458,23 @@
     }
 
     <span class="kw">match</span> <span class="ident">name_attrs</span>.<span class="ident">get</span>(<span class="number">0</span>) {
-        <span class="prelude-val">Some</span>((<span class="ident">syn</span>::<span class="ident">Lit</span>::<span class="ident">Str</span>(<span class="ident">s</span>), <span class="ident">span</span>)) <span class="op">=&gt;</span> {
+        <span class="prelude-val">Some</span>((<span class="ident">syn</span>::<span class="ident">Lit</span>::<span class="ident">Str</span>(<span class="ident">s</span>), <span class="ident">span</span>)) <span class="op">=</span><span class="op">&gt;</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ident</span>: <span class="ident">syn</span>::<span class="ident">Ident</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
             <span class="comment">// This span is the whole attribute span, which is nicer for reporting errors.</span>
             <span class="ident">ident</span>.<span class="ident">set_span</span>(<span class="kw-2">*</span><span class="ident">span</span>);
             <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">ident</span>))
         }
-        <span class="prelude-val">Some</span>((<span class="kw">_</span>, <span class="ident">span</span>)) <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
+        <span class="prelude-val">Some</span>((<span class="kw">_</span>, <span class="ident">span</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">syn</span>::<span class="ident">Error</span>::<span class="ident">new</span>(
             <span class="kw-2">*</span><span class="ident">span</span>,
             <span class="string">&quot;Expected string literal for #[name] argument&quot;</span>,
         )),
-        <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>),
+        <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>),
     }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">build_py_function</span>(<span class="ident">ast</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">syn</span>::<span class="ident">ItemFn</span>, <span class="ident">args</span>: <span class="ident">PyFunctionAttr</span>) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TokenStream</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">build_py_function</span>(<span class="ident">ast</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">syn</span>::<span class="ident">ItemFn</span>, <span class="ident">args</span>: <span class="ident">PyFunctionAttr</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TokenStream</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">python_name</span> <span class="op">=</span>
-        <span class="ident">parse_name_attribute</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ast</span>.<span class="ident">attrs</span>)<span class="question-mark">?</span>.<span class="ident">unwrap_or_else</span>(<span class="op">||</span> <span class="ident">ast</span>.<span class="ident">sig</span>.<span class="ident">ident</span>.<span class="ident">unraw</span>());
+        <span class="ident">parse_name_attribute</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ast</span>.<span class="ident">attrs</span>)<span class="question-mark">?</span>.<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">ast</span>.<span class="ident">sig</span>.<span class="ident">ident</span>.<span class="ident">unraw</span>());
     <span class="ident">add_fn_to_module</span>(<span class="ident">ast</span>, <span class="ident">python_name</span>, <span class="ident">args</span>.<span class="ident">arguments</span>)
 }
 
@@ -485,7 +485,7 @@
     <span class="kw">use</span> <span class="ident">quote</span>::<span class="ident">quote</span>;
     <span class="kw">use</span> <span class="ident">syn</span>::<span class="ident">parse_quote</span>;
 
-    <span class="kw">fn</span> <span class="ident">items</span>(<span class="ident">input</span>: <span class="ident">TokenStream</span>) <span class="op">-&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Argument</span><span class="op">&gt;&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">items</span>(<span class="ident">input</span>: <span class="ident">TokenStream</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Argument</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">py_fn_attr</span>: <span class="ident">PyFunctionAttr</span> <span class="op">=</span> <span class="ident">syn</span>::<span class="ident">parse2</span>(<span class="ident">input</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(<span class="ident">py_fn_attr</span>.<span class="ident">arguments</span>)
     }
@@ -502,7 +502,7 @@
     <span class="kw">fn</span> <span class="ident">test_simple_args</span>() {
         <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">items</span>(<span class="macro">quote</span><span class="macro">!</span> {<span class="ident">test1</span>, <span class="ident">test2</span>, <span class="ident">test3</span><span class="op">=</span><span class="string">&quot;None&quot;</span>}).<span class="ident">unwrap</span>();
         <span class="macro">assert</span><span class="macro">!</span>(
-            <span class="ident">args</span> <span class="op">==</span> <span class="macro">vec</span><span class="macro">!</span>[
+            <span class="ident">args</span> <span class="op">=</span><span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[
                 <span class="ident">Argument</span>::<span class="ident">Arg</span>(<span class="macro">parse_quote</span><span class="macro">!</span> {<span class="ident">test1</span>}, <span class="prelude-val">None</span>),
                 <span class="ident">Argument</span>::<span class="ident">Arg</span>(<span class="macro">parse_quote</span><span class="macro">!</span> {<span class="ident">test2</span>}, <span class="prelude-val">None</span>),
                 <span class="ident">Argument</span>::<span class="ident">Arg</span>(<span class="macro">parse_quote</span><span class="macro">!</span> {<span class="ident">test3</span>}, <span class="prelude-val">Some</span>(<span class="string">&quot;None&quot;</span>.<span class="ident">to_owned</span>())),
@@ -514,7 +514,7 @@
     <span class="kw">fn</span> <span class="ident">test_varargs</span>() {
         <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">items</span>(<span class="macro">quote</span><span class="macro">!</span> {<span class="ident">test1</span>, <span class="ident">test2</span><span class="op">=</span><span class="string">&quot;None&quot;</span>, <span class="string">&quot;*&quot;</span>, <span class="ident">test3</span><span class="op">=</span><span class="string">&quot;None&quot;</span>}).<span class="ident">unwrap</span>();
         <span class="macro">assert</span><span class="macro">!</span>(
-            <span class="ident">args</span> <span class="op">==</span> <span class="macro">vec</span><span class="macro">!</span>[
+            <span class="ident">args</span> <span class="op">=</span><span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[
                 <span class="ident">Argument</span>::<span class="ident">Arg</span>(<span class="macro">parse_quote</span><span class="macro">!</span> {<span class="ident">test1</span>}, <span class="prelude-val">None</span>),
                 <span class="ident">Argument</span>::<span class="ident">Arg</span>(<span class="macro">parse_quote</span><span class="macro">!</span> {<span class="ident">test2</span>}, <span class="prelude-val">Some</span>(<span class="string">&quot;None&quot;</span>.<span class="ident">to_owned</span>())),
                 <span class="ident">Argument</span>::<span class="ident">VarArgsSeparator</span>,
@@ -528,7 +528,7 @@
         <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span>
             <span class="ident">items</span>(<span class="macro">quote</span><span class="macro">!</span> {<span class="ident">test1</span>, <span class="ident">test2</span><span class="op">=</span><span class="string">&quot;None&quot;</span>, <span class="ident">args</span><span class="op">=</span><span class="string">&quot;*&quot;</span>, <span class="ident">test3</span><span class="op">=</span><span class="string">&quot;None&quot;</span>, <span class="ident">kwargs</span><span class="op">=</span><span class="string">&quot;**&quot;</span>}).<span class="ident">unwrap</span>();
         <span class="macro">assert</span><span class="macro">!</span>(
-            <span class="ident">args</span> <span class="op">==</span> <span class="macro">vec</span><span class="macro">!</span>[
+            <span class="ident">args</span> <span class="op">=</span><span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[
                 <span class="ident">Argument</span>::<span class="ident">Arg</span>(<span class="macro">parse_quote</span><span class="macro">!</span> {<span class="ident">test1</span>}, <span class="prelude-val">None</span>),
                 <span class="ident">Argument</span>::<span class="ident">Arg</span>(<span class="macro">parse_quote</span><span class="macro">!</span> {<span class="ident">test2</span>}, <span class="prelude-val">Some</span>(<span class="string">&quot;None&quot;</span>.<span class="ident">to_owned</span>())),
                 <span class="ident">Argument</span>::<span class="ident">VarArgs</span>(<span class="macro">parse_quote</span><span class="macro">!</span> {<span class="ident">args</span>}),
