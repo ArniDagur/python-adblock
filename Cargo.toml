@@ -11,7 +11,7 @@ debug = true
 
 [dependencies]
 adblock = { version = "0.3.2", default-features = false, features = ["full-regex-handling", "embedded-domain-resolver"] }
-pyo3 = "0.11"
+pyo3 = "0.12"
 
 [lib]
 name = "adblock"
