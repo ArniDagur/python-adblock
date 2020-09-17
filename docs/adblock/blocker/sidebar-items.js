@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["BlockerError",""]],"struct":[["Blocker",""],["BlockerOptions",""],["BlockerResult",""],["NetworkFilterList",""]]});
+initSidebarItems({"enum":[["BlockerError",""]],"struct":[["Blocker","Stores network filters for efficient querying."],["BlockerOptions",""],["BlockerResult",""],["NetworkFilterList",""]]});

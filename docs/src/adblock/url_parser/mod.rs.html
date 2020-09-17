@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/adblock-0.3.2/src/url_parser/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../adblock/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/adblock-0.3.3/src/url_parser/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../adblock/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
                 <a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
@@ -135,7 +135,21 @@
 <span id="134">134</span>
 <span id="135">135</span>
 <span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
 </pre><div class="example-wrap"><pre class="rust ">
+<span class="doccomment">//! Simplified URL parsing infrastructure, including the domain resolver</span>
+<span class="doccomment">//! implementation if the `embedded-domain-resolver` feature is disabled.</span>
+
 <span class="kw">mod</span> <span class="ident">parser</span>;
 <span class="comment">// mod parser_regex;</span>
 
@@ -144,7 +158,8 @@
 
 <span class="doccomment">/// Sets the library&#39;s domain resolver implementation.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// If the library is used without this having been set, panics may occur!</span>
+<span class="doccomment">/// If the `embedded-domain-resolver` feature is disabled and the library is</span>
+<span class="doccomment">/// used without this having been set, panics may occur!</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Will return the resolver if it has already been previously set.</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;embedded-domain-resolver&quot;</span>))]</span>
@@ -152,6 +167,8 @@
     <span class="ident">DOMAIN_RESOLVER</span>.<span class="ident">set</span>(<span class="ident">resolver</span>)
 }
 
+<span class="doccomment">/// Default `addr`-based domain resolution implementation used when the</span>
+<span class="doccomment">/// `embedded-domain-resolver` feature is enabled.</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;embedded-domain-resolver&quot;</span>)]</span>
 <span class="kw">struct</span> <span class="ident">DefaultResolver</span>;
 
@@ -175,6 +192,8 @@
     }
 }
 
+<span class="doccomment">/// Required trait for any domain resolution implementation used with this</span>
+<span class="doccomment">/// crate.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ResolvesDomain</span>: <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> {
     <span class="doccomment">/// Return the start and end indices of the domain (eTLD+1) of the given hostname.</span>
     <span class="doccomment">///</span>
@@ -206,6 +225,7 @@
     <span class="kw">fn</span> <span class="ident">get_host_domain</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">host</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">usize</span>, <span class="ident">usize</span>);
 }
 
+<span class="doccomment">/// Parsed URL representation.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RequestUrl</span> {
     <span class="kw">pub</span> <span class="ident">url</span>: <span class="ident">String</span>,
     <span class="ident">schema_end</span>: <span class="ident">usize</span>,
@@ -235,10 +255,12 @@
     <span class="ident">domain_resolver</span>.<span class="ident">get_host_domain</span>(<span class="ident">host</span>)
 }
 
-<span class="doccomment">/// Return the string representation of the host (domain or IP address) for this URL, if any together with the URL.</span>
+<span class="doccomment">/// Return the string representation of the host (domain or IP address) for</span>
+<span class="doccomment">/// this URL, if any together with the URL.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// As part of hostname parsing, punycode decoding is used to convert URLs with UTF characters to plain ASCII ones.</span>
-<span class="doccomment">/// Serialisation then contains this decoded URL that is used for further matching.</span>
+<span class="doccomment">/// As part of hostname parsing, punycode decoding is used to convert URLs with</span>
+<span class="doccomment">/// UTF characters to plain ASCII ones.  Serialisation then contains this</span>
+<span class="doccomment">/// decoded URL that is used for further matching.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse_url</span>(<span class="ident">url</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">RequestUrl</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">parsed</span> <span class="op">=</span> <span class="ident">parser</span>::<span class="ident">Hostname</span>::<span class="ident">parse</span>(<span class="kw-2">&amp;</span><span class="ident">url</span>).<span class="ident">ok</span>();
     <span class="ident">parsed</span>.<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">h</span><span class="op">|</span> {

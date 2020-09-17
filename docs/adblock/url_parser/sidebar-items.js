@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["parse_url","Return the string representation of the host (domain or IP address) for this URL, if any together with the URL."]],"struct":[["RequestUrl",""]],"trait":[["ResolvesDomain",""]]});
+initSidebarItems({"fn":[["parse_url","Return the string representation of the host (domain or IP address) for this URL, if any together with the URL."]],"struct":[["RequestUrl","Parsed URL representation."]],"trait":[["ResolvesDomain","Required trait for any domain resolution implementation used with this crate."]]});

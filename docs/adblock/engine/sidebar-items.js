@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Engine",""]]});
+initSidebarItems({"struct":[["Engine","Main adblocking engine that allows efficient querying of resources to block."]]});

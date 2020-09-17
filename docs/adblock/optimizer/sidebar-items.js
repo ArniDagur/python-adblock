@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["optimize","Fusion a set of `filters` by applying optimizations sequentially."]]});
+initSidebarItems({"fn":[["optimize","Fuse `NetworkFilter`s together by applying optimizations sequentially."]]});

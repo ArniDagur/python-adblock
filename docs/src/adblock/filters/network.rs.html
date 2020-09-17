@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/adblock-0.3.2/src/filters/network.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>network.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../adblock/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/adblock-0.3.3/src/filters/network.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>network.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../adblock/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
                 <a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
@@ -3091,142 +3091,17 @@
 <span id="3090">3090</span>
 <span id="3091">3091</span>
 <span id="3092">3092</span>
-<span id="3093">3093</span>
-<span id="3094">3094</span>
-<span id="3095">3095</span>
-<span id="3096">3096</span>
-<span id="3097">3097</span>
-<span id="3098">3098</span>
-<span id="3099">3099</span>
-<span id="3100">3100</span>
-<span id="3101">3101</span>
-<span id="3102">3102</span>
-<span id="3103">3103</span>
-<span id="3104">3104</span>
-<span id="3105">3105</span>
-<span id="3106">3106</span>
-<span id="3107">3107</span>
-<span id="3108">3108</span>
-<span id="3109">3109</span>
-<span id="3110">3110</span>
-<span id="3111">3111</span>
-<span id="3112">3112</span>
-<span id="3113">3113</span>
-<span id="3114">3114</span>
-<span id="3115">3115</span>
-<span id="3116">3116</span>
-<span id="3117">3117</span>
-<span id="3118">3118</span>
-<span id="3119">3119</span>
-<span id="3120">3120</span>
-<span id="3121">3121</span>
-<span id="3122">3122</span>
-<span id="3123">3123</span>
-<span id="3124">3124</span>
-<span id="3125">3125</span>
-<span id="3126">3126</span>
-<span id="3127">3127</span>
-<span id="3128">3128</span>
-<span id="3129">3129</span>
-<span id="3130">3130</span>
-<span id="3131">3131</span>
-<span id="3132">3132</span>
-<span id="3133">3133</span>
-<span id="3134">3134</span>
-<span id="3135">3135</span>
-<span id="3136">3136</span>
-<span id="3137">3137</span>
-<span id="3138">3138</span>
-<span id="3139">3139</span>
-<span id="3140">3140</span>
-<span id="3141">3141</span>
-<span id="3142">3142</span>
-<span id="3143">3143</span>
-<span id="3144">3144</span>
-<span id="3145">3145</span>
-<span id="3146">3146</span>
-<span id="3147">3147</span>
-<span id="3148">3148</span>
-<span id="3149">3149</span>
-<span id="3150">3150</span>
-<span id="3151">3151</span>
-<span id="3152">3152</span>
-<span id="3153">3153</span>
-<span id="3154">3154</span>
-<span id="3155">3155</span>
-<span id="3156">3156</span>
-<span id="3157">3157</span>
-<span id="3158">3158</span>
-<span id="3159">3159</span>
-<span id="3160">3160</span>
-<span id="3161">3161</span>
-<span id="3162">3162</span>
-<span id="3163">3163</span>
-<span id="3164">3164</span>
-<span id="3165">3165</span>
-<span id="3166">3166</span>
-<span id="3167">3167</span>
-<span id="3168">3168</span>
-<span id="3169">3169</span>
-<span id="3170">3170</span>
-<span id="3171">3171</span>
-<span id="3172">3172</span>
-<span id="3173">3173</span>
-<span id="3174">3174</span>
-<span id="3175">3175</span>
-<span id="3176">3176</span>
-<span id="3177">3177</span>
-<span id="3178">3178</span>
-<span id="3179">3179</span>
-<span id="3180">3180</span>
-<span id="3181">3181</span>
-<span id="3182">3182</span>
-<span id="3183">3183</span>
-<span id="3184">3184</span>
-<span id="3185">3185</span>
-<span id="3186">3186</span>
-<span id="3187">3187</span>
-<span id="3188">3188</span>
-<span id="3189">3189</span>
-<span id="3190">3190</span>
-<span id="3191">3191</span>
-<span id="3192">3192</span>
-<span id="3193">3193</span>
-<span id="3194">3194</span>
-<span id="3195">3195</span>
-<span id="3196">3196</span>
-<span id="3197">3197</span>
-<span id="3198">3198</span>
-<span id="3199">3199</span>
-<span id="3200">3200</span>
-<span id="3201">3201</span>
-<span id="3202">3202</span>
-<span id="3203">3203</span>
-<span id="3204">3204</span>
-<span id="3205">3205</span>
-<span id="3206">3206</span>
-<span id="3207">3207</span>
-<span id="3208">3208</span>
-<span id="3209">3209</span>
-<span id="3210">3210</span>
-<span id="3211">3211</span>
-<span id="3212">3212</span>
-<span id="3213">3213</span>
-<span id="3214">3214</span>
-<span id="3215">3215</span>
-<span id="3216">3216</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">idna</span>;
-<span class="kw">use</span> <span class="ident">regex</span>::<span class="ident">Regex</span>;
-<span class="kw">use</span> <span class="ident">regex</span>::<span class="ident">RegexSet</span>;
+<span class="kw">use</span> <span class="ident">regex</span>::{<span class="ident">Regex</span>, <span class="ident">RegexSet</span>};
 <span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
+<span class="kw">use</span> <span class="ident">once_cell</span>::<span class="ident">sync</span>::<span class="ident">Lazy</span>;
+
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::{<span class="ident">Arc</span>, <span class="ident">RwLock</span>};
 
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">request</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">utils</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">utils</span>::<span class="ident">Hash</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">sync</span>::{<span class="ident">Arc</span>, <span class="ident">RwLock</span>};
-<span class="kw">use</span> <span class="ident">twoway</span>;
 
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TOKENS_BUFFER_SIZE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">200</span>;
 
@@ -3249,7 +3124,7 @@
     <span class="ident">PunycodeError</span>,
 }
 
-<span class="macro">bitflags</span><span class="macro">!</span> {
+<span class="ident">bitflags</span>::<span class="macro">bitflags</span><span class="macro">!</span> {
     <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">NetworkFilterMask</span>: <span class="ident">u32</span> {
         <span class="kw">const</span> <span class="ident">FROM_IMAGE</span> <span class="op">=</span> <span class="number">1</span>; <span class="comment">// 1 &lt;&lt; 0;</span>
@@ -3267,7 +3142,7 @@
         <span class="kw">const</span> <span class="ident">FROM_HTTPS</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">12</span>;
         <span class="kw">const</span> <span class="ident">IS_IMPORTANT</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">13</span>;
         <span class="kw">const</span> <span class="ident">MATCH_CASE</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">14</span>;
-        <span class="kw">const</span> <span class="ident">FUZZY_MATCH</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">15</span>;
+        <span class="kw">const</span> <span class="ident">_FUZZY_MATCH</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">15</span>;    <span class="comment">// Unused</span>
         <span class="kw">const</span> <span class="ident">THIRD_PARTY</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">16</span>;
         <span class="kw">const</span> <span class="ident">FIRST_PARTY</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">17</span>;
         <span class="kw">const</span> <span class="ident">EXPLICIT_CANCEL</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">26</span>;
@@ -3314,38 +3189,6 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">CompiledRegex</span> {
-    <span class="ident">Compiled</span>(<span class="ident">Regex</span>),
-    <span class="ident">CompiledSet</span>(<span class="ident">RegexSet</span>),
-    <span class="ident">MatchAll</span>,
-    <span class="ident">RegexParsingError</span>(<span class="ident">regex</span>::<span class="ident">Error</span>),
-}
-
-<span class="kw">impl</span> <span class="ident">CompiledRegex</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_match</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">pattern</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="self">self</span> {
-            <span class="ident">CompiledRegex</span>::<span class="ident">MatchAll</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>, <span class="comment">// simple case for matching everything, e.g. for empty filter</span>
-            <span class="ident">CompiledRegex</span>::<span class="ident">RegexParsingError</span>(<span class="ident">_e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>, <span class="comment">// no match if regex didn&#39;t even compile</span>
-            <span class="ident">CompiledRegex</span>::<span class="ident">Compiled</span>(<span class="ident">r</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">r</span>.<span class="ident">is_match</span>(<span class="ident">pattern</span>),
-            <span class="ident">CompiledRegex</span>::<span class="ident">CompiledSet</span>(<span class="ident">r</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="comment">// let matches: Vec&lt;_&gt; = r.matches(pattern).into_iter().collect();</span>
-                <span class="comment">// println!(&quot;Matching {} against RegexSet: {:?}&quot;, pattern, matches);</span>
-                <span class="ident">r</span>.<span class="ident">is_match</span>(<span class="ident">pattern</span>)
-            }
-        }
-    }
-
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_string</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
-        <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="self">self</span> {
-            <span class="ident">CompiledRegex</span>::<span class="ident">MatchAll</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;.*&quot;</span>), <span class="comment">// simple case for matching everything, e.g. for empty filter</span>
-            <span class="ident">CompiledRegex</span>::<span class="ident">RegexParsingError</span>(<span class="ident">_e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;ERROR&quot;</span>), <span class="comment">// no match if regex didn&#39;t even compile</span>
-            <span class="ident">CompiledRegex</span>::<span class="ident">Compiled</span>(<span class="ident">r</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">String</span>::<span class="ident">from</span>(<span class="ident">r</span>.<span class="ident">as_str</span>()),
-            <span class="ident">CompiledRegex</span>::<span class="ident">CompiledSet</span>(<span class="ident">r</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">r</span>.<span class="ident">patterns</span>().<span class="ident">join</span>(<span class="string">&quot; | &quot;</span>),
-        }
-    }
-}
-
 <span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="kw">for</span> <span class="ident">NetworkFilterMask</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
         <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;{:b}&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>)
@@ -3372,6 +3215,40 @@
             <span class="ident">request</span>::<span class="ident">RequestType</span>::<span class="ident">Websocket</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">NetworkFilterMask</span>::<span class="ident">FROM_WEBSOCKET</span>,
             <span class="ident">request</span>::<span class="ident">RequestType</span>::<span class="ident">Xlst</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">NetworkFilterMask</span>::<span class="ident">FROM_OTHER</span>,
             <span class="ident">request</span>::<span class="ident">RequestType</span>::<span class="ident">Xmlhttprequest</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">NetworkFilterMask</span>::<span class="ident">FROM_XMLHTTPREQUEST</span>,
+        }
+    }
+}
+
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
+<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">CompiledRegex</span> {
+    <span class="ident">Compiled</span>(<span class="ident">Regex</span>),
+    <span class="ident">CompiledSet</span>(<span class="ident">RegexSet</span>),
+    <span class="ident">MatchAll</span>,
+    <span class="ident">RegexParsingError</span>(<span class="ident">regex</span>::<span class="ident">Error</span>),
+}
+
+<span class="kw">impl</span> <span class="ident">CompiledRegex</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_match</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">pattern</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+        <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="self">self</span> {
+            <span class="ident">CompiledRegex</span>::<span class="ident">MatchAll</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>, <span class="comment">// simple case for matching everything, e.g. for empty filter</span>
+            <span class="ident">CompiledRegex</span>::<span class="ident">RegexParsingError</span>(<span class="ident">_e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>, <span class="comment">// no match if regex didn&#39;t even compile</span>
+            <span class="ident">CompiledRegex</span>::<span class="ident">Compiled</span>(<span class="ident">r</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">r</span>.<span class="ident">is_match</span>(<span class="ident">pattern</span>),
+            <span class="ident">CompiledRegex</span>::<span class="ident">CompiledSet</span>(<span class="ident">r</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="comment">// let matches: Vec&lt;_&gt; = r.matches(pattern).into_iter().collect();</span>
+                <span class="comment">// println!(&quot;Matching {} against RegexSet: {:?}&quot;, pattern, matches);</span>
+                <span class="ident">r</span>.<span class="ident">is_match</span>(<span class="ident">pattern</span>)
+            }
+        }
+    }
+}
+
+<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="kw">for</span> <span class="ident">CompiledRegex</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+        <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="self">self</span> {
+            <span class="ident">CompiledRegex</span>::<span class="ident">MatchAll</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;.*&quot;</span>), <span class="comment">// simple case for matching everything, e.g. for empty filter</span>
+            <span class="ident">CompiledRegex</span>::<span class="ident">RegexParsingError</span>(<span class="ident">_e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;ERROR&quot;</span>), <span class="comment">// no match if regex didn&#39;t even compile</span>
+            <span class="ident">CompiledRegex</span>::<span class="ident">Compiled</span>(<span class="ident">r</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">r</span>.<span class="ident">as_str</span>()),
+            <span class="ident">CompiledRegex</span>::<span class="ident">CompiledSet</span>(<span class="ident">r</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">r</span>.<span class="ident">patterns</span>().<span class="ident">join</span>(<span class="string">&quot; | &quot;</span>)),
         }
     }
 }
@@ -3408,7 +3285,8 @@
     <span class="kw">pub</span> <span class="ident">raw_line</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
 
     <span class="kw">pub</span> <span class="ident">id</span>: <span class="ident">Hash</span>,
-    <span class="kw">pub</span> <span class="ident">fuzzy_signature</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="comment">// Unused, kept to retain backwards-compatibility</span>
+    <span class="ident">_fuzzy_signature</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 
     <span class="comment">// All domain option values (their hashes) OR&#39;ed together to quickly dismiss mis-matches</span>
     <span class="kw">pub</span> <span class="ident">opt_domains_union</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span>,
@@ -3492,7 +3370,7 @@
                         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">option_values</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">value</span>.<span class="ident">split</span>(<span class="string">&#39;|&#39;</span>).<span class="ident">collect</span>();
                         <span class="comment">// Some rules have duplicate domain options - avoid including duplicates</span>
                         <span class="comment">// Benchmarking doesn&#39;t indicate signficant performance degradation across the entire easylist</span>
-                        <span class="ident">option_values</span>.<span class="ident">sort</span>();
+                        <span class="ident">option_values</span>.<span class="ident">sort_unstable</span>();
                         <span class="ident">option_values</span>.<span class="ident">dedup</span>();
                         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">opt_domains_array</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
                         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">opt_not_domains_array</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[];
@@ -3509,12 +3387,12 @@
                         }
 
                         <span class="kw">if</span> <span class="op">!</span><span class="ident">opt_domains_array</span>.<span class="ident">is_empty</span>() {
-                            <span class="ident">opt_domains_array</span>.<span class="ident">sort</span>();
+                            <span class="ident">opt_domains_array</span>.<span class="ident">sort_unstable</span>();
                             <span class="ident">opt_domains_union</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">opt_domains_array</span>.<span class="ident">iter</span>().<span class="ident">fold</span>(<span class="number">0</span>, <span class="op">|</span><span class="ident">acc</span>, <span class="ident">x</span><span class="op">|</span> <span class="ident">acc</span> <span class="op">|</span> <span class="ident">x</span>));
                             <span class="ident">opt_domains</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">opt_domains_array</span>);
                         }
                         <span class="kw">if</span> <span class="op">!</span><span class="ident">opt_not_domains_array</span>.<span class="ident">is_empty</span>() {
-                            <span class="ident">opt_not_domains_array</span>.<span class="ident">sort</span>();
+                            <span class="ident">opt_not_domains_array</span>.<span class="ident">sort_unstable</span>();
                             <span class="ident">opt_not_domains_union</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">opt_not_domains_array</span>.<span class="ident">iter</span>().<span class="ident">fold</span>(<span class="number">0</span>, <span class="op">|</span><span class="ident">acc</span>, <span class="ident">x</span><span class="op">|</span> <span class="ident">acc</span> <span class="op">|</span> <span class="ident">x</span>));
                             <span class="ident">opt_not_domains</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">opt_not_domains_array</span>);
                         }
@@ -3538,7 +3416,6 @@
                     (<span class="string">&quot;first-party&quot;</span>, <span class="bool-val">false</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">mask</span>.<span class="ident">set</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">THIRD_PARTY</span>, <span class="bool-val">false</span>),
                     (<span class="string">&quot;1p&quot;</span>, <span class="bool-val">true</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">mask</span>.<span class="ident">set</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">FIRST_PARTY</span>, <span class="bool-val">false</span>),
                     (<span class="string">&quot;1p&quot;</span>, <span class="bool-val">false</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">mask</span>.<span class="ident">set</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">THIRD_PARTY</span>, <span class="bool-val">false</span>),
-                    (<span class="string">&quot;fuzzy&quot;</span>, <span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">mask</span>.<span class="ident">set</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">FUZZY_MATCH</span>, <span class="bool-val">true</span>),
                     (<span class="string">&quot;collapse&quot;</span>, <span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {}
                     (<span class="string">&quot;bug&quot;</span>, <span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">bug</span> <span class="op">=</span> <span class="ident">value</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>().<span class="ident">ok</span>(),
                     (<span class="string">&quot;tag&quot;</span>, <span class="bool-val">false</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">tag</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">String</span>::<span class="ident">from</span>(<span class="ident">value</span>)),
@@ -3645,9 +3522,7 @@
                 <span class="comment">// and then the pattern.</span>
                 <span class="comment">// TODO - this could be made more efficient if we could match between two</span>
                 <span class="comment">// indices. Once again, we have to do more work than is really needed.</span>
-                <span class="macro">lazy_static</span><span class="macro">!</span> {
-                    <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">SEPARATOR</span>: <span class="ident">Regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;[/^*]&quot;</span>).<span class="ident">unwrap</span>();
-                }
+                <span class="kw">static</span> <span class="ident">SEPARATOR</span>: <span class="ident">Lazy</span><span class="op">&lt;</span><span class="ident">Regex</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;[/^*]&quot;</span>).<span class="ident">unwrap</span>());
                 <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">first_separator</span>) <span class="op">=</span> <span class="ident">SEPARATOR</span>.<span class="ident">find</span>(<span class="ident">line</span>) {
                     <span class="kw">let</span> <span class="ident">first_separator_start</span> <span class="op">=</span> <span class="ident">first_separator</span>.<span class="ident">start</span>();
                     <span class="comment">// NOTE: `first_separator` shall never be -1 here since `IS_REGEX` is true.</span>
@@ -3778,16 +3653,8 @@
             <span class="prelude-val">Ok</span>(<span class="ident">hostname</span>)
         }).<span class="ident">transpose</span>();
 
-        <span class="kw">let</span> <span class="ident">maybe_fuzzy_signature</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">FUZZY_MATCH</span>) {
-            <span class="ident">filter</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">utils</span>::<span class="ident">create_fuzzy_signature</span>(<span class="ident">f</span>))
-        } <span class="kw">else</span> {
-            <span class="prelude-val">None</span>
-        };
-
-        <span class="kw">if</span> <span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">GENERIC_HIDE</span>) {
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">IS_EXCEPTION</span>) {
-                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">NetworkFilterError</span>::<span class="ident">GenericHideWithoutException</span>);
-            }
+        <span class="kw">if</span> <span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">GENERIC_HIDE</span>) <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">IS_EXCEPTION</span>) {
+            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">NetworkFilterError</span>::<span class="ident">GenericHideWithoutException</span>);
         }
 
         <span class="prelude-val">Ok</span>(<span class="ident">NetworkFilter</span> {
@@ -3810,7 +3677,7 @@
             },
             <span class="ident">redirect</span>,
             <span class="ident">id</span>: <span class="ident">utils</span>::<span class="ident">fast_hash</span>(<span class="kw-2">&amp;</span><span class="ident">line</span>),
-            <span class="ident">fuzzy_signature</span>: <span class="ident">maybe_fuzzy_signature</span>,
+            <span class="ident">_fuzzy_signature</span>: <span class="prelude-val">None</span>,
             <span class="ident">opt_domains_union</span>,
             <span class="ident">opt_not_domains_union</span>,
             <span class="ident">regex</span>: <span class="ident">Arc</span>::<span class="ident">new</span>(<span class="ident">RwLock</span>::<span class="ident">new</span>(<span class="prelude-val">None</span>))
@@ -3821,9 +3688,7 @@
     <span class="doccomment">/// emulate the behavior of hosts-style blocking.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse_hosts_style</span>(<span class="ident">hostname</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">debug</span>: <span class="ident">bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">NetworkFilterError</span><span class="op">&gt;</span> {
         <span class="comment">// Make sure the hostname doesn&#39;t contain any invalid characters</span>
-        <span class="macro">lazy_static</span><span class="macro">!</span> {
-            <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">INVALID_CHARS</span>: <span class="ident">Regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;[/^*!?$&amp;(){}\\[\\]+=~`\\s|@,&#39;\&quot;&gt;&lt;:;]&quot;</span>).<span class="ident">unwrap</span>();
-        }
+        <span class="kw">static</span> <span class="ident">INVALID_CHARS</span>: <span class="ident">Lazy</span><span class="op">&lt;</span><span class="ident">Regex</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">&quot;[/^*!?$&amp;(){}\\[\\]+=~`\\s|@,&#39;\&quot;&gt;&lt;:;]&quot;</span>).<span class="ident">unwrap</span>());
         <span class="kw">if</span> <span class="ident">INVALID_CHARS</span>.<span class="ident">is_match</span>(<span class="ident">hostname</span>) {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">NetworkFilterError</span>::<span class="ident">FilterParseError</span>);
         }
@@ -3851,21 +3716,14 @@
         <span class="ident">NetworkFilter</span>::<span class="ident">parse</span>(<span class="kw-2">&amp;</span><span class="ident">hostname</span>, <span class="ident">debug</span>)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_string</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">raw_line</span>.<span class="ident">as_ref</span>() {
-            <span class="prelude-val">Some</span>(<span class="ident">r</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">r</span>.<span class="ident">clone</span>(),
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">String</span>::<span class="ident">from</span>(<span class="string">&quot;&quot;</span>),
-        }
-    }
-
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_id_without_badfilter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Hash</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">mask</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">mask</span>;
         <span class="ident">mask</span>.<span class="ident">set</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">BAD_FILTER</span>, <span class="bool-val">false</span>);
         <span class="ident">compute_filter_id</span>(
-            <span class="self">self</span>.<span class="ident">csp</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="ident">String</span>::<span class="ident">as_str</span>),
+            <span class="self">self</span>.<span class="ident">csp</span>.<span class="ident">as_deref</span>(),
             <span class="ident">mask</span>,
-            <span class="self">self</span>.<span class="ident">filter</span>.<span class="ident">string_view</span>().<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">as_str</span>()),
-            <span class="self">self</span>.<span class="ident">hostname</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="ident">String</span>::<span class="ident">as_str</span>),
+            <span class="self">self</span>.<span class="ident">filter</span>.<span class="ident">string_view</span>().<span class="ident">as_deref</span>(),
+            <span class="self">self</span>.<span class="ident">hostname</span>.<span class="ident">as_deref</span>(),
             <span class="self">self</span>.<span class="ident">opt_domains</span>.<span class="ident">as_ref</span>(),
             <span class="self">self</span>.<span class="ident">opt_not_domains</span>.<span class="ident">as_ref</span>(),
         )
@@ -3873,31 +3731,13 @@
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Hash</span> {
         <span class="ident">compute_filter_id</span>(
-            <span class="self">self</span>.<span class="ident">csp</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="ident">String</span>::<span class="ident">as_str</span>),
+            <span class="self">self</span>.<span class="ident">csp</span>.<span class="ident">as_deref</span>(),
             <span class="self">self</span>.<span class="ident">mask</span>,
-            <span class="self">self</span>.<span class="ident">filter</span>.<span class="ident">string_view</span>().<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">as_str</span>()),
-            <span class="self">self</span>.<span class="ident">hostname</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="ident">String</span>::<span class="ident">as_str</span>),
+            <span class="self">self</span>.<span class="ident">filter</span>.<span class="ident">string_view</span>().<span class="ident">as_deref</span>(),
+            <span class="self">self</span>.<span class="ident">hostname</span>.<span class="ident">as_deref</span>(),
             <span class="self">self</span>.<span class="ident">opt_domains</span>.<span class="ident">as_ref</span>(),
             <span class="self">self</span>.<span class="ident">opt_not_domains</span>.<span class="ident">as_ref</span>(),
         )
-    }
-
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_fuzzy_signature</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">fuzzy_signature</span>.<span class="ident">is_none</span>() {
-            <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">is_fuzzy</span>() {
-                <span class="self">self</span>.<span class="ident">fuzzy_signature</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="macro">vec</span><span class="macro">!</span>[]);
-            } <span class="kw">else</span> {
-
-            }
-            <span class="self">self</span>.<span class="ident">fuzzy_signature</span> <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">filter</span> {
-                <span class="ident">FilterPart</span>::<span class="ident">Empty</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="macro">vec</span><span class="macro">!</span>[]),
-                <span class="ident">FilterPart</span>::<span class="ident">Simple</span>(<span class="ident">filter</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">utils</span>::<span class="ident">create_fuzzy_signature</span>(<span class="kw-2">&amp;</span><span class="ident">filter</span>)),
-                <span class="ident">FilterPart</span>::<span class="ident">AnyOf</span>(<span class="ident">filters</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="prelude-val">Some</span>(<span class="ident">utils</span>::<span class="ident">create_combined_fuzzy_signature</span>(<span class="kw-2">&amp;</span><span class="ident">filters</span>))
-                }
-            }
-        }
-        <span class="self">self</span>.<span class="ident">fuzzy_signature</span>.<span class="ident">as_ref</span>().<span class="ident">unwrap</span>()
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_tokens</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Hash</span><span class="op">&gt;</span><span class="op">&gt;</span> {
@@ -3921,7 +3761,7 @@
             <span class="ident">FilterPart</span>::<span class="ident">Simple</span>(<span class="ident">f</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">is_complete_regex</span>() {
                     <span class="kw">let</span> <span class="ident">skip_last_token</span> <span class="op">=</span>
-                        (<span class="self">self</span>.<span class="ident">is_plain</span>() <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">is_regex</span>()) <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">is_right_anchor</span>() <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">is_fuzzy</span>();
+                        (<span class="self">self</span>.<span class="ident">is_plain</span>() <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">is_regex</span>()) <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">is_right_anchor</span>();
                     <span class="kw">let</span> <span class="ident">skip_first_token</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">is_right_anchor</span>();
 
                     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">filter_tokens</span> <span class="op">=</span>
@@ -3966,10 +3806,6 @@
 
     <span class="kw">fn</span> <span class="ident">get_cpt_mask</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">NetworkFilterMask</span> {
         <span class="self">self</span>.<span class="ident">mask</span> <span class="op">&amp;</span> <span class="ident">NetworkFilterMask</span>::<span class="ident">FROM_ANY</span>
-    }
-
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_fuzzy</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">FUZZY_MATCH</span>)
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_exception</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
@@ -4050,6 +3886,15 @@
 
     <span class="kw">fn</span> <span class="ident">for_https</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">FROM_HTTPS</span>)
+    }
+}
+
+<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="kw">for</span> <span class="ident">NetworkFilter</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">fmt</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">raw_line</span>.<span class="ident">as_ref</span>() {
+            <span class="prelude-val">Some</span>(<span class="ident">r</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">r</span>.<span class="ident">clone</span>()),
+            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;NetworkFilter&quot;</span>),
+        }
     }
 }
 
@@ -4139,11 +3984,9 @@
     <span class="ident">hash</span>
 }
 
-<span class="doccomment">/**
- * Compiles a filter pattern to a regex. This is only performed *lazily* for
- * filters containing at least a * or ^ symbol. Because Regexes are expansive,
- * we try to convert some patterns to plain filters.
- */</span>
+<span class="doccomment">/// Compiles a filter pattern to a regex. This is only performed *lazily* for</span>
+<span class="doccomment">/// filters containing at least a * or ^ symbol. Because Regexes are expansive,</span>
+<span class="doccomment">/// we try to convert some patterns to plain filters.</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy</span>::<span class="ident">trivial_regex</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">compile_regex</span>(
     <span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">FilterPart</span>,
@@ -4151,16 +3994,14 @@
     <span class="ident">is_left_anchor</span>: <span class="ident">bool</span>,
     <span class="ident">is_complete_regex</span>: <span class="ident">bool</span>,
 ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">CompiledRegex</span> {
-    <span class="macro">lazy_static</span><span class="macro">!</span> {
-      <span class="comment">// Escape special regex characters: |.$+?{}()[]\</span>
-      <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">SPECIAL_RE</span>: <span class="ident">Regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;([\|\.\$\+\?\{\}\(\)\[\]])&quot;</span>).<span class="ident">unwrap</span>();
-      <span class="comment">// * can match anything</span>
-      <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">WILDCARD_RE</span>: <span class="ident">Regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;\*&quot;</span>).<span class="ident">unwrap</span>();
-      <span class="comment">// ^ can match any separator or the end of the pattern</span>
-      <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">ANCHOR_RE</span>: <span class="ident">Regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;\^(.)&quot;</span>).<span class="ident">unwrap</span>();
-      <span class="comment">// ^ can match any separator or the end of the pattern</span>
-      <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">ANCHOR_RE_EOL</span>: <span class="ident">Regex</span> <span class="op">=</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;\^$&quot;</span>).<span class="ident">unwrap</span>();
-    }
+    <span class="comment">// Escape special regex characters: |.$+?{}()[]\</span>
+    <span class="kw">static</span> <span class="ident">SPECIAL_RE</span>: <span class="ident">Lazy</span><span class="op">&lt;</span><span class="ident">Regex</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;([\|\.\$\+\?\{\}\(\)\[\]])&quot;</span>).<span class="ident">unwrap</span>());
+    <span class="comment">// * can match anything</span>
+    <span class="kw">static</span> <span class="ident">WILDCARD_RE</span>: <span class="ident">Lazy</span><span class="op">&lt;</span><span class="ident">Regex</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;\*&quot;</span>).<span class="ident">unwrap</span>());
+    <span class="comment">// ^ can match any separator or the end of the pattern</span>
+    <span class="kw">static</span> <span class="ident">ANCHOR_RE</span>: <span class="ident">Lazy</span><span class="op">&lt;</span><span class="ident">Regex</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;\^(.)&quot;</span>).<span class="ident">unwrap</span>());
+    <span class="comment">// ^ can match any separator or the end of the pattern</span>
+    <span class="kw">static</span> <span class="ident">ANCHOR_RE_EOL</span>: <span class="ident">Lazy</span><span class="op">&lt;</span><span class="ident">Regex</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Lazy</span>::<span class="ident">new</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">Regex</span>::<span class="ident">new</span>(<span class="string">r&quot;\^$&quot;</span>).<span class="ident">unwrap</span>());
 
     <span class="kw">let</span> <span class="ident">filters</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">filter</span> {
         <span class="ident">FilterPart</span>::<span class="ident">Empty</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">vec</span><span class="macro">!</span>[],
@@ -4217,25 +4058,21 @@
     }
 }
 
-<span class="doccomment">/**
- * Check if the sub-string contained between the indices start and end is a
- * regex filter (it contains a &#39;*&#39; or &#39;^&#39; char). Here we are limited by the
- * capability of javascript to check the presence of a pattern between two
- * indices (same for Regex...).
- * // TODO - we could use sticky regex here
- */</span>
+<span class="doccomment">/// Check if the sub-string contained between the indices start and end is a</span>
+<span class="doccomment">/// regex filter (it contains a &#39;*&#39; or &#39;^&#39; char). Here we are limited by the</span>
+<span class="doccomment">/// capability of javascript to check the presence of a pattern between two</span>
+<span class="doccomment">/// indices (same for Regex...).</span>
 <span class="kw">fn</span> <span class="ident">check_is_regex</span>(<span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="comment">// TODO - we could use sticky regex here</span>
     <span class="kw">let</span> <span class="ident">start_index</span> <span class="op">=</span> <span class="ident">filter</span>.<span class="ident">find</span>(<span class="string">&#39;*&#39;</span>);
     <span class="kw">let</span> <span class="ident">separator_index</span> <span class="op">=</span> <span class="ident">filter</span>.<span class="ident">find</span>(<span class="string">&#39;^&#39;</span>);
     <span class="ident">start_index</span>.<span class="ident">is_some</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">separator_index</span>.<span class="ident">is_some</span>()
 }
 
-<span class="doccomment">/**
- * Handle hostname anchored filters, given &#39;hostname&#39; from ||hostname and
- * request&#39;s hostname, check if there is a match. This is tricky because filters
- * authors rely and different assumption. We can have prefix of suffix matches
- * of anchor.
- */</span>
+<span class="doccomment">/// Handle hostname anchored filters, given &#39;hostname&#39; from ||hostname and</span>
+<span class="doccomment">/// request&#39;s hostname, check if there is a match. This is tricky because</span>
+<span class="doccomment">/// filters authors rely and different assumption. We can have prefix of suffix</span>
+<span class="doccomment">/// matches of anchor.</span>
 <span class="kw">fn</span> <span class="ident">is_anchored_by_hostname</span>(<span class="ident">filter_hostname</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">hostname</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">wildcard_filter_hostname</span>: <span class="ident">bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
     <span class="kw">let</span> <span class="ident">filter_hostname_len</span> <span class="op">=</span> <span class="ident">filter_hostname</span>.<span class="ident">len</span>();
     <span class="comment">// Corner-case, if `filterHostname` is empty, then it&#39;s a match</span>
@@ -4285,31 +4122,6 @@
 <span class="comment">// ---------------------------------------------------------------------------</span>
 <span class="comment">// Filter matching</span>
 <span class="comment">// ---------------------------------------------------------------------------</span>
-
-<span class="comment">// pattern$fuzzy</span>
-<span class="kw">fn</span> <span class="ident">check_pattern_fuzzy_filter</span>(<span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">NetworkFilter</span>, <span class="ident">request</span>: <span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-    <span class="ident">filter</span>
-        .<span class="ident">fuzzy_signature</span>
-        .<span class="ident">as_ref</span>()
-        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">signature</span><span class="op">|</span> {
-            <span class="kw">let</span> <span class="ident">request_signature</span> <span class="op">=</span> <span class="ident">request</span>.<span class="ident">get_fuzzy_signature</span>();
-
-            <span class="kw">if</span> <span class="ident">signature</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="ident">request_signature</span>.<span class="ident">len</span>() {
-                <span class="kw">return</span> <span class="bool-val">false</span>;
-            }
-
-            <span class="kw">for</span> <span class="ident">filter_token</span> <span class="kw">in</span> <span class="ident">signature</span> {
-                <span class="comment">// Find the occurrence of `c` in `request_signature`</span>
-                <span class="comment">// Can assume fuzzy signatures are sorted</span>
-                <span class="kw">if</span> <span class="ident">request_signature</span>.<span class="ident">binary_search</span>(<span class="ident">filter_token</span>).<span class="ident">is_err</span>() {
-                    <span class="kw">return</span> <span class="bool-val">false</span>;
-                }
-            }
-
-            <span class="bool-val">true</span>
-        })
-        .<span class="ident">unwrap_or</span>(<span class="bool-val">true</span>) <span class="comment">// corner case of rulle having fuzzy option but no filter</span>
-}
 
 <span class="comment">// pattern</span>
 <span class="kw">fn</span> <span class="ident">check_pattern_plain_filter_filter</span>(<span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">NetworkFilter</span>, <span class="ident">request</span>: <span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
@@ -4552,28 +4364,8 @@
         .<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">unreachable</span><span class="macro">!</span>()) <span class="comment">// no match if filter has no hostname - should be unreachable</span>
 }
 
-<span class="comment">// ||pattern$fuzzy</span>
-<span class="kw">fn</span> <span class="ident">check_pattern_hostname_anchor_fuzzy_filter</span>(
-    <span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">NetworkFilter</span>,
-    <span class="ident">request</span>: <span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-    <span class="ident">filter</span>
-        .<span class="ident">hostname</span>
-        .<span class="ident">as_ref</span>()
-        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">hostname</span><span class="op">|</span> {
-            <span class="kw">if</span> <span class="ident">is_anchored_by_hostname</span>(<span class="ident">hostname</span>, <span class="kw-2">&amp;</span><span class="ident">request</span>.<span class="ident">hostname</span>, <span class="ident">filter</span>.<span class="ident">mask</span>.<span class="ident">contains</span>(<span class="ident">NetworkFilterMask</span>::<span class="ident">IS_HOSTNAME_REGEX</span>)) {
-                <span class="ident">check_pattern_fuzzy_filter</span>(<span class="ident">filter</span>, <span class="ident">request</span>)
-            } <span class="kw">else</span> {
-                <span class="bool-val">false</span>
-            }
-        })
-        .<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">unreachable</span><span class="macro">!</span>()) <span class="comment">// no match if filter has no hostname - should be unreachable</span>
-}
-
-<span class="doccomment">/**
- * Specialize a network filter depending on its type. It allows for more
- * efficient matching function.
- */</span>
+<span class="doccomment">/// Efficiently checks if a certain network filter matches against a network</span>
+<span class="doccomment">/// request.</span>
 <span class="kw">fn</span> <span class="ident">check_pattern</span>(<span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">NetworkFilter</span>, <span class="ident">request</span>: <span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
     <span class="kw">if</span> <span class="ident">filter</span>.<span class="ident">is_hostname_anchor</span>() {
         <span class="kw">if</span> <span class="ident">filter</span>.<span class="ident">is_regex</span>() {
@@ -4582,8 +4374,6 @@
             <span class="ident">check_pattern_hostname_left_right_anchor_filter</span>(<span class="ident">filter</span>, <span class="ident">request</span>)
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">filter</span>.<span class="ident">is_right_anchor</span>() {
             <span class="ident">check_pattern_hostname_right_anchor_filter</span>(<span class="ident">filter</span>, <span class="ident">request</span>)
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">filter</span>.<span class="ident">is_fuzzy</span>() {
-            <span class="ident">check_pattern_hostname_anchor_fuzzy_filter</span>(<span class="ident">filter</span>, <span class="ident">request</span>)
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">filter</span>.<span class="ident">is_left_anchor</span>() {
             <span class="ident">check_pattern_hostname_left_anchor_filter</span>(<span class="ident">filter</span>, <span class="ident">request</span>)
         } <span class="kw">else</span> {
@@ -4597,8 +4387,6 @@
         <span class="ident">check_pattern_left_anchor_filter</span>(<span class="ident">filter</span>, <span class="ident">request</span>)
     } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">filter</span>.<span class="ident">is_right_anchor</span>() {
         <span class="ident">check_pattern_right_anchor_filter</span>(<span class="ident">filter</span>, <span class="ident">request</span>)
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">filter</span>.<span class="ident">is_fuzzy</span>() {
-        <span class="ident">check_pattern_fuzzy_filter</span>(<span class="ident">filter</span>, <span class="ident">request</span>)
     } <span class="kw">else</span> {
         <span class="ident">check_pattern_plain_filter_filter</span>(<span class="ident">filter</span>, <span class="ident">request</span>)
     }
@@ -4681,7 +4469,6 @@
         <span class="ident">redirect</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
 
         <span class="comment">// filter type</span>
-        <span class="ident">is_fuzzy</span>: <span class="ident">bool</span>,
         <span class="ident">is_exception</span>: <span class="ident">bool</span>,
         <span class="ident">is_hostname_anchor</span>: <span class="ident">bool</span>,
         <span class="ident">is_right_anchor</span>: <span class="ident">bool</span>,
@@ -4722,7 +4509,6 @@
                 <span class="ident">redirect</span>: <span class="ident">filter</span>.<span class="ident">redirect</span>.<span class="ident">as_ref</span>().<span class="ident">cloned</span>(),
 
                 <span class="comment">// filter type</span>
-                <span class="ident">is_fuzzy</span>: <span class="ident">filter</span>.<span class="ident">is_fuzzy</span>(),
                 <span class="ident">is_exception</span>: <span class="ident">filter</span>.<span class="ident">is_exception</span>(),
                 <span class="ident">is_hostname_anchor</span>: <span class="ident">filter</span>.<span class="ident">is_hostname_anchor</span>(),
                 <span class="ident">is_right_anchor</span>: <span class="ident">filter</span>.<span class="ident">is_right_anchor</span>(),
@@ -4764,7 +4550,6 @@
             <span class="ident">redirect</span>: <span class="prelude-val">None</span>,
 
             <span class="comment">// filter type</span>
-            <span class="ident">is_fuzzy</span>: <span class="bool-val">false</span>,
             <span class="ident">is_exception</span>: <span class="bool-val">false</span>,
             <span class="ident">is_hostname_anchor</span>: <span class="bool-val">false</span>,
             <span class="ident">is_right_anchor</span>: <span class="bool-val">false</span>,
@@ -5726,9 +5511,9 @@
         }
     }
 
-    <span class="kw">use</span> <span class="ident">rmps</span>::{<span class="ident">Deserializer</span>, <span class="ident">Serializer</span>};
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">binary_serialization_works</span>() {
+        <span class="kw">use</span> <span class="ident">rmp_serde</span>::{<span class="ident">Deserializer</span>, <span class="ident">Serializer</span>};
         {
             <span class="kw">let</span> <span class="ident">filter</span> <span class="op">=</span> <span class="ident">NetworkFilter</span>::<span class="ident">parse</span>(<span class="string">&quot;||foo.com/bar/baz$important&quot;</span>, <span class="bool-val">true</span>).<span class="ident">unwrap</span>();
 
@@ -5915,26 +5700,6 @@
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="comment">// pattern$fuzzy</span>
-    <span class="kw">fn</span> <span class="ident">check_pattern_fuzzy_filter_works</span>() {
-        <span class="ident">filter_match_url</span>(<span class="string">&quot;f$fuzzy&quot;</span>, <span class="string">&quot;https://bar.com/f&quot;</span>, <span class="bool-val">true</span>);
-        <span class="ident">filter_match_url</span>(<span class="string">&quot;foo$fuzzy&quot;</span>, <span class="string">&quot;https://bar.com/foo&quot;</span>, <span class="bool-val">true</span>);
-        <span class="ident">filter_match_url</span>(<span class="string">&quot;foo$fuzzy&quot;</span>, <span class="string">&quot;https://bar.com/foo/baz&quot;</span>, <span class="bool-val">true</span>);
-        <span class="ident">filter_match_url</span>(<span class="string">&quot;foo/bar$fuzzy&quot;</span>, <span class="string">&quot;https://bar.com/foo/baz&quot;</span>, <span class="bool-val">true</span>);
-        <span class="ident">filter_match_url</span>(<span class="string">&quot;foo bar$fuzzy&quot;</span>, <span class="string">&quot;https://bar.com/foo/baz&quot;</span>, <span class="bool-val">true</span>);
-        <span class="ident">filter_match_url</span>(<span class="string">&quot;foo bar baz$fuzzy&quot;</span>, <span class="string">&quot;http://bar.foo.baz&quot;</span>, <span class="bool-val">true</span>);
-
-        <span class="ident">filter_match_url</span>(<span class="string">&quot;foo bar baz 42$fuzzy&quot;</span>, <span class="string">&quot;http://bar.foo.baz&quot;</span>, <span class="bool-val">false</span>);
-
-        <span class="comment">// Fast-path for when pattern is longer than the URL</span>
-        <span class="ident">filter_match_url</span>(<span class="string">&quot;foo bar baz 42 43$fuzzy&quot;</span>, <span class="string">&quot;http://bar.foo.baz&quot;</span>, <span class="bool-val">false</span>);
-
-        <span class="comment">// No fuzzy signature, matches every URL?</span>
-        <span class="ident">filter_match_url</span>(<span class="string">&quot;+$fuzzy&quot;</span>, <span class="string">&quot;http://bar.foo.baz&quot;</span>, <span class="bool-val">true</span>);
-        <span class="ident">filter_match_url</span>(<span class="string">&quot;$fuzzy&quot;</span>, <span class="string">&quot;http://bar.foo.baz&quot;</span>, <span class="bool-val">true</span>);
-    }
-
-    <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="comment">// ||pattern</span>
     <span class="kw">fn</span> <span class="ident">check_pattern_hostname_anchor_filter_works</span>() {
         <span class="ident">filter_match_url</span>(<span class="string">&quot;||foo.com&quot;</span>, <span class="string">&quot;https://foo.com/bar&quot;</span>, <span class="bool-val">true</span>);
@@ -5971,27 +5736,6 @@
         <span class="ident">hosts_filter_match_url</span>(<span class="string">&quot;bar.baz.com&quot;</span>, <span class="string">&quot;https://foo-bar.baz.com/bar&quot;</span>, <span class="bool-val">false</span>);
         <span class="ident">hosts_filter_match_url</span>(<span class="string">&quot;foo.com&quot;</span>, <span class="string">&quot;https://foo.de&quot;</span>, <span class="bool-val">false</span>);
         <span class="ident">hosts_filter_match_url</span>(<span class="string">&quot;foo.com&quot;</span>, <span class="string">&quot;https://bar.foo.de&quot;</span>, <span class="bool-val">false</span>);
-    }
-
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="comment">// ||pattern$fuzzy</span>
-    <span class="kw">fn</span> <span class="ident">check_pattern_hostname_anchor_fuzzy_filter_works</span>() {
-        <span class="kw">let</span> <span class="ident">network_filter</span> <span class="op">=</span> <span class="ident">NetworkFilter</span>::<span class="ident">parse</span>(<span class="string">&quot;||bar.foo/baz$fuzzy&quot;</span>, <span class="bool-val">true</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">request</span> <span class="op">=</span> <span class="ident">request</span>::<span class="ident">Request</span>::<span class="ident">from_url</span>(<span class="string">&quot;http://bar.foo/baz&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">network_filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">request</span>), <span class="bool-val">true</span>);
-        <span class="comment">// Same result when fuzzy signature is cached</span>
-        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">network_filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">request</span>), <span class="bool-val">true</span>);
-
-        <span class="ident">filter_match_url</span>(<span class="string">&quot;||bar.foo/baz$fuzzy&quot;</span>, <span class="string">&quot;http://bar.foo/id/baz&quot;</span>, <span class="bool-val">true</span>);
-        <span class="ident">filter_match_url</span>(<span class="string">&quot;||bar.foo/baz$fuzzy&quot;</span>, <span class="string">&quot;http://bar.foo?id=42&amp;baz=1&quot;</span>, <span class="bool-val">true</span>);
-        <span class="ident">filter_match_url</span>(<span class="string">&quot;||foo.com/id bar$fuzzy&quot;</span>, <span class="string">&quot;http://foo.com?bar&amp;id=42&quot;</span>, <span class="bool-val">true</span>);
-
-        <span class="ident">filter_match_url</span>(<span class="string">&quot;||bar.com/id bar$fuzzy&quot;</span>, <span class="string">&quot;http://foo.com?bar&amp;id=42&quot;</span>, <span class="bool-val">false</span>);
-        <span class="ident">filter_match_url</span>(
-            <span class="string">&quot;||bar.com/id bar baz foo 42 id$fuzzy&quot;</span>,
-            <span class="string">&quot;http://foo.com?bar&amp;id=42&quot;</span>,
-            <span class="bool-val">false</span>,
-        );
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -6259,6 +6003,14 @@
             <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">network_filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;http://example.net/adv&quot;</span>, <span class="string">&quot;http://subfoo.foo.example.com&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>()) <span class="op">=</span><span class="op">=</span> <span class="bool-val">false</span>);
             <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">network_filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;http://example.net/adv&quot;</span>, <span class="string">&quot;http://bar.example.com&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>()) <span class="op">=</span><span class="op">=</span> <span class="bool-val">false</span>);
             <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">network_filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;http://example.net/adv&quot;</span>, <span class="string">&quot;http://anotherexample.com&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>()) <span class="op">=</span><span class="op">=</span> <span class="bool-val">false</span>);
+        }
+        {
+            <span class="kw">let</span> <span class="ident">network_filter</span> <span class="op">=</span> <span class="ident">NetworkFilter</span>::<span class="ident">parse</span>(<span class="string">&quot;adv$domain=com|~foo.com&quot;</span>, <span class="bool-val">true</span>).<span class="ident">unwrap</span>();
+            <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">network_filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;http://example.net/adv&quot;</span>, <span class="string">&quot;http://com&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>()) <span class="op">=</span><span class="op">=</span> <span class="bool-val">true</span>);
+            <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">network_filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;http://example.net/adv&quot;</span>, <span class="string">&quot;http://foo.com&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>()) <span class="op">=</span><span class="op">=</span> <span class="bool-val">false</span>);
+            <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">network_filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;http://example.net/adv&quot;</span>, <span class="string">&quot;http://subfoo.foo.com&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>()) <span class="op">=</span><span class="op">=</span> <span class="bool-val">false</span>);
+            <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">network_filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;http://example.net/adv&quot;</span>, <span class="string">&quot;http://bar.com&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>()) <span class="op">=</span><span class="op">=</span> <span class="bool-val">true</span>);
+            <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">network_filter</span>.<span class="ident">matches</span>(<span class="kw-2">&amp;</span><span class="ident">request</span>::<span class="ident">Request</span>::<span class="ident">from_urls</span>(<span class="string">&quot;http://example.net/adv&quot;</span>, <span class="string">&quot;http://co.uk&quot;</span>, <span class="string">&quot;&quot;</span>).<span class="ident">unwrap</span>()) <span class="op">=</span><span class="op">=</span> <span class="bool-val">false</span>);
         }
     }
 

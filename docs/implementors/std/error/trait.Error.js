@@ -5,7 +5,6 @@ implementors["aho_corasick"] = [{"text":"impl Error for Error","synthetic":false
 implementors["base64"] = [{"text":"impl Error for DecodeError","synthetic":false,"types":[]}];
 implementors["error_chain"] = [{"text":"impl Error for Error","synthetic":false,"types":[]},{"text":"impl Error for Error","synthetic":false,"types":[]}];
 implementors["flate2"] = [{"text":"impl Error for DecompressError","synthetic":false,"types":[]},{"text":"impl Error for CompressError","synthetic":false,"types":[]}];
-implementors["getrandom"] = [{"text":"impl Error for Error","synthetic":false,"types":[]}];
 implementors["native_tls"] = [{"text":"impl Error for Error","synthetic":false,"types":[]},{"text":"impl&lt;S&gt; Error for HandshakeError&lt;S&gt; <span class=\"where fmt-newline\">where<br>&nbsp;&nbsp;&nbsp;&nbsp;S: Any + Debug,&nbsp;</span>","synthetic":false,"types":[]}];
 implementors["openssl"] = [{"text":"impl Error for ErrorStack","synthetic":false,"types":[]},{"text":"impl Error for Error","synthetic":false,"types":[]},{"text":"impl Error for Error","synthetic":false,"types":[]},{"text":"impl&lt;S:&nbsp;Debug&gt; Error for HandshakeError&lt;S&gt;","synthetic":false,"types":[]},{"text":"impl Error for X509VerifyResult","synthetic":false,"types":[]}];
 implementors["psl_lexer"] = [{"text":"impl Error for Error","synthetic":false,"types":[]}];
