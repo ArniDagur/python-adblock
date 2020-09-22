@@ -150,7 +150,7 @@ jobs:
 
   docs-publish:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/master' && github.event.action == 'push'
     steps:
       - uses: actions/checkout@v2
         with:
