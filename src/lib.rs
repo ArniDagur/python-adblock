@@ -17,7 +17,7 @@ use adblock::engine::Engine as RustEngine;
 use adblock::lists::FilterFormat;
 use adblock::lists::FilterSet as RustFilterSet;
 use pyo3::class::PyObjectProtocol;
-use pyo3::exceptions::ValueError as PyValueError;
+use pyo3::exceptions::PyValueError;
 use pyo3::prelude::*;
 use pyo3::types::PyBytes;
 use pyo3::PyErr;
