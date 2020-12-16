@@ -242,6 +242,11 @@ pub struct UrlSpecificResources {
     /// page.
     #[pyo3(get)]
     pub injected_script: String,
+    /// `generichide` is set to `True` if there is a corresponding
+    /// `$generichide` exception network filter. If so, the page should not
+    /// query for additional generic rules using hidden_class_id_selectors.
+    #[pyo3(get)]
+    pub generichide: bool,
 }
 
 impl Into<UrlSpecificResources> for RustUrlSpecificResources {
@@ -251,6 +256,7 @@ impl Into<UrlSpecificResources> for RustUrlSpecificResources {
             style_selectors: self.style_selectors,
             exceptions: self.exceptions,
             injected_script: self.injected_script,
+            generichide: self.generichide,
         }
     }
 }
@@ -259,11 +265,12 @@ impl Into<UrlSpecificResources> for RustUrlSpecificResources {
 impl PyObjectProtocol for UrlSpecificResources {
     fn __repr__(&self) -> PyResult<String> {
         Ok(format!(
-            "UrlSpecificResources<{} hide selectors, {} style selectors, {} exceptions, injected_javascript={:?}>",
+            "UrlSpecificResources<{} hide selectors, {} style selectors, {} exceptions, injected_javascript={:?}, generichide={}>",
             self.hide_selectors.len(),
             self.style_selectors.len(),
             self.exceptions.len(),
             self.injected_script,
+            self.generichide,
         ))
     }
 }
