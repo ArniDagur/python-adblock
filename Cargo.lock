@@ -2,14 +2,6 @@
 # It is not intended for manual editing.
 [[package]]
 name = "adblock"
-version = "0.3.2"
-dependencies = [
- "adblock 0.3.4",
- "pyo3",
-]
-
-[[package]]
-name = "adblock"
 version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "190544b3099ca6e26366898a4991fcb19d031d48ea36158e083543c56c1694b7"
@@ -28,6 +20,14 @@ dependencies = [
  "serde",
  "twoway",
  "url 2.2.0",
+]
+
+[[package]]
+name = "adblock"
+version = "0.4.0"
+dependencies = [
+ "adblock 0.3.4",
+ "pyo3",
 ]
 
 [[package]]
