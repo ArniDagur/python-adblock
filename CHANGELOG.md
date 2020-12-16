@@ -4,17 +4,31 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Changelog](http://keepachangelog.com/).
 
 
+
 ## Unreleased
 ---
 
 ### New
-* Maintain a `CHANGELOG.md` file.
 
 ### Changes
 
 ### Fixes
 
 ### Breaks
+
+
+## 0.4.0 - (2020-12-16)
+---
+
+### New
+* Maintain a `CHANGELOG.md` file.
+* Include `generichide` field in `UrlSpecificResources`.
+
+### Fixes
+* Include `Cargo.lock` in source control, fixing incorrect dependency resolution [#15](https://github.com/ArniDagur/python-adblock/issues/15).
+
+### Breaks
+* Remove `explicit_cancel` field from `BlockerResult`, as it has been removed upstream.
 
 
 ## 0.3.2 - (2020-09-22)

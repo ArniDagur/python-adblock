@@ -45,11 +45,6 @@ fn adblock(_py: Python<'_>, m: &PyModule) -> PyResult<()> {
 pub struct BlockerResult {
     #[pyo3(get)]
     pub matched: bool,
-    /// Normally, Brave Browser returns `200 OK` with an empty body when
-    /// `matched` is `True`, except if `explicit_cancel` is also `True`, in
-    /// which case the request is cancelled.
-    #[pyo3(get)]
-    pub explicit_cancel: bool,
     /// Important is used to signal that a rule with the `important` option
     /// matched. An `important` match means that exceptions should not apply
     /// and no further checking is neccesary--the request should be blocked
@@ -91,7 +86,6 @@ impl Into<BlockerResult> for RustBlockerResult {
     fn into(self) -> BlockerResult {
         BlockerResult {
             matched: self.matched,
-            explicit_cancel: self.explicit_cancel,
             important: self.important,
             redirect: self.redirect,
             exception: self.exception,
@@ -105,14 +99,8 @@ impl Into<BlockerResult> for RustBlockerResult {
 impl PyObjectProtocol for BlockerResult {
     fn __repr__(&self) -> PyResult<String> {
         Ok(format!(
-            "BlockerResult({}, {}, {}, {:?}, {:?}, {:?}, {:?})",
-            self.matched,
-            self.explicit_cancel,
-            self.important,
-            self.redirect,
-            self.exception,
-            self.filter,
-            self.error
+            "BlockerResult({}, {}, {:?}, {:?}, {:?}, {:?})",
+            self.matched, self.important, self.redirect, self.exception, self.filter, self.error
         ))
     }
 }
@@ -249,6 +237,11 @@ pub struct UrlSpecificResources {
     /// page.
     #[pyo3(get)]
     pub injected_script: String,
+    /// `generichide` is set to `True` if there is a corresponding
+    /// `$generichide` exception network filter. If so, the page should not
+    /// query for additional generic rules using hidden_class_id_selectors.
+    #[pyo3(get)]
+    pub generichide: bool,
 }
 
 impl Into<UrlSpecificResources> for RustUrlSpecificResources {
@@ -258,6 +251,7 @@ impl Into<UrlSpecificResources> for RustUrlSpecificResources {
             style_selectors: self.style_selectors,
             exceptions: self.exceptions,
             injected_script: self.injected_script,
+            generichide: self.generichide,
         }
     }
 }
@@ -266,11 +260,12 @@ impl Into<UrlSpecificResources> for RustUrlSpecificResources {
 impl PyObjectProtocol for UrlSpecificResources {
     fn __repr__(&self) -> PyResult<String> {
         Ok(format!(
-            "UrlSpecificResources<{} hide selectors, {} style selectors, {} exceptions, injected_javascript={:?}>",
+            "UrlSpecificResources<{} hide selectors, {} style selectors, {} exceptions, injected_javascript={:?}, generichide={}>",
             self.hide_selectors.len(),
             self.style_selectors.len(),
             self.exceptions.len(),
             self.injected_script,
+            self.generichide,
         ))
     }
 }
