@@ -10,7 +10,7 @@ license = "MIT OR Apache-2.0"
 debug = true
 
 [dependencies]
-adblock = { version = "0.3.2", default-features = false, features = ["full-regex-handling", "embedded-domain-resolver"] }
+adblock = { version = "=0.3.4", default-features = false, features = ["full-regex-handling", "embedded-domain-resolver"] }
 pyo3 = "0.12"
 
 [lib]

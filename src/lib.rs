@@ -45,11 +45,6 @@ fn adblock(_py: Python<'_>, m: &PyModule) -> PyResult<()> {
 pub struct BlockerResult {
     #[pyo3(get)]
     pub matched: bool,
-    /// Normally, Brave Browser returns `200 OK` with an empty body when
-    /// `matched` is `True`, except if `explicit_cancel` is also `True`, in
-    /// which case the request is cancelled.
-    #[pyo3(get)]
-    pub explicit_cancel: bool,
     /// Important is used to signal that a rule with the `important` option
     /// matched. An `important` match means that exceptions should not apply
     /// and no further checking is neccesary--the request should be blocked
@@ -91,7 +86,6 @@ impl Into<BlockerResult> for RustBlockerResult {
     fn into(self) -> BlockerResult {
         BlockerResult {
             matched: self.matched,
-            explicit_cancel: self.explicit_cancel,
             important: self.important,
             redirect: self.redirect,
             exception: self.exception,
@@ -105,9 +99,8 @@ impl Into<BlockerResult> for RustBlockerResult {
 impl PyObjectProtocol for BlockerResult {
     fn __repr__(&self) -> PyResult<String> {
         Ok(format!(
-            "BlockerResult({}, {}, {}, {:?}, {:?}, {:?}, {:?})",
+            "BlockerResult({}, {}, {:?}, {:?}, {:?}, {:?})",
             self.matched,
-            self.explicit_cancel,
             self.important,
             self.redirect,
             self.exception,

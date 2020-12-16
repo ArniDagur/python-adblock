@@ -1,6 +1,5 @@
 # -- Rust --
 /target
-Cargo.lock
 
 # -- Editors --
 # Created by https://www.gitignore.io/api/vim,emacs,visualstudiocode
