@@ -11,10 +11,12 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 ### New
 
 ### Changes
+* Updated PyO3 to version `0.13`.
 
 ### Fixes
 
 ### Breaks
+* Dropped Python `3.5` support.
 
 
 ## 0.4.0 - (2020-12-16)
