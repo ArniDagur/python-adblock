@@ -17,7 +17,10 @@ def get_version_value_cargo():
 
 
 def get_version_value_changelog():
-    proc = subprocess.Popen(["changelog", "current"], stdout=subprocess.PIPE)
+    try:
+        proc = subprocess.Popen(["changelog", "current"], stdout=subprocess.PIPE)
+    except FileNotFoundError:
+        return None
     assert proc.wait() == 0
     return proc.stdout.read().decode("utf-8").strip()
 
@@ -33,5 +36,5 @@ def test_version_numbers_all_same():
     module_version = adblock.__version__
 
     assert cargo_version == poetry_version
-    assert poetry_version == changelog_version
-    assert changelog_version == module_version
+    assert poetry_version == module_version
+    assert changelog_version is None or module_version == changelog_version
