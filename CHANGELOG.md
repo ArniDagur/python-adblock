@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 
 ### Changes
 * Updated PyO3 to version `0.13`.
+* Changed `__repr__` methods of classes to be more idiomatic.
 
 ### Fixes
 

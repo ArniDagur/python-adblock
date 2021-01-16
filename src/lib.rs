@@ -99,8 +99,13 @@ impl Into<BlockerResult> for RustBlockerResult {
 impl PyObjectProtocol for BlockerResult {
     fn __repr__(&self) -> PyResult<String> {
         Ok(format!(
-            "BlockerResult({}, {}, {:?}, {:?}, {:?}, {:?})",
-            self.matched, self.important, self.redirect, self.exception, self.filter, self.error
+            "BlockerResult(matched={}, important={}, redirect={}, exception={}, filter={}, error={})",
+            self.matched.diy_python_repr(),
+            self.important.diy_python_repr(),
+            self.redirect.diy_python_repr(),
+            self.exception.diy_python_repr(),
+            self.filter.diy_python_repr(),
+            self.error.diy_python_repr(),
         ))
     }
 }
@@ -173,6 +178,7 @@ fn filter_format_from_string(filter_format: &str) -> PyResult<FilterFormat> {
 #[derive(Clone)]
 pub struct FilterSet {
     filter_set: RustFilterSet,
+    debug: bool,
 }
 
 #[pymethods]
@@ -186,6 +192,7 @@ impl FilterSet {
     pub fn new(debug: bool) -> Self {
         Self {
             filter_set: RustFilterSet::new(debug),
+            debug,
         }
     }
 
@@ -215,6 +222,14 @@ impl FilterSet {
         Ok(())
     }
 }
+
+#[pyproto]
+impl PyObjectProtocol for FilterSet {
+    fn __repr__(&self) -> PyResult<String> {
+        Ok(format!("FilterSet(debug={})", self.debug.diy_python_repr()))
+    }
+}
+
 /// Contains cosmetic filter information intended to be injected into a
 /// particular hostname.
 #[pyclass]
@@ -260,12 +275,12 @@ impl Into<UrlSpecificResources> for RustUrlSpecificResources {
 impl PyObjectProtocol for UrlSpecificResources {
     fn __repr__(&self) -> PyResult<String> {
         Ok(format!(
-            "UrlSpecificResources<{} hide selectors, {} style selectors, {} exceptions, injected_javascript={:?}, generichide={}>",
+            "UrlSpecificResources<{} hide selectors, {} style selectors, {} exceptions, injected_javascript={}, generichide={}>",
             self.hide_selectors.len(),
             self.style_selectors.len(),
             self.exceptions.len(),
-            self.injected_script,
-            self.generichide,
+            self.injected_script.diy_python_repr(),
+            self.generichide.diy_python_repr(),
         ))
     }
 }
@@ -293,6 +308,7 @@ impl PyObjectProtocol for UrlSpecificResources {
 #[text_signature = "($self, filter_set, optimize)"]
 pub struct Engine {
     engine: RustEngine,
+    optimize: bool,
 }
 
 #[pymethods]
@@ -302,7 +318,7 @@ impl Engine {
     #[args(filter_set, optimize = true)]
     pub fn new(filter_set: FilterSet, optimize: bool) -> Self {
         let engine = RustEngine::from_filter_set(filter_set.filter_set, optimize);
-        Self { engine }
+        Self { engine, optimize }
     }
 
     /// Check if the given `url`—pointing to a resource of type `request_type`—
@@ -521,5 +537,54 @@ impl Engine {
         Ok(self
             .engine
             .hidden_class_id_selectors(&classes, &ids, &exceptions))
+    }
+}
+
+#[pyproto]
+impl PyObjectProtocol for Engine {
+    fn __repr__(&self) -> PyResult<String> {
+        Ok(format!(
+            "Engine<optimize={}>",
+            self.optimize.diy_python_repr()
+        ))
+    }
+}
+
+/// PyO3 doesn't offer the ability to get the Python representation of a Rust
+/// object, so we make our own trait.
+trait DiyPythonRepr {
+    fn diy_python_repr(&self) -> String;
+}
+
+impl<T> DiyPythonRepr for Option<T>
+where
+    T: DiyPythonRepr,
+{
+    fn diy_python_repr(&self) -> String {
+        match self {
+            None => "None".to_owned(),
+            Some(x) => x.diy_python_repr(),
+        }
+    }
+}
+
+impl DiyPythonRepr for String {
+    fn diy_python_repr(&self) -> String {
+        let mut res = format!("{:?}", self);
+        // This is safe to do since we know that `res` will always be of
+        // length >= 2.
+        res.replace_range(0..1, "'");
+        res.replace_range(res.len() - 1..res.len(), "'");
+        res
+    }
+}
+
+impl DiyPythonRepr for bool {
+    fn diy_python_repr(&self) -> String {
+        if *self {
+            "True".to_owned()
+        } else {
+            "False".to_owned()
+        }
     }
 }
