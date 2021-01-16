@@ -99,7 +99,7 @@ impl Into<BlockerResult> for RustBlockerResult {
 impl PyObjectProtocol for BlockerResult {
     fn __repr__(&self) -> PyResult<String> {
         Ok(format!(
-            "BlockerResult({}, {}, {:?}, {:?}, {:?}, {:?})",
+            "BlockerResult(matched={}, important={}, redirect={:?}, exception={:?}, filter={:?}, error={:?})",
             self.matched, self.important, self.redirect, self.exception, self.filter, self.error
         ))
     }
