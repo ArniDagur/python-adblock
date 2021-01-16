@@ -570,7 +570,12 @@ where
 
 impl DiyPythonRepr for String {
     fn diy_python_repr(&self) -> String {
-        format!("{:?}", self)
+        let mut res = format!("{:?}", self);
+        // This is safe to do since we know that `res` will always be of
+        // length >= 2.
+        res.replace_range(0..1, "'");
+        res.replace_range(res.len() - 1..res.len(), "'");
+        res
     }
 }
 

@@ -5,8 +5,8 @@ import re
 def assert_acceptable_repr(obj):
     # Default repr is r"<[A-Za-z]+ object at 0x[0-9a-f]+>"
     assert "object at" not in repr(obj)
-    assert re.match(repr(obj), "[A-Z][a-zA-Z]+\(.*\)") or re.match(
-        repr(obj), "([A-Z][a-zA-Z]+)?<.*>"
+    assert re.match(r"[A-Z][a-zA-Z]+\(.*\)", repr(obj)) or re.match(
+        r"([A-Z][a-zA-Z]+)?<.*>", repr(obj)
     )
 
 
