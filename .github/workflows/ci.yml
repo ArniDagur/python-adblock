@@ -70,7 +70,7 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: ${{ matrix.rust-toolchain }}
-          target: ${{ACTIONS_RUST_TARGET}}
+          target: ${{ env.ACTIONS_RUST_TARGET }}
           override: true
 
       - name: Run Rust tests
@@ -79,7 +79,7 @@ jobs:
           command: test
 
       - name: Build Python package
-        run: poetry run maturin build
+        run: poetry run maturin build --target ${{ env.ACTIONS_RUST_TARGET }}
 
       # Note: Windows doesn't support glob
       # https://stackoverflow.com/a/52481267/270334
@@ -125,7 +125,7 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
-          target: ${{ACTIONS_RUST_TARGET}}
+          target: ${{ env.ACTIONS_RUST_TARGET }}
           override: true
 
       - name: Install dependencies
@@ -134,7 +134,7 @@ jobs:
           pip install poetry
           poetry install
       - name: Build Python package
-        run: poetry run maturin build --release --no-sdist --strip --interpreter python${{matrix.python_version}} --target ${{ACTIONS_RUST_TARGET}}
+        run: poetry run maturin build --release --no-sdist --strip --interpreter python${{matrix.python_version}} --target ${{ env.ACTIONS_RUST_TARGET }}
 
       - name: List wheels
         if: matrix.os == 'windows-latest'
