@@ -67,7 +67,8 @@ jobs:
           poetry install
 
       - name: Set Rust target environment variable
-        run: echo "ACTIONS_RUST_TARGET=$(ci/get-target.sh ${{matrix.os}} ${{matrix.architecture}})" >> $GITHUB_ENV
+        run: bash ci/set-target.sh
+        shell: bash
 
       - name: Install Rust
         uses: actions-rs/toolchain@v1
@@ -117,7 +118,8 @@ jobs:
           architecture: ${{ matrix.architecture }}
 
       - name: Set Rust target environment variable
-        run: echo "ACTIONS_RUST_TARGET=$(ci/get-target.sh ${{matrix.os}} ${{matrix.architecture}})" >> $GITHUB_ENV
+        run: bash ci/set-target.sh
+        shell: bash
 
       - name: Install latest nightly
         uses: actions-rs/toolchain@v1
