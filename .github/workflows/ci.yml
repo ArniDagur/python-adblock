@@ -40,9 +40,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        rust-toolchain: [1.45, nightly]
         python-version: [3.6, 3.7, 3.8, 3.9]
         os: [ubuntu-latest, macos-latest, windows-latest]
         architecture: [x86, x64]
+        exclude:
+            - os: macos-latest
+              architecture: x86
 
     steps:
       - name: Checkout
@@ -58,14 +62,34 @@ jobs:
           python -m pip install --upgrade pip
           pip install poetry
           poetry install
-      - name: Install latest nightly
+
+      - name: Set Rust target environment variable
+        run: echo "ACTIONS_RUST_TARGET=$(ci/get-target.sh ${{matrix.os}} ${{matrix.architecture}})" >> $GITHUB_ENV
+
+      - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: nightly
+          toolchain: ${{ matrix.rust-toolchain }}
+          target: ${{ACTIONS_RUST_TARGET}}
           override: true
 
+      - name: Run Rust tests
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+
       - name: Build Python package
-        run: poetry run maturin develop --release
+        run: poetry run maturin build
+
+      # Note: Windows doesn't support glob
+      # https://stackoverflow.com/a/52481267/270334
+      - name: Install wheels
+        if:  matrix.os == 'windows-latest'
+        run: poetry run pip install --find-links=target\wheels adblock
+
+      - name: Install wheels
+        if:  matrix.os != 'windows-latest'
+        run: poetry run pip install target/wheels/adblock*.whl
 
       - name: Run Python tests
         run: poetry run pytest -vv --color=yes
@@ -79,6 +103,13 @@ jobs:
         python-version: [3.6, 3.7, 3.8, 3.9]
         os: [ubuntu-latest, macos-latest, windows-latest]
         architecture: [x86, x64]
+        exclude:
+            # Only build 32-bit for Windows
+            - os: macos-latest
+              architecture: x86
+            - os: ubuntu-latest
+              architecture: x86
+
     steps:
       - uses: actions/checkout@v1
 
@@ -87,10 +118,14 @@ jobs:
           python-version: ${{ matrix.python-version }}
           architecture: ${{ matrix.architecture }}
 
+      - name: Set Rust target environment variable
+        run: echo "ACTIONS_RUST_TARGET=$(ci/get-target.sh ${{matrix.os}} ${{matrix.architecture}})" >> $GITHUB_ENV
+
       - name: Install latest nightly
         uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
+          target: ${{ACTIONS_RUST_TARGET}}
           override: true
 
       - name: Install dependencies
@@ -99,7 +134,7 @@ jobs:
           pip install poetry
           poetry install
       - name: Build Python package
-        run: poetry run maturin build --release --no-sdist --strip --interpreter python${{matrix.python_version}}
+        run: poetry run maturin build --release --no-sdist --strip --interpreter python${{matrix.python_version}} --target ${{ACTIONS_RUST_TARGET}}
 
       - name: List wheels
         if: matrix.os == 'windows-latest'
