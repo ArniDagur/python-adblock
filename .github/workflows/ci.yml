@@ -67,7 +67,7 @@ jobs:
           poetry install
 
       - name: Set Rust target environment variable
-        run: bash ci/set-target.sh
+        run: bash ci/set-target.sh ${{ matrix.os }} ${{ matrix.architecture }}
         shell: bash
 
       - name: Install Rust
@@ -84,11 +84,11 @@ jobs:
       # https://stackoverflow.com/a/52481267/270334
       - name: Install wheels
         if:  matrix.os == 'windows-latest'
-        run: poetry run pip install --find-links=target\wheels adblock
+        run: poetry run pip install --user --find-links=target\wheels adblock
 
       - name: Install wheels
         if:  matrix.os != 'windows-latest'
-        run: poetry run pip install target/wheels/adblock*.whl
+        run: poetry run pip install --user target/wheels/adblock*.whl
 
       - name: Run Python tests
         run: poetry run pytest -vv --color=yes
@@ -118,7 +118,7 @@ jobs:
           architecture: ${{ matrix.architecture }}
 
       - name: Set Rust target environment variable
-        run: bash ci/set-target.sh
+        run: bash ci/set-target.sh ${{ matrix.os }} ${{ matrix.architecture }}
         shell: bash
 
       - name: Install latest nightly
@@ -148,11 +148,11 @@ jobs:
       # https://stackoverflow.com/a/52481267/270334
       - name: Install wheels
         if:  matrix.os == 'windows-latest'
-        run: pip install --user --find-links=target\wheels adblock
+        run: pip install --find-links=target\wheels adblock
 
       - name: Install wheels
         if:  matrix.os != 'windows-latest'
-        run: pip install --user target/wheels/adblock*.whl
+        run: pip install target/wheels/adblock*.whl
 
       - name: Release
         uses: softprops/action-gh-release@v1
