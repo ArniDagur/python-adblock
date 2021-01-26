@@ -78,17 +78,7 @@ jobs:
           override: true
 
       - name: Build Python package
-        run: poetry run maturin build --target ${{ env.ACTIONS_RUST_TARGET }}
-
-      # Note: Windows doesn't support glob
-      # https://stackoverflow.com/a/52481267/270334
-      - name: Install wheels
-        if:  matrix.os == 'windows-latest'
-        run: poetry run pip install --user --find-links=target\wheels adblock
-
-      - name: Install wheels
-        if:  matrix.os != 'windows-latest'
-        run: poetry run pip install --user target/wheels/adblock*.whl
+        run: poetry run maturin develop
 
       - name: Run Python tests
         run: poetry run pytest -vv --color=yes
