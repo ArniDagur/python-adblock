@@ -45,7 +45,10 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
         architecture: [x86, x64]
         exclude:
+            # Only build 32-bit for Windows
             - os: macos-latest
+              architecture: x86
+            - os: ubuntu-latest
               architecture: x86
 
     steps:
@@ -72,11 +75,6 @@ jobs:
           toolchain: ${{ matrix.rust-toolchain }}
           target: ${{ env.ACTIONS_RUST_TARGET }}
           override: true
-
-      - name: Run Rust tests
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
 
       - name: Build Python package
         run: poetry run maturin build --target ${{ env.ACTIONS_RUST_TARGET }}
