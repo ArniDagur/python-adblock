@@ -84,7 +84,7 @@ jobs:
 
       - name: Build Python package
         if: matrix.architecture == 'x86'
-        run: poetry run maturin build --target ${{ env.ACTION_RUST_TARGET }}
+        run: poetry run maturin build --target ${{ env.ACTIONS_RUST_TARGET }}
 
       - name: Build Python package
         if: matrix.architecture != 'x86'
