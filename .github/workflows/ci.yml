@@ -148,11 +148,11 @@ jobs:
       # https://stackoverflow.com/a/52481267/270334
       - name: Install wheels
         if:  matrix.os == 'windows-latest'
-        run: pip install --find-links=target\wheels adblock
+        run: pip install --user --find-links=target\wheels adblock
 
       - name: Install wheels
         if:  matrix.os != 'windows-latest'
-        run: pip install target/wheels/adblock*.whl
+        run: pip install --user target/wheels/adblock*.whl
 
       - name: Release
         uses: softprops/action-gh-release@v1
