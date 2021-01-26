@@ -50,6 +50,11 @@ jobs:
               architecture: x86
             - os: ubuntu-latest
               architecture: x86
+            # Only build on Rust 1.45 on Linux
+            - os: macos-latest
+              rust-toolchain: 1.45
+            - os: windows-latest
+              rust-toolchain: 1.45
 
     steps:
       - name: Checkout
@@ -78,9 +83,15 @@ jobs:
           override: true
 
       - name: Build Python package
+        if: matrix.architecture == 'x86'
+        run: poetry run maturin build --target ${{ env.ACTION_RUST_TARGET }}
+
+      - name: Build Python package
+        if: matrix.architecture != 'x86'
         run: poetry run maturin develop
 
       - name: Run Python tests
+        if: matrix.architecture != 'x86'
         run: poetry run pytest -vv --color=yes
 
   python-publish:
