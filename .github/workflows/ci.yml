@@ -4,6 +4,7 @@ on:
   release:
     types: [created]
   push:
+  pull_request:
   schedule:
     # Runs every Thursday at 20:23 GMT to avoid bit rot
     - cron: "20 23 * * 4"
