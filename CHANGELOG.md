@@ -3,18 +3,19 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Changelog](http://keepachangelog.com/).
 
-
-
 ## Unreleased
 ---
 
+
+## 0.4.1 - (2021-01-27)
+---
+
 ### New
+* Windows 32-bit prebuilt wheels.
 
 ### Changes
 * Updated PyO3 to version `0.13`.
 * Changed `__repr__` methods of classes to be more idiomatic.
-
-### Fixes
 
 ### Breaks
 * Dropped Python `3.5` support.
