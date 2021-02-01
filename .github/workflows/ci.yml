@@ -84,15 +84,13 @@ jobs:
           override: true
 
       - name: Build Python package
-        if: matrix.architecture == 'x86'
         run: poetry run maturin build --target ${{ env.ACTIONS_RUST_TARGET }}
 
-      - name: Build Python package
-        if: matrix.architecture != 'x86'
-        run: poetry run maturin develop
+      - name: Install Python package
+        run: poetry run pip install target/wheels/adblock*.whl
+        shell: bash
 
       - name: Run Python tests
-        if: matrix.architecture != 'x86'
         run: poetry run pytest -vv --color=yes
 
   python-publish:
