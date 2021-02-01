@@ -7,6 +7,12 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 ---
 
 
+## 0.4.2 - (2021-02-01)
+---
+### Fixes
+* Remove relative import which caused problems in [#17](https://github.com/ArniDagur/python-adblock/issues/17).
+
+
 ## 0.4.1 - (2021-01-27)
 ---
 
