@@ -133,10 +133,10 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install poetry
+          pip install poetry twine
           poetry install
       - name: Build Python package
-        run: poetry run maturin build --release --no-sdist --strip --interpreter python${{matrix.python_version}} --target ${{ env.ACTIONS_RUST_TARGET }}
+        run: poetry run maturin build --release --strip --interpreter python${{matrix.python_version}} --target ${{ env.ACTIONS_RUST_TARGET }}
 
       - name: List wheels
         if: matrix.os == 'windows-latest'
@@ -167,8 +167,9 @@ jobs:
       - name: PyPi publish
         if: github.event_name == 'release' && github.event.action == 'created'
         env:
-          MATURIN_PASSWORD: ${{ secrets.PYPI }}
-        run: poetry run maturin publish --interpreter python${{matrix.python_version}} --username __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI }}
+        run: twine upload --non-interactive --skip-existing --username __token__ target/wheels/*
+        shell: bash
 
   docs-publish:
     runs-on: ubuntu-latest
