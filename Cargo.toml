@@ -1,10 +1,22 @@
 [package]
-name = "adblock"
 publish = false
-version = "0.4.1"
-authors = ["Árni Dagur <arni@dagur.eu"]
+name = "adblock"
+version = "0.4.2"
 edition = "2018"
+authors = ["Árni Dagur <arni@dagur.eu>"]
 license = "MIT OR Apache-2.0"
+readme = "README.md"
+homepage = "https://github.com/ArniDagur/python-adblock"
+repository = "https://github.com/ArniDagur/python-adblock"
+
+[package.metadata.maturin]
+classifier = [
+    "Programming Language :: Python",
+    "Programming Language :: Rust",
+    "License :: OSI Approved :: MIT License",
+    "License :: OSI Approved :: Apache Software License",
+]
+requires-python = ">=3.6"
 
 [profile.release]
 debug = true

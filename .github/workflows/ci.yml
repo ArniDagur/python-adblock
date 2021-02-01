@@ -4,6 +4,8 @@ on:
   release:
     types: [created]
   push:
+    branches:
+      - master
   pull_request:
   schedule:
     # Runs every Thursday at 20:23 GMT to avoid bit rot
@@ -69,7 +71,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install poetry
+          pip install poetry twine
           poetry install
 
       - name: Set Rust target environment variable
@@ -84,15 +86,17 @@ jobs:
           override: true
 
       - name: Build Python package
-        if: matrix.architecture == 'x86'
-        run: poetry run maturin build --target ${{ env.ACTIONS_RUST_TARGET }}
+        run: poetry run maturin build --interpreter python${{matrix.python_version}} --target ${{ env.ACTIONS_RUST_TARGET }}
 
-      - name: Build Python package
-        if: matrix.architecture != 'x86'
-        run: poetry run maturin develop
+      - name: Check wheels with Twine
+        run: twine check target/wheels/*
+        shell: bash
+
+      - name: Install Python package
+        run: poetry run pip install target/wheels/adblock*.whl
+        shell: bash
 
       - name: Run Python tests
-        if: matrix.architecture != 'x86'
         run: poetry run pytest -vv --color=yes
 
   python-publish:
@@ -133,10 +137,10 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install poetry
+          pip install poetry twine
           poetry install
       - name: Build Python package
-        run: poetry run maturin build --release --no-sdist --strip --interpreter python${{matrix.python_version}} --target ${{ env.ACTIONS_RUST_TARGET }}
+        run: poetry run maturin build --release --strip --interpreter python${{matrix.python_version}} --target ${{ env.ACTIONS_RUST_TARGET }}
 
       - name: List wheels
         if: matrix.os == 'windows-latest'
@@ -146,15 +150,9 @@ jobs:
         if:  matrix.os != 'windows-latest'
         run: find ./target/wheels/
 
-      # Note: Windows doesn't support glob
-      # https://stackoverflow.com/a/52481267/270334
       - name: Install wheels
-        if:  matrix.os == 'windows-latest'
-        run: pip install --find-links=target\wheels adblock
-
-      - name: Install wheels
-        if:  matrix.os != 'windows-latest'
         run: pip install target/wheels/adblock*.whl
+        shell: bash
 
       - name: Release
         uses: softprops/action-gh-release@v1
@@ -167,8 +165,9 @@ jobs:
       - name: PyPi publish
         if: github.event_name == 'release' && github.event.action == 'created'
         env:
-          MATURIN_PASSWORD: ${{ secrets.PYPI }}
-        run: poetry run maturin publish --interpreter python${{matrix.python_version}} --username __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI }}
+        run: twine upload --non-interactive --skip-existing --username __token__ target/wheels/*
+        shell: bash
 
   docs-publish:
     runs-on: ubuntu-latest
