@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 ## Unreleased
 ---
 
+## 0.4.3 - (2021-03-20)
+---
+### Changes
+* Update `adblock` dependency to `0.3.10`
 
 ## 0.4.2 - (2021-02-01)
 ---

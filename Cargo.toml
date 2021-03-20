@@ -1,7 +1,7 @@
 [package]
 publish = false
 name = "adblock"
-version = "0.4.2"
+version = "0.4.3"
 edition = "2018"
 authors = ["Árni Dagur <arni@dagur.eu>"]
 license = "MIT OR Apache-2.0"
@@ -22,7 +22,7 @@ requires-python = ">=3.6"
 debug = true
 
 [dependencies]
-adblock = { version = "=0.3.4", default-features = false, features = ["full-regex-handling", "embedded-domain-resolver"] }
+adblock = { version = "=0.3.10", default-features = false, features = ["full-regex-handling", "embedded-domain-resolver"] }
 pyo3 = "0.13"
 
 [lib]
