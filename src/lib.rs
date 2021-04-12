@@ -2,7 +2,6 @@
 #![deny(
     future_incompatible,
     nonstandard_style,
-    rust_2018_idioms,
     missing_copy_implementations,
     trivial_casts,
     trivial_numeric_casts,
