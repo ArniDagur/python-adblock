@@ -198,7 +198,7 @@ jobs:
         shell: bash
 
       - name: Upload wheels
-        if: matrix.platform.toolchain == "stable"
+        if: matrix.platform.toolchain == 'stable'
         uses: actions/upload-artifact@v2
         with:
           name: wheels
