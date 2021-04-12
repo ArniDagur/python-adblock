@@ -71,7 +71,7 @@ jobs:
       - name: Run PyTest
         run: |
           pip install pytest toml
-          cd tests && pytest -vv --color=yes
+          pytest -vv --color=yes
 
       - name: Check wheels with Twine
         run: pip install twine && twine check dist/*
@@ -120,7 +120,7 @@ jobs:
       - name: Run PyTest
         run: |
           pip install pytest toml
-          cd tests && pytest -vv --color=yes
+          pytest -vv --color=yes
 
       - name: Check wheels with Twine
         run: pip install twine && twine check dist/*
@@ -186,7 +186,7 @@ jobs:
         run: |
           pip install adblock --no-index --find-links dist --force-reinstall
           pip install pytest toml
-          cd tests && pytest -vv --color=yes
+          pytest -vv --color=yes
 
       - name: Auditwheel Symbols
         run: |
