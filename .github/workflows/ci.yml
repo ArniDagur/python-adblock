@@ -283,6 +283,14 @@ jobs:
         with:
           python-version: 3.9
 
+      - name: Wheel filename sanity checks
+        run: |
+          num_abi3_whl=$(find | grep ".*adblock.*-abi3.*\.whl" | wc -l)
+          num_whl=$(find | grep ".*\.whl" | wc -l)
+          test num_abi3_whl -eq num_whl
+          test num_whl -ge 1
+          find | grep "adblock-.*\.tar\.gz"
+
       - name: PyPi publish
         if: github.event_name == 'release' && github.event.action == 'created'
         env:
