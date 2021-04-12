@@ -28,6 +28,3 @@ pyo3 = { version = "0.13", features = ["abi3-py36", "extension-module"] }
 [lib]
 name = "adblock"
 crate-type = ["rlib", "cdylib"]
-
-[features]
-default = ["pyo3/extension-module"]
