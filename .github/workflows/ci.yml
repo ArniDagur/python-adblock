@@ -157,12 +157,14 @@ jobs:
               target: "x86_64-unknown-linux-gnu",
               arch: "x86_64",
             },
-            {
-              toolchain: "stable",
-              manylinux: "2010",
-              target: "i686-unknown-linux-gnu",
-              arch: "i686"
-            },
+            # FIXME: GitHub actions runs out of memory when this build is
+            # attempted.
+            # {
+            #   toolchain: "stable",
+            #   manylinux: "2010",
+            #   target: "i686-unknown-linux-gnu",
+            #   arch: "i686"
+            # },
           ]
     steps:
       - uses: actions/checkout@v2
