@@ -14,7 +14,7 @@ maturin build --release
 |------------------|----------|------------|-----|
 | Python           | `>=3.6`  | `python3`  | -   |
 | Rust             | `>=1.45` | `rust`     | -   |
-| Maturin          | `*`      | `maturin`  | https://github.com/PyO3/maturin |
+| Maturin          | `>=0.10` | `maturin`  | https://github.com/PyO3/maturin |
 
 ### Developing
 
