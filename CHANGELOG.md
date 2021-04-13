@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 
 ## Unreleased
 ---
+### Changes
+* PyO3 is now configured to use [`abi3`](https://pyo3.rs/v0.13.2/building_and_distribution.html#py_limited_apiabi3).
 
 ## 0.4.3 - (2021-03-20)
 ---
