@@ -5,6 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 
 ## Unreleased
 ---
+### Breaks
+* Library now throws the custom `adblock.AdblockException` exception, instead of `ValueError`.
+
 
 ## 0.4.4 - (2021-04-13)
 ---

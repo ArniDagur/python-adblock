@@ -17,7 +17,8 @@ use adblock::engine::Engine as RustEngine;
 use adblock::lists::FilterFormat;
 use adblock::lists::FilterSet as RustFilterSet;
 use pyo3::class::PyObjectProtocol;
-use pyo3::exceptions::PyValueError;
+use pyo3::create_exception;
+use pyo3::exceptions::PyException;
 use pyo3::prelude::*;
 use pyo3::types::PyBytes;
 use pyo3::PyErr;
@@ -31,12 +32,28 @@ use std::io::{Read, Write};
 
 /// Brave's adblocking library in Python!
 #[pymodule]
-fn adblock(_py: Python<'_>, m: &PyModule) -> PyResult<()> {
+fn adblock(py: Python<'_>, m: &PyModule) -> PyResult<()> {
     m.add("__version__", env!("CARGO_PKG_VERSION"))?;
     m.add_class::<Engine>()?;
     m.add_class::<FilterSet>()?;
     m.add_class::<BlockerResult>()?;
     m.add_class::<UrlSpecificResources>()?;
+    m.add("AdblockException", py.get_type::<AdblockException>())?;
+    m.add("BlockerException", py.get_type::<BlockerException>())?;
+    m.add("SerializationError", py.get_type::<SerializationError>())?;
+    m.add(
+        "DeserializationError",
+        py.get_type::<DeserializationError>(),
+    )?;
+    m.add(
+        "OptimizedFilterExistence",
+        py.get_type::<OptimizedFilterExistence>(),
+    )?;
+    m.add(
+        "BadFilterAddUnsupported",
+        py.get_type::<BadFilterAddUnsupported>(),
+    )?;
+    m.add("FilterExists", py.get_type::<FilterExists>())?;
     Ok(())
 }
 
@@ -141,9 +158,24 @@ impl Display for BlockerError {
     }
 }
 
+create_exception!(adblock, AdblockException, PyException);
+create_exception!(adblock, BlockerException, AdblockException);
+create_exception!(adblock, SerializationError, BlockerException);
+create_exception!(adblock, DeserializationError, BlockerException);
+create_exception!(adblock, OptimizedFilterExistence, BlockerException);
+create_exception!(adblock, BadFilterAddUnsupported, BlockerException);
+create_exception!(adblock, FilterExists, BlockerException);
+
 impl Into<PyErr> for BlockerError {
     fn into(self) -> PyErr {
-        PyErr::new::<PyValueError, _>(format!("{:?}", self))
+        let msg = format!("{:?}", self);
+        match self {
+            Self::SerializationError => PyErr::new::<SerializationError, _>(msg),
+            Self::DeserializationError => PyErr::new::<DeserializationError, _>(msg),
+            Self::OptimizedFilterExistence => PyErr::new::<OptimizedFilterExistence, _>(msg),
+            Self::BadFilterAddUnsupported => PyErr::new::<BadFilterAddUnsupported, _>(msg),
+            Self::FilterExists => PyErr::new::<FilterExists, _>(msg),
+        }
     }
 }
 
@@ -163,7 +195,7 @@ fn filter_format_from_string(filter_format: &str) -> PyResult<FilterFormat> {
     match filter_format {
         "standard" => Ok(FilterFormat::Standard),
         "hosts" => Ok(FilterFormat::Hosts),
-        _ => Err(PyErr::new::<PyValueError, _>("Invalid format value")),
+        _ => Err(PyErr::new::<AdblockException, _>("Invalid format value")),
     }
 }
 
