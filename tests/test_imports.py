@@ -14,16 +14,18 @@ def get_added_classes():
             match = re.match(r"m\.add_class::<(.+)>\(\)\?;", line.strip())
             if match is not None:
                 classes.append(match.group(1))
+                continue
     return classes
 
 
 def test_added_classes():
     """
     Make sure that there's no class that we added in Rust but didn't import in
-    `__init__.py` and vice versa.
+    `__init__.py`.
     """
     added_classes = get_added_classes()
-    assert added_classes == list(adblock.__all__)
+    for c in added_classes:
+        assert c in adblock.__all__
 
 
 def test_dunder_all_classes_imported():

@@ -1,5 +1,26 @@
 from typing import Optional, Dict, List, Set
 
+class AdblockException(Exception):
+    pass
+
+class BlockerException(AdblockException):
+    pass
+
+class SerializationError(BlockerException):
+    pass
+
+class DeserializationError(BlockerException):
+    pass
+
+class OptimizedFilterExistence(BlockerException):
+    pass
+
+class BadFilterAddUnsupported(BlockerException):
+    pass
+
+class FilterExists(BlockerException):
+    pass
+
 class BlockerResult:
     matched: bool
     explicit_cancel: bool

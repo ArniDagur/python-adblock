@@ -52,6 +52,17 @@ def test_serde_file(tmpdir):
     assert deserialization_result is None
 
 
+def test_deserialize_corrupt(tmpdir):
+    path = str(tmpdir / "corrupt_cache.dat")
+    with open(path, "w", encoding="utf-8") as f:
+        f.write("abc")
+
+    engine = empty_engine()
+    with pytest.raises(adblock.DeserializationError):
+        engine.deserialize_from_file(path)
+    with pytest.raises(adblock.DeserializationError):
+        engine.deserialize(b"abc")
+
 def test_serde():
     engine = empty_engine()
     serialization_result = engine.serialize()
