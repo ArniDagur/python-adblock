@@ -32,6 +32,9 @@ jobs:
           command: clippy
           args: --all-targets --all-features
 
+      - name: Lint with Black
+        run: pip install black && black --check .
+
   macos:
     runs-on: macos-latest
     needs: lint

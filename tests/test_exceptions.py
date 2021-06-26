@@ -1,5 +1,6 @@
 import adblock
 
+
 def test_correct_baseclasses():
     assert issubclass(adblock.AdblockException, Exception)
     assert issubclass(adblock.BlockerException, adblock.AdblockException)

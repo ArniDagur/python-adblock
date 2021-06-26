@@ -63,6 +63,7 @@ def test_deserialize_corrupt(tmpdir):
     with pytest.raises(adblock.DeserializationError):
         engine.deserialize(b"abc")
 
+
 def test_serde():
     engine = empty_engine()
     serialization_result = engine.serialize()
