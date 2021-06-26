@@ -26,7 +26,7 @@ dependencies = [
 
 [[package]]
 name = "adblock"
-version = "0.4.4"
+version = "0.5.0"
 dependencies = [
  "adblock 0.3.13",
  "pyo3",
