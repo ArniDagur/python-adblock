@@ -7,7 +7,8 @@
     trivial_casts,
     trivial_numeric_casts,
     unsafe_code,
-    unused_qualifications
+    unused_qualifications,
+    deprecated
 )]
 
 use adblock::blocker::BlockerError as RustBlockerError;
@@ -99,15 +100,15 @@ pub struct BlockerResult {
     pub error: Option<String>,
 }
 
-impl Into<BlockerResult> for RustBlockerResult {
-    fn into(self) -> BlockerResult {
-        BlockerResult {
-            matched: self.matched,
-            important: self.important,
-            redirect: self.redirect,
-            exception: self.exception,
-            filter: self.filter,
-            error: self.error,
+impl From<RustBlockerResult> for BlockerResult {
+    fn from(br: RustBlockerResult) -> Self {
+        Self {
+            matched: br.matched,
+            important: br.important,
+            redirect: br.redirect,
+            exception: br.exception,
+            filter: br.filter,
+            error: br.error,
         }
     }
 }
@@ -166,27 +167,27 @@ create_exception!(adblock, OptimizedFilterExistence, BlockerException);
 create_exception!(adblock, BadFilterAddUnsupported, BlockerException);
 create_exception!(adblock, FilterExists, BlockerException);
 
-impl Into<PyErr> for BlockerError {
-    fn into(self) -> PyErr {
-        let msg = format!("{:?}", self);
-        match self {
-            Self::SerializationError => PyErr::new::<SerializationError, _>(msg),
-            Self::DeserializationError => PyErr::new::<DeserializationError, _>(msg),
-            Self::OptimizedFilterExistence => PyErr::new::<OptimizedFilterExistence, _>(msg),
-            Self::BadFilterAddUnsupported => PyErr::new::<BadFilterAddUnsupported, _>(msg),
-            Self::FilterExists => PyErr::new::<FilterExists, _>(msg),
+impl From<BlockerError> for PyErr {
+    fn from(err: BlockerError) -> Self {
+        let msg = format!("{:?}", err);
+        match err {
+            BlockerError::SerializationError => Self::new::<SerializationError, _>(msg),
+            BlockerError::DeserializationError => Self::new::<DeserializationError, _>(msg),
+            BlockerError::OptimizedFilterExistence => Self::new::<OptimizedFilterExistence, _>(msg),
+            BlockerError::BadFilterAddUnsupported => Self::new::<BadFilterAddUnsupported, _>(msg),
+            BlockerError::FilterExists => Self::new::<FilterExists, _>(msg),
         }
     }
 }
 
-impl Into<BlockerError> for RustBlockerError {
-    fn into(self) -> BlockerError {
-        match self {
-            Self::SerializationError => BlockerError::SerializationError,
-            Self::DeserializationError => BlockerError::DeserializationError,
-            Self::OptimizedFilterExistence => BlockerError::OptimizedFilterExistence,
-            Self::BadFilterAddUnsupported => BlockerError::BadFilterAddUnsupported,
-            Self::FilterExists => BlockerError::FilterExists,
+impl From<RustBlockerError> for BlockerError {
+    fn from(err: RustBlockerError) -> Self {
+        match err {
+            RustBlockerError::SerializationError => Self::SerializationError,
+            RustBlockerError::DeserializationError => Self::DeserializationError,
+            RustBlockerError::OptimizedFilterExistence => Self::OptimizedFilterExistence,
+            RustBlockerError::BadFilterAddUnsupported => Self::BadFilterAddUnsupported,
+            RustBlockerError::FilterExists => Self::FilterExists,
         }
     }
 }
@@ -206,7 +207,7 @@ fn filter_format_from_string(filter_format: &str) -> PyResult<FilterFormat> {
 /// created. FilterSet allows assembling a compound list from multiple
 /// different sources before compiling the rules into an Engine.
 #[pyclass]
-#[text_signature = "($self, debug)"]
+#[pyo3(text_signature = "($self, debug)")]
 #[derive(Clone)]
 pub struct FilterSet {
     filter_set: RustFilterSet,
@@ -233,7 +234,7 @@ impl FilterSet {
     ///
     /// The format is a string containing either "standard" (ABP/uBO-style)
     /// or "hosts".
-    #[text_signature = "($self, filter_list, format)"]
+    #[pyo3(text_signature = "($self, filter_list, format)")]
     #[args(filter_list, format = "\"standard\"")]
     pub fn add_filter_list(&mut self, filter_list: &str, format: &str) -> PyResult<()> {
         let filter_format = filter_format_from_string(format)?;
@@ -246,7 +247,7 @@ impl FilterSet {
     ///
     /// The format is a string containing either "standard" (ABP/uBO-style)
     /// or "hosts".
-    #[text_signature = "($self, filters, format)"]
+    #[pyo3(text_signature = "($self, filters, format)")]
     #[args(filters, format = "\"standard\"")]
     pub fn add_filters(&mut self, filters: Vec<String>, format: &str) -> PyResult<()> {
         let filter_format = filter_format_from_string(format)?;
@@ -291,14 +292,14 @@ pub struct UrlSpecificResources {
     pub generichide: bool,
 }
 
-impl Into<UrlSpecificResources> for RustUrlSpecificResources {
-    fn into(self) -> UrlSpecificResources {
-        UrlSpecificResources {
-            hide_selectors: self.hide_selectors,
-            style_selectors: self.style_selectors,
-            exceptions: self.exceptions,
-            injected_script: self.injected_script,
-            generichide: self.generichide,
+impl From<RustUrlSpecificResources> for UrlSpecificResources {
+    fn from(r: RustUrlSpecificResources) -> Self {
+        Self {
+            hide_selectors: r.hide_selectors,
+            style_selectors: r.style_selectors,
+            exceptions: r.exceptions,
+            injected_script: r.injected_script,
+            generichide: r.generichide,
         }
     }
 }
@@ -337,7 +338,7 @@ impl PyObjectProtocol for UrlSpecificResources {
 ///
 /// [1]: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/ResourceType
 #[pyclass]
-#[text_signature = "($self, filter_set, optimize)"]
+#[pyo3(text_signature = "($self, filter_set, optimize)")]
 pub struct Engine {
     engine: RustEngine,
     optimize: bool,
@@ -361,7 +362,7 @@ impl Engine {
     /// * `url` - The URL of the request to check
     /// * `source_url` - The URL from where the request is made
     /// * `request_type` - The resource type that the request points to
-    #[text_signature = "($self, url, source_url, request_type)"]
+    #[pyo3(text_signature = "($self, url, source_url, request_type)")]
     pub fn check_network_urls(
         &self,
         url: &str,
@@ -384,7 +385,9 @@ impl Engine {
     /// * `third_party_request` - Is the given request to a third-party? Here,
     ///   `None` can be given and the engine will figure it out based on the
     ///   `hostname` and `source_hostname`.
-    #[text_signature = "($self, url, hostname, source_hostname, requsest_type, third_party_request)"]
+    #[pyo3(
+        text_signature = "($self, url, hostname, source_hostname, requsest_type, third_party_request)"
+    )]
     pub fn check_network_urls_with_hostnames(
         &self,
         url: &str,
@@ -416,8 +419,10 @@ impl Engine {
     /// * `previously_matched_rule` - Return a match as long as there are no
     ///    exceptions
     /// * `force_check_exceptions` - Check exceptions even if no other rule matches
-    #[text_signature = "($self, url, hostname, source_hostname, request_type, \
-        third_party_request, previously_matched_rule, force_check_exceptions)"]
+    #[pyo3(
+        text_signature = "($self, url, hostname, source_hostname, request_type, \
+        third_party_request, previously_matched_rule, force_check_exceptions)"
+    )]
     #[allow(clippy::too_many_arguments)]
     pub fn check_network_urls_with_hostnames_subset(
         &self,
@@ -443,7 +448,7 @@ impl Engine {
 
     /// Serialize this blocking engine to bytes. They can then be deserialized
     /// using `deserialize()` to get the same engine again.
-    #[text_signature = "($self)"]
+    #[pyo3(text_signature = "($self)")]
     pub fn serialize<'p>(&mut self, py: Python<'p>) -> PyResult<&'p PyBytes> {
         let bytes = self.serialize_inner()?;
         let py_bytes = PyBytes::new(py, &bytes);
@@ -464,7 +469,7 @@ impl Engine {
     /// Serialize this blocking engine to a file. The file can then be
     /// deserialized using `deserialize_from_file()` to get the same engine
     /// again.
-    #[text_signature = "($self, file)"]
+    #[pyo3(text_signature = "($self, file)")]
     pub fn serialize_to_file(&mut self, file: &str) -> PyResult<()> {
         let data = self.serialize_inner()?;
         let mut fd = fs::OpenOptions::new()
@@ -477,7 +482,7 @@ impl Engine {
     }
 
     /// Deserialize a blocking engine from bytes produced with `serialize()`.
-    #[text_signature = "($self, serialized)"]
+    #[pyo3(text_signature = "($self, serialized)")]
     pub fn deserialize(&mut self, serialized: &[u8]) -> PyResult<()> {
         let result = self.engine.deserialize(serialized);
         match result {
@@ -491,7 +496,7 @@ impl Engine {
 
     /// Deserialize a blocking engine from file produced with
     /// `serialize_to_file()`.
-    #[text_signature = "($self, file)"]
+    #[pyo3(text_signature = "($self, file)")]
     pub fn deserialize_from_file(&mut self, file: &str) -> PyResult<()> {
         let mut fd = fs::File::open(file)?;
         let mut data: Vec<u8> = Vec::new();
@@ -500,7 +505,7 @@ impl Engine {
     }
 
     /// Checks if the given filter exists in the blocking engine.
-    #[text_signature = "($self, filter)"]
+    #[pyo3(text_signature = "($self, filter)")]
     pub fn filter_exists(&self, filter: &str) -> bool {
         self.engine.filter_exists(filter)
     }
@@ -509,7 +514,7 @@ impl Engine {
     ///
     /// Tags can be used to cheaply enable or disable network rules with a
     /// corresponding $tag option.
-    #[text_signature = "($self, tags)"]
+    #[pyo3(text_signature = "($self, tags)")]
     pub fn use_tags(&mut self, tags: Vec<&str>) {
         self.engine.use_tags(&tags);
     }
@@ -519,7 +524,7 @@ impl Engine {
     ///
     /// Tags can be used to cheaply enable or disable network rules with a
     /// corresponding $tag option.
-    #[text_signature = "($self, tags)"]
+    #[pyo3(text_signature = "($self, tags)")]
     pub fn enable_tags(&mut self, tags: Vec<&str>) {
         self.engine.enable_tags(&tags);
     }
@@ -529,7 +534,7 @@ impl Engine {
     ///
     /// Tags can be used to cheaply enable or disable network rules with a
     /// corresponding $tag option.
-    #[text_signature = "($self, tags)"]
+    #[pyo3(text_signature = "($self, tags)")]
     pub fn disable_tags(&mut self, tags: Vec<&str>) {
         self.engine.disable_tags(&tags);
     }
@@ -538,7 +543,7 @@ impl Engine {
     ///
     /// Tags can be used to cheaply enable or disable network rules with a
     /// corresponding $tag option.
-    #[text_signature = "($self, tag)"]
+    #[pyo3(text_signature = "($self, tag)")]
     pub fn tag_exists(&self, tag: &str) -> bool {
         self.engine.tag_exists(tag)
     }
@@ -547,7 +552,7 @@ impl Engine {
     /// url. Once this has been called, all CSS ids and classes on a
     /// page should be passed to hidden_class_id_selectors to obtain any
     /// stylesheets consisting of generic rules.
-    #[text_signature = "($self, url)"]
+    #[pyo3(text_signature = "($self, url)")]
     pub fn url_cosmetic_resources(&self, url: &str) -> UrlSpecificResources {
         self.engine.url_cosmetic_resources(url).into()
     }
@@ -559,7 +564,7 @@ impl Engine {
     /// are not excepted.
     ///
     /// Exceptions should be passed directly from UrlSpecificResources.
-    #[text_signature = "($self, classes, ids, exceptions)"]
+    #[pyo3(text_signature = "($self, classes, ids, exceptions)")]
     pub fn hidden_class_id_selectors(
         &self,
         classes: Vec<String>,
