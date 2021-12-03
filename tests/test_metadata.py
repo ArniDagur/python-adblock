@@ -5,10 +5,15 @@ import toml
 import adblock
 
 
+def parse_version(version):
+    parts = version.split(".")
+    return tuple(map(int, parts))
+
+
 def get_version_value_cargo():
     with open("Cargo.toml", encoding="utf-8") as f:
         cargo_toml = toml.loads(f.read())
-    return cargo_toml["package"]["version"]
+    return parse_version(cargo_toml["package"]["version"])
 
 
 def get_version_value_changelog():
@@ -25,7 +30,7 @@ def get_version_value_changelog():
                 line.strip(),
             )
             if match is not None:
-                versions.append(match.group(1))
+                versions.append(parse_version(match.group(1)))
     assert versions == sorted(versions, reverse=True)
     return versions[0]
 
@@ -37,14 +42,14 @@ def test_version_numbers_all_same():
     """
     cargo_version = get_version_value_cargo()
     changelog_version = get_version_value_changelog()
-    module_version = adblock.__version__
+    module_version = parse_version(adblock.__version__)
 
     assert cargo_version == module_version
     assert module_version == changelog_version
 
 
 def get_current_python_version():
-    return f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
+    return (sys.version_info.major, sys.version_info.minor, sys.version_info.micro)
 
 
 def test_required_python_version():
@@ -58,4 +63,4 @@ def test_required_python_version():
     required_python = cargo_toml["package"]["metadata"]["maturin"]["requires-python"]
     assert required_python.startswith(">=")
     required_python = required_python[2:]
-    assert get_current_python_version() >= required_python
+    assert get_current_python_version() >= parse_version(required_python)
