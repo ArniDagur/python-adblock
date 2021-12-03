@@ -4,6 +4,8 @@ import sys
 import toml
 import adblock
 
+from packaging import version
+
 
 def get_version_value_cargo():
     with open("Cargo.toml", encoding="utf-8") as f:
@@ -58,4 +60,4 @@ def test_required_python_version():
     required_python = cargo_toml["package"]["metadata"]["maturin"]["requires-python"]
     assert required_python.startswith(">=")
     required_python = required_python[2:]
-    assert get_current_python_version() >= required_python
+    assert version.parse(get_current_python_version()) >= version.parse(required_python)
