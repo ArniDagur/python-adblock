@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 ## Unreleased
 ---
 
+## 0.5.1 - (2021-06-26)
+---
+### Fixes
+* Fix test suite for Python `3.10`.
+
 ## 0.5.0 - (2021-06-26)
 ---
 ### Breaks
