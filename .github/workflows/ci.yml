@@ -30,7 +30,7 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: clippy
-          args: --all-targets --all-features
+          args: --all-targets --all-features -- -D clippy::all
 
       - name: Lint with Black
         run: pip install black && black --check .
