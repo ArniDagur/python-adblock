@@ -147,34 +147,36 @@ jobs:
               manylinux: "2010",
               target: "x86_64-unknown-linux-gnu",
               arch: "x86_64",
+              python-version: "3.6"
             },
             {
               toolchain: "nightly",
               manylinux: "2010",
               target: "x86_64-unknown-linux-gnu",
               arch: "x86_64",
+              python-version: "3.6"
             },
             {
               toolchain: "stable",
               manylinux: "2010",
               target: "x86_64-unknown-linux-gnu",
               arch: "x86_64",
+              python-version: "3.6"
             },
-            # FIXME: GitHub actions runs out of memory when this build is
-            # attempted.
-            # {
-            #   toolchain: "stable",
-            #   manylinux: "2010",
-            #   target: "i686-unknown-linux-gnu",
-            #   arch: "i686"
-            # },
+            {
+              toolchain: "stable",
+              manylinux: "2010",
+              target: "x86_64-unknown-linux-gnu",
+              arch: "x86_64",
+              python-version: "3.10"
+            },
           ]
     steps:
       - uses: actions/checkout@v2
 
       - uses: actions/setup-python@v2
         with:
-          python-version: 3.6
+          python-version: ${{ matrix.platform.python-version }}
 
       - name: Build Wheels
         run: |
