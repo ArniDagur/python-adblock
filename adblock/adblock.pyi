@@ -21,10 +21,14 @@ class BadFilterAddUnsupported(BlockerException):
 class FilterExists(BlockerException):
     pass
 
+class AddResourceError(BlockerException):
+    pass
+
 class BlockerResult:
     matched: bool
     explicit_cancel: bool
     important: bool
+    redirect_type: Optional[str]
     redirect: Optional[str]
     exception: Optional[str]
     filter: Optional[str]
@@ -43,14 +47,15 @@ class UrlSpecificResources:
 class FilterSet:
     def __init__(self, debug: bool = False) -> None:
         pass
-    def add_filter_list(self, filter_list: str, format: str = "standard") -> None:
+    def add_filter_list(self, filter_list: str, format: str = "standard", include_redirect_urls: bool = False) -> None:
         pass
-    def add_filters(self, filters: List[str], format: str = "standard") -> None:
+    def add_filters(self, filters: List[str], format: str = "standard", include_redirect_urls: bool = False) -> None:
         pass
 
 class Engine:
     def __init__(self, filter_set: FilterSet, optimize: bool = True) -> None:
         pass
+
     def check_network_urls(
         self, url: str, source_url: str, request_type: str
     ) -> BlockerResult:
@@ -92,6 +97,8 @@ class Engine:
     def disable_tags(self, tags: List[str]) -> None:
         pass
     def tag_exists(self, tag: str) -> bool:
+        pass
+    def add_resource(self, name: str, content_type: str, content: str) -> bool:
         pass
     def url_cosmetic_resources(self, url: str) -> UrlSpecificResources:
         pass
