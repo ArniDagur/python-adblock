@@ -11,6 +11,7 @@ from adblock.adblock import (
     OptimizedFilterExistence,
     BadFilterAddUnsupported,
     FilterExists,
+    AddResourceError,
 )
 
 
@@ -26,4 +27,5 @@ __all__ = (
     "OptimizedFilterExistence",
     "BadFilterAddUnsupported",
     "FilterExists",
+    "AddResourceError",
 )

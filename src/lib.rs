@@ -11,11 +11,11 @@
     deprecated
 )]
 
-use adblock::blocker::BlockerError as RustBlockerError;
+use adblock::blocker::{BlockerError as RustBlockerError, Redirection};
 use adblock::blocker::BlockerResult as RustBlockerResult;
 use adblock::cosmetic_filter_cache::UrlSpecificResources as RustUrlSpecificResources;
 use adblock::engine::Engine as RustEngine;
-use adblock::lists::FilterFormat;
+use adblock::lists::{FilterFormat, ParseOptions};
 use adblock::lists::FilterSet as RustFilterSet;
 use pyo3::class::PyObjectProtocol;
 use pyo3::create_exception;
@@ -30,6 +30,10 @@ use std::error::Error;
 use std::fmt::{self, Display};
 use std::fs;
 use std::io::{Read, Write};
+use adblock::resources::{
+    AddResourceError as RustAddResourceError, MimeType, Resource, ResourceType,
+};
+
 
 /// Brave's adblocking library in Python!
 #[pymodule]
@@ -55,6 +59,7 @@ fn adblock(py: Python<'_>, m: &PyModule) -> PyResult<()> {
         py.get_type::<BadFilterAddUnsupported>(),
     )?;
     m.add("FilterExists", py.get_type::<FilterExists>())?;
+    m.add("AddResourceError", py.get_type::<AddResourceError>())?;
     Ok(())
 }
 
@@ -80,6 +85,13 @@ pub struct BlockerResult {
     ///
     /// [1]: https://github.com/gorhill/uBlock/wiki/Static-filter-syntax#redirect
     #[pyo3(get)]
+    pub redirect_type: Option<String>,
+    /// Exception is not `None` when the blocker matched on an exception rule.
+    /// Effectively this means that there was a match, but the request should
+    /// not be blocked. It is a non-empty string if the blocker was initialized
+    /// from a list of rules with debugging enabled, otherwise the original
+    /// string representation is discarded to reduce memory use.
+    #[pyo3(get)]
     pub redirect: Option<String>,
     /// Exception is not `None` when the blocker matched on an exception rule.
     /// Effectively this means that there was a match, but the request should
@@ -102,13 +114,30 @@ pub struct BlockerResult {
 
 impl From<RustBlockerResult> for BlockerResult {
     fn from(br: RustBlockerResult) -> Self {
+        let mut redirect: Option<String> = None;
+        let mut redirect_type: Option<String> = None;
+        if br.redirect.is_some() {
+            let resource = br.redirect.unwrap();
+            redirect = Option::from(match resource {
+                Redirection::Resource(resource) => {
+                    redirect_type = Some("resource".to_string());
+                    resource
+                }
+                Redirection::Url(url) => {
+                    redirect_type = Some("url".to_string());
+                    url
+                }
+            });
+        }
+
         Self {
             matched: br.matched,
             important: br.important,
-            redirect: br.redirect,
             exception: br.exception,
             filter: br.filter,
             error: br.error,
+            redirect_type: redirect_type,
+            redirect: redirect,
         }
     }
 }
@@ -166,6 +195,8 @@ create_exception!(adblock, DeserializationError, BlockerException);
 create_exception!(adblock, OptimizedFilterExistence, BlockerException);
 create_exception!(adblock, BadFilterAddUnsupported, BlockerException);
 create_exception!(adblock, FilterExists, BlockerException);
+create_exception!(adblock, AddResourceError, BlockerException);
+
 
 impl From<BlockerError> for PyErr {
     fn from(err: BlockerError) -> Self {
@@ -234,11 +265,22 @@ impl FilterSet {
     ///
     /// The format is a string containing either "standard" (ABP/uBO-style)
     /// or "hosts".
-    #[pyo3(text_signature = "($self, filter_list, format)")]
-    #[args(filter_list, format = "\"standard\"")]
-    pub fn add_filter_list(&mut self, filter_list: &str, format: &str) -> PyResult<()> {
+    #[pyo3(text_signature = "($self, filter_list, format, include_redirect_urls)")]
+    #[args(filter_list, format = "\"standard\"", include_redirect_urls = "false")]
+    pub fn add_filter_list(
+        &mut self,
+        filter_list: &str,
+        format: &str,
+        include_redirect_urls: bool,
+    ) -> PyResult<()> {
         let filter_format = filter_format_from_string(format)?;
-        self.filter_set.add_filter_list(filter_list, filter_format);
+        self.filter_set.add_filter_list(
+            filter_list,
+            ParseOptions {
+                format: filter_format,
+                include_redirect_urls,
+            },
+        );
         Ok(())
     }
 
@@ -247,11 +289,22 @@ impl FilterSet {
     ///
     /// The format is a string containing either "standard" (ABP/uBO-style)
     /// or "hosts".
-    #[pyo3(text_signature = "($self, filters, format)")]
-    #[args(filters, format = "\"standard\"")]
-    pub fn add_filters(&mut self, filters: Vec<String>, format: &str) -> PyResult<()> {
+    #[pyo3(text_signature = "($self, filters, format, include_redirect_urls)")]
+    #[args(filters, format = "\"standard\"", include_redirect_urls = "false")]
+    pub fn add_filters(
+        &mut self,
+        filters: Vec<String>,
+        format: &str,
+        include_redirect_urls: bool,
+    ) -> PyResult<()> {
         let filter_format = filter_format_from_string(format)?;
-        self.filter_set.add_filters(&filters, filter_format);
+        self.filter_set.add_filters(
+            &filters,
+            ParseOptions {
+                format: filter_format,
+                include_redirect_urls,
+            },
+        );
         Ok(())
     }
 }
@@ -446,6 +499,36 @@ impl Engine {
         blocker_result.into()
     }
 
+    /// Sets this engine's resources to additionally include `resource`.
+    ///
+    /// # Arguments
+    /// * `name`: Represents the primary name of the resource, often a filename
+    /// * `content_type`: How to interpret the resource data within `content`
+    /// * `content`: The resource data, encoded using standard base64 configuration
+    #[pyo3(text_signature = "($self, name, content_type, content)")]
+    pub fn add_resource(&mut self, name: &str, content_type: &str, content: &str) -> PyResult<()> {
+        let result = self.engine.add_resource(Resource {
+            name: name.to_string(),
+            aliases: vec![],
+            kind: ResourceType::Mime(MimeType::from(std::borrow::Cow::from(
+                content_type.to_string(),
+            ))),
+            content: content.to_string(),
+        });
+
+        match result {
+            Ok(_) => Ok(()),
+            Err(err) => match err {
+                RustAddResourceError::InvalidBase64Content => Err(AddResourceError::new_err(
+                    "invalid base64 content".to_string(),
+                )),
+                RustAddResourceError::InvalidUtf8Content => {
+                    Err(AddResourceError::new_err("invalid utf content".to_string()))
+                }
+            },
+        }
+    }
+
     /// Serialize this blocking engine to bytes. They can then be deserialized
     /// using `deserialize()` to get the same engine again.
     #[pyo3(text_signature = "($self)")]
@@ -456,7 +539,7 @@ impl Engine {
     }
 
     fn serialize_inner(&mut self) -> PyResult<Vec<u8>> {
-        let result = self.engine.serialize();
+        let result = self.engine.serialize_raw();
         match result {
             Ok(x) => Ok(x),
             Err(error) => {
