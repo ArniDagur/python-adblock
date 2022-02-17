@@ -47,15 +47,24 @@ class UrlSpecificResources:
 class FilterSet:
     def __init__(self, debug: bool = False) -> None:
         pass
-    def add_filter_list(self, filter_list: str, format: str = "standard", include_redirect_urls: bool = False) -> None:
+    def add_filter_list(
+        self,
+        filter_list: str,
+        format: str = "standard",
+        include_redirect_urls: bool = False,
+    ) -> None:
         pass
-    def add_filters(self, filters: List[str], format: str = "standard", include_redirect_urls: bool = False) -> None:
+    def add_filters(
+        self,
+        filters: List[str],
+        format: str = "standard",
+        include_redirect_urls: bool = False,
+    ) -> None:
         pass
 
 class Engine:
     def __init__(self, filter_set: FilterSet, optimize: bool = True) -> None:
         pass
-
     def check_network_urls(
         self, url: str, source_url: str, request_type: str
     ) -> BlockerResult:
