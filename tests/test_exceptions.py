@@ -1,6 +1,7 @@
 import adblock
 import pytest
 
+
 def test_correct_baseclasses():
     assert issubclass(adblock.AdblockException, Exception)
     assert issubclass(adblock.BlockerException, adblock.AdblockException)
@@ -17,6 +18,6 @@ def test_add_resource_error():
     engine = adblock.Engine(filter_set=filter_set)
 
     with pytest.raises(adblock.AddResourceError) as exc:
-        engine.add_resource(name='aa', content_type="image/jpeg", content="111")
+        engine.add_resource(name="aa", content_type="image/jpeg", content="111")
 
     assert "invalid base64 content" in str(exc.value)
