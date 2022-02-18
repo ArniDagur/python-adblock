@@ -58,7 +58,18 @@ fn adblock(py: Python<'_>, m: &PyModule) -> PyResult<()> {
         py.get_type::<BadFilterAddUnsupported>(),
     )?;
     m.add("FilterExists", py.get_type::<FilterExists>())?;
-    m.add("AddResourceError", py.get_type::<AddResourceError>())?;
+    m.add(
+        "AddResourceException",
+        py.get_type::<AddResourceException>(),
+    )?;
+    m.add(
+        "InvalidBase64ContentError",
+        py.get_type::<InvalidBase64ContentError>(),
+    )?;
+    m.add(
+        "InvalidUtf8ContentError",
+        py.get_type::<InvalidUtf8ContentError>(),
+    )?;
     Ok(())
 }
 
@@ -113,21 +124,14 @@ pub struct BlockerResult {
 
 impl From<RustBlockerResult> for BlockerResult {
     fn from(br: RustBlockerResult) -> Self {
-        let mut redirect: Option<String> = None;
-        let mut redirect_type: Option<String> = None;
-        if br.redirect.is_some() {
-            let resource = br.redirect.unwrap();
-            redirect = Option::from(match resource {
-                Redirection::Resource(resource) => {
-                    redirect_type = Some("resource".to_string());
-                    resource
-                }
-                Redirection::Url(url) => {
-                    redirect_type = Some("url".to_string());
-                    url
-                }
-            });
-        }
+        let (redirect, redirect_type) = if let Some(resource) = br.redirect {
+            match resource {
+                Redirection::Resource(resource) => (Some(resource), Some("resource".to_string())),
+                Redirection::Url(url) => (Some(url), Some("url".to_string())),
+            }
+        } else {
+            (None, None)
+        };
 
         Self {
             matched: br.matched,
@@ -135,8 +139,8 @@ impl From<RustBlockerResult> for BlockerResult {
             exception: br.exception,
             filter: br.filter,
             error: br.error,
-            redirect_type: redirect_type,
-            redirect: redirect,
+            redirect_type,
+            redirect,
         }
     }
 }
@@ -189,12 +193,14 @@ impl Display for BlockerError {
 
 create_exception!(adblock, AdblockException, PyException);
 create_exception!(adblock, BlockerException, AdblockException);
+create_exception!(adblock, AddResourceException, AdblockException);
+create_exception!(adblock, InvalidBase64ContentError, AddResourceException);
+create_exception!(adblock, InvalidUtf8ContentError, AddResourceException);
 create_exception!(adblock, SerializationError, BlockerException);
 create_exception!(adblock, DeserializationError, BlockerException);
 create_exception!(adblock, OptimizedFilterExistence, BlockerException);
 create_exception!(adblock, BadFilterAddUnsupported, BlockerException);
 create_exception!(adblock, FilterExists, BlockerException);
-create_exception!(adblock, AddResourceError, BlockerException);
 
 impl From<BlockerError> for PyErr {
     fn from(err: BlockerError) -> Self {
@@ -517,12 +523,12 @@ impl Engine {
         match result {
             Ok(_) => Ok(()),
             Err(err) => match err {
-                RustAddResourceError::InvalidBase64Content => Err(AddResourceError::new_err(
-                    "invalid base64 content".to_string(),
+                RustAddResourceError::InvalidBase64Content => Err(
+                    InvalidBase64ContentError::new_err("invalid base64 content".to_string()),
+                ),
+                RustAddResourceError::InvalidUtf8Content => Err(InvalidUtf8ContentError::new_err(
+                    "invalid utf content".to_string(),
                 )),
-                RustAddResourceError::InvalidUtf8Content => {
-                    Err(AddResourceError::new_err("invalid utf content".to_string()))
-                }
             },
         }
     }

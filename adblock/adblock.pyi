@@ -21,7 +21,13 @@ class BadFilterAddUnsupported(BlockerException):
 class FilterExists(BlockerException):
     pass
 
-class AddResourceError(BlockerException):
+class AddResourceException(AdblockException):
+    pass
+
+class InvalidUtf8ContentError(AddResourceException):
+    pass
+
+class InvalidBase64ContentError(AddResourceException):
     pass
 
 class BlockerResult:

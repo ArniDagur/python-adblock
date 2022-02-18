@@ -11,7 +11,9 @@ from adblock.adblock import (
     OptimizedFilterExistence,
     BadFilterAddUnsupported,
     FilterExists,
-    AddResourceError,
+    AddResourceException,
+    InvalidUtf8ContentError,
+    InvalidBase64ContentError,
 )
 
 
@@ -27,5 +29,7 @@ __all__ = (
     "OptimizedFilterExistence",
     "BadFilterAddUnsupported",
     "FilterExists",
-    "AddResourceError",
+    "AddResourceException",
+    "InvalidUtf8ContentError",
+    "InvalidBase64ContentError",
 )
