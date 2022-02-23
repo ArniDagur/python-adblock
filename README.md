@@ -9,7 +9,7 @@ Python wrapper for Brave's adblocking library, which is written in Rust.
 | Build Dependency | Versions | Arch Linux | Url                             |
 | ---------------- | -------- | ---------- | ------------------------------- |
 | Python           | `>=3.6`  | `python`   | -                               |
-| Rust             | `>=1.45` | `rust`     | -                               |
+| Rust             | `>=1.49` | `rust`     | -                               |
 | Maturin          | `>=0.10` | `maturin`  | https://github.com/PyO3/maturin |
 
 #### PEP 517
