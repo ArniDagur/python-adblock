@@ -143,7 +143,7 @@ jobs:
         platform:
           [
             {
-              toolchain: "1.45",
+              toolchain: "1.49",
               manylinux: "2010",
               target: "x86_64-unknown-linux-gnu",
               arch: "x86_64",
