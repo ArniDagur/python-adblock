@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 ## Unreleased
 ---
 
+## 0.5.2 - (2022-03-01)
+---
+* Include complete redirect rule feature ([#59](https://github.com/ArniDagur/python-adblock/pull/59)). Thanks @x0day!
+
 ## 0.5.1 - (2021-06-26)
 ---
 ### Fixes
