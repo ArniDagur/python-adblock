@@ -1,7 +1,7 @@
 [package]
 publish = false
 name = "adblock"
-version = "0.5.1"
+version = "0.5.2"
 edition = "2018"
 authors = ["Árni Dagur <arni@dagur.eu>"]
 license = "MIT OR Apache-2.0"
