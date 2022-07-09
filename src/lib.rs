@@ -507,9 +507,10 @@ impl Engine {
     ///
     /// # Arguments
     /// * `name`: Represents the primary name of the resource, often a filename
+    /// * `aliases`: List of aliases for the resource
     /// * `content_type`: How to interpret the resource data within `content`
     /// * `content`: The resource data, encoded using standard base64 configuration
-    #[pyo3(text_signature = "($self, name, content_type, content)")]
+    #[pyo3(text_signature = "($self, name, aliases, content_type, content)")]
     pub fn add_resource(&mut self, name: &str, aliases: Vec<&str>, content_type: &str, content: &str) -> PyResult<()> {
         let result = self.engine.add_resource(Resource {
             name: name.to_string(),
