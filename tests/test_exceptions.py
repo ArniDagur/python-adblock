@@ -20,7 +20,7 @@ def test_add_resource_error():
     engine = adblock.Engine(filter_set=filter_set)
 
     with pytest.raises(adblock.InvalidBase64ContentError) as exc:
-        engine.add_resource(name="aa", content_type="image/jpeg", content="111")
+        engine.add_resource(name="aa", aliases=[], content_type="image/jpeg", content="111")
     assert "invalid base64 content" in str(exc.value)
 
     with pytest.raises(adblock.InvalidUtf8ContentError) as exc:
@@ -30,6 +30,6 @@ def test_add_resource_error():
         # }
         # xOO6ww== => base64.b64encode('你好'.encode('gbk'))
         engine.add_resource(
-            name="aa", content_type="application/javascript", content="xOO6ww=="
+            name="aa", aliases=[], content_type="application/javascript", content="xOO6ww=="
         )
     assert "invalid utf content" in str(exc.value)

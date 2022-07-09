@@ -113,7 +113,7 @@ class Engine:
         pass
     def tag_exists(self, tag: str) -> bool:
         pass
-    def add_resource(self, name: str, content_type: str, content: str) -> bool:
+    def add_resource(self, name: str, aliases: List[str], content_type: str, content: str) -> bool:
         pass
     def url_cosmetic_resources(self, url: str) -> UrlSpecificResources:
         pass

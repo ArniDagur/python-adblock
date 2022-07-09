@@ -62,7 +62,7 @@ def test_redirect_with_custom_resource():
 
     engine = adblock.Engine(filter_set=filters)
     engine.add_resource(
-        name="test", content_type="application/javascript", content="YWxlcnQoMSk="
+        name="test", aliases=[], content_type="application/javascript", content="YWxlcnQoMSk="
     )
 
     result = engine.check_network_urls(

@@ -510,10 +510,10 @@ impl Engine {
     /// * `content_type`: How to interpret the resource data within `content`
     /// * `content`: The resource data, encoded using standard base64 configuration
     #[pyo3(text_signature = "($self, name, content_type, content)")]
-    pub fn add_resource(&mut self, name: &str, content_type: &str, content: &str) -> PyResult<()> {
+    pub fn add_resource(&mut self, name: &str, aliases: Vec<&str>, content_type: &str, content: &str) -> PyResult<()> {
         let result = self.engine.add_resource(Resource {
             name: name.to_string(),
-            aliases: vec![],
+            aliases: aliases.into_iter().map(|alias| alias.to_string()).collect(),
             kind: ResourceType::Mime(MimeType::from(std::borrow::Cow::from(
                 content_type.to_string(),
             ))),
