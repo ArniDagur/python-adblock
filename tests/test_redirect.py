@@ -35,11 +35,11 @@ def test_redirect_url_is_not_recognized_without_include_redirect_urls():
 def test_redirect_url_exception():
     # https://github.com/brave/adblock-rust/blob/b7f29af8c0a0d000201d8d769b6a0b25a9dd4e89/src/blocker.rs#L1314
     filter_set = adblock.FilterSet(debug=True)
-    filter_set.add_filter_list(
-        """
-        ||imdb-video.media-imdb.com$media,redirect-url=http://xyz.com
-        @@||imdb-video.media-imdb.com^$domain=imdb.com
-        """,
+    filter_set.add_filters(
+        [
+            "||imdb-video.media-imdb.com$media,redirect-url=http://xyz.com",
+            "@@||imdb-video.media-imdb.com^$domain=imdb.com",
+        ],
         include_redirect_urls=True,
     )
 
@@ -50,10 +50,11 @@ def test_redirect_url_exception():
         "https://www.imdb.com/video/13",
         "media",
     )
+    assert res.error is None
     assert res.matched is False
     assert res.redirect == "http://xyz.com"
     assert res.redirect_type == "url"
-    assert res.exception == "@@||imdb-video.media-imdb.com^$domain=imdb.com"
+    assert res.exception is None
 
 
 def test_redirect_with_custom_resource():

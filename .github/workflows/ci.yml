@@ -26,14 +26,18 @@ jobs:
           command: fmt
           args: -- --check
 
-      - name: Lint with clippy
-        uses: actions-rs/cargo@v1
-        with:
-          command: clippy
-          args: --all-targets --all-features -- -D clippy::all
+      # Disabled because of https://github.com/rust-lang/rust-clippy/issues/8971
+      # - name: Lint with clippy
+      #   uses: actions-rs/cargo@v1
+      #   with:
+      #     command: clippy
+      #     args: --all-targets --all-features -- -D clippy::all
 
       - name: Lint with Black
         run: pip install black && black --check .
+
+      - name: Lint with mypy
+        run: pip install mypy && mypy --non-interactive --install-types --ignore-missing-imports .
 
   macos:
     runs-on: macos-latest
@@ -43,7 +47,7 @@ jobs:
 
       - uses: actions/setup-python@v2
         with:
-          python-version: 3.6
+          python-version: 3.7
 
       - name: Install Rust toolchain
         uses: actions-rs/toolchain@v1
@@ -68,7 +72,7 @@ jobs:
           PYO3_CROSS_LIB_DIR: /Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.8/lib
         run: |
           # Build wheels
-          maturin build -i python --release --universal2 --out dist --no-sdist
+          maturin build -i python --release --universal2 --out dist
           pip install adblock --no-index --find-links dist --force-reinstall
 
       - name: Run PyTest
@@ -101,7 +105,7 @@ jobs:
 
       - uses: actions/setup-python@v2
         with:
-          python-version: 3.6
+          python-version: 3.7
           architecture: ${{ matrix.platform.python-architecture }}
 
       - name: Install Rust toolchain
@@ -117,7 +121,7 @@ jobs:
 
       - name: Build wheels
         run: |
-          maturin build -i python --release --out dist --no-sdist --target ${{ matrix.platform.target }}
+          maturin build -i python --release --out dist --target ${{ matrix.platform.target }}
           pip install adblock --no-index --find-links dist --force-reinstall
 
       - name: Run PyTest
@@ -143,25 +147,25 @@ jobs:
         platform:
           [
             {
-              toolchain: "1.49",
+              toolchain: "1.53",
               manylinux: "2010",
               target: "x86_64-unknown-linux-gnu",
               arch: "x86_64",
-              python-version: "3.6"
+              python-version: "3.7"
             },
             {
               toolchain: "nightly",
               manylinux: "2010",
               target: "x86_64-unknown-linux-gnu",
               arch: "x86_64",
-              python-version: "3.6"
+              python-version: "3.7"
             },
             {
               toolchain: "stable",
               manylinux: "2010",
               target: "x86_64-unknown-linux-gnu",
               arch: "x86_64",
-              python-version: "3.6"
+              python-version: "3.7"
             },
             {
               toolchain: "stable",
@@ -169,7 +173,7 @@ jobs:
               target: "x86_64-unknown-linux-gnu",
               arch: "x86_64",
               python-version: "3.10"
-            },
+            }
           ]
     steps:
       - uses: actions/checkout@v2
@@ -184,7 +188,7 @@ jobs:
           source ~/.cargo/env
           export PATH=/opt/python/cp38-cp38/bin:$PATH
           pip install maturin
-          maturin build -i python --release --out dist --no-sdist --target ${{ matrix.platform.target }} --manylinux ${{ matrix.platform.manylinux }}
+          maturin build -i python --release --out dist --target ${{ matrix.platform.target }} --manylinux ${{ matrix.platform.manylinux }}
           ' > build-wheel.sh
           chmod +x build-wheel.sh
           docker run --rm -v "$PWD":/io -w /io quay.io/pypa/manylinux${{ matrix.platform.manylinux }}_${{ matrix.platform.arch }} bash build-wheel.sh
@@ -234,23 +238,23 @@ jobs:
 
       - uses: actions/setup-python@v2
         with:
-          python-version: 3.6
+          python-version: 3.7
 
       - name: Build Wheels
         run: |
           echo 'curl -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable
           source ~/.cargo/env
           rustup target add ${{ matrix.platform.target }}
-          maturin build -i python --release --out dist --no-sdist --target ${{ matrix.platform.target }} --manylinux ${{ matrix.platform.manylinux }}
+          maturin build -i python --release --out dist --target ${{ matrix.platform.target }} --manylinux ${{ matrix.platform.manylinux }}
           ' > build-wheel.sh
           chmod +x build-wheel.sh
           docker run --rm -v "$PWD":/io -w /io messense/manylinux2014-cross:${{ matrix.platform.arch }} bash build-wheel.sh
 
-      - uses: uraimo/run-on-arch-action@v2.0.5
+      - uses: uraimo/run-on-arch-action@v2.2.0
         name: Install built wheel
         with:
           arch: ${{ matrix.platform.arch }}
-          distro: ubuntu18.04
+          distro: ubuntu22.04
           # Mount the dist directory as /artifacts in the container
           dockerRunArgs: |
             --volume "${PWD}/dist:/artifacts"

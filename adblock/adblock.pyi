@@ -1,5 +1,7 @@
 from typing import Optional, Dict, List, Set
 
+__version__: str
+
 class AdblockException(Exception):
     pass
 
@@ -58,6 +60,7 @@ class FilterSet:
         filter_list: str,
         format: str = "standard",
         include_redirect_urls: bool = False,
+        rule_types: str = "all",
     ) -> None:
         pass
     def add_filters(
@@ -65,6 +68,7 @@ class FilterSet:
         filters: List[str],
         format: str = "standard",
         include_redirect_urls: bool = False,
+        rule_types: str = "all",
     ) -> None:
         pass
 
