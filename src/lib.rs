@@ -530,16 +530,27 @@ impl Engine {
     ///
     /// # Arguments
     /// * `name`: Represents the primary name of the resource, often a filename
-    /// * `content_type`: How to interpret the resource data within `content`
+    /// * `content_type`: How to interpret the resource data within `content`.
+    ///   Use `"template"` if wanting to specify a template resource type.
     /// * `content`: The resource data, encoded using standard base64 configuration
-    #[pyo3(text_signature = "($self, name, content_type, content)")]
-    pub fn add_resource(&mut self, name: &str, content_type: &str, content: &str) -> PyResult<()> {
+    /// * `aliases`: List of aliases for the resource
+    #[pyo3(text_signature = "($self, name, content_type, content, aliases)")]
+    pub fn add_resource(
+        &mut self,
+        name: &str,
+        content_type: &str,
+        content: &str,
+        aliases: Option<Vec<String>>,
+    ) -> PyResult<()> {
         let result = self.engine.add_resource(Resource {
             name: name.to_string(),
-            aliases: vec![],
-            kind: ResourceType::Mime(MimeType::from(std::borrow::Cow::from(
-                content_type.to_string(),
-            ))),
+            aliases: aliases.unwrap_or_default(),
+            kind: match content_type {
+                "template" => ResourceType::Template,
+                _ => ResourceType::Mime(MimeType::from(std::borrow::Cow::from(
+                    content_type.to_string(),
+                ))),
+            },
             content: content.to_string(),
         });
 

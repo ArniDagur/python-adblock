@@ -30,6 +30,9 @@ def test_add_resource_error():
         # }
         # xOO6ww== => base64.b64encode('你好'.encode('gbk'))
         engine.add_resource(
-            name="aa", content_type="application/javascript", content="xOO6ww=="
+            name="aa",
+            content_type="application/javascript",
+            content="xOO6ww==",
+            aliases=[],
         )
     assert "invalid utf content" in str(exc.value)

@@ -5,6 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 
 ## Unreleased
 ---
+### Added
+* Added `aliases` optional argument to `Engine.add_resource`
+
 ### Changes
 * Update PyO3 dependency to `0.16`.
 * Update upstream dependency to `0.5.6`.
