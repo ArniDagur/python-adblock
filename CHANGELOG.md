@@ -5,6 +5,14 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 
 ## Unreleased
 ---
+### Changes
+* Update PyO3 dependency to `0.16`.
+* Update upstream dependency to `0.5.6`.
+
+### Breaks
+* Minimum Rust version is now `1.53`.
+* Minimum Python version is now `3.7`.
+
 
 ## 0.5.2 - (2022-03-01)
 ---

@@ -16,8 +16,7 @@ use adblock::blocker::{BlockerError as RustBlockerError, Redirection};
 use adblock::cosmetic_filter_cache::UrlSpecificResources as RustUrlSpecificResources;
 use adblock::engine::Engine as RustEngine;
 use adblock::lists::FilterSet as RustFilterSet;
-use adblock::lists::{FilterFormat, ParseOptions};
-use pyo3::class::PyObjectProtocol;
+use adblock::lists::{FilterFormat, ParseOptions, RuleTypes};
 use pyo3::create_exception;
 use pyo3::exceptions::PyException;
 use pyo3::prelude::*;
@@ -145,8 +144,8 @@ impl From<RustBlockerResult> for BlockerResult {
     }
 }
 
-#[pyproto]
-impl PyObjectProtocol for BlockerResult {
+#[pymethods]
+impl BlockerResult {
     fn __repr__(&self) -> PyResult<String> {
         Ok(format!(
             "BlockerResult(matched={}, important={}, redirect={}, exception={}, filter={}, error={})",
@@ -231,7 +230,18 @@ fn filter_format_from_string(filter_format: &str) -> PyResult<FilterFormat> {
     match filter_format {
         "standard" => Ok(FilterFormat::Standard),
         "hosts" => Ok(FilterFormat::Hosts),
-        _ => Err(PyErr::new::<AdblockException, _>("Invalid format value")),
+        _ => Err(PyErr::new::<AdblockException, _>(
+            "Invalid FilterFormat value",
+        )),
+    }
+}
+
+fn rule_types_from_string(rule_types: &str) -> PyResult<RuleTypes> {
+    match rule_types {
+        "all" => Ok(RuleTypes::All),
+        "networkonly" => Ok(RuleTypes::NetworkOnly),
+        "cosmeticonly" => Ok(RuleTypes::CosmeticOnly),
+        _ => Err(PyErr::new::<AdblockException, _>("Invalid RuleTypes value")),
     }
 }
 
@@ -269,20 +279,28 @@ impl FilterSet {
     ///
     /// The format is a string containing either "standard" (ABP/uBO-style)
     /// or "hosts".
-    #[pyo3(text_signature = "($self, filter_list, format, include_redirect_urls)")]
-    #[args(filter_list, format = "\"standard\"", include_redirect_urls = "false")]
+    #[pyo3(text_signature = "($self, filter_list, format, include_redirect_urls, rule_types)")]
+    #[args(
+        filter_list,
+        format = "\"standard\"",
+        include_redirect_urls = "false",
+        rule_types = "\"all\""
+    )]
     pub fn add_filter_list(
         &mut self,
         filter_list: &str,
         format: &str,
         include_redirect_urls: bool,
+        rule_types: &str,
     ) -> PyResult<()> {
         let filter_format = filter_format_from_string(format)?;
+        let rule_types = rule_types_from_string(rule_types)?;
         self.filter_set.add_filter_list(
             filter_list,
             ParseOptions {
                 format: filter_format,
                 include_redirect_urls,
+                rule_types,
             },
         );
         Ok(())
@@ -293,28 +311,33 @@ impl FilterSet {
     ///
     /// The format is a string containing either "standard" (ABP/uBO-style)
     /// or "hosts".
-    #[pyo3(text_signature = "($self, filters, format, include_redirect_urls)")]
-    #[args(filters, format = "\"standard\"", include_redirect_urls = "false")]
+    #[pyo3(text_signature = "($self, filters, format, include_redirect_urls, rule_types)")]
+    #[args(
+        filters,
+        format = "\"standard\"",
+        include_redirect_urls = "false",
+        rule_types = "\"all\""
+    )]
     pub fn add_filters(
         &mut self,
         filters: Vec<String>,
         format: &str,
         include_redirect_urls: bool,
+        rule_types: &str,
     ) -> PyResult<()> {
         let filter_format = filter_format_from_string(format)?;
+        let rule_types = rule_types_from_string(rule_types)?;
         self.filter_set.add_filters(
             &filters,
             ParseOptions {
                 format: filter_format,
                 include_redirect_urls,
+                rule_types,
             },
         );
         Ok(())
     }
-}
 
-#[pyproto]
-impl PyObjectProtocol for FilterSet {
     fn __repr__(&self) -> PyResult<String> {
         Ok(format!("FilterSet(debug={})", self.debug.diy_python_repr()))
     }
@@ -361,8 +384,8 @@ impl From<RustUrlSpecificResources> for UrlSpecificResources {
     }
 }
 
-#[pyproto]
-impl PyObjectProtocol for UrlSpecificResources {
+#[pymethods]
+impl UrlSpecificResources {
     fn __repr__(&self) -> PyResult<String> {
         Ok(format!(
             "UrlSpecificResources<{} hide selectors, {} style selectors, {} exceptions, injected_javascript={}, generichide={}>",
@@ -662,10 +685,7 @@ impl Engine {
             .engine
             .hidden_class_id_selectors(&classes, &ids, &exceptions))
     }
-}
 
-#[pyproto]
-impl PyObjectProtocol for Engine {
     fn __repr__(&self) -> PyResult<String> {
         Ok(format!(
             "Engine<optimize={}>",
