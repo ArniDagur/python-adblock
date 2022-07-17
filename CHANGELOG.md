@@ -5,6 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 
 ## Unreleased
 ---
+
+## 0.6.0 - (2022-07-17)
+---
 ### Added
 * Added `aliases` optional argument to `Engine.add_resource`
 
@@ -15,7 +18,6 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 ### Breaks
 * Minimum Rust version is now `1.53`.
 * Minimum Python version is now `3.7`.
-
 
 ## 0.5.2 - (2022-03-01)
 ---
