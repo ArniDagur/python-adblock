@@ -4,14 +4,6 @@ version = 3
 
 [[package]]
 name = "adblock"
-version = "0.5.2"
-dependencies = [
- "adblock 0.5.6",
- "pyo3",
-]
-
-[[package]]
-name = "adblock"
 version = "0.5.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "27785ef5b89bc88fd2def3e1ecfefdf5ec1583795b916667afd15b13058f8315"
@@ -31,6 +23,14 @@ dependencies = [
  "serde",
  "twoway",
  "url",
+]
+
+[[package]]
+name = "adblock"
+version = "0.6.0"
+dependencies = [
+ "adblock 0.5.6",
+ "pyo3",
 ]
 
 [[package]]
