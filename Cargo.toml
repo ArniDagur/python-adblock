@@ -22,7 +22,7 @@ requires-python = ">=3.7"
 debug = true
 
 [dependencies]
-adblock = { version = "=0.5.6", default-features = false, features = ["full-regex-handling", "embedded-domain-resolver"] }
+adblock = { version = "=0.7.2", default-features = false, features = ["full-regex-handling", "embedded-domain-resolver"] }
 pyo3 = { version = "0.16", features = ["abi3-py37", "extension-module"] }
 
 [lib]
