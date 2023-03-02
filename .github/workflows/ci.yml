@@ -148,31 +148,31 @@ jobs:
           [
             {
               toolchain: "1.53",
-              manylinux: "2010",
+              manylinux: "2014",
               target: "x86_64-unknown-linux-gnu",
               arch: "x86_64",
               python-version: "3.7"
             },
             {
               toolchain: "nightly",
-              manylinux: "2010",
+              manylinux: "2014",
               target: "x86_64-unknown-linux-gnu",
               arch: "x86_64",
               python-version: "3.7"
             },
             {
               toolchain: "stable",
-              manylinux: "2010",
+              manylinux: "2014",
               target: "x86_64-unknown-linux-gnu",
               arch: "x86_64",
               python-version: "3.7"
             },
             {
               toolchain: "stable",
-              manylinux: "2010",
+              manylinux: "2014",
               target: "x86_64-unknown-linux-gnu",
               arch: "x86_64",
-              python-version: "3.10"
+              python-version: "3.11"
             }
           ]
     steps:
@@ -184,7 +184,7 @@ jobs:
 
       - name: Build Wheels
         run: |
-          echo 'curl --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain ${{ matrix.platform.toolchain }}
+          echo 'curl -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain ${{ matrix.platform.toolchain }}
           source ~/.cargo/env
           export PATH=/opt/python/cp38-cp38/bin:$PATH
           pip install maturin
@@ -245,6 +245,7 @@ jobs:
           echo 'curl -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable
           source ~/.cargo/env
           rustup target add ${{ matrix.platform.target }}
+          pip install maturin
           maturin build -i python --release --out dist --target ${{ matrix.platform.target }} --manylinux ${{ matrix.platform.manylinux }}
           ' > build-wheel.sh
           chmod +x build-wheel.sh
@@ -296,6 +297,7 @@ jobs:
 
       - name: Wheel filename sanity checks
         run: |
+          ls -lah
           num_abi3_whl=$(find | grep "\./adblock.*-abi3.*\.whl" | wc -l)
           num_whl=$(find | grep "\./adblock.*\.whl" | wc -l)
           test $num_abi3_whl -eq $num_whl
