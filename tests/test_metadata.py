@@ -16,6 +16,15 @@ def get_version_value_cargo():
     return parse_version(cargo_toml["package"]["version"])
 
 
+def get_version_values_pyproject():
+    with open("pyproject.toml", encoding="utf-8") as f:
+        pyproject_toml = toml.loads(f.read())
+    return [
+        parse_version(pyproject_toml["project"]["version"]),
+        parse_version(pyproject_toml["tool"]["poetry"]["version"]),
+    ]
+
+
 def get_version_value_changelog():
     """
     Try to get the names of all classes that we added to the Python module
@@ -37,15 +46,18 @@ def get_version_value_changelog():
 
 def test_version_numbers_all_same():
     """
-    Makes sure that `Cargo.toml` and `CHANGELOG.md` contain the same version
-    number as the one attached to the `adblock` module.
+    Makes sure that `pyproject.toml`, `Cargo.toml` and `CHANGELOG.md` contain
+    the same version number as the one attached to the `adblock` module.
     """
     cargo_version = get_version_value_cargo()
     changelog_version = get_version_value_changelog()
+    pyproject_versions = get_version_values_pyproject()
     module_version = parse_version(adblock.__version__)
 
     assert cargo_version == module_version
     assert module_version == changelog_version
+    assert changelog_version == pyproject_versions[0]
+    assert pyproject_versions[0] == pyproject_versions[1]
 
 
 def get_current_python_version():
