@@ -1,18 +1,21 @@
 [project]
 name = "adblock"
-version = "0.0.0"
+version = "0.6.0"
 description = "Brave's adblocking in Python"
 requires-python = ">=3.7"
-authors = [
-    {email = "arni@dagur.eu"},
-    {name = "Árni Dagur"}
-]
+authors = [{ name = "Árni Dagur", email = "arni@dagur.eu" }]
 classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Rust",
     "License :: OSI Approved :: MIT License",
     "License :: OSI Approved :: Apache Software License",
 ]
+
+[tool.poetry]
+name = "adblock"
+version = "0.6.0"
+description = "Brave's adblocking in Python"
+authors = ["Árni Dagur <arni@dagur.eu>"]
 
 [tool.poetry.dependencies]
 python = "^3.6"
@@ -23,5 +26,5 @@ pytest = "*"
 toml = "*"
 
 [build-system]
-requires = ["maturin>=0.12,<0.13"]
+requires = ["maturin>=0.12"]
 build-backend = "maturin"
