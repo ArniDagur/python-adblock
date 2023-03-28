@@ -301,7 +301,6 @@ jobs:
           num_whl=$(find | grep "\./adblock.*\.whl" | wc -l)
           test $num_abi3_whl -eq $num_whl
           test $num_whl -ge 1
-          find | grep "\./adblock-.*\.tar\.gz"
 
       - name: PyPi publish
         if: github.event_name == 'release' && github.event.action == 'created'
