@@ -33,7 +33,7 @@ def test_redirect_url_is_not_recognized_without_include_redirect_urls():
 
 
 def test_redirect_url_exception():
-    # https://github.com/brave/adblock-rust/blob/b7f29af8c0a0d000201d8d769b6a0b25a9dd4e89/src/blocker.rs#L1314
+    # https://github.com/brave/adblock-rust/blob/c4da2dc7d2e2f72605da31e15257080a08bfcbef/src/blocker.rs#L1341
     filter_set = adblock.FilterSet(debug=True)
     filter_set.add_filters(
         [
